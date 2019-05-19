@@ -1,6 +1,4 @@
-// -User
-//   - Library
-//   - Auth stuff
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 

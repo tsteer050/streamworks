@@ -1,8 +1,3 @@
-// -Album
-//   - Artist
-//   - Title
-//   - Songs
-//   - Art
 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
