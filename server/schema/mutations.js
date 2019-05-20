@@ -1,5 +1,5 @@
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLString, GraphQLInt } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLID } = graphql;
 const mongoose = require("mongoose");
 const AlbumType = require('./types/album_type');
 const Album = mongoose.model("albums");
@@ -14,6 +14,7 @@ const Song = mongoose.model("songs");
 const UserType = require('./types/user_type');
 const User = mongoose.model('users');
 
+// add validUser authentication for all mutations using 'ctx' argument
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
@@ -23,7 +24,7 @@ const mutation = new GraphQLObjectType({
         title: { type: GraphQLString },
         album_art_url: { type: GraphQLString }
       },
-      resolve(_, { title, album_art_url }) {
+      resolve(_, { title, album_art_url }, ctx) {
         return new Album({ title, album_art_url }).save();
       }
     },
@@ -32,7 +33,7 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLID }
       },
-      resolve(_, { id }) {
+      resolve(_, { id }, ctx) {
         return Album.remove({ _id: id });
       }
     },
@@ -44,7 +45,7 @@ const mutation = new GraphQLObjectType({
         bio: { type: GraphQLString },
         artist_image_url: { type: GraphQLString }
       },
-      resolve(_, { name, genre, bio, artist_image_url }) {
+      resolve(_, { name, genre, bio, artist_image_url }, ctx) {
         return new Artist({ name, genre, bio, artist_image_url }).save();
       }
     },
@@ -53,7 +54,7 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLID }
       },
-      resolve(_, { id }) {
+      resolve(_, { id }, ctx) {
         return Artist.remove({ _id: id });
       }
     },
