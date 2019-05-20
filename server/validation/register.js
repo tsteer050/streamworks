@@ -22,7 +22,7 @@ module.exports = function validateRegisterInput(data) {
     return { message: "Password field is required", isValid: false };
   }
 
-  if (Validator.isLength(data.password, { min: 6 })) {
+  if (!Validator.isLength(data.password, { min: 6 })) {
     return { message: "Password is too short", isValid: false };
   }
 

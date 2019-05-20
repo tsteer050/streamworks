@@ -17,15 +17,22 @@ const PlaylistType = new GraphQLObjectType({
         .then(playlist => playlist.songs);
       }
     },
-    user: {
+    owner: {
       type: UserType,
       resolve(parentValue) {
         return User.findById(parentValue.user)
         .then(user => user)
         .catch(err => null);
       }
+    },
+    subscribers: {
+      type: new GraphQLList(UserType),
+      resolve(parentValue) {
+        return Playlist.findById(parentValue.id).populate('users')
+        .then(playlist => playlist.subscribers);
+      }
     }
   })
-})
+});
 
 module.exports = PlaylistType;
