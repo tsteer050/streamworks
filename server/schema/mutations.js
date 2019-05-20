@@ -12,6 +12,8 @@ const Song = mongoose.model("songs");
 const UserType = require('./types/user_type');
 const User = mongoose.model('users');
 
+//Remove this comment!
+
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
