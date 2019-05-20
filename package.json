@@ -21,10 +21,10 @@
     "express-graphql": "^0.8.0",
     "graphql": "^14.3.0",
     "jsonwebtoken": "^8.5.1",
-    "mongo-seeding": "^3.1.1",
+
     "mongoose": "^5.5.9",
     "nodemon": "^1.19.0",
-    "s3": "^4.4.0",
+
     "validator": "^10.11.0"
   }
 }
