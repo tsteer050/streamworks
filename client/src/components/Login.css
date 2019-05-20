@@ -1,9 +1,38 @@
+
 #login {
   flex-grow: 1;
 }
+
+#login-header{
+  width: 100%;
+    height: 110px;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 40px;
+}
+
 
 #login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+#login-form > input{
+  width: 426px;
+  height: 48px;
+  border: 1px solid #dfe0e6;
+  color: #1c1c1f;
+  font-size: .9375em;
+  margin-bottom: 20px;
+}
+
+
+#submit-button {
+  color: white;
+    border-radius: 500px;
+    width: 320px;
+    height: 48px;
+    background: #1DB954;
+    font-weight: 700;
+    border: 1px solid transparent;
+    font-size: 16px;
 }

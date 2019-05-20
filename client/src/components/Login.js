@@ -35,33 +35,37 @@ class Login extends React.Component {
         }}
         update={(client, data) => this.updateCache(client, data)}
       >
-        {loginUser => (
-          <div id="login">
-            <form id="login-form"
-              onSubmit={e => {
-                e.preventDefault();
-                loginUser({
-                  variables: {
-                    email: this.state.email,
-                    password: this.state.password
-                  }
-                });
-              }}
-            >
-              <input
-                value={this.state.email}
-                onChange={this.update("email")}
-                placeholder="Email"
-              />
-              <input
-                value={this.state.password}
-                onChange={this.update("password")}
-                type="password"
-                placeholder="Password"
-              />
-              <button type="submit">Log In</button>
-            </form>
+        {loginUser => ( <div id="login">
+          <div id="login-header">
           </div>
+          <form id="login-form"
+            onSubmit={e => {
+              e.preventDefault();
+              loginUser({
+                variables: {
+                  email: this.state.email,
+                  password: this.state.password
+                }
+              });
+            }}
+          >
+            <h2>To continue, login to StreamWorks.</h2>
+            <input
+              type="email"
+              value={this.state.email}
+              onChange={this.update("email")}
+              placeholder="Email"
+            />
+            <input
+              value={this.state.password}
+              onChange={this.update("password")}
+              type="password"
+              placeholder="Password"
+            />
+           
+            <button id="submit-button" type="login">LOG IN</button>
+          </form>
+        </div>
         )}
       </Mutation>
     );
