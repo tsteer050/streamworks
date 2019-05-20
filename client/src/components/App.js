@@ -17,7 +17,7 @@ const App = () => {
         <AuthRoute exact path="/login" component={Login} routeType="auth"/>
         <AuthRoute exact path="/signup" component={Signup} routeType="auth"/>
       </Switch>
-      {/* <Route path="/" component={AudioPlayer} /> */}
+      <Route path="/" component={AudioPlayer} />
     </div>
   );
 };
