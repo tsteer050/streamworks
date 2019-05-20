@@ -11,10 +11,6 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 
-const models = require("../server/models/index");
-const schema = require("./schema/schema");
-const cors = require("cors");
-
 if (!db) {
   throw new Error("You must provide a string to connect to mLab");
 }
