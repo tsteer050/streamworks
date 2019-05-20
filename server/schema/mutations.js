@@ -5,7 +5,7 @@ const AlbumType = require("./types/album_type");
 const Album = mongoose.model("albums");
 const ArtistType = require("./types/artist_type");
 const Artist = mongoose.model("artists");
-const PlaylistType = require('./types/playlist_type');
+const PlaylistType = require("./types/playlist_type");
 const Playlist = mongoose.model("playlists");
 const SongType = require("./types/song_type");
 const Song = mongoose.model("songs");
@@ -46,7 +46,7 @@ const mutation = new GraphQLObjectType({
         songId: { type: GraphQLID }
       },
       resolve(_, { albumId, songId }) {
-        return Album.addSong( albumId, songId );
+        return Album.addSong(albumId, songId);
       }
     },
     removeAlbumSong: {
@@ -56,7 +56,7 @@ const mutation = new GraphQLObjectType({
         songId: { type: GraphQLID }
       },
       resolve(_, { albumId, songId }) {
-        return Album.removeSong( albumId, songId );
+        return Album.removeSong(albumId, songId);
       }
     },
     updateAlbumArtist: {
@@ -66,7 +66,7 @@ const mutation = new GraphQLObjectType({
         artistId: { type: GraphQLID }
       },
       resolve(_, { albumId, artistId }) {
-        return Album.updateArtist( albumId, artistId );
+        return Album.updateArtist(albumId, artistId);
       }
     },
 
@@ -117,9 +117,18 @@ const mutation = new GraphQLObjectType({
       args: {
         title: { type: GraphQLString }
       },
-      resolve(_, { title }) {
-        return new Playlist({ title }).save();
-        
+      async resolve(_, { name, description, weight }, ctx) {
+        const validUser = await AuthService.verifyUser({ token: ctx.token });
+
+        // if our service returns true then our product is good to save!
+        // anything else and we'll throw an error
+        if (validUser.loggedIn) {
+          return new Playlist({ title }).save();
+        } else {
+          throw new Error(
+            "Sorry, you need to be logged in to perform this action."
+          );
+        }
       }
     },
     deletePlaylist: {
@@ -127,18 +136,36 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLID }
       },
-      resolve(_, { id }) {
-        return Playlist.remove({ _id: id });
+      async resolve(_, { name, description, weight }, ctx) {
+        const validUser = await AuthService.verifyUser({ token: ctx.token });
+
+        // if our service returns true then our product is good to save!
+        // anything else and we'll throw an error
+        if (validUser.loggedIn) {
+          return Playlist.remove({ _id: id });
+        } else {
+          throw new Error(
+            "Sorry, you need to be logged in to perform this action."
+          );
+        }
       }
     },
     addPlaylistSubscriber: {
       type: PlaylistType,
       args: {
-        playlistId: { type: GraphQLID }, 
+        playlistId: { type: GraphQLID },
         subscriberId: { type: GraphQLID }
       },
-      resolve(_, { playlistId, subscriberId }) {
-        return Playlist.addSubscriber(playlistId, subscriberId);
+      async resolve(_, { name, description, weight }, ctx) {
+        const validUser = await AuthService.verifyUser({ token: ctx.token });
+
+        if (validUser.loggedIn) {
+          return Playlist.addSubscriber(playlistId, subscriberId);
+        } else {
+          throw new Error(
+            "Sorry, you need to be logged in to perform this action."
+          );
+        }
       }
     },
     removePlaylistSubscriber: {
@@ -147,28 +174,56 @@ const mutation = new GraphQLObjectType({
         playlistId: { type: GraphQLID },
         subscriberId: { type: GraphQLID }
       },
-      resolve(_, { playlistId, subscriberId }) {
-        return Playlist.removeSubscriber(playlistId, subscriberId);
+      async resolve(_, { name, description, weight }, ctx) {
+        const validUser = await AuthService.verifyUser({ token: ctx.token });
+
+        if (validUser.loggedIn) {
+          return Playlist.removeSubscriber(playlistId, subscriberId);
+        } else {
+          throw new Error(
+            "Sorry, you need to be logged in to perform this action."
+          );
+        }
       }
     },
     updatePlaylistOwner: {
       type: PlaylistType,
       args: {
-        playlistId: { type: GraphQLID }, 
+        playlistId: { type: GraphQLID },
         ownerId: { type: GraphQLID }
       },
-      resolve(_, { playlistId, ownerId }) {
-        return Playlist.updateOwner(playlistId, ownerId);
+      async resolve(_, { name, description, weight }, ctx) {
+        const validUser = await AuthService.verifyUser({ token: ctx.token });
+
+        // if our service returns true then our product is good to save!
+        // anything else and we'll throw an error
+        if (validUser.loggedIn) {
+          return Playlist.updateOwner(playlistId, ownerId);
+        } else {
+          throw new Error(
+            "Sorry, you need to be logged in to perform this action."
+          );
+        }
       }
     },
     addPlaylistSong: {
       type: PlaylistType,
       args: {
-        playlistId: { type: GraphQLID }, 
+        playlistId: { type: GraphQLID },
         songId: { type: GraphQLID }
       },
-      resolve(_, { playlistId, songId }) {
-        return Playlist.addSong(playlistId, songId);
+      async resolve(_, { name, description, weight }, ctx) {
+        const validUser = await AuthService.verifyUser({ token: ctx.token });
+
+        // if our service returns true then our product is good to save!
+        // anything else and we'll throw an error
+        if (validUser.loggedIn) {
+          return Playlist.addSong(playlistId, songId);
+        } else {
+          throw new Error(
+            "Sorry, you need to be logged in to perform this action."
+          );
+        }
       }
     },
     removePlaylistSong: {
@@ -177,8 +232,18 @@ const mutation = new GraphQLObjectType({
         playlistId: { type: GraphQLID },
         songId: { type: GraphQLID }
       },
-      resolve(_, { playlistId, songId }) {
-        return Playlist.removeSong(playlistId, songId);
+      async resolve(_, { name, description, weight }, ctx) {
+        const validUser = await AuthService.verifyUser({ token: ctx.token });
+
+        // if our service returns true then our product is good to save!
+        // anything else and we'll throw an error
+        if (validUser.loggedIn) {
+          return Playlist.removeSong(playlistId, songId);
+        } else {
+          throw new Error(
+            "Sorry, you need to be logged in to perform this action."
+          );
+        }
       }
     },
     newSong: {
@@ -211,7 +276,7 @@ const mutation = new GraphQLObjectType({
         return Song.updateAlbum(songId, albumId);
       }
     },
-   
+
     register: {
       type: UserType,
       args: {
@@ -229,8 +294,26 @@ const mutation = new GraphQLObjectType({
         // all we need to log the user our is an id
         _id: { type: GraphQLID }
       },
+      async resolve(_, { name, description, weight }, ctx) {
+        const validUser = await AuthService.verifyUser({ token: ctx.token });
+
+        // if our service returns true then our product is good to save!
+        // anything else and we'll throw an error
+        if (validUser.loggedIn) {
+          return AuthService.logout(args);
+        } else {
+          throw new Error("Not logged in.");
+        }
+      }
+    },
+    login: {
+      type: UserType,
+      args: {
+        email: { type: GraphQLString },
+        password: { type: GraphQLString }
+      },
       resolve(_, args) {
-        return AuthService.logout(args);
+        return AuthService.login(args);
       }
     },
     verifyUser: {

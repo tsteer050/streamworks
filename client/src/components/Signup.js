@@ -1,7 +1,7 @@
 import React from "react";
 import { Mutation } from "react-apollo";
-import { CREATE_USER } from '../graphql/mutations';
-import './Signup.css';
+import { CREATE_USER } from "../graphql/mutations";
+import "./Signup.css";
 
 class Signup extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class Signup extends React.Component {
     console.log(data);
     // here we can write directly to our cache with our returned mutation data
     client.writeData({
-      data: { isLoggedIn: data.login.loggedIn }
+      data: { isLoggedIn: data.register.loggedIn }
     });
   }
 
@@ -31,7 +31,7 @@ class Signup extends React.Component {
       <Mutation
         mutation={CREATE_USER}
         onCompleted={data => {
-          const { token } = data.login;
+          const { token } = data.register;
           localStorage.setItem("auth-token", token);
           this.props.history.push("/");
         }}
@@ -39,9 +39,11 @@ class Signup extends React.Component {
       >
         {createUser => (
           <div id="signup">
+
           <div id="signup-header">
           </div>
             <form id="signup-form"
+
               onSubmit={e => {
                 e.preventDefault();
                 createUser({

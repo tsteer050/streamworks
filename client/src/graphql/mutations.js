@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const LOGIN_USER = gql`
   mutation LoginUser($email: String!, $password: String!) {
@@ -14,10 +14,10 @@ export const LOGIN_USER = gql`
 
 export const CREATE_USER = gql`
   mutation CreateUser($name: String!, $email: String!, $password: String!) {
-    createUser(name: $name, email: $email, password: $password) {
+    register(name: $name, email: $email, password: $password) {
       token
       loggedIn
-       _id
+      _id
       name
       email
     }
@@ -25,7 +25,7 @@ export const CREATE_USER = gql`
 `;
 
 export const CREATE_ALBUM = gql`
-  mutation FetchAlbums($title: String!, $album_art_url: String!){
+  mutation FetchAlbums($title: String!, $album_art_url: String!) {
     newAlbum(title: $title, album_art_url: $album_art_url) {
       _id
       title
