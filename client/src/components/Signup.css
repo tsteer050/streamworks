@@ -1,0 +1,9 @@
+#signup {
+  flex-grow: 1;
+}
+
+#signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
