@@ -5,15 +5,15 @@ const expressGraphQL = require("express-graphql");
 const db = require("../config/keys").MONGO_URI;
 const models = require("../server/models/index");
 const schema = require("./schema/schema");
+const keys = require('../config/keys');
+const { accessKeyId, secretAccessKey } = keys;
+
 
 const cors = require("cors");
 
 const app = express();
 app.use(cors());
 
-const models = require("../server/models/index");
-const schema = require("./schema/schema");
-const cors = require("cors");
 
 if (!db) {
   throw new Error("You must provide a string to connect to mLab");

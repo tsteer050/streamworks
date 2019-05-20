@@ -13,15 +13,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
     "express": "^4.17.0",
     "express-graphql": "^0.8.0",
     "graphql": "^14.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongo-seeding": "^3.1.1",
     "mongoose": "^5.5.9",
     "nodemon": "^1.19.0",
-    "bcryptjs": "^2.4.3",
+    "s3": "^4.4.0",
     "validator": "^10.11.0"
   }
 }
