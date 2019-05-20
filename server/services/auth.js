@@ -14,6 +14,7 @@ const register = async data => {
     if (!isValid) {
       throw new Error(message);
     }
+    console.log(`entered register`);
 
     const { name, email, password } = data;
 
@@ -39,6 +40,7 @@ const register = async data => {
     user.save();
     // we'll create a token for the user
     const token = jwt.sign({ id: user._id }, keys.secretOrKey);
+    console.log(`token: ${token}`);
 
     // then return our created token, set loggedIn to be true, null their password, and send the rest of the user
     return { token, loggedIn: true, ...user._doc, password: null };
