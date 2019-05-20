@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLList } = graphql;
 const Album = mongoose.model('albums');
+const ArtistType = require('./artist_type');
+const Artist = mongoose.model('artists');
 
 const AlbumType = new GraphQLObjectType({
   name: "AlbumType",
@@ -10,10 +12,11 @@ const AlbumType = new GraphQLObjectType({
     title: { type: GraphQLString },
     album_art_url: { type: GraphQLString },
     artist: {
-      type: new GraphQLList(require('./artist_type')),
+      type: ArtistType,
       resolve(parentValue) {
-        return Album.findById(parentValue.id).populate("artists")
-        .then(album => album.artist);
+        return Artist.findById(parentValue.artist)
+        .then(artist => artist)
+        .catch(err => null);
       }
     },
     songs: {

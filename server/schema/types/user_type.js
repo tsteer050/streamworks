@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLString, GraphQLID } = graphql;
-const LibraryType = require('./library_type');
-const Library = mongoose.model('libraries');
+const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLList } = graphql;
 
 const UserType = new GraphQLObjectType({
   name: "UserType",
@@ -11,14 +9,34 @@ const UserType = new GraphQLObjectType({
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
-    library: {
-      type: LibraryType,
+    albums: {
+      type: new GraphQLList(require('./album_type')),
       resolve(parentValue) {
-        return Library.findById(parentValue.library)
-        .then(library => library)
-        .catch(err => null);
+        return User.findById(parentValue.id).populate('albums')
+          .then(user => user.albums);
       }
-    }
+    },
+    artists: {
+      type: new GraphQLList(require('./artist_type')),
+      resolve(parentValue) {
+        return User.findById(parentValue.id).populate('artists')
+          .then(user => user.artists);
+      }
+    },
+    songs: {
+      type: new GraphQLList(require('./song_type')),
+      resolve(parentValue) {
+        return User.findById(parentValue.id).populate('songs')
+          .then(user => user.songs);
+      }
+    },
+    playlists: {
+      type: new GraphQLList(require('./playlist_type')),
+      resolve(parentValue) {
+        return User.findById(parentValue.id).populate('playlists')
+          .then(user => user.playlists);
+      }
+    },
   })
 });
 

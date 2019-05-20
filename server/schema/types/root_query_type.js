@@ -6,8 +6,6 @@ const AlbumType = require("./album_type");
 const Album = mongoose.model("albums");
 const ArtistType = require("./artist_type");
 const Artist = mongoose.model("artists");
-const LibraryType = require("./library_type");
-const Library = mongoose.model("libraries");
 const PlaylistType = require("./playlist_type");
 const Playlist = mongoose.model("playlists");
 const SongType = require("./song_type");
@@ -34,7 +32,7 @@ const RootQueryType = new GraphQLObjectType({
     artists: {
       type: new GraphQLList(ArtistType),
       resolve() {
-        return Artists.find({});
+        return Artist.find({});
       }
     },
     artist: {
@@ -42,19 +40,6 @@ const RootQueryType = new GraphQLObjectType({
       args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
       resolve(_, args) {
         return Artist.findById(args._id);
-      }
-    },
-      libraries: {
-      type: new GraphQLList(LibraryType),
-      resolve() {
-        return Library.find({});
-      }
-    },
-    library: {
-      type: LibraryType,
-      args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
-      resolve(_, args) {
-        return Library.findById(args._id);
       }
     },
     playlists: {
