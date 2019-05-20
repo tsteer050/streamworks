@@ -11,14 +11,14 @@ const UserType = new GraphQLObjectType({
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
-    library: {
-      type: LibraryType,
-      resolve(parentValue) {
-        return Library.findById(parentValue.library)
-        .then(library => library)
-        .catch(err => null);
-      }
-    }
+    // library: {
+    //   type: LibraryType,
+    //   resolve(parentValue) {
+    //     return Library.findById(parentValue.library)
+    //     .then(library => library)
+    //     .catch(err => null);
+    //   }
+    // }
   })
 });
 

@@ -1,0 +1,6 @@
+#root-container {
+  display:inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
