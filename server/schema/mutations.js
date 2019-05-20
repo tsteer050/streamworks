@@ -42,10 +42,14 @@ const mutation = new GraphQLObjectType({
         album_art_url: { type: GraphQLString }
       },
 <<<<<<< HEAD
+<<<<<<< HEAD
       resolve(_, { title, album_art_url }, ctx) {
 =======
       resolve(_, { title, album_art_url }) {
 >>>>>>> backend-auth
+=======
+      resolve(_, { title, album_art_url }, ctx) {
+>>>>>>> branch2
         return new Album({ title, album_art_url }).save();
       }
     },
@@ -55,10 +59,14 @@ const mutation = new GraphQLObjectType({
         id: { type: GraphQLID }
       },
 <<<<<<< HEAD
+<<<<<<< HEAD
       resolve(_, { id }, ctx) {
 =======
       resolve(_, { id }) {
 >>>>>>> backend-auth
+=======
+      resolve(_, { id }, ctx) {
+>>>>>>> branch2
         return Album.remove({ _id: id });
       }
     },
@@ -71,10 +79,14 @@ const mutation = new GraphQLObjectType({
         artist_image_url: { type: GraphQLString }
       },
 <<<<<<< HEAD
+<<<<<<< HEAD
       resolve(_, { name, genre, bio, artist_image_url }, ctx) {
 =======
       resolve(_, { name, genre, bio, artist_image_url }) {
 >>>>>>> backend-auth
+=======
+      resolve(_, { name, genre, bio, artist_image_url }, ctx) {
+>>>>>>> branch2
         return new Artist({ name, genre, bio, artist_image_url }).save();
       }
     },
@@ -84,10 +96,14 @@ const mutation = new GraphQLObjectType({
         id: { type: GraphQLID }
       },
 <<<<<<< HEAD
+<<<<<<< HEAD
       resolve(_, { id }, ctx) {
 =======
       resolve(_, { id }) {
 >>>>>>> backend-auth
+=======
+      resolve(_, { id }, ctx) {
+>>>>>>> branch2
         return Artist.remove({ _id: id });
       }
     },
