@@ -10,17 +10,15 @@ const UserType = new GraphQLObjectType({
     _id: { type: GraphQLID },
     name: { type: GraphQLString },
     email: { type: GraphQLString },
-    password: { type: GraphQLString },
-    library: {
-      type: LibraryType,
-      resolve(parentValue) {
-        return Library.findById(parentValue.library)
-          .then(library => library)
-          .catch(err => null);
-      }
-    },
-    token: { type: GraphQLString },
-    loggedIn: { type: GraphQLBoolean }
+    password: { type: GraphQLString }
+    // library: {
+    //   type: LibraryType,
+    //   resolve(parentValue) {
+    //     return Library.findById(parentValue.library)
+    //     .then(library => library)
+    //     .catch(err => null);
+    //   }
+    // }
   })
 });
 
