@@ -1,22 +1,6 @@
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLID } = graphql;
 const mongoose = require("mongoose");
-<<<<<<< HEAD
-const AlbumType = require('./types/album_type');
-const Album = mongoose.model("albums");
-const ArtistType = require('./types/artist_type');
-const Artist = mongoose.model("artists");
-const LibraryType = require('./types/library_type');
-const Library = mongoose.model("libraries");
-const PlaylistType = require('./types/playlist_type');
-const Playlist = mongoose.model("playlists");
-const SongType = require('./types/song_type');
-const Song = mongoose.model("songs");
-const UserType = require('./types/user_type');
-const User = mongoose.model('users');
-
-// add validUser authentication for all mutations using 'ctx' argument
-=======
 const AlbumType = require("./types/album_type");
 const Album = mongoose.model("albums");
 const ArtistType = require("./types/artist_type");
@@ -31,7 +15,6 @@ const UserType = require("./types/user_type");
 const User = mongoose.model("users");
 const AuthService = require("../services/auth");
 
->>>>>>> backend-auth
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
@@ -41,15 +24,8 @@ const mutation = new GraphQLObjectType({
         title: { type: GraphQLString },
         album_art_url: { type: GraphQLString }
       },
-<<<<<<< HEAD
-<<<<<<< HEAD
+
       resolve(_, { title, album_art_url }, ctx) {
-=======
-      resolve(_, { title, album_art_url }) {
->>>>>>> backend-auth
-=======
-      resolve(_, { title, album_art_url }, ctx) {
->>>>>>> branch2
         return new Album({ title, album_art_url }).save();
       }
     },
@@ -58,15 +34,8 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLID }
       },
-<<<<<<< HEAD
-<<<<<<< HEAD
+
       resolve(_, { id }, ctx) {
-=======
-      resolve(_, { id }) {
->>>>>>> backend-auth
-=======
-      resolve(_, { id }, ctx) {
->>>>>>> branch2
         return Album.remove({ _id: id });
       }
     },
@@ -78,15 +47,8 @@ const mutation = new GraphQLObjectType({
         bio: { type: GraphQLString },
         artist_image_url: { type: GraphQLString }
       },
-<<<<<<< HEAD
-<<<<<<< HEAD
+
       resolve(_, { name, genre, bio, artist_image_url }, ctx) {
-=======
-      resolve(_, { name, genre, bio, artist_image_url }) {
->>>>>>> backend-auth
-=======
-      resolve(_, { name, genre, bio, artist_image_url }, ctx) {
->>>>>>> branch2
         return new Artist({ name, genre, bio, artist_image_url }).save();
       }
     },
@@ -95,15 +57,7 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLID }
       },
-<<<<<<< HEAD
-<<<<<<< HEAD
       resolve(_, { id }, ctx) {
-=======
-      resolve(_, { id }) {
->>>>>>> backend-auth
-=======
-      resolve(_, { id }, ctx) {
->>>>>>> branch2
         return Artist.remove({ _id: id });
       }
     },
@@ -163,14 +117,6 @@ const mutation = new GraphQLObjectType({
         return Song.remove({ _id: id });
       }
     },
-<<<<<<< HEAD
-
-
-  }
-});
-
-module.exports = mutation;
-=======
     register: {
       type: UserType,
       args: {
@@ -205,4 +151,3 @@ module.exports = mutation;
 });
 
 module.exports = mutation;
->>>>>>> backend-auth
