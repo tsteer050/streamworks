@@ -28,16 +28,6 @@ class LoggedIn extends React.Component {
     if (!this.state.user) return null;
     return (
       <Fragment>
-        <button
-          onClick={e => {
-            e.preventDefault();
-            localStorage.removeItem("auth-token");
-            client.writeData({ data: { isLoggedIn: false } });
-            this.props.history.push("/");
-          }}
-        >
-          Logout
-        </button>
         <div className="account-footer">
           <div className="footer-icon">
             <Link to="/account">
@@ -45,7 +35,7 @@ class LoggedIn extends React.Component {
               <Query query={FETCH_USER} variables={{ _id: this.state.user.id }}>
                 {({ data, loading, error }) => {
                   if (loading) return <p>Loading...</p>;
-                  debugger;
+
                   if (error) return <p>error</p>;
 
                   return <h5>{data.user.name}</h5>;

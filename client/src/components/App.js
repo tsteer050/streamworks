@@ -5,7 +5,8 @@ import AuthRoute from "../util/route_util";
 import Login from "./Login";
 import Signup from "./Signup";
 // import Sidebar from "./Sidebar";
-import AudioPlayer from "./AudioPlayer";
+// import AudioPlayer from "./AudioPlayer";
+import Profile from "../components/profile/Profile";
 import "./root.css";
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
     <div id="root-container">
       <Switch>
         {/* <Route exact path="/" component={Sidebar} /> */}
+        <AuthRoute exact path="/account" component={Profile} />
         <Route exact path="/" component={Splash} />
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute exact path="/signup" component={Signup} routeType="auth" />
