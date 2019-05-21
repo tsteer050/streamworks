@@ -16,7 +16,7 @@ class Splash extends React.Component {
         return (
           <ul id="splash">
             {data.albums.map(album => (
-              <li key={album._id}>{album.title}</li>
+              <li key={album._id}>{album.title} {album._id}</li>
             ))}
           </ul>
           

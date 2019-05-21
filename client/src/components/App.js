@@ -6,6 +6,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Sidebar from './Sidebar';
 import AudioPlayer from './AudioPlayer';
+import AlbumShow from './AlbumShow';
 import './root.css';
 
 const App = () => {
@@ -16,8 +17,9 @@ const App = () => {
         <Route exact path="/"  component={Splash} />
         <AuthRoute exact path="/login" component={Login} routeType="auth"/>
         <AuthRoute exact path="/signup" component={Signup} routeType="auth"/>
+        <Route exact path="/album/:id" component={AlbumShow} />
       </Switch>
-      <Route path="/" component={AudioPlayer} />
+      {/* <Route path="/" component={AudioPlayer} /> */}
     </div>
   );
 };
