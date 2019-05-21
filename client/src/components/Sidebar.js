@@ -1,13 +1,63 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./Sidebar.css";
-import { IS_LOGGED_IN } from "../graphql/queries";
+import { IS_LOGGED_IN, FETCH_USER } from "../graphql/queries";
 import { Query, ApolloConsumer } from "react-apollo";
 import * as logo from "../images/spotify.png";
 import * as home from "../images/home.jpg";
 import * as search from "../images/search.png";
 import * as library from "../images/library.png";
 import * as profile from "../images/profile.png";
+const jwt = require("jsonwebtoken");
+
+class LoggedIn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null
+    };
+  }
+  componentDidMount() {
+    let token = localStorage.getItem("auth-token");
+
+    const user = jwt.decode(token);
+    this.setState({ user });
+  }
+  render() {
+    const { client } = this.props;
+    if (!this.state.user) return null;
+    return (
+      <Fragment>
+        <button
+          onClick={e => {
+            e.preventDefault();
+            localStorage.removeItem("auth-token");
+            client.writeData({ data: { isLoggedIn: false } });
+            this.props.history.push("/");
+          }}
+        >
+          Logout
+        </button>
+        <div className="account-footer">
+          <div className="footer-icon">
+            <Link to="/account">
+              <img className="profile-icon" src={profile} alt="profile" />
+              <Query query={FETCH_USER} variables={{ _id: this.state.user.id }}>
+                {({ data, loading, error }) => {
+                  if (loading) return <p>Loading...</p>;
+                  debugger;
+                  if (error) return <p>error</p>;
+
+                  return <h5>{data.user.name}</h5>;
+                }}
+              </Query>
+            </Link>
+          </div>
+        </div>
+      </Fragment>
+    );
+  }
+}
 
 class Sidebar extends React.Component {
   render() {
@@ -46,39 +96,17 @@ class Sidebar extends React.Component {
                 {({ data }) => {
                   // if we have some one logged in we show them a logout button
                   if (data.isLoggedIn) {
+                    // debugger;
                     return (
-                      <Fragment>
-                        <button
-                          onClick={e => {
-                            e.preventDefault();
-                            localStorage.removeItem("auth-token");
-                            client.writeData({ data: { isLoggedIn: false } });
-                            this.props.history.push("/");
-                          }}
-                        >
-                          Logout
-                        </button>
-                        <div className="account-footer">
-                          <div className="footer-icon">
-                            <Link to="/account">
-                              <img
-                                className="profile-icon"
-                                src={profile}
-                                alt="profile"
-                              />
-                              <h5>Account Name</h5>
-                            </Link>
-                          </div>
-                        </div>
-                      </Fragment>
+                      <LoggedIn client={client} history={this.props.history} />
                     );
                   } else {
                     return (
                       <div id="sidebar-footer">
-                        <p id="signup">
+                        <p className="signup">
                           <Link to="/signup">SIGN UP</Link>
                         </p>
-                        <p id="login-p">
+                        <p className="login-p">
                           <Link to="/login">LOG IN</Link>
                         </p>
                       </div>
@@ -94,4 +122,4 @@ class Sidebar extends React.Component {
   }
 }
 
-export default Sidebar;
+export default withRouter(Sidebar);

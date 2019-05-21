@@ -41,3 +41,15 @@ export const VERIFY_USER = gql`
     }
   }
 `;
+
+export const CREATE_PLAYLIST = gql`
+  mutation CreateUser($name: String!, $email: String!, $password: String!) {
+    register(name: $name, email: $email, password: $password) {
+      token
+      loggedIn
+      _id
+      name
+      email
+    }
+  }
+`;

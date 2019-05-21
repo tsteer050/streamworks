@@ -82,10 +82,11 @@ const login = async data => {
     if (!user) throw new Error("This user does not exist");
 
     if (!bcrypt.compareSync(password, user.password))
-      throw new Error("Incorret password");
+      throw new Error("Incorrect password");
 
     const token = jwt.sign({ id: user._id }, keys.secretOrKey);
 
+    // const token = `Bearer ${jwt.sign({ id: user._id }, keys.secretOrKey)}`;
     return { token, loggedIn: true, ...user._doc, password: null };
   } catch (err) {
     throw err;
