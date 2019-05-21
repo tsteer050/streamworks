@@ -1,6 +1,13 @@
 import React from "react";
 import './AudioPlayer.css';
 import { Query } from 'react-apollo';
+import AWSSoundPlayer from './DemoPlayer';
+
+
+const streamUrl = 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Long+Live+the+King+1.m4a';
+const trackTitle = 'Long Live the King';
+const artistName = 'Organ Freeman';
+
 
 class AudioPlayer extends React.Component {
 
@@ -10,9 +17,12 @@ class AudioPlayer extends React.Component {
     return (
 
         <div id="audio-player-bar">
-          <div id="sidebar-footer">
-            <p id="audio-player">AUDIO PLAYER</p>
-          </div>
+          <AWSSoundPlayer
+            id="audio-player"
+            streamUrl={streamUrl}
+            trackTitle={trackTitle}
+            artistName={artistName}
+              />
         </div>
     )
   }
