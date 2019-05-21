@@ -3,4 +3,20 @@
   height: 90px;
   width: 100%;
   background: #282828;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.volume-control {
+  display: flex;
+  position: fixed;
+  right: 30px;
+  bottom: 25px;
+}
+
+#audio-player {
+  display: flex;
+  justify-content: space-between;
 }

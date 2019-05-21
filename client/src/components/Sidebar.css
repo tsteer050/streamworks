@@ -1,6 +1,6 @@
 #sidebar-container {
   width: 230px;
-  height: 83vh;
+  height: calc(100vh - 90px);
   background: black;
   color: white;
   display: flex;
