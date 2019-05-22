@@ -61,14 +61,10 @@
 }
 
 .favorite {
-  width: 25px;
-  height: 35px;
   margin-right: 20px;
 }
 
 .menu {
-  width: 25px;
-  height: 35px;
 }
 
 .right-column {
@@ -86,17 +82,17 @@
   font-size: 16px;
   cursor: default;
 }
-ul > li {
+.songs-list > li {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 4em;
 }
-/* ul > li:hover {
+.songs-list > li:hover {
   background: rgba(0, 0, 0, 0.9);
-} */
-ul > li:hover .menu {
+}
+.songs-list > li:hover .menu {
   visibility: visible;
 }
 .playicon-container {
@@ -106,7 +102,11 @@ ul > li:hover .menu {
   max-width: 19px;
   max-height: 19px;
 }
-
+.left-menu-icon {
+}
 .menu {
   visibility: hidden;
+}
+.menu-icon {
+  transform: rotate(90deg);
 }
