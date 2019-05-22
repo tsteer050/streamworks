@@ -3,11 +3,19 @@ import { Query } from "react-apollo";
 import { FETCH_ALBUM } from "../graphql/queries";
 import "./AlbumShow.css";
 import { constants } from "fs";
+import { selectTrack, togglePlay } from "../util/redux_config";
 
 class AlbumShow extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      newPlayQueue: [],
+      currentlyPlaying: {}
+    };
   }
+
+  
+
   onHover(elementId) {
     
     let element = document.getElementById(elementId);
@@ -20,6 +28,14 @@ class AlbumShow extends React.Component {
 
     element.src = require('../resources/music_note_icon.png');
   }
+
+  toggleSong(e, songId) {
+    
+    this.props.selectTrack(3);
+    this.props.togglePlay();
+    debugger
+  }
+
   render() {
     const id = this.props.match.params.id;
     
@@ -29,6 +45,17 @@ class AlbumShow extends React.Component {
           
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
+
+          // if (!this.props.newPlayQueue.length) this.props.newPlayQueue = data.album.songs.map(song => {
+          //     return {
+          //       streamUrl: song.audio_url,
+          //       trackTitle: song.title,
+          //       artistName: data.album.artist.name,
+          //       albumArtUrl: data.album.album_art_url
+          //     }; 
+          //   });
+          
+            debugger
           const songs = data.album.songs.map( song=> {
             let songLength = null;
             if((song.length % 60) >= 10){
@@ -42,7 +69,7 @@ class AlbumShow extends React.Component {
                 onMouseOut={() => { this.offHover(song._id) }}
                 >
                 <div className="playicon-songname">
-                  <span className="playicon-container">
+                  <span className="playicon-container" onClick={e => this.toggleSong(e, song._id)}>
                     <img id={song._id}  className="playicon" src={require('../resources/music_note_icon.png')} 
                     
                       />
@@ -58,6 +85,7 @@ class AlbumShow extends React.Component {
               </li>
             )
           })
+          
           return (
             <div className="album-show">
               <div className="left-column">
