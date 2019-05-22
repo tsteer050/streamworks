@@ -56,7 +56,6 @@ class AWSSoundPlayer extends Component {
           className="flex-none h4 button button-transparent button-grow rounded mr2"
           icon={PlayIconSVG}
           {...this.props} onTogglePlay={this.props.togglePlay}/>
-        />
         <NextButton
           id="next-button"
           className="flex-none h4 button button-transparent button-grow rounded mr2"
