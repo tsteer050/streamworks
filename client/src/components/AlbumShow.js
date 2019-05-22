@@ -29,6 +29,8 @@ class AlbumShow extends React.Component {
           
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
+
+          debugger
           const songs = data.album.songs.map( song=> {
             let songLength = null;
             if((song.length % 60) >= 10){
