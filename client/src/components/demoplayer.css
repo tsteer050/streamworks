@@ -1,4 +1,3 @@
-
 .progress-bar-container {
   position: fixed;
   bottom: 15px;
@@ -6,7 +5,6 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-
 }
 
 .time-label {
@@ -24,8 +22,6 @@
   left: 17px;
 }
 
-
-
 .sb-soundplayer-progress-container {
   background-color: var(--sb-progress-bg-color);
   width: 488px;
@@ -41,14 +37,13 @@
 .sb-soundplayer-progress-inner {
   background-color: var(--sb-progress-color);
   height: 100%;
-  transition: width .2s ease-in;
-
+  transition: width 0.2s ease-in;
 }
 
-.sb-soundplayer-progress-container:hover > .sb-soundplayer-progress-inner{
+.sb-soundplayer-progress-container:hover > .sb-soundplayer-progress-inner {
   background-color: #1db954;
   height: 100%;
-  transition: width .2s ease-in;
+  transition: width 0.2s ease-in;
 }
 
 .player-track-labels {
@@ -57,18 +52,17 @@
   align-items: flex-start;
   justify-content: center;
   width: 130px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 14px;
   font-family: sans-serif;
   margin-left: 90px;
 }
 
 .player-track-song-title-label {
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 14px;
   font-family: sans-serif;
   margin: 0;
-
 }
 
 .player-track-artist-label {
@@ -119,7 +113,6 @@
 .sb-soundplayer-volume div {
   width: 80px;
   overflow: hidden;
-
 }
 .sb-soundplayer-volume-range {
   -webkit-appearance: none;
@@ -134,7 +127,7 @@
   height: 0.2em;
   cursor: pointer;
   animate: 0.2s;
-  background: #DDD;
+  background: #ddd;
   border-radius: 1.3px;
 }
 .sb-soundplayer-volume-range::-moz-range-track {
@@ -158,7 +151,7 @@
   height: 1em;
   width: 1em;
   border-radius: 1em;
-  background: #DDD;
+  background: #ddd;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -0.4em;
@@ -167,7 +160,7 @@
   height: 1em;
   width: 1em;
   border-radius: 1em;
-  background: #FFFFFF;
+  background: #ffffff;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -0.4em;
@@ -176,14 +169,14 @@
   height: 1em;
   width: 1em;
   border-radius: 1em;
-  background: #DDD;
+  background: #ddd;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -0.4em;
 }
 /* progress fill */
 .sb-soundplayer-volume-range::-ms-fill-lower {
-  background: #DDD;
+  background: #ddd;
 }
 
 .sb-soundplayer-play-btn {
@@ -214,7 +207,7 @@
   border: 0;
   outline: none;
   cursor: pointer;
-  transition: transform, box-shadow, .05s ease;
+  transition: transform, box-shadow, 0.05s ease;
   box-sizing: border-box;
   -webkit-appearance: none;
 }
@@ -222,7 +215,7 @@
   transform: scale(1.0625);
 }
 .sb-soundplayer-btn:focus {
-  transform: scale(.9375);
+  transform: scale(0.9375);
 }
 .sb-soundplayer-btn:active {
   box-shadow: inset 0 0 0 2px var(--sb-btn-color);
@@ -236,7 +229,6 @@
   --sb-btn-color: #b3b3b3;
 }
 
-
 .sb-soundplayer-icon {
   width: 1em;
   height: 1em;
@@ -249,9 +241,9 @@
 }
 
 header {
-  background-image: linear-gradient(45deg, var(--teal), rgba(0, 255, 127,.7));
-  border-bottom: 1px solid rgba(0,0,0,.1);
-  box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+  background-image: linear-gradient(45deg, var(--teal), rgba(0, 255, 127, 0.7));
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 h2 a:hover {
@@ -269,21 +261,21 @@ h2 a:hover {
 }
 
 .muted {
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .btn-small.btn-square {
-  padding: .25rem .3rem;
+  padding: 0.25rem 0.3rem;
 }
 
 .custom-track-bg::-webkit-slider-runnable-track {
-  background-color: rgba(0, 0, 0, .25);
+  background-color: rgba(0, 0, 0, 0.25);
 }
 .custom-track-bg::-moz-range-track {
-  background-color: rgba(0, 0, 0, .25);
+  background-color: rgba(0, 0, 0, 0.25);
 }
 .custom-track-bg::-ms-track {
-  background-color: rgba(0, 0, 0, .25);
+  background-color: rgba(0, 0, 0, 0.25);
 }
 .custom-track-bg::-moz-range-thumb {
   background: #fff;
@@ -296,10 +288,10 @@ h2 a:hover {
 }
 
 :root {
-  --font-family: 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --container-width: 820px;
   --yellow: rgba(255, 220, 0, 0.45);
-  --orange: #FC561E;
+  --orange: #fc561e;
   --button-line-height: 1;
   --sb-progress-height: 8px;
   --button-big-padding-x: 1.25rem;

@@ -6,6 +6,7 @@ import { Link, withRouter } from "react-router-dom";
 import { ApolloConsumer } from "react-apollo";
 import SideBar from "../Sidebar";
 import { Query } from "react-apollo";
+import AudioPlayer from "../AudioPlayer";
 const jwt = require("jsonwebtoken");
 
 class Profile extends React.Component {
@@ -67,6 +68,7 @@ class Profile extends React.Component {
             </div>
           )}
         </ApolloConsumer>
+        <AudioPlayer />
       </div>
     );
   }

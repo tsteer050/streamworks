@@ -1,13 +1,13 @@
-#album-show{
+.album-show {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  background: #07040F;
+  background: #07040f;
   flex-grow: 1;
   height: 100%;
 }
 
-#left-column{
+.left-column {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,106 +15,98 @@
   margin-top: 30px;
 }
 
-#album-photo-container{
+.album-photo-container {
   max-height: 225px;
   max-width: 225px;
 }
 
-#album-photo{
+.album-photo {
   width: 100%;
-  height: 100%
+  height: 100%;
 }
 
-#album-name{
+.album-name {
   font-size: 28px;
-    line-height: 36px;
-    letter-spacing: -.005em;
-    font-weight: var(--glue-font-weight-black);
-    color: #fff;
-    margin-top: 15px;
-    margin-bottom: 5px;
+  line-height: 36px;
+  letter-spacing: -0.005em;
+  font-weight: var(--glue-font-weight-black);
+  color: #fff;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
-#artist-name{
+.artist-name {
   margin-top: 0;
   font-size: 11px;
   color: #fff;
   margin-bottom: 40px;
 }
-#play{
-background-color: #1db954;
-font-size: 11px;
-color: white;
-border: 0;
-border-radius: 500px;
-min-width: 130px;
-vertical-align: middle;
-text-align: center;
-line-height: 1.6;
-padding: 11px 44px;
-margin-bottom: 8px;
-
+.play {
+  background-color: #1db954;
+  font-size: 11px;
+  color: white;
+  border: 0;
+  border-radius: 500px;
+  min-width: 130px;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 1.6;
+  padding: 11px 44px;
+  margin-bottom: 8px;
 }
 
-#more-info{
+.more-info {
   color: white;
   font-size: 11px;
   margin-bottom: 45px;
 }
 
-#favorite{
+.favorite {
   width: 25px;
   height: 35px;
   margin-right: 20px;
 }
 
-#menu{
+.menu {
   width: 25px;
   height: 35px;
 }
 
-#right-column{
+.right-column {
   flex-grow: 1;
   margin-top: 30px;
   margin-right: 30px;
 }
 
-#songs-list{
+.songs-list {
   margin-top: 0;
   flex-direction: column;
-    width: 100%;
-    padding: 0;
-    color: white;
-    font-size: 16px;
-    cursor: default;
+  width: 100%;
+  padding: 0;
+  color: white;
+  font-size: 16px;
+  cursor: default;
 }
-ul > li{
+/* ul > li {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between !important;
+  justify-content: space-between;
   height: 4em;
-  
 }
-ul > li:hover{
-  background: rgba(0,0,0,.9)
-  
-  
+ul > li:hover {
+  background: rgba(0, 0, 0, 0.9);
 }
-ul > li:hover .menu{
+ul > li:hover .menu {
   visibility: visible;
-  
 }
-.playicon-container{
+.playicon-container {
   margin-right: 5px;
 }
-.playicon{
+.playicon {
   max-width: 19px;
   max-height: 19px;
 }
 
-.menu{
+.menu {
   visibility: hidden;
-  
-}
-
-
+} */
