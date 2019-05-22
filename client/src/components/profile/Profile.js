@@ -7,6 +7,10 @@ import { ApolloConsumer } from "react-apollo";
 import SideBar from "../Sidebar";
 import { Query } from "react-apollo";
 import AudioPlayer from "../AudioPlayer";
+import withRedux from '../../util/redux_container';
+
+const AudioPlayerRedux = withRedux(AudioPlayer);
+
 const jwt = require("jsonwebtoken");
 
 class Profile extends React.Component {
@@ -68,7 +72,7 @@ class Profile extends React.Component {
             </div>
           )}
         </ApolloConsumer>
-        <AudioPlayer />
+        <AudioPlayerRedux />
       </div>
     );
   }
