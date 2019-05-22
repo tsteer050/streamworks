@@ -8,7 +8,7 @@ const Modal = () => {
         <h1>StreamWorks</h1>
       </div>
       <div className="modal-body">
-        <h1>StreamWorks is Free</h1>
+        <h2>StreamWorks is Free</h2>
         <ul className="modal-list">
           <li className="modal-li">No credit card, ever</li>
           <li className="modal-li">Create a playlist</li>

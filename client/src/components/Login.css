@@ -15,6 +15,7 @@
 .login-header > a > img {
   height: 70px;
   width: 70px;
+  margin-right: 15px;
 }
 
 .login-header > h1 {
@@ -25,6 +26,7 @@
   color: black;
   text-decoration: none;
   display: flex;
+  align-items: center;
 }
 
 #login-form {
@@ -39,6 +41,7 @@
   color: #1c1c1f;
   font-size: 0.9375em;
   margin-bottom: 20px;
+  padding-left: 15px;
 }
 
 #submit-button {
@@ -75,9 +78,10 @@
 
 .signup-div {
   text-align: center;
+  margin-top: 30px;
 }
 
-.signup-div > h4 {
+.signup-div > h5 {
   margin-bottom: 50px;
 }
 

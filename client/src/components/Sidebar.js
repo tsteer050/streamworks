@@ -24,7 +24,19 @@ class LoggedIn extends React.Component {
     let token = localStorage.getItem("auth-token");
 
     const user = jwt.decode(token);
+    // debugger;
     this.setState({ user });
+  }
+
+  componentDidUpdate() {
+    if (!this.state.user) {
+      let token = localStorage.getItem("auth-token");
+
+      const user = jwt.decode(token);
+      if (user) {
+        this.setState({ user });
+      }
+    }
   }
 
   render() {
@@ -93,13 +105,13 @@ class Sidebar extends React.Component {
               <div className="align-div">
                 <Link to="/featured">
                   <img className="home-logo" src={home} alt="home" />
-                  <h5 className="home-link">Home</h5>
+                  <h6 className="home-link">Home</h6>
                 </Link>
               </div>
               <div className="align-div">
                 <Link to="/search">
                   <img className="search-logo" src={search} alt="search" />
-                  <h5>Search</h5>
+                  <h6>Search</h6>
                 </Link>
               </div>
               <div className="align-div">
@@ -113,7 +125,7 @@ class Sidebar extends React.Component {
                             src={library}
                             alt="library"
                           />
-                          <h5>Your Library</h5>
+                          <h6>Your Library</h6>
                         </Link>
                       );
                     } else {
@@ -125,7 +137,7 @@ class Sidebar extends React.Component {
                             src={library}
                             alt="library"
                           />
-                          <h5 onClick={this.show.bind(this)}>Your Library</h5>
+                          <h6 onClick={this.show.bind(this)}>Your Library</h6>
                         </Link>
                       );
                     }

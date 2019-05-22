@@ -205,7 +205,7 @@
   border-radius: 3px;
   text-decoration: none;
   border: 0;
-  outline: none;
+  outline: none !important;
   cursor: pointer;
   transition: transform, box-shadow, 0.05s ease;
   box-sizing: border-box;

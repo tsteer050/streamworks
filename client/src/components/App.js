@@ -6,6 +6,10 @@ import Signup from "./Signup";
 import Profile from "../components/profile/Profile";
 import Main from "./Main";
 import Contact from "./profile/Contact";
+<<<<<<< HEAD
+=======
+
+>>>>>>> a477a55441f49a225c998aa5882fd411864d894d
 import "./root.css";
 
 const App = () => {

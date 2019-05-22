@@ -49,10 +49,13 @@
   color: white;
 }
 
-.modal-body > h1 {
+.modal-body > h2 {
   margin-left: 50px;
 }
 
+.modal-list {
+  margin-top: 25px;
+}
 .modal-li {
   justify-content: flex-start;
   height: 30px;
@@ -70,7 +73,7 @@
 }
 
 .rodal-dialog {
-  height: 400px;
+  height: 400px !important;
 }
 
 .modal-sign-in > a {
