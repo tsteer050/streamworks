@@ -43,7 +43,7 @@ class AlbumShow extends React.Component {
       <Query query={FETCH_ALBUM} variables={{ id }}>
         {({ loading, error, data }) => {
           
-          if (loading) return "Loading...";
+          if (loading) return <div className="loading-screen" />;
           if (error) return `Error! ${error.message}`;
 
           // if (!this.props.newPlayQueue.length) this.props.newPlayQueue = data.album.songs.map(song => {
