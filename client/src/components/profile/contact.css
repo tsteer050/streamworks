@@ -6,14 +6,20 @@
   display: flex;
   align-items: center;
 }
-.contact-header > h5 {
+
+.contact-header > a {
+  display: flex;
+  align-items: center;
+}
+
+.contact-header > a > h5 {
   color: white;
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 0;
 }
 
-.contact-header > img {
+.contact-header > a > img {
   height: 30px;
   width: 30px;
   margin-right: 15px;

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./contact.css";
 import * as logo from "../../images/spotify.png";
 
@@ -6,8 +7,10 @@ const Contact = () => {
   return (
     <section className="contact-main  text-center">
       <header className="contact-header">
-        <img src={logo} alt="logo" />
-        <h5>StreamWorks</h5>
+        <Link to="/">
+          <img src={logo} alt="logo" />
+          <h5>StreamWorks</h5>
+        </Link>
       </header>
       <article className="main-contact">
         <h1>Thank you for visiting StreamWorks</h1>
