@@ -21,10 +21,9 @@
     "express-graphql": "^0.8.0",
     "graphql": "^14.3.0",
     "jsonwebtoken": "^8.5.1",
-
+    "jwt-decode": "^2.2.0",
     "mongoose": "^5.5.9",
     "nodemon": "^1.19.0",
-
     "validator": "^10.11.0"
   }
 }

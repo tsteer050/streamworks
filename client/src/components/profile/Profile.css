@@ -1,0 +1,67 @@
+.bg-container {
+  display: flex;
+  width: 100%;
+}
+
+.main-bg-div {
+  background: #0d0d0d;
+
+  width: 100%;
+}
+
+.bg-div {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.bg-div > img {
+  height: 120px;
+  width: 120px;
+}
+
+.profile-name {
+  color: white;
+  text-transform: lowercase;
+  margin: 30px;
+}
+
+.menu-links {
+  text-align: center;
+}
+
+.menu-links > a {
+  display: block;
+  border-radius: 50px;
+  color: white;
+  text-decoration: none;
+  border: 1px solid lightgray;
+  padding: 10px 30px;
+  width: 200px;
+  text-align: center;
+  margin: 20px auto;
+  font-size: 12px;
+}
+
+.menu-links > a:hover {
+  width: 210px;
+  border: 2px solid white;
+}
+
+.logout-btn {
+  display: block;
+  border-radius: 50px;
+  color: white;
+  text-decoration: none;
+  border: 1px solid lightgray;
+  padding: 10px 30px;
+  width: 255px;
+  text-align: center;
+  margin: 15px auto;
+  font-size: 12px;
+  background: black;
+}
+
+.logout-btn:hover {
+  width: 265px;
+  border: 2px solid white;
+}

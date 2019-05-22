@@ -1,6 +1,6 @@
 #sidebar-container {
   width: 230px;
-  height: 83vh;
+  height: calc(100vh - 90px);
   background: black;
   color: white;
   display: flex;
@@ -27,7 +27,7 @@
   align-items: center;
   margin-top: 250px;
 }
-#signup {
+.signup {
   width: auto;
   background-color: white;
   width: fit-content;
@@ -36,13 +36,13 @@
   letter-spacing: 2px;
   font-size: 14px;
 }
-#signup a {
+.signup a {
   color: rgba(0, 0, 0, 0.8);
   text-decoration: none;
   font-size: 12px;
 }
 
-#login-p {
+.login-p {
   background-color: black;
   width: fit-content;
   border-radius: 20px;
@@ -50,20 +50,20 @@
   border: 1px solid lightgray;
   margin-top: 0px;
 }
-#login-p a {
+.login-p a {
   font-size: 12px;
   color: white;
   text-decoration: none;
   padding: 10px;
 }
 
-#signup:hover {
+.signup:hover {
   padding: 8px 65px;
   font-size: 14px;
   font-weight: bold;
 }
 
-#login-p:hover {
+.login-p:hover {
   padding: 8px 65px;
   font-size: 14px;
   border: 2px solid white;

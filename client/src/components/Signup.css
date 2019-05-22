@@ -1,26 +1,112 @@
+input {
+  outline: none !important;
+}
+
 #signup {
   flex-grow: 1;
+  text-align: center;
 }
 
-#signup-header{
+.signup-header {
   width: 100%;
-    height: 110px;
-    border-bottom: 1px solid lightgray;
-    margin-bottom: 40px;
+  height: 110px;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.signup-header > a > img {
+  height: 70px;
+  width: 70px;
+}
+
+.signup-header > h1 {
+  font-size: 40px;
+}
+
+.signup-header > a {
+  color: black;
+  display: flex;
+  text-decoration: none;
+}
+input::placeholder {
+  padding-left: 10px;
+}
+.demo-div {
+  display: flex;
+  justify-content: center;
+}
+
+.demo-btn-div {
+  text-align: center;
+}
+
+.demo-btn {
+  margin-bottom: 14px;
+  width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #fff;
+  background-color: #3b5998;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 500px;
+  padding: 16px 48px 18px;
+  font-weight: bold;
+  outline: none !important;
+  cursor: pointer;
+}
+
+.borders {
+  display: flex;
+  width: 450px;
+}
+
+.line-through {
+  display: block;
+  font-size: 0.875em;
+  margin-bottom: 1em;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.line-through:before {
+  width: 40px;
+  height: 10px;
+  background-color: #fff;
+  content: "";
+  margin: -5px 0 0 -20px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  z-index: -1;
+}
+
+.line-through:after {
+  border-bottom: 1px solid #dfe0e6;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 49%;
+  width: 100%;
+  z-index: -2;
+}
 
 #signup-form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-#signup-form > input{
+#signup-form > input {
   width: 426px;
   height: 48px;
   border: 1px solid #dfe0e6;
   color: #1c1c1f;
-  font-size: .9375em;
+  font-size: 0.9375em;
   margin-bottom: 20px;
 }
 #birthdate-picker {
@@ -31,37 +117,47 @@
   margin-bottom: 20px;
 }
 #enter-birthdate {
-  
- 
 }
 #birthdate-picker > select {
-width: 40%;
-margin-right: 15px;
-background: white;
-color: gray !important;
+  width: 40%;
+  margin-right: 15px;
+  background: white;
+  color: gray !important;
 }
 #birthdate-picker > input {
-    width: 20%;
-    margin-left: 30px;
+  width: 20%;
+  margin-left: 30px;
 }
 
-#gender{
+#gender {
   color: gray;
   width: 426px;
   height: 48px;
   margin-bottom: 30px;
 }
-.radio-button{
-  
+.radio-button {
 }
 
 #submit-button {
   color: white;
-    border-radius: 500px;
-    width: 320px;
-    height: 48px;
-    background: #1DB954;
-    font-weight: 700;
-    border: 1px solid transparent;
-    font-size: 16px;
+  border-radius: 500px;
+  width: 320px;
+  height: 48px;
+  background: #1db954;
+  font-weight: 700;
+  border: 1px solid transparent;
+  font-size: 16px;
+}
+
+.account-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.login-link {
+  color: #1db954;
+  text-decoration: none;
+  margin-left: 10px;
 }

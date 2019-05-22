@@ -120,8 +120,6 @@ const mutation = new GraphQLObjectType({
       async resolve(_, { name, description, weight }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
-        // if our service returns true then our product is good to save!
-        // anything else and we'll throw an error
         if (validUser.loggedIn) {
           return new Playlist({ title }).save();
         } else {
@@ -139,8 +137,6 @@ const mutation = new GraphQLObjectType({
       async resolve(_, { name, description, weight }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
-        // if our service returns true then our product is good to save!
-        // anything else and we'll throw an error
         if (validUser.loggedIn) {
           return Playlist.remove({ _id: id });
         } else {
