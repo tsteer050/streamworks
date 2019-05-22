@@ -39,12 +39,18 @@ class AudioPlayer extends React.Component {
   }
 
   render() {
-    const track = this.props.state.playQueue[this.props.state.currentTrack] || {
-      streamUrl: "https://s3.us-east-2.amazonaws.com/streamworks-songs/Respect+My+Art/Long+Live+the+King+1.m4a",
-      trackTitle: "Long Live the King",
-      artistName: "Organ Freeman",
-      albumArtUrl: "https://m.media-amazon.com/images/I/81mBzkImdvL._SS500_.jpg"
-    };
+
+      let track;
+      if (this.props.state.playQueue) {
+
+        track = this.props.state.playQueue[this.props.state.currentTrack];
+      } 
+        track = track || {
+          streamUrl: "https://s3.us-east-2.amazonaws.com/streamworks-songs/Respect+My+Art/Long+Live+the+King+1.m4a",
+          trackTitle: "Long Live the King",
+          artistName: "Organ Freeman",
+          albumArtUrl: "https://m.media-amazon.com/images/I/81mBzkImdvL._SS500_.jpg"
+       };
 
     return (
         <Query query={IS_LOGGED_IN}>

@@ -1,0 +1,104 @@
+.contact-header {
+  background: black;
+  /* border-bottom: 1px solid white; */
+  box-shadow: none;
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+}
+
+.contact-header > a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.contact-header > a > h5 {
+  color: white;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 0;
+}
+
+.contact-header > a > img {
+  height: 30px;
+  width: 30px;
+  margin-right: 15px;
+  margin-left: 55px;
+}
+
+.contact-main {
+  min-height: 1200px;
+  width: 100%;
+  background: lightgray;
+}
+
+.main-contact {
+  background: url("../../images/gradient-bg.png") no-repeat;
+  background-size: 100%;
+  height: 600px;
+}
+
+.main-contact > h1 {
+  color: white;
+  padding-top: 60px;
+  text-shadow: 3px 2px 1px rgba(150, 150, 145, 1);
+}
+
+.main-contact > h4 {
+  color: white;
+  padding-top: 10px;
+  text-shadow: 3px 2px 1px rgba(150, 150, 145, 1);
+}
+
+.tech-list-div {
+  display: flex;
+}
+.tech-list {
+  margin: 0 auto;
+  color: white;
+  font-weight: bold;
+  text-shadow: 3px 2px 1px rgba(150, 150, 145, 1);
+  list-style-type: none;
+  text-align: left;
+}
+
+.tech-list li:before {
+  margin-left: -1.3em;
+  position: absolute;
+  font-weight: bold;
+}
+
+.tech-list li.tech-li:before {
+  content: "\2713";
+  color: black;
+}
+.contact-div {
+  text-align: center;
+}
+.contact-us-li {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 auto;
+  padding-left: 0;
+}
+
+.contact-us-li > li > h5 {
+  margin: 0 auto;
+  font-weight: bold;
+}
+
+.contact-us-li > li {
+  display: block;
+  margin-top: 50px;
+}
+
+.contact-us-li > li > a {
+  display: block;
+  margin: 15px auto;
+  color: black;
+}
+
+.contact-us-li > li > a:hover {
+  font-weight: bold;
+}

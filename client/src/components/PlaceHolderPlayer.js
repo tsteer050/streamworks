@@ -23,17 +23,9 @@ class PlaceHolderPlayer extends React.Component {
   }
 
   render() {
-    let style = {
-      height: 400,
-      padding: 0
-    };
     return (
       <Fragment>
-        <Rodal
-          style={style}
-          visible={this.state.visible}
-          onClose={this.hide.bind(this)}
-        >
+        <Rodal visible={this.state.visible} onClose={this.hide.bind(this)}>
           <Modal />
         </Rodal>
         <div className="p1 mb3 mt1 flex flex-center bg-darken-1 orange rounded">

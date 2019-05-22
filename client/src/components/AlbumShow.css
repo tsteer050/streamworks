@@ -4,8 +4,9 @@
   align-items: flex-start;
   background: #07040f;
   flex-grow: 1;
-  height: calc(100vh - 75px);
-  overflow: scroll;
+  height: calc(100vh - 90px);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .left-column {
@@ -66,7 +67,6 @@
 }
 
 .menu {
-  
 }
 
 .right-column {
@@ -104,9 +104,10 @@
   max-width: 19px;
   max-height: 19px;
 }
-.left-menu-icon{
 
+.left-menu-icon {
 }
+  
 .menu {
   visibility: hidden;
 }

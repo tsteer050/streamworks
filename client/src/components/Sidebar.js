@@ -8,6 +8,8 @@ import * as home from "../images/home.jpg";
 import * as search from "../images/search.png";
 import * as library from "../images/library.png";
 import * as profile from "../images/profile.png";
+import Rodal from "rodal";
+import Modal from "./Modal";
 const jwt = require("jsonwebtoken");
 
 class LoggedIn extends React.Component {
@@ -22,7 +24,19 @@ class LoggedIn extends React.Component {
     let token = localStorage.getItem("auth-token");
 
     const user = jwt.decode(token);
+    // debugger;
     this.setState({ user });
+  }
+
+  componentDidUpdate() {
+    if (!this.state.user) {
+      let token = localStorage.getItem("auth-token");
+
+      const user = jwt.decode(token);
+      if (user) {
+        this.setState({ user });
+      }
+    }
   }
 
   render() {
@@ -51,12 +65,18 @@ class LoggedIn extends React.Component {
 }
 
 class Sidebar extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     user: null
-  //   };
-  // }
+  constructor(props) {
+    super(props);
+    this.state = { visible: false };
+  }
+
+  show() {
+    this.setState({ visible: true });
+  }
+
+  hide() {
+    this.setState({ visible: false });
+  }
 
   // componentDidMount() {
   //   let token = localStorage.getItem("auth-token");
@@ -69,62 +89,91 @@ class Sidebar extends React.Component {
     // if (!this.state.user) return null;
 
     return (
-      <div id="sidebar-container">
-        <div id="sidebar">
-          <div id="logo">
-            <Link to="/featured">
-              <img className="str-logo" src={logo} alt="spotify-logo" />
-              <h3 className="str-header">StreamWorks</h3>
-            </Link>
-          </div>
-          <div>
-            <div className="align-div">
+      <Fragment>
+        <Rodal visible={this.state.visible} onClose={this.hide.bind(this)}>
+          <Modal />
+        </Rodal>
+        <div id="sidebar-container">
+          <div id="sidebar">
+            <div id="logo">
               <Link to="/featured">
-                <img className="home-logo" src={home} alt="home" />
-                <h5 className="home-link">Home</h5>
+                <img className="str-logo" src={logo} alt="spotify-logo" />
+                <h3 className="str-header">StreamWorks</h3>
               </Link>
             </div>
-            <div className="align-div">
-              <Link to="/search">
-                <img className="search-logo" src={search} alt="search" />
-                <h5>Search</h5>
-              </Link>
-            </div>
-            <div className="align-div">
-              <Link to="/playlists">
-                <img className="library-logo" src={library} alt="library" />
-                <h5>Your Library</h5>
-              </Link>
+            <div>
+              <div className="align-div">
+                <Link to="/featured">
+                  <img className="home-logo" src={home} alt="home" />
+                  <h6 className="home-link">Home</h6>
+                </Link>
+              </div>
+              <div className="align-div">
+                <Link to="/search">
+                  <img className="search-logo" src={search} alt="search" />
+                  <h6>Search</h6>
+                </Link>
+              </div>
+              <div className="align-div">
+                <Query query={IS_LOGGED_IN}>
+                  {({ data }) => {
+                    if (data.isLoggedIn) {
+                      return (
+                        <Link to="/library">
+                          <img
+                            className="library-logo"
+                            src={library}
+                            alt="library"
+                          />
+                          <h6>Your Library</h6>
+                        </Link>
+                      );
+                    } else {
+                      return (
+                        <Link to="#!">
+                          <img
+                            onClick={this.show.bind(this)}
+                            className="library-logo"
+                            src={library}
+                            alt="library"
+                          />
+                          <h6 onClick={this.show.bind(this)}>Your Library</h6>
+                        </Link>
+                      );
+                    }
+                  }}
+                </Query>
+              </div>
             </div>
           </div>
+          <ApolloConsumer>
+            {client => (
+              <Query query={IS_LOGGED_IN}>
+                {({ data }) => {
+                  // if we have some one logged in we show them a logout button
+                  if (data.isLoggedIn) {
+                    // debugger;
+                    return (
+                      <LoggedIn client={client} history={this.props.history} />
+                    );
+                  } else {
+                    return (
+                      <div id="sidebar-footer">
+                        <p className="signup">
+                          <Link to="/signup">SIGN UP</Link>
+                        </p>
+                        <p className="login-p">
+                          <Link to="/login">LOG IN</Link>
+                        </p>
+                      </div>
+                    );
+                  }
+                }}
+              </Query>
+            )}
+          </ApolloConsumer>
         </div>
-        <ApolloConsumer>
-          {client => (
-            <Query query={IS_LOGGED_IN}>
-              {({ data }) => {
-                // if we have some one logged in we show them a logout button
-                if (data.isLoggedIn) {
-                  // debugger;
-                  return (
-                    <LoggedIn client={client} history={this.props.history} />
-                  );
-                } else {
-                  return (
-                    <div id="sidebar-footer">
-                      <p className="signup">
-                        <Link to="/signup">SIGN UP</Link>
-                      </p>
-                      <p className="login-p">
-                        <Link to="/login">LOG IN</Link>
-                      </p>
-                    </div>
-                  );
-                }
-              }}
-            </Query>
-          )}
-        </ApolloConsumer>
-      </div>
+      </Fragment>
     );
   }
 }
