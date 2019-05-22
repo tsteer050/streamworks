@@ -51,7 +51,7 @@ class Profile extends React.Component {
 
                 <div className="menu-links">
                   <Link to="overview">VIEW ACCOUNT</Link>
-                  <Link to="/help">HELP</Link>
+                  <Link to="/contact">CONTACT US</Link>
                   <button
                     className="logout-btn"
                     onClick={e => {

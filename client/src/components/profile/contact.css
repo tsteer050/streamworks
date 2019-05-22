@@ -1,0 +1,50 @@
+.contact-header {
+  background: black;
+  /* border-bottom: 1px solid white; */
+  box-shadow: none;
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+}
+.contact-header > h5 {
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 0;
+}
+
+.contact-header > img {
+  height: 30px;
+  width: 30px;
+  margin-right: 15px;
+  margin-left: 55px;
+}
+
+.contact-main {
+  min-height: 1000px;
+  width: 100%;
+  background: lightgray;
+}
+
+.main-contact {
+  background: url("../../images/gradient-bg.png") no-repeat;
+  background-size: 100%;
+  height: 500px;
+}
+
+.main-contact > p {
+  color: white;
+}
+
+.contact-div {
+  text-align: center;
+}
+.contact-us-li {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.contact-us-li {
+  text-align: center;
+}

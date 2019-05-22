@@ -107,7 +107,7 @@ class Sidebar extends React.Component {
                   {({ data }) => {
                     if (data.isLoggedIn) {
                       return (
-                        <Link to="/playlists">
+                        <Link to="/library">
                           <img
                             className="library-logo"
                             src={library}
