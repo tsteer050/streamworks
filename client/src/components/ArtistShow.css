@@ -1,0 +1,9 @@
+#title-header{
+  background-image: url(paper.gif);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #07040F;
+  
+  height: 100%;
+}
