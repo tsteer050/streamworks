@@ -15,8 +15,8 @@ const Contact = () => {
       <article className="main-contact">
         <h1>Thank you for visiting StreamWorks</h1>
 
-        <h5>StreamWorks is a duplicate website inspired by Spotify,</h5>
-        <h5>built with the following technologies.</h5>
+        <h4>StreamWorks is a duplicate website inspired by Spotify,</h4>
+        <h4>built with the following technologies.</h4>
 
         <div className="tech-list-div">
           <ul className="tech-list">
@@ -26,13 +26,13 @@ const Contact = () => {
             <li className="tech-li">Bootstrap/css for the styling.</li>
           </ul>
         </div>
-        <h5>StreamWorks was built by a small team of collaborators.</h5>
+        <h4>StreamWorks was built by a small team of collaborators.</h4>
 
-        <h5>Please feel free to look around.</h5>
-        <h5>
+        <h4>Please feel free to look around.</h4>
+        <h4>
           Explore our app, listen to some music, add music to you playlists, and
           please visit us:
-        </h5>
+        </h4>
       </article>
       <div className="contact-div">
         <ul className="contact-us-li">
