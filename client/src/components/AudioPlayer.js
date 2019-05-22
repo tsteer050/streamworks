@@ -6,12 +6,10 @@ import { IS_LOGGED_IN } from "../graphql/queries";
 
 import PlaceHolderPlayer from "./PlaceHolderPlayer";
 
-
-
-const streamUrl = 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Long+Live+the+King+1.m4a';
-const trackTitle = 'Long Live the King';
-const artistName = 'Organ Freeman';
-
+const streamUrl =
+  "https://s3.us-east-2.amazonaws.com/streamworks-songs/Long+Live+the+King+1.m4a";
+const trackTitle = "Long Live the King";
+const artistName = "Organ Freeman";
 
 class AudioPlayer extends React.Component {
   constructor(props) {
@@ -24,7 +22,7 @@ class AudioPlayer extends React.Component {
   togglePlay() {
     this.props.togglePlay();
   }
-  
+
   nextTrack() {
     let currentTrack = this.props.state.currentTrack;
     currentTrack += 1;
@@ -39,36 +37,36 @@ class AudioPlayer extends React.Component {
   }
 
   render() {
-      let track;
-      if (this.props.state.playQueue) {
+    let track;
 
-        track = this.props.state.playQueue[this.props.state.currentTrack];
-      } 
-        track = track || {
-          streamUrl: "https://s3.us-east-2.amazonaws.com/streamworks-songs/Respect+My+Art/Long+Live+the+King+1.m4a",
-          trackTitle: "Long Live the King",
-          artistName: "Organ Freeman",
-          albumArtUrl: "https://m.media-amazon.com/images/I/81mBzkImdvL._SS500_.jpg"
-       };
-    
+    if (this.props.state.playQueue) {
+      track = this.props.state.playQueue[this.props.state.currentTrack];
+    }
+    track = track || {
+      streamUrl:
+        "https://s3.us-east-2.amazonaws.com/streamworks-songs/Respect+My+Art/Long+Live+the+King+1.m4a",
+      trackTitle: "Long Live the King",
+      artistName: "Organ Freeman",
+      albumArtUrl: "https://m.media-amazon.com/images/I/81mBzkImdvL._SS500_.jpg"
+    };
 
     return (
-        <Query query={IS_LOGGED_IN}>
+      <Query query={IS_LOGGED_IN}>
         {({ data }) => {
           if (data.isLoggedIn) {
             return (
               <div id="audio-player-bar">
                 <AWSSoundPlayer
-            id="audio-player"
-            streamUrl={track.streamUrl}
-            trackTitle={track.trackTitle}
-            artistName={track.artistName}
-            albumArtUrl={track.albumArtUrl}
-            prevTrack={this.prevTrack}
-            nextTrack={this.nextTrack}
-            togglePlay={this.togglePlay}
-            playing={this.props.state.playing}
-              />
+                  id="audio-player"
+                  streamUrl={track.streamUrl}
+                  trackTitle={track.trackTitle}
+                  artistName={track.artistName}
+                  albumArtUrl={track.albumArtUrl}
+                  prevTrack={this.prevTrack}
+                  nextTrack={this.nextTrack}
+                  togglePlay={this.togglePlay}
+                  playing={this.props.state.playing}
+                />
               </div>
             );
           } else {
@@ -80,9 +78,7 @@ class AudioPlayer extends React.Component {
           }
         }}
       </Query>
-
-        
-    )
+    );
   }
 }
 
