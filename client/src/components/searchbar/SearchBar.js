@@ -8,7 +8,7 @@ export default class SearchBar extends Component {
         <div className="input-header">
           <input
             type="text"
-            class=" input-box"
+            className="input-box"
             placeholder="Start Typing . . ."
           />
         </div>

@@ -41,16 +41,19 @@ class AudioPlayer extends React.Component {
   render() {
 
       let track;
-      if (this.props.state.playQueue) {
+      if (this.props.state.playQueue.length > 0) {
 
         track = this.props.state.playQueue[this.props.state.currentTrack];
       } 
-        track = track || {
-          streamUrl: "https://s3.us-east-2.amazonaws.com/streamworks-songs/Respect+My+Art/Long+Live+the+King+1.m4a",
-          trackTitle: "Long Live the King",
-          artistName: "Organ Freeman",
-          albumArtUrl: "https://m.media-amazon.com/images/I/81mBzkImdvL._SS500_.jpg"
-       };
+
+      track = track || {
+        streamUrl: "https://s3.us-east-2.amazonaws.com/streamworks-songs/Respect+My+Art/Long+Live+the+King+1.m4a",
+        trackTitle: "Long Live the King",
+        artistName: "Organ Freeman",
+        albumArtUrl: "https://m.media-amazon.com/images/I/81mBzkImdvL._SS500_.jpg"
+      };
+    
+
 
     return (
         <Query query={IS_LOGGED_IN}>
