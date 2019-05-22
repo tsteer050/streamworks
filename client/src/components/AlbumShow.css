@@ -61,14 +61,11 @@
 }
 
 .favorite {
-  width: 25px;
-  height: 35px;
   margin-right: 20px;
 }
 
 .menu {
-  width: 25px;
-  height: 35px;
+  
 }
 
 .right-column {
@@ -86,17 +83,28 @@
   font-size: 16px;
   cursor: default;
 }
+<<<<<<< HEAD
 ul > li {
+=======
+.songs-list > li {
+>>>>>>> f9545e5b8abde094ba53cd9878ae336497fca4d2
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 4em;
 }
+<<<<<<< HEAD
 /* ul > li:hover {
   background: rgba(0, 0, 0, 0.9);
 } */
 ul > li:hover .menu {
+=======
+.songs-list > li:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+.songs-list > li:hover .menu {
+>>>>>>> f9545e5b8abde094ba53cd9878ae336497fca4d2
   visibility: visible;
 }
 .playicon-container {
@@ -106,7 +114,15 @@ ul > li:hover .menu {
   max-width: 19px;
   max-height: 19px;
 }
+.left-menu-icon{
 
+}
 .menu {
   visibility: hidden;
 }
+<<<<<<< HEAD
+=======
+.menu-icon {
+  transform: rotate(90deg);
+}
+>>>>>>> f9545e5b8abde094ba53cd9878ae336497fca4d2

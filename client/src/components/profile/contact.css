@@ -10,6 +10,7 @@
 .contact-header > a {
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
 .contact-header > a > h5 {

@@ -70,7 +70,7 @@
 }
 
 .rodal-dialog {
-  height: 400px;
+  height: 400px !important;
 }
 
 .modal-sign-in > a {
