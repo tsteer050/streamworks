@@ -4,6 +4,10 @@ import Splash from './Splash';
 import SideBar from "../components/Sidebar";
 import AudioPlayer from "./AudioPlayer";
 import AlbumShow from "./AlbumShow";
+import withRedux from '../util/redux_container';
+
+const AudioPlayerRedux = withRedux(AudioPlayer);
+const AlbumShowRedux = withRedux(AlbumShow);
 
 class Main extends React.Component {
   render() {
@@ -12,9 +16,9 @@ class Main extends React.Component {
         <SideBar />
           <Switch>
             <Route exact path="/" component={Splash} />
-            <Route exact path="/album/:id" component={AlbumShow} />
+            <Route exact path="/album/:id" component={AlbumShowRedux} />
           </Switch>
-        <AudioPlayer />
+        <AudioPlayerRedux />
       </Fragment>
     );
   }
