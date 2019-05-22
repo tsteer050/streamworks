@@ -24,7 +24,7 @@ class LoggedIn extends React.Component {
     this.setState({ user });
   }
   render() {
-    const { client } = this.props;
+    // const { client } = this.props;
     if (!this.state.user) return null;
     return (
       <Fragment>
