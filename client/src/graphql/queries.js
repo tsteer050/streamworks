@@ -62,7 +62,6 @@ export const FETCH_ALBUM = gql`
         title
         length
         audio_url
-
       }
     }
   }

@@ -1,7 +1,10 @@
-import React from "react";
-import './AudioPlayer.css';
-import { Query } from 'react-apollo';
-import AWSSoundPlayer from './DemoPlayer';
+import React, { Component, Fragment } from "react";
+import "./AudioPlayer.css";
+import { Query } from "react-apollo";
+import AWSSoundPlayer from "./DemoPlayer";
+import { IS_LOGGED_IN } from "../graphql/queries";
+
+import PlaceHolderPlayer from "./PlaceHolderPlayer";
 
 
 
@@ -44,9 +47,12 @@ class AudioPlayer extends React.Component {
     };
 
     return (
-
-        <div id="audio-player-bar">
-          <AWSSoundPlayer
+        <Query query={IS_LOGGED_IN}>
+        {({ data }) => {
+          if (data.isLoggedIn) {
+            return (
+              <div id="audio-player-bar">
+                <AWSSoundPlayer
             id="audio-player"
             streamUrl={track.streamUrl}
             trackTitle={track.trackTitle}
@@ -57,9 +63,21 @@ class AudioPlayer extends React.Component {
             togglePlay={this.togglePlay}
             playing={this.props.state.playing}
               />
-        </div>
+              </div>
+            );
+          } else {
+            return (
+              <div id="audio-player-bar">
+                <PlaceHolderPlayer />
+              </div>
+            );
+          }
+        }}
+      </Query>
+
+        
     )
   }
-};
+}
 
 export default AudioPlayer;

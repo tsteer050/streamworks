@@ -1,4 +1,3 @@
-
 import React from "react";
 import Splash from "./Splash";
 import { Route, Switch } from "react-router-dom";
@@ -9,6 +8,7 @@ import AlbumShow from './AlbumShow';
 // import Sidebar from "./Sidebar";
 // import AudioPlayer from "./AudioPlayer";
 import Profile from "../components/profile/Profile";
+import AlbumShow from "./AlbumShow";
 import "./root.css";
 
 const App = () => {
