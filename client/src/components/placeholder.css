@@ -22,3 +22,89 @@
   bottom: 35px;
   left: calc(50vw + 48px);
 }
+
+/* modal */
+.modal-list {
+  margin-top: 0;
+  padding-left: 2em;
+  list-style-type: none;
+  margin-left: 40px;
+}
+
+.modal-header {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../images/background.png");
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.modal-header > h1 {
+  color: white;
+}
+
+.modal-body > h1 {
+  margin-left: 50px;
+}
+
+.modal-li {
+  justify-content: flex-start;
+  height: 30px;
+}
+
+.modal-list li:before {
+  margin-left: -1.3em;
+  position: absolute;
+  font-weight: bold;
+}
+
+.modal-list li.modal-li:before {
+  content: "\2713";
+  color: black;
+}
+
+.rodal-dialog {
+  height: 400px;
+}
+
+.modal-sign-in > a {
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  margin: 0 auto 20px;
+  justify-content: center;
+}
+
+.modal-sign-in {
+  text-align: center;
+}
+
+.modal-signup {
+  color: white;
+  border-radius: 500px;
+  width: 320px;
+  height: 48px;
+  background: #1db954;
+  font-weight: 700;
+  border: 1px solid transparent;
+  font-size: 14px;
+  outline: none !important;
+  cursor: pointer;
+}
+
+.modal-signup:hover {
+  background: #1ed760;
+}
+
+.modal-login {
+  color: #1db954;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.modal-login:hover {
+  font-size: 16px;
+}

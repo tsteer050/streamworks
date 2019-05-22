@@ -5,6 +5,8 @@ import { VolumeControl, Progress } from "react-soundplayer/components";
 import "./placeholder.css";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
+import "./placeholder.css";
+import Modal from "./Modal";
 
 class PlaceHolderPlayer extends React.Component {
   constructor(props) {
@@ -21,10 +23,18 @@ class PlaceHolderPlayer extends React.Component {
   }
 
   render() {
+    let style = {
+      height: 400,
+      padding: 0
+    };
     return (
       <Fragment>
-        <Rodal visible={this.state.visible} onClose={this.hide.bind(this)}>
-          <div>Content</div>
+        <Rodal
+          style={style}
+          visible={this.state.visible}
+          onClose={this.hide.bind(this)}
+        >
+          <Modal />
         </Rodal>
         <div className="p1 mb3 mt1 flex flex-center bg-darken-1 orange rounded">
           <div className="track-icons">
