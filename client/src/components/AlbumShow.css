@@ -86,7 +86,7 @@
   font-size: 16px;
   cursor: default;
 }
-/* ul > li {
+ul > li {
   width: 100%;
   display: flex;
   align-items: center;
@@ -109,4 +109,4 @@ ul > li:hover .menu {
 
 .menu {
   visibility: hidden;
-} */
+}
