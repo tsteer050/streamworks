@@ -5,7 +5,7 @@ import SideBar from "../components/Sidebar";
 import AudioPlayer from "./AudioPlayer";
 import AlbumShow from "./AlbumShow";
 
-class Splash extends React.Component {
+class Main extends React.Component {
   render() {
     return (
       <Fragment>
@@ -20,4 +20,4 @@ class Splash extends React.Component {
   }
 }
 
-export default Splash;
+export default Main;
