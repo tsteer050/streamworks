@@ -40,7 +40,7 @@ class AWSSoundPlayer extends Component {
     console.log(this.props);
     return (
       <div className="p1 mb3 mt1 flex flex-center bg-darken-1 orange rounded">
-        <img className="player-album-art" src="https://m.media-amazon.com/images/I/81mBzkImdvL._SS500_.jpg"/>
+        <img className="player-album-art" src={this.props.albumArtUrl} />
         <PrevButton 
           id="prev-button"
           className="flex-none h4 button button-transparent button-grow rounded mr2"
@@ -49,7 +49,7 @@ class AWSSoundPlayer extends Component {
         <PlayButton
           className="flex-none h4 button button-transparent button-grow rounded mr2"
           icon={PlayIconSVG}
-          {...this.props} />
+          {...this.props} onTogglePlay={this.props.togglePlay}/>
         <NextButton
           id="next-button"
           className="flex-none h4 button button-transparent button-grow rounded mr2"

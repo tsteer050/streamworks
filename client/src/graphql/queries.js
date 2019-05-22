@@ -30,7 +30,13 @@ export const FETCH_ALBUMS = gql`
       _id
       title
       album_art_url
-      artist
+      artist {
+        _id
+        name
+        genre
+        bio
+        artist_image_url
+      }
       songs {
         title
       }

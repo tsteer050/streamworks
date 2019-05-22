@@ -4,6 +4,9 @@ import { FETCH_ALBUMS } from "../graphql/queries";
 import "./Splash.css";
 import SideBar from "../components/Sidebar";
 import AudioPlayer from "./AudioPlayer";
+import withRedux from '../util/redux_container';
+
+const AudioPlayerRedux = withRedux(AudioPlayer);
 
 class Splash extends React.Component {
   render() {
@@ -24,30 +27,10 @@ class Splash extends React.Component {
             );
           }}
         </Query>
-        <AudioPlayer />
+        <AudioPlayerRedux />
       </Fragment>
     );
   }
-}
-  return (
-    <Query query={FETCH_ALBUMS}>
-      {({ loading, error, data }) => {
-        if (loading) return "Loading...";
-        if (error) return `Error! ${error.message}`;
-
-        return (
-          <ul id="splash">
-            {data.albums.map(album => (
-              <li key={album._id}>{album.title} {album._id}</li>
-            ))}
-          </ul>
-          
-        );
-          
-            }}
-    </Query>
-  );
-          }
 };
 
 export default Splash;
