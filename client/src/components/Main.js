@@ -10,6 +10,7 @@ import withRedux from '../util/redux_container';
 import SearchBar from "./searchbar/SearchBar";
 
 const AudioPlayerRedux = withRedux(AudioPlayer);
+const AlbumShowRedux = withRedux(AlbumShow);
 
 class Main extends React.Component {
   render() {
@@ -19,7 +20,7 @@ class Main extends React.Component {
         <Switch>
           <Route exact path="/search" component={SearchBar} />
           <Route exact path="/" component={Splash} />
-          <Route exact path="/album/:id" component={AlbumShow} />
+          <Route exact path="/album/:id" component={AlbumShowRedux} />
         </Switch>
         <AudioPlayerRedux />
       </Fragment>
