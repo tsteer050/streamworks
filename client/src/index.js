@@ -11,6 +11,8 @@ import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 import {HashRouter} from 'react-router-dom';
 import { VERIFY_USER } from './graphql/mutations';
+import { Provider } from 'react-redux';
+import { store } from './util/redux_config';
 
 
 
@@ -66,11 +68,13 @@ const errorLink = onError(({ graphQLErrors }) => {
 
 const Root = () => {
   return (
-    <ApolloProvider client={client}>
-      <HashRouter>
-        <App />
-      </HashRouter>
-    </ApolloProvider>
+    <Provider store={store}>
+      <ApolloProvider client={client}>
+        <HashRouter>
+          <App />
+        </HashRouter>
+      </ApolloProvider>
+    </Provider>
   );
 };
 

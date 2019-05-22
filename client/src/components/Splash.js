@@ -24,6 +24,7 @@ class Splash extends React.Component {
       </Fragment>
     );
   }
-}
+};
 
 export default Splash;
+
