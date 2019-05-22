@@ -93,9 +93,9 @@ ul > li {
   justify-content: space-between;
   height: 4em;
 }
-ul > li:hover {
+/* ul > li:hover {
   background: rgba(0, 0, 0, 0.9);
-}
+} */
 ul > li:hover .menu {
   visibility: visible;
 }
