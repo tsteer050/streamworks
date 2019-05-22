@@ -24,7 +24,19 @@ class LoggedIn extends React.Component {
     let token = localStorage.getItem("auth-token");
 
     const user = jwt.decode(token);
+    // debugger;
     this.setState({ user });
+  }
+
+  componentDidUpdate() {
+    if (!this.state.user) {
+      let token = localStorage.getItem("auth-token");
+
+      const user = jwt.decode(token);
+      if (user) {
+        this.setState({ user });
+      }
+    }
   }
 
   render() {

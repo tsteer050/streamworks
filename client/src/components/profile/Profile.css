@@ -54,14 +54,15 @@
   text-decoration: none;
   border: 1px solid lightgray;
   padding: 10px 30px;
-  width: 255px;
+  width: 200px;
   text-align: center;
   margin: 15px auto;
   font-size: 12px;
   background: black;
+  outline: none;
 }
 
 .logout-btn:hover {
-  width: 265px;
+  width: 210px;
   border: 2px solid white;
 }
