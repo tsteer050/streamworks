@@ -20,6 +20,7 @@ input {
 .signup-header > a > img {
   height: 70px;
   width: 70px;
+  margin-right: 15px;
 }
 
 .signup-header > h1 {
@@ -30,6 +31,7 @@ input {
   color: black;
   display: flex;
   text-decoration: none;
+  align-items: center;
 }
 input::placeholder {
   padding-left: 10px;
@@ -108,6 +110,7 @@ input::placeholder {
   color: #1c1c1f;
   font-size: 0.9375em;
   margin-bottom: 20px;
+  padding-left: 15px;
 }
 #birthdate-picker {
   width: 426px;
@@ -152,7 +155,7 @@ input::placeholder {
 .account-login {
   display: flex;
   justify-content: center;
-  align-items: center;
+
   margin-top: 15px;
 }
 

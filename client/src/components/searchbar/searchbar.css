@@ -1,0 +1,28 @@
+.search-results {
+  background: #0d0d0d;
+  color: white;
+  height: 100%;
+}
+.search-div {
+  width: calc(100vw - 230px);
+}
+
+.input-box {
+  background: #282828;
+  width: 100%;
+  border-radius: 0;
+  width: 1690px;
+  height: 80px;
+  border: none;
+  color: white;
+  font-size: 36px;
+  padding-left: 100px;
+}
+
+/* .search-results {
+  color: white;
+} */
+
+.input-box::placeholder {
+  font-size: 36px;
+}

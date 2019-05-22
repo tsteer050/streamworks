@@ -28,7 +28,11 @@
   align-items: center;
   position: absolute;
   bottom: 30px;
-  left: 25px;
+  width: 100%;
+}
+
+.footer-icon {
+  margin-top: 10px;
 }
 .signup {
   width: auto;
@@ -119,15 +123,16 @@ a > h3 {
   height: 50px;
 }
 
-.align-div > h5 {
+.align-div > a > h6 {
   margin: auto 0;
 }
 
 .home-link {
   color: white;
+  margin-bottom: 0;
 }
 
-.align-div > a > h5:hover {
+.align-div > a > h6:hover {
   color: white;
 }
 
@@ -137,6 +142,7 @@ a > h3 {
   width: 80%;
   bottom: 0px;
   left: 20px;
+  margin-bottom: 20px;
 }
 
 .profile-icon {

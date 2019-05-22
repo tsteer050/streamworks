@@ -102,7 +102,7 @@ class Login extends React.Component {
               <div className="bottom-border" />
             </div>
             <div className="signup-div">
-              <h4>Don't have an account?</h4>
+              <h5>Don't have an account?</h5>
               <Link to="/signup">SIGN UP FOR STREAMWORKS</Link>
             </div>
           </div>

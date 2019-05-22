@@ -65,7 +65,6 @@
 }
 
 .menu {
-  
 }
 
 .right-column {
@@ -103,9 +102,10 @@
   max-width: 19px;
   max-height: 19px;
 }
-.left-menu-icon{
 
+.left-menu-icon {
 }
+  
 .menu {
   visibility: hidden;
 }
