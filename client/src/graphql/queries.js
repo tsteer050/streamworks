@@ -30,6 +30,10 @@ export const FETCH_ALBUMS = gql`
       _id
       title
       album_art_url
+      artist
+      songs {
+        title
+      }
     }
   }
 `;
@@ -40,6 +44,20 @@ export const FETCH_ALBUM = gql`
       _id
       title
       album_art_url
+      artist {
+        _id
+        name
+        genre
+        bio
+        artist_image_url
+      }
+      songs {
+        _id
+        title
+        length
+        audio_url
+
+      }
     }
   }
 `;

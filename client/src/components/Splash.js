@@ -29,5 +29,25 @@ class Splash extends React.Component {
     );
   }
 }
+  return (
+    <Query query={FETCH_ALBUMS}>
+      {({ loading, error, data }) => {
+        if (loading) return "Loading...";
+        if (error) return `Error! ${error.message}`;
+
+        return (
+          <ul id="splash">
+            {data.albums.map(album => (
+              <li key={album._id}>{album.title} {album._id}</li>
+            ))}
+          </ul>
+          
+        );
+          
+            }}
+    </Query>
+  );
+          }
+};
 
 export default Splash;
