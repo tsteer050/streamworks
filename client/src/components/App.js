@@ -5,6 +5,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Profile from "../components/profile/Profile";
 import Main from "./Main";
+import Contact from "./profile/Contact";
 import "./root.css";
 
 const App = () => {
