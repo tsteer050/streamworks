@@ -1,10 +1,14 @@
 import React, { Fragment } from "react";
-import { Switch, Route } from "react-router-dom";
-import Splash from "./Splash";
+
+import { Switch, Route } from 'react-router-dom';
+import Splash from './Splash';
 import SideBar from "../components/Sidebar";
 import AudioPlayer from "./AudioPlayer";
 import AlbumShow from "./AlbumShow";
+import withRedux from '../util/redux_container';
 import SearchBar from "./searchbar/SearchBar";
+
+const AudioPlayerRedux = withRedux(AudioPlayer);
 
 class Main extends React.Component {
   render() {
@@ -16,7 +20,7 @@ class Main extends React.Component {
           <Route exact path="/" component={Splash} />
           <Route exact path="/album/:id" component={AlbumShow} />
         </Switch>
-        <AudioPlayer />
+        <AudioPlayerRedux />
       </Fragment>
     );
   }
