@@ -2,17 +2,11 @@ import React, { Fragment } from "react";
 import { Query } from "react-apollo";
 import { FETCH_ALBUMS } from "../graphql/queries";
 import "./Splash.css";
-import SideBar from "../components/Sidebar";
-import AudioPlayer from "./AudioPlayer";
-import withRedux from '../util/redux_container';
-
-const AudioPlayerRedux = withRedux(AudioPlayer);
 
 class Splash extends React.Component {
   render() {
     return (
       <Fragment>
-        <SideBar />
         <Query query={FETCH_ALBUMS}>
           {({ loading, error, data }) => {
             if (loading) return "Loading...";
@@ -27,7 +21,6 @@ class Splash extends React.Component {
             );
           }}
         </Query>
-        <AudioPlayerRedux />
       </Fragment>
     );
   }
