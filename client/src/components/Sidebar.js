@@ -17,14 +17,15 @@ class LoggedIn extends React.Component {
       user: null
     };
   }
+
   componentDidMount() {
     let token = localStorage.getItem("auth-token");
 
     const user = jwt.decode(token);
     this.setState({ user });
   }
+
   render() {
-    // const { client } = this.props;
     if (!this.state.user) return null;
     return (
       <Fragment>
@@ -50,7 +51,23 @@ class LoggedIn extends React.Component {
 }
 
 class Sidebar extends React.Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     user: null
+  //   };
+  // }
+
+  // componentDidMount() {
+  //   let token = localStorage.getItem("auth-token");
+
+  //   const user = jwt.decode(token);
+  //   this.setState({ user });
+  // }
+
   render() {
+    // if (!this.state.user) return null;
+
     return (
       <div id="sidebar-container">
         <div id="sidebar">
@@ -80,33 +97,33 @@ class Sidebar extends React.Component {
               </Link>
             </div>
           </div>
-          <ApolloConsumer>
-            {client => (
-              <Query query={IS_LOGGED_IN}>
-                {({ data }) => {
-                  // if we have some one logged in we show them a logout button
-                  if (data.isLoggedIn) {
-                    // debugger;
-                    return (
-                      <LoggedIn client={client} history={this.props.history} />
-                    );
-                  } else {
-                    return (
-                      <div id="sidebar-footer">
-                        <p className="signup">
-                          <Link to="/signup">SIGN UP</Link>
-                        </p>
-                        <p className="login-p">
-                          <Link to="/login">LOG IN</Link>
-                        </p>
-                      </div>
-                    );
-                  }
-                }}
-              </Query>
-            )}
-          </ApolloConsumer>
         </div>
+        <ApolloConsumer>
+          {client => (
+            <Query query={IS_LOGGED_IN}>
+              {({ data }) => {
+                // if we have some one logged in we show them a logout button
+                if (data.isLoggedIn) {
+                  // debugger;
+                  return (
+                    <LoggedIn client={client} history={this.props.history} />
+                  );
+                } else {
+                  return (
+                    <div id="sidebar-footer">
+                      <p className="signup">
+                        <Link to="/signup">SIGN UP</Link>
+                      </p>
+                      <p className="login-p">
+                        <Link to="/login">LOG IN</Link>
+                      </p>
+                    </div>
+                  );
+                }
+              }}
+            </Query>
+          )}
+        </ApolloConsumer>
       </div>
     );
   }
