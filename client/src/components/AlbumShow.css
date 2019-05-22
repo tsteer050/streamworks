@@ -4,7 +4,9 @@
   align-items: flex-start;
   background: #07040f;
   flex-grow: 1;
-  height: 100%;
+  height: calc(100vh - 90px);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .left-column {

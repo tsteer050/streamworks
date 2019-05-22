@@ -38,10 +38,10 @@ class AudioPlayer extends React.Component {
 
   render() {
     let track;
-
-    if (this.props.state.playQueue) {
+    if (this.props.state.playQueue.length > 0) {
       track = this.props.state.playQueue[this.props.state.currentTrack];
     }
+
     track = track || {
       streamUrl:
         "https://s3.us-east-2.amazonaws.com/streamworks-songs/Respect+My+Art/Long+Live+the+King+1.m4a",

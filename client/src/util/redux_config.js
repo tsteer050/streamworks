@@ -53,9 +53,15 @@ const RootReducer = combineReducers({
   playing: playingReducer
 });
 
-const configureStore = () => (
-  createStore(RootReducer)
+const configureStore = (preloadedState) => (
+  createStore(RootReducer, preloadedState)
 );
 
-export const store = configureStore();
+const preloadedState = {
+  playQueue: [],
+  currentTrack: null,
+  playing: false
+};
+
+export const store = configureStore(preloadedState);
 window.getState = store.getState;

@@ -6,6 +6,7 @@ import SideBar from "../components/Sidebar";
 import AudioPlayer from "./AudioPlayer";
 import AlbumShow from "./AlbumShow";
 import withRedux from '../util/redux_container';
+
 import SearchBar from "./searchbar/SearchBar";
 
 const AudioPlayerRedux = withRedux(AudioPlayer);
