@@ -33,7 +33,8 @@ class AlbumShow extends React.Component {
   toggleSong(e, songId) {
     this.props.newPlayQueue(this.songList);
     this.props.selectTrack(3);
-    //this.props.togglePlay();
+    this.props.togglePlay();
+    
     
   }
 
