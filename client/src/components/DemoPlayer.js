@@ -50,7 +50,6 @@ class AWSSoundPlayer extends Component {
 
   render() {
     const { trackTitle, artistName } = this.props;
-    console.log(this.props);
     return (
       <div className="p1 mb3 mt1 flex flex-center bg-darken-1 orange rounded">
         <img className="player-album-art" src={this.props.albumArtUrl} />
