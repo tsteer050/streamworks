@@ -20,6 +20,7 @@
   text-decoration: none;
   height: 50px;
   align-items: center;
+  outline: none;
 }
 
 #sidebar-footer {

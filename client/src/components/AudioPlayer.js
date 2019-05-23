@@ -12,6 +12,7 @@ const streamUrl = 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Long+Liv
 const trackTitle = 'Long Live the King';
 const artistName = 'Organ Freeman';
 
+export const soundPlayer = AWSSoundPlayer;
 
 class AudioPlayer extends React.Component {
   constructor(props) {
@@ -19,10 +20,12 @@ class AudioPlayer extends React.Component {
     this.nextTrack = this.nextTrack.bind(this);
     this.prevTrack = this.prevTrack.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
+   
   }
 
   togglePlay() {
     this.props.togglePlay();
+    
   }
   
   nextTrack() {
