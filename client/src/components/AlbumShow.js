@@ -9,9 +9,10 @@ class AlbumShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      newPlayQueue: [],
+      songList: [],
       currentlyPlaying: {}
     };
+    this.songList = null;
   }
 
   
@@ -30,10 +31,11 @@ class AlbumShow extends React.Component {
   }
 
   toggleSong(e, songId) {
-    
+    this.props.newPlayQueue(this.songList);
     this.props.selectTrack(3);
     this.props.togglePlay();
-    debugger
+    
+    
   }
 
   render() {
@@ -43,19 +45,22 @@ class AlbumShow extends React.Component {
       <Query query={FETCH_ALBUM} variables={{ id }}>
         {({ loading, error, data }) => {
           
-          if (loading) return "Loading...";
+          if (loading) return <div className="loading-screen" />;
           if (error) return `Error! ${error.message}`;
 
-          // if (!this.props.newPlayQueue.length) this.props.newPlayQueue = data.album.songs.map(song => {
-          //     return {
-          //       streamUrl: song.audio_url,
-          //       trackTitle: song.title,
-          //       artistName: data.album.artist.name,
-          //       albumArtUrl: data.album.album_art_url
-          //     }; 
-          //   });
-          
-            debugger
+          const songList = data.album.songs.map(song => {
+              
+              return {
+                streamUrl: song.audio_url,
+                trackTitle: song.title,
+                artistName: data.album.artist.name,
+                albumArtUrl: data.album.album_art_url
+              }; 
+            });
+            this.songList = songList;
+          debugger
+          // this.props.newPlayQueue(songList)
+
           const songs = data.album.songs.map( song=> {
             let songLength = null;
             if((song.length % 60) >= 10){

@@ -9,13 +9,17 @@ class Splash extends React.Component {
       <Fragment>
         <Query query={FETCH_ALBUMS}>
           {({ loading, error, data }) => {
-            if (loading) return "Loading...";
+            if (loading) return <div className="loading-screen" />;
             if (error) return `Error! ${error.message}`;
 
             return (
               <ul id="splash">
                 {data.albums.map(album => (
-                  <li key={album._id}>{album.title}</li>
+                  <li key={album._id}>
+                    <img className="list-album-art" src={album.album_art_url} alt={album.title} onClick={() => this.props.history.push(`/album/${album._id}`)}/>
+                    <h5 className="list-album-title">{album.title}</h5>
+                    <h5 className="list-album-artist-name">{album.artist.name}</h5>
+                  </li>
                 ))}
               </ul>
             );
