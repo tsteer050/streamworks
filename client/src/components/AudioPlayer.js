@@ -38,6 +38,7 @@ class AudioPlayer extends React.Component {
 
   render() {
     let track;
+
     if (this.props.state.playQueue.length > 0) {
       track = this.props.state.playQueue[this.props.state.currentTrack];
     }

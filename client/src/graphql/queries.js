@@ -169,3 +169,34 @@ export const IS_LOGGED_IN = gql`
     isLoggedIn @client
   }
 `;
+
+export const SEARCH_QUERY = gql`
+  query SearchQuery($filter: String!) {
+    search(filter: $filter) {
+      artist {
+        id
+        name
+      }
+      album {
+        id
+        title
+      }
+    }
+  }
+`;
+
+// artists {
+//   id
+//   name
+//   genre
+//   bio
+//   artist_image_url
+// }
+// songs {
+//   id
+//   title
+//   length
+//   audio_url
+// }
+// title
+// album_art_url
