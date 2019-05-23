@@ -1,4 +1,55 @@
 #splash {
-  height: 100%;
-  flex-grow: 1
+  height: calc(100vh - 90px);
+  width: calc(100vw - 230px);
+  position: fixed;
+  left: 230px;
+  bottom: 90px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  margin: 0;
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-evenly;
+  background-image: linear-gradient(to bottom right, #106063, black);
+  padding: 32px;
+}
+
+#splash li {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list-album-art {
+  min-width: 50px;
+  min-height: 50px;
+  max-width: 130px;
+  max-height: 130px;
+}
+
+.list-album-art:hover {
+  cursor: pointer;
+}
+
+.list-album-title {
+  font-size: 14px;
+  color: #FFFFFF;
+  margin: 4px;
+}
+
+.list-album-artist-name {
+  font-size: 14px;
+  color: #b3b3b3;
+  margin: 4px;
+}
+
+.loading-screen {
+  background-color: black;
+  height: calc(100vh - 90px);
+  width: calc(100vw - 230px);
+  position: fixed;
+  left: 230px;
+  bottom: 90px;
+  margin: 0;
 }

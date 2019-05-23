@@ -9,9 +9,10 @@ class AlbumShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      newPlayQueue: [],
+      songList: [],
       currentlyPlaying: {}
     };
+    this.songList = null;
   }
 
   onHover(elementId) {
@@ -26,9 +27,17 @@ class AlbumShow extends React.Component {
   }
 
   toggleSong(e, songId) {
+<<<<<<< HEAD
     this.props.selectTrack(3);
     this.props.togglePlay();
     debugger;
+=======
+    this.props.newPlayQueue(this.songList);
+    this.props.selectTrack(3);
+    this.props.togglePlay();
+    
+    
+>>>>>>> master
   }
 
   render() {
@@ -37,6 +46,7 @@ class AlbumShow extends React.Component {
     return (
       <Query query={FETCH_ALBUM} variables={{ id }}>
         {({ loading, error, data }) => {
+<<<<<<< HEAD
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
 
@@ -50,6 +60,26 @@ class AlbumShow extends React.Component {
           //   });
 
           const songs = data.album.songs.map(song => {
+=======
+          
+          if (loading) return <div className="loading-screen" />;
+          if (error) return `Error! ${error.message}`;
+
+          const songList = data.album.songs.map(song => {
+              
+              return {
+                streamUrl: song.audio_url,
+                trackTitle: song.title,
+                artistName: data.album.artist.name,
+                albumArtUrl: data.album.album_art_url
+              }; 
+            });
+            this.songList = songList;
+          debugger
+          // this.props.newPlayQueue(songList)
+
+          const songs = data.album.songs.map( song=> {
+>>>>>>> master
             let songLength = null;
             if (song.length % 60 >= 10) {
               songLength = `${Math.floor(

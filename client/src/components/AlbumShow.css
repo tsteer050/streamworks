@@ -2,11 +2,21 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  background: #07040f;
   flex-grow: 1;
   height: calc(100vh - 90px);
   overflow-y: scroll;
   overflow-x: hidden;
+  background-image: linear-gradient(to bottom right, #106063, black); 
+}
+
+.loading-screen {
+  background-color: black;
+  height: calc(100vh - 90px);
+  width: calc(100vw - 230px);
+  position: fixed;
+  left: 230px;
+  bottom: 90px;
+  margin: 0;
 }
 
 .left-column {
