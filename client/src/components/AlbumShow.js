@@ -48,6 +48,7 @@ class AlbumShow extends React.Component {
 
   toggleSong(e, track, iconElementId) {
     this.props.newPlayQueue(this.songList);
+
     track = track || 0;
     iconElementId = iconElementId || this.defaultTrack;
     
@@ -58,7 +59,7 @@ class AlbumShow extends React.Component {
     if(track === this.state.currentTrack) {
 
       if(this.props.state.playing === false) {
-        element.src = pauseIcon;
+        element.src = pauseIcon;t
         playButton.innerHTML = "PLAY";
         //albumImage
         this.props.togglePlay();
@@ -79,9 +80,7 @@ class AlbumShow extends React.Component {
       this.setState( {currentIconId: iconElementId});
       this.props.selectTrack(track);
       this.props.togglePlay();
-    }
-    //this.props.togglePlay();
-    
+    }  
   }
 
   render() {
