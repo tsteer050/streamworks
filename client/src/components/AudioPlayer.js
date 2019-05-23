@@ -8,11 +8,6 @@ import PlaceHolderPlayer from "./PlaceHolderPlayer";
 
 
 
-const streamUrl = 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Long+Live+the+King+1.m4a';
-const trackTitle = 'Long Live the King';
-const artistName = 'Organ Freeman';
-
-
 class AudioPlayer extends React.Component {
   constructor(props) {
     super(props);
@@ -70,7 +65,7 @@ class AudioPlayer extends React.Component {
             prevTrack={this.prevTrack}
             nextTrack={this.nextTrack}
             togglePlay={this.togglePlay}
-            playing={this.props.state.playing}
+            state={this.props.state}
               />
               </div>
             );
