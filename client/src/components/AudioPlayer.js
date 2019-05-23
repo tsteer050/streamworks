@@ -14,10 +14,12 @@ class AudioPlayer extends React.Component {
     this.nextTrack = this.nextTrack.bind(this);
     this.prevTrack = this.prevTrack.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
+   
   }
 
   togglePlay() {
     this.props.togglePlay();
+    
   }
   
   nextTrack() {
