@@ -100,7 +100,7 @@ mongoose
                 {
                 _id: albumIds[3],
                 title: "Viva la Vida",
-                album_art_url: 'https://img.discogs.com/HcUgTZqIPZ9qMy--PLfVZ_SvdX8=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1369232-1459320208-6030.jpeg.jpg',
+                  album_art_url: 'https://i.redd.it/gi20y0kqdli11.png',
                 artist: artistIds[1],
                 songs: [songIds[30], songIds[31], songIds[32], songIds[33], songIds[34], songIds[35], songIds[36], songIds[37], songIds[38], songIds[39], songIds[40]]
                 },
@@ -114,7 +114,7 @@ mongoose
                 {
                   _id: albumIds[5],
                   title: "Load",
-                  album_art_url: 'https://img.discogs.com/F_rbLWMQjkMv9e7zwQ95WjtnANw=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-367438-1523163280-4134.jpeg.jpg',
+                  album_art_url: 'https://www.analogueseduction.net/user/products/large/metallica_load-cover.jpg',
                   artist: artistIds[3],
                   songs: [songIds[53], songIds[54], songIds[55], songIds[56], songIds[57], songIds[58], songIds[59], songIds[60], songIds[61], songIds[62], songIds[63]]
                 },
