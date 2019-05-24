@@ -1,12 +1,12 @@
 import React from "react";
-import './library.css';
-import { Switch, Link, Route } from 'react-router-dom';
-import LibraryAlbums from './LibraryAlbums';
-import LibraryPlaylist from './LibraryPlaylist';
-import LibrarySongs from './LibrarySongs';
-import LibraryArtists from './LibraryArtists';
+import "./library.css";
+import { Switch, Link, Route } from "react-router-dom";
+import LibraryAlbums from "./LibraryAlbums";
+import LibraryPlaylist from "./LibraryPlaylist";
+import LibrarySongs from "./LibrarySongs";
+import LibraryArtists from "./LibraryArtists";
 import NewPlaylistModal from "./NewPlaylistModal";
-import withRedux from '../util/redux_container';
+import withRedux from "../util/redux_container";
 
 const LibraryAlbumsRedux = withRedux(LibraryAlbums);
 const LibraryPlaylistRedux = withRedux(LibraryPlaylist);
@@ -32,37 +32,36 @@ class Library extends React.Component {
     return (
       <div className="library-page-area">
         <div className="library-nav-bar">
-          <Link to="/library/playlists">
-            Playlists
-        </Link>
-          <Link to="/library/songs">
-            Songs
-        </Link>
-          <Link to="/library/albums">
-            Albums
-        </Link>
-          <Link to="/library/artists">
-            Artists
-        </Link>
+          <Link to="/library/playlists">Playlists</Link>
+          <Link to="/library/songs">Songs</Link>
+          <Link to="/library/albums">Albums</Link>
+          <Link to="/library/artists">Artists</Link>
         </div>
-        <button className="new-playlist-button" onClick={this.toggleModal}>
-          NEW PLAYLIST
-        </button>
+        <div className="new-playlist-div">
+          <button className="new-playlist-button" onClick={this.toggleModal}>
+            NEW PLAYLIST
+          </button>
+        </div>
         <div id="new-playlist-modal" className="modal">
-          <NewPlaylistModal toggleModal={this.toggleModal}/>
+          <NewPlaylistModal toggleModal={this.toggleModal} />
         </div>
         <Switch>
-          <Route exact path="/library/playlists" component={LibraryPlaylistRedux} />
+          <Route
+            exact
+            path="/library/playlists"
+            component={LibraryPlaylistRedux}
+          />
           <Route exact path="/library/songs" component={LibrarySongsRedux} />
           <Route exact path="/library/albums" component={LibraryAlbumsRedux} />
-          <Route exact path="/library/artists" component={LibraryArtistsRedux} />
+          <Route
+            exact
+            path="/library/artists"
+            component={LibraryArtistsRedux}
+          />
         </Switch>
       </div>
-    )};
-     
-};
-
-
+    );
+  }
+}
 
 export default Library;
-
