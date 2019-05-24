@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull } = graphql;
+const {
+  GraphQLObjectType,
+  GraphQLList,
+  GraphQLID,
+  GraphQLNonNull,
+  GraphQLString
+} = graphql;
 
 const AlbumType = require("./album_type");
 const Album = mongoose.model("albums");
@@ -12,6 +18,7 @@ const SongType = require("./song_type");
 const Song = mongoose.model("songs");
 const UserType = require("./user_type");
 const User = mongoose.model("users");
+const SearchType = require("./search_type");
 
 const RootQueryType = new GraphQLObjectType({
   name: "RootQueryType",
@@ -80,6 +87,37 @@ const RootQueryType = new GraphQLObjectType({
       resolve(_, args) {
         console.log(_);
         return User.findById(args._id);
+      }
+    },
+    search: {
+      // type: SearchType,
+      type: new GraphQLList(SearchType),
+      // type: SearchType,
+      args: { filter: { type: GraphQLString } },
+      resolve: async (_, args) => {
+        // Song.createIndex({ title: "text" });
+        // let song = await Album.find({ $text: { $search: args } });
+        let album = await Album.find({
+          title: { $regex: args.filter, $options: "i" }
+        });
+        console.log(args.filter);
+        let song = await Song.find({
+          title: { $regex: args.filter, $options: "i" }
+        });
+        let playlist = await Playlist.find({
+          title: { $regex: args.filter, $options: "i" }
+        });
+        let artist = await Artist.find({
+          name: { $regex: args.filter, $options: "i" }
+        });
+
+        console.log(song);
+        // return { song, album, playlist, artist };
+        return [...song, ...album, ...playlist, ...artist];
+        // return song
+        //   .concat(album)
+        //   .concat(playlist)
+        //   .concat(artist);
       }
     }
   })
