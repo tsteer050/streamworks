@@ -6,6 +6,7 @@ export const FETCH_USER = gql`
       _id
       name
       email
+      
     }
   }
 `;
@@ -96,6 +97,13 @@ export const FETCH_ARTIST = gql`
         _id
         title
         album_art_url
+        songs {
+          _id
+        title
+        length
+        audio_url
+
+        }
       }
     }
   }
@@ -123,14 +131,20 @@ export const FETCH_SONG = gql`
   }
 `;
 
-export const FETCH_LIBRARY = gql`
-  query FetchLibrary($id: ID!) {
-    library(id: $id) {
+export const FETCH_USER_LIBRARY = gql`
+  query FetchUser($id: ID!) {
+    user(id: $id) {
       _id
       albums {
         _id
         title
         album_art_url
+        songs {
+          _id
+          title
+          length
+          audio_url
+        }
       }
       artists {
         _id
