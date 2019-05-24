@@ -117,8 +117,16 @@ const mutation = new GraphQLObjectType({
       args: {
         title: { type: GraphQLString }
       },
-      resolve(_, {title}) {
-        return new Playlist({title}).save();
+      async resolve(_, { title }, ctx) {
+        const validUser = await AuthService.verifyUser({ token: ctx.token });
+
+        if (validUser.loggedIn) {
+          return new Playlist({ title }).save();
+        } else {
+          throw new Error(
+            "Sorry, you need to be logged in to perform this action."
+          );
+        }
       }
     },
     deletePlaylist: {

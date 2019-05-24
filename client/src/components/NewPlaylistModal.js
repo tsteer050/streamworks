@@ -36,7 +36,6 @@ class NewPlaylistModal extends React.Component {
       <Mutation
         mutation={CREATE_PLAYLIST}
         onCompleted={data => {
-          debugger
           const id = data.newPlaylist._id;
           this.setState({ title: "" });
           this.props.history.push(`/playlists/${id}`);
