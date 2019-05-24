@@ -1,11 +1,12 @@
 import React, { Fragment } from "react";
 import { Query } from "react-apollo";
-import { FETCH_ALBUM, IS_LOGGED_IN } from "../graphql/queries";
+import { FETCH_ALBUM, FETCH_USER_LIBRARY } from "../graphql/queries";
 import "./AlbumShow.css";
 import { Link } from 'react-router-dom';
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import Modal from "./Modal";
+
 
 
 const playIcon = require('../resources/play_icon.png');
@@ -18,15 +19,14 @@ class AlbumShow extends React.Component {
     this.state = {
       songList: [],
       currentTrack: null,
-      currentIconId: null
+      currentIconId: null,
     };
     this.isLoggedIn = null;
     this.defaultTrack = null;
     this.songList = null;
   }
 
-  
-  
+
   onHover(elementId, track) {
     if(elementId === "albumImage") {
       let albumImage = document.getElementById(elementId);
@@ -86,7 +86,9 @@ class AlbumShow extends React.Component {
 
   render() {
     const id = this.props.match.params.id;
+    // const userId = this.state.user;
     
+
     return ( 
       
       <Query query={FETCH_ALBUM} variables={{ id }}>

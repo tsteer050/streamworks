@@ -14,11 +14,10 @@
   
 }
 
-.input-box {
+.playlist-input-box {
   background: #282828;
-  width: 100%;
+  width: 100vw;
   border-radius: 0;
-  width: 1690px;
   height: 80px;
   border: none;
   color: white;
@@ -97,6 +96,44 @@
   line-height: 32px;
   text-decoration: none;
   color: #FFFFFF;
+}
+
+.new-playlist-form {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.x-button {
+  color: #FFFFFF;
+  background: none;
+  border: none;
+  font-size: 45px;
+  margin-bottom: 2px;
+}
+
+.x-button:hover {
+  cursor: pointer;
+  font-size: 47px;
+  margin-bottom: 0;
+}
+
+.new-playlist-form h1 {
+  color: #FFFFFF;
+
+}
+
+.new-playlist-form-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.new-playlist-form-buttons button {
+  margin: 0 5px 0 5px;
 }
 
 
