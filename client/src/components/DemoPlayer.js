@@ -43,14 +43,14 @@ class AWSSoundPlayer extends Component {
     if (this.props.state.playing) {
       this.props.soundCloudAudio.play();
     } else {
-      this.props.soundCloudAudio.stop();
+      this.props.soundCloudAudio.pause();
     }
   }
   
 
   render() {
     const { trackTitle, artistName } = this.props;
-    console.log(this.props);
+    //console.log(this.props);
     return (
       <div className="p1 mb3 mt1 flex flex-center bg-darken-1 orange rounded">
         <img className="player-album-art" src={this.props.albumArtUrl} />

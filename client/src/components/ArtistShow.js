@@ -107,9 +107,8 @@ class ArtistShow extends React.Component {
           const albums = data.artist.albums.map((album, idx) => {
 
             // if (idx === 0) this.defaultTrack = song._id;
-
+          
             let songLength = null;
-            debugger
             var sectionStyle = {
               width: "100%",
               height: "100%",
@@ -120,13 +119,13 @@ class ArtistShow extends React.Component {
 
       return (
               <li key={album._id} className="album-image-container">
-                <Link to={`/album/${album._id}`} >
+          <Link to={`/album/${album._id}`} style={{ textDecoration: 'none' }}>
                   <div className="album-image" style={ sectionStyle }>
                       {/* <img id={song._id} className="playicon" src={require('../resources/music_note_icon.png')}
                         alt=""
                       /> */}
                   </div>
-                  <p className="artist-album-name">{album.name}</p>
+                  <p className="artist-album-name">{album.title}</p>
                 </Link>
                 <p className="artist-artist-name">{data.artist.name}</p>
               </li>

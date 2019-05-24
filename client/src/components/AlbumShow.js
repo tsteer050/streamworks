@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Query } from "react-apollo";
-import { FETCH_ALBUM } from "../graphql/queries";
+import { FETCH_ALBUM, IS_LOGGED_IN } from "../graphql/queries";
 import "./AlbumShow.css";
 import { Link } from 'react-router-dom';
-import { constants } from "fs";
-import { selectTrack, togglePlay } from "../util/redux_config";
-import { soundPlayer } from './AudioPlayer';
+import Rodal from "rodal";
+import "rodal/lib/rodal.css";
+import Modal from "./Modal";
 
 const playIcon = require('../resources/play_icon.png');
 const pauseIcon = require('../resources/pause_icon.png');
@@ -19,12 +19,15 @@ class AlbumShow extends React.Component {
       currentTrack: null,
       currentIconId: null
     };
+    this.isLoggedIn = null;
     this.defaultTrack = null;
     this.songList = null;
   }
 
   
-
+  componentDidMount() {
+   
+  }
   onHover(elementId, track) {
     if(elementId === "albumImage") {
       let albumImage = document.getElementById(elementId);
@@ -47,7 +50,6 @@ class AlbumShow extends React.Component {
   }
 
   toggleSong(e, track, iconElementId) {
-    this.props.newPlayQueue(this.songList);
 
     track = track || 0;
     iconElementId = iconElementId || this.defaultTrack;
@@ -57,9 +59,8 @@ class AlbumShow extends React.Component {
     let albumImage = document.getElementById("albumImage");
 
     if(track === this.state.currentTrack) {
-
       if(this.props.state.playing === false) {
-        element.src = pauseIcon;t
+        element.src = pauseIcon;
         playButton.innerHTML = "PLAY";
         //albumImage
         this.props.togglePlay();
@@ -70,6 +71,7 @@ class AlbumShow extends React.Component {
       }
 
     } else {
+      this.props.newPlayQueue(this.songList);
       element.src = pauseIcon;
       playButton.innerHTML = "PLAY";
       this.setState({ currentTrack: track});
@@ -86,13 +88,14 @@ class AlbumShow extends React.Component {
   render() {
     const id = this.props.match.params.id;
     
-    return (  
+    return ( 
+      
       <Query query={FETCH_ALBUM} variables={{ id }}>
         {({ loading, error, data }) => {
           
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
-
+  
           const songList = data.album.songs.map(song => {
               
               return {
@@ -171,6 +174,7 @@ class AlbumShow extends React.Component {
 
         }}
       </Query>
+      
     );
   }
 };

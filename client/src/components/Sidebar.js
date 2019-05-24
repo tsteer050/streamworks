@@ -96,14 +96,14 @@ class Sidebar extends React.Component {
         <div id="sidebar-container">
           <div id="sidebar">
             <div id="logo">
-              <Link to="/featured">
+              <Link to="/">
                 <img className="str-logo" src={logo} alt="spotify-logo" />
                 <h3 className="str-header">StreamWorks</h3>
               </Link>
             </div>
             <div>
               <div className="align-div">
-                <Link to="/featured">
+                <Link to="/">
                   <img className="home-logo" src={home} alt="home" />
                   <h6 className="home-link">Home</h6>
                 </Link>
