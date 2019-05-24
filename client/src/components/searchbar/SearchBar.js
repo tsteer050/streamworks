@@ -8,7 +8,7 @@ import "./searchbar.css";
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.state = { filter: "" };
+    this.state = { filter: "", enter: false };
 
     this.update = this.update.bind(this);
   }
@@ -18,11 +18,18 @@ class SearchBar extends Component {
     this.setState({ filter: e.target.value });
   }
 
+  onEnter(e) {
+    if (e.key === "Enter") {
+      this.setState({ enter: true });
+    }
+  }
+
   render() {
     return (
       <div className="search-div">
         <div className="input-header">
           <input
+            onKeyPress={this.onEnter.bind(this)}
             onChange={this.update}
             type="text"
             className="input-box"
@@ -30,14 +37,23 @@ class SearchBar extends Component {
           />
         </div>
         <section className="search-results2">
-          {this.state.filter ? (
+          {this.state.enter ? (
             <Query
               query={SEARCH_QUERY}
               variables={{ filter: this.state.filter }}
             >
               {({ loading, error, data }) => {
                 console.log("data", data);
-                if (loading) return <div className="loading-screen" />;
+                if (loading)
+                  return (
+                    <div className="loading-screen">
+                      <div class="lds-facebook">
+                        <div />
+                        <div />
+                        <div />
+                      </div>
+                    </div>
+                  );
                 if (error) return `Error! ${error.message}`;
 
                 let songs = data.search.filter(
@@ -56,73 +72,80 @@ class SearchBar extends Component {
                     <h6 className="top-results">TOP RESULTS</h6>
                     <div className="search-results">
                       <div className="results-div">
-                       {songs.length === 0 ? null : 
-                       <Fragment>
-                        <div className="results-photo">
-                          <img
-                            className="results-img"
-                            src={songs[0].album.artist.artist_image_url}
-                            alt="artist"
-                          />
-                          <div className="results-p">
-                            <p>{songs[0].title}</p>
-                            <p className="last-p">
-                              {songs[0].album.artist.name}
-                            </p>
-                          </div>
-                        </div>
-                        <ul className="result-list">
-                          {songs.map(song => {
-                            if (song.title) {
-                              return (
-                                <li>
-                                  {song.title}
-                                  <div className="song-p">
-                                    <p>{song.album.artist.name}</p>
-                                    <span className="star">*</span>
-                                    <p>{song.album.title}</p>
-                                  </div>
-                                </li>
-                              );
-                            }
-                          })}
-                          </ul>
-                          </Fragment>}
+                        {songs.length === 0 ? null : (
+                          <Fragment>
+                            <div className="results-photo">
+                              <img
+                                className="results-img"
+                                src={songs[0].album.artist.artist_image_url}
+                                alt="artist"
+                              />
+                              <div className="results-p">
+                                <p>{songs[0].title}</p>
+                                <p className="last-p">
+                                  {songs[0].album.artist.name}
+                                </p>
+                              </div>
+                            </div>
+                            <ul className="result-list">
+                              {songs.map(song => {
+                                if (song.title) {
+                                  return (
+                                    <li>
+                                      {song.title}
+                                      <div className="song-p">
+                                        <p>{song.album.artist.name}</p>
+                                        <span className="star">*</span>
+                                        <p>{song.album.title}</p>
+                                      </div>
+                                    </li>
+                                  );
+                                }
+                              })}
+                            </ul>
+                          </Fragment>
+                        )}
                       </div>
                     </div>
                     <div className="artist-results">
                       <h1 className="results-header">Artists</h1>
                       <ul className="artist-results-list">
                         {artists.map(artist => {
-                          return <li>
-                            <div className="artist-li-div">
-                            <img className="artist-result-pic" src={artist.artist_image_url} alt="artist" />
-                            <p>{artist.name}</p>
-                            </div>
-                          </li>
+                          return (
+                            <li>
+                              <div className="artist-li-div">
+                                <img
+                                  className="artist-result-pic"
+                                  src={artist.artist_image_url}
+                                  alt="artist"
+                                />
+                                <p>{artist.name}</p>
+                              </div>
+                            </li>
+                          );
                         })}
                       </ul>
                     </div>
-    
+
                     <div className="album-results">
                       <h1 className="albums-header2">Albums</h1>
                       <ul className="albums-list2">
                         {albums.map(album => {
-                          return <li>
-                            <div className="albums--photo">
-                              <img
-                                className="results-img"
-                                src={album.album_art_url}
-                                alt="artist"
-                              />
-                              <div className="results-p">
-                                <p>{album.title}</p>
-                                <p className="last-p">
-                                  {album.artist.name}
-                                </p>
+                          return (
+                            <li>
+                              <div className="albums--photo">
+                                <img
+                                  className="results-img"
+                                  src={album.album_art_url}
+                                  alt="artist"
+                                />
+                                <div className="results-p">
+                                  <p>{album.title}</p>
+                                  <p className="last-p">{album.artist.name}</p>
+                                </div>
                               </div>
-                            </div>
-                          </li>
+                            </li>
+                          );
                         })}
                       </ul>
                     </div>
