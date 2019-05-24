@@ -3,7 +3,6 @@ import { Query } from "react-apollo";
 import { FETCH_ARTIST } from "../graphql/queries";
 import "./ArtistShow.css";
 import { Link } from 'react-router-dom';
-import { selectTrack, togglePlay } from "../util/redux_config";
 
 const playIcon = require('../resources/play_icon.png');
 const pauseIcon = require('../resources/pause_icon.png');
@@ -51,7 +50,7 @@ class ArtistShow extends React.Component {
 
     let element = document.getElementById(iconElementId);
     let playButton = document.getElementById("playButton");
-    let albumImage = document.getElementById("albumImage");
+    // let albumImage = document.getElementById("albumImage");
 
     if (track === this.state.currentTrack) {
 

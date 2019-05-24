@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "./AudioPlayer.css";
 import { Query } from "react-apollo";
 import AWSSoundPlayer from "./DemoPlayer";
@@ -8,7 +8,7 @@ import PlaceHolderPlayer from "./PlaceHolderPlayer";
 
 
 
-class AudioPlayer extends React.Component {
+class AudioPlayer extends Component {
   constructor(props) {
     super(props);
     this.nextTrack = this.nextTrack.bind(this);

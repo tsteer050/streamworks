@@ -7,6 +7,7 @@ import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import Modal from "./Modal";
 
+
 const playIcon = require('../resources/play_icon.png');
 const pauseIcon = require('../resources/pause_icon.png');
 const musicNoteIcon = require('../resources/music_note_icon.png');
