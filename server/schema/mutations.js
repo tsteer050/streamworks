@@ -320,7 +320,27 @@ const mutation = new GraphQLObjectType({
       resolve(_, args) {
         return AuthService.verifyUser(args);
       }
-    }
+    },
+    addUserAlbum: {
+      type: UserType,
+      args: {
+        userId: { type: GraphQLID },
+        albumId: { type: GraphQLID }
+      },
+      resolve(_, { userId, albumId }) {
+        return User.addAlbum(userId, albumId);
+      }
+    },
+    removeUserAlbum: {
+      type: UserType,
+      args: {
+        userId: { type: GraphQLID },
+        albumId: { type: GraphQLID }
+      },
+      resolve(_, { userId, albumId }) {
+        return User.removeAlbum(userId, albumId);
+      }
+    },
   }
 });
 

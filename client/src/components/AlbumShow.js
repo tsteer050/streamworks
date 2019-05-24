@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Query } from "react-apollo";
+import { Query, Mutation } from "react-apollo";
 import { FETCH_ALBUM, IS_LOGGED_IN, FETCH_USER_LIBRARY } from "../graphql/queries";
 import { ADD_USER_ALBUM, REMOVE_USER_ALBUM } from '../graphql/mutations';
 import "./AlbumShow.css";
@@ -101,31 +101,50 @@ class AlbumShow extends React.Component {
   render() {
     const id = this.props.match.params.id;
 
+
+    const favoriteIcon = (addUserAlbum, removeUserAlbum, albumInLibrary) => {
+      if (albumInLibrary) {
+        return (
+          <img onClick={e => removeUserAlbum({ variables: { userId: this.state.user.id, albumId: id } })} className="favorite" src={require('../resources/favorite_filled.png')} alt="Remove from library" />
+        )
+      }
+      return (
+        <img onClick={e => addUserAlbum({ variables: { userId: this.state.user.id, albumId: id } })} className="favorite" src={require('../resources/favorite_outline.png')} alt="Add to library" />
+      )
+    };
+
+    
+
     let favoriteButton;
     if (this.state.user) {
-      favoriteButton = () => {
+      favoriteButton = (album) => {
         return (
-          <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user }}>
+          <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }}>
             {({ loading, error, data, client }) => {
+              debugger
               if (loading) return "Loading...";
               if (error) return `Error! ${error.message}`;
+              let albumInLibrary;
+              data.user.albums.some((userAlbum) => userAlbum._id === album._id) ? albumInLibrary = true : albumInLibrary = false;
               return (
                 <Mutation 
                   mutation={ADD_USER_ALBUM}
-                  // onCompleted={data => {
-                  //   const { token } = data.login;
-                  //   localStorage.setItem("auth-token", token);
-                  //   this.props.history.push("/");
-                  // }}
                   >
                   {addUserAlbum => {
-                    <Mutation>
-
-                    </Mutation>
-
-
+                    return (
+                      <Mutation
+                        mutation={REMOVE_USER_ALBUM}
+                      >
+                        {removeUserAlbum => {
+                          return (
+                            <Fragment>
+                              {favoriteIcon(addUserAlbum, removeUserAlbum, albumInLibrary)}
+                            </Fragment>
+                          )
+                        }}
+                      </Mutation>
+                    )
                   }}
-
                 </Mutation>
               )
             }}
@@ -135,7 +154,7 @@ class AlbumShow extends React.Component {
     } else {
       favoriteButton = () => {
         return ( 
-          <img className="favorite" src={require('../resources/favorites_icon.png')} alt="" />
+          <img className="favorite" src={require('../resources/favorite_outline.png')} alt="" />
         )
       }
     }
@@ -174,7 +193,7 @@ class AlbumShow extends React.Component {
                   <p>{`${data.album.songs.length} SONGS`}</p>
                 </div>
                 <div className="more-buttons">
-                  {favoriteButton()}
+                  {favoriteButton(data.album)}
                   <img className="menu-icon" src={require('../resources/menu_icon.png')} alt=""/>
                 </div>
               </div>

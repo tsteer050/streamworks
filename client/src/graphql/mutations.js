@@ -64,7 +64,7 @@ export const CREATE_PLAYLIST = gql`
 
 export const ADD_USER_ALBUM = gql`
   mutation AddUserAlbum($userId: ID!, $albumId: ID!) {
-    addUserAlbum(id: $id, albumId: $albumId) {
+    addUserAlbum(userId: $userId, albumId: $albumId) {
       _id
       albums {
         _id
@@ -75,7 +75,7 @@ export const ADD_USER_ALBUM = gql`
 
 export const REMOVE_USER_ALBUM = gql`
   mutation RemoveUserAlbum($userId: ID!, $albumId: ID!) {
-    removeUserAlbum(id: $id, albumId: $albumId) {
+    removeUserAlbum(userId: $userId, albumId: $albumId) {
       _id
       albums {
         _id
