@@ -6,24 +6,16 @@ import { IS_LOGGED_IN } from "../graphql/queries";
 
 import PlaceHolderPlayer from "./PlaceHolderPlayer";
 
-<<<<<<< HEAD
-class AudioPlayer extends React.Component {
-=======
-
-
 class AudioPlayer extends Component {
->>>>>>> c53fc8faf4b02d4dead45a9373d2a6af514761c3
   constructor(props) {
     super(props);
     this.nextTrack = this.nextTrack.bind(this);
     this.prevTrack = this.prevTrack.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
-   
   }
 
   togglePlay() {
     this.props.togglePlay();
-    
   }
 
   nextTrack() {
