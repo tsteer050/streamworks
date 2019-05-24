@@ -1,20 +1,31 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Query } from "react-apollo";
-import { FETCH_ALBUM } from "../graphql/queries";
+import { FETCH_ALBUM, IS_LOGGED_IN } from "../graphql/queries";
 import "./AlbumShow.css";
-import { constants } from "fs";
-import { selectTrack, togglePlay } from "../util/redux_config";
+import { Link } from 'react-router-dom';
+import Rodal from "rodal";
+import "rodal/lib/rodal.css";
+import Modal from "./Modal";
+
+
+const playIcon = require('../resources/play_icon.png');
+const pauseIcon = require('../resources/pause_icon.png');
+const musicNoteIcon = require('../resources/music_note_icon.png');
 
 class AlbumShow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       songList: [],
-      currentlyPlaying: {}
+      currentTrack: null,
+      currentIconId: null
     };
+    this.isLoggedIn = null;
+    this.defaultTrack = null;
     this.songList = null;
   }
 
+<<<<<<< HEAD
   onHover(elementId) {
     let element = document.getElementById(elementId);
 
@@ -30,18 +41,90 @@ class AlbumShow extends React.Component {
     this.props.newPlayQueue(this.songList);
     this.props.selectTrack(3);
     this.props.togglePlay();
+=======
+  
+  componentDidMount() {
+   
+  }
+  onHover(elementId, track) {
+    if(elementId === "albumImage") {
+      let albumImage = document.getElementById(elementId);
+
+    }
+    let element = document.getElementById(elementId);
+
+   if(this.props.state.playing === true && this.state.currentTrack === track) {
+    element.src = pauseIcon;
+   } else {
+    element.src = playIcon;
+   }
+  }
+  offHover(elementId, track) {
+
+    let element = document.getElementById(elementId);
+    if (this.state.currentTrack !== track) {
+      element.src = require('../resources/music_note_icon.png');
+    } 
+  }
+
+  toggleSong(e, track, iconElementId) {
+
+    track = track || 0;
+    iconElementId = iconElementId || this.defaultTrack;
+    
+    let element = document.getElementById(iconElementId);
+    let playButton = document.getElementById("playButton");
+    let albumImage = document.getElementById("albumImage");
+
+    if(track === this.state.currentTrack) {
+      if(this.props.state.playing === false) {
+        element.src = pauseIcon;
+        playButton.innerHTML = "PLAY";
+        //albumImage
+        this.props.togglePlay();
+      } else {
+        element.src = playIcon;
+        playButton.innerHTML = "PAUSE";
+        this.props.togglePlay();
+      }
+
+    } else {
+      this.props.newPlayQueue(this.songList);
+      element.src = pauseIcon;
+      playButton.innerHTML = "PLAY";
+      this.setState({ currentTrack: track});
+
+      // set previous track's icon back to music note
+      if(this.state.currentIconId) document.getElementById(this.state.currentIconId).src= musicNoteIcon;
+
+      this.setState( {currentIconId: iconElementId});
+      this.props.selectTrack(track);
+      this.props.togglePlay();
+    }  
+>>>>>>> master
   }
 
   render() {
     const id = this.props.match.params.id;
+<<<<<<< HEAD
 
     return (
       <Query query={FETCH_ALBUM} variables={{ id }}>
         {({ loading, error, data }) => {
           if (loading) return <div className="loading-screen" />;
+=======
+    
+    return ( 
+      
+      <Query query={FETCH_ALBUM} variables={{ id }}>
+        {({ loading, error, data }) => {
+          
+          if (loading) return "Loading...";
+>>>>>>> master
           if (error) return `Error! ${error.message}`;
-
+  
           const songList = data.album.songs.map(song => {
+<<<<<<< HEAD
             return {
               streamUrl: song.audio_url,
               trackTitle: song.title,
@@ -51,9 +134,28 @@ class AlbumShow extends React.Component {
           });
           this.songList = songList;
           debugger;
+=======
+              
+              return {
+                streamUrl: song.audio_url,
+                trackTitle: song.title,
+                artistName: data.album.artist.name,
+                albumArtUrl: data.album.album_art_url
+              }; 
+            });
+            this.songList = songList;
+>>>>>>> master
           // this.props.newPlayQueue(songList)
+          
+          //create array of album's songs
+          const songs = data.album.songs.map( (song, idx)=> {
 
+            if(idx === 0) this.defaultTrack = song._id;
+
+<<<<<<< HEAD
           const songs = data.album.songs.map(song => {
+=======
+>>>>>>> master
             let songLength = null;
             if (song.length % 60 >= 10) {
               songLength = `${Math.floor(
@@ -65,6 +167,7 @@ class AlbumShow extends React.Component {
               )}:0${song.length % 60}`;
             }
             return (
+<<<<<<< HEAD
               <li
                 key={song._id}
                 onMouseOver={() => {
@@ -84,15 +187,29 @@ class AlbumShow extends React.Component {
                       className="playicon"
                       src={require("../resources/music_note_icon.png")}
                     />
+=======
+              <li key={song._id} onMouseOver={() => { this.onHover(song._id, idx)}}
+                onMouseOut={() => { this.offHover(song._id, idx) }}
+                >
+                <div className="playicon-songname">
+                  <span className="playicon-container" onClick={e => this.toggleSong(e, idx, song._id)}>
+                    <img id={song._id}  className="playicon" src={require('../resources/music_note_icon.png') } 
+                      alt=""
+                      />
+>>>>>>> master
                   </span>
                   <span id="1"> {song.title}</span>
                 </div>
                 <div className="menu-songlength">
                   <span className="menu">
+<<<<<<< HEAD
                     <img
                       className="menu-icon"
                       src={require("../resources/menu_icon.png")}
                     />
+=======
+                    <img className="menu-icon" src={require('../resources/menu_icon.png')} alt=""/>
+>>>>>>> master
                   </span>
                   <span> {songLength}</span>
                 </div>
@@ -104,19 +221,26 @@ class AlbumShow extends React.Component {
             <div className="album-show">
               <div className="left-column">
                 <div className="album-photo-container">
+<<<<<<< HEAD
                   <img
                     className="album-photo"
                     src={`${data.album.album_art_url}`}
                   />
+=======
+                  <img id="albumImage" className="album-photo" src={`${data.album.album_art_url}`} alt=""
+                    onClick={e => this.toggleSong(e, this.state.currentTrack, this.state.currentIconId)}/>
+>>>>>>> master
                 </div>
                 <p className="album-name">{data.album.title}</p>
-                <p className="artist-name">{data.album.artist.name}</p>
-                <button className="play">PLAY</button>
+                <Link to={`/artist/${data.album.artist._id}`}><p className="album-artist-name">{data.album.artist.name}</p></Link>
+                <button id="playButton" className="play" onClick={e => this.toggleSong(e, this.state.currentTrack, this.state.currentIconId)}
+                  >PLAY</button>
                 <div className="more-info">
                   <p>(YEAR) {`${data.album.songs.length} SONGS`}</p>
                 </div>
 
                 <div className="more-buttons">
+<<<<<<< HEAD
                   <img
                     className="favorite"
                     src={require("../resources/favorites_icon.png")}
@@ -125,6 +249,10 @@ class AlbumShow extends React.Component {
                     className="menu-icon"
                     src={require("../resources/menu_icon.png")}
                   />
+=======
+                  <img className="favorite" src={require('../resources/favorites_icon.png')} alt=""/>
+                  <img className="menu-icon" src={require('../resources/menu_icon.png')} alt=""/>
+>>>>>>> master
                 </div>
               </div>
 
@@ -135,6 +263,7 @@ class AlbumShow extends React.Component {
           );
         }}
       </Query>
+      
     );
   }
 }

@@ -75,6 +75,11 @@ export const FETCH_ARTISTS = gql`
       genre
       bio
       artist_image_url
+      albums {
+        _id
+      title
+      album_art_url
+      }
     }
   }
 `;
@@ -87,6 +92,11 @@ export const FETCH_ARTIST = gql`
       genre
       bio
       artist_image_url
+       albums {
+        _id
+        title
+        album_art_url
+      }
     }
   }
 `;
