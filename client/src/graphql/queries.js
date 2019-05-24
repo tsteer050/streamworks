@@ -173,30 +173,22 @@ export const IS_LOGGED_IN = gql`
 export const SEARCH_QUERY = gql`
   query SearchQuery($filter: String!) {
     search(filter: $filter) {
-      artist {
-        id
-        name
-      }
-      album {
-        id
+      ... on SongType {
         title
+        __typename
+      }
+      ... on AlbumType {
+        title
+        __typename
+      }
+      ... on ArtistType {
+        name
+        __typename
+      }
+      ... on PlaylistType {
+        title
+        __typename
       }
     }
   }
 `;
-
-// artists {
-//   id
-//   name
-//   genre
-//   bio
-//   artist_image_url
-// }
-// songs {
-//   id
-//   title
-//   length
-//   audio_url
-// }
-// title
-// album_art_url

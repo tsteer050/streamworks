@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { SEARCH_QUERY } from "../../graphql/queries";
+import { SEARCH_QUERY, FETCH_ALBUMS } from "../../graphql/queries";
 import { Query } from "react-apollo";
+
 import "./searchbar.css";
 
 class SearchBar extends Component {
@@ -28,12 +29,31 @@ class SearchBar extends Component {
           />
         </div>
         <section className="search-results">
-          <Query query={SEARCH_QUERY} variables={{ filter: this.state.filter }}>
-            {({ data }) => {
-              console.log(data);
-              return null;
-            }}
-          </Query>
+          {this.state.filter ? (
+            <Query
+              query={SEARCH_QUERY}
+              variables={{ filter: this.state.filter }}
+            >
+              {({ loading, error, data }) => {
+                console.log("data", data);
+                if (loading) return <div className="loading-screen" />;
+                if (error) return `Error! ${error.message}`;
+
+                let songs = data.search.filter(
+                  result => result.__typename === "SongType"
+                );
+                return (
+                  <ul className="result-list">
+                    {songs.map(song => {
+                      if (song.title) {
+                        return <li>{song.title}</li>;
+                      }
+                    })}
+                  </ul>
+                );
+              }}
+            </Query>
+          ) : null}
         </section>
       </div>
     );

@@ -90,18 +90,34 @@ const RootQueryType = new GraphQLObjectType({
       }
     },
     search: {
+      // type: SearchType,
       type: new GraphQLList(SearchType),
+      // type: SearchType,
       args: { filter: { type: GraphQLString } },
       resolve: async (_, args) => {
-        let album = await Album.find({ title: { $regex: args } });
-        let song = await Song.find({ title: { $regex: args } });
-        let playlist = await Playlist.find({ title: { $regex: args } });
-        let artist = await Artist.find({ name: { $regex: args } });
+        // Song.createIndex({ title: "text" });
+        // let song = await Album.find({ $text: { $search: args } });
+        let album = await Album.find({
+          title: { $regex: args.filter, $options: "i" }
+        });
+        console.log(args.filter);
+        let song = await Song.find({
+          title: { $regex: args.filter, $options: "i" }
+        });
+        let playlist = await Playlist.find({
+          title: { $regex: args.filter, $options: "i" }
+        });
+        let artist = await Artist.find({
+          name: { $regex: args.filter, $options: "i" }
+        });
 
-        return artist || album;
-        // .concat(song)
-        // .concat(playlist)
-        // .concat(artist);
+        console.log(song);
+        // return { song, album, playlist, artist };
+        return [...song, ...album, ...playlist, ...artist];
+        // return song
+        //   .concat(album)
+        //   .concat(playlist)
+        //   .concat(artist);
       }
     }
   })

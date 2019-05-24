@@ -26,3 +26,8 @@
 .input-box::placeholder {
   font-size: 36px;
 }
+
+.result-list {
+  color: white;
+  list-style-type: none;
+}

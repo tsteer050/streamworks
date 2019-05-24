@@ -7,17 +7,11 @@ import { ApolloConsumer } from "react-apollo";
 import SideBar from "../Sidebar";
 import { Query } from "react-apollo";
 import AudioPlayer from "../AudioPlayer";
-<<<<<<< HEAD
 import withRedux from "../../util/redux_container";
-=======
-import withRedux from '../../util/redux_container';
 
 const AudioPlayerRedux = withRedux(AudioPlayer);
 
->>>>>>> master
 const jwt = require("jsonwebtoken");
-
-const AudioPlayerRedux = withRedux(AudioPlayer);
 
 class Profile extends React.Component {
   constructor(props) {
