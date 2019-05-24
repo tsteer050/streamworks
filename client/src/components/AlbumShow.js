@@ -3,7 +3,7 @@ import { Query } from "react-apollo";
 import { FETCH_ALBUM, FETCH_USER_LIBRARY } from "../graphql/queries";
 import "./AlbumShow.css";
 import { Link } from 'react-router-dom';
-const jwt = require("jsonwebtoken");
+
 
 const playIcon = require('../resources/play_icon.png');
 const pauseIcon = require('../resources/pause_icon.png');
