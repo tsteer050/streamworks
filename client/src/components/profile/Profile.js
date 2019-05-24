@@ -7,7 +7,7 @@ import { ApolloConsumer } from "react-apollo";
 import SideBar from "../Sidebar";
 import { Query } from "react-apollo";
 import AudioPlayer from "../AudioPlayer";
-import withRedux from '../../util/redux_container';
+import withRedux from "../../util/redux_container";
 
 const AudioPlayerRedux = withRedux(AudioPlayer);
 

@@ -6,6 +6,7 @@ export const FETCH_USER = gql`
       _id
       name
       email
+      
     }
   }
 `;
@@ -77,8 +78,8 @@ export const FETCH_ARTISTS = gql`
       artist_image_url
       albums {
         _id
-      title
-      album_art_url
+        title
+        album_art_url
       }
     }
   }
@@ -92,7 +93,7 @@ export const FETCH_ARTIST = gql`
       genre
       bio
       artist_image_url
-       albums {
+      albums {
         _id
         title
         album_art_url
@@ -131,13 +132,21 @@ export const FETCH_SONG = gql`
 `;
 
 export const FETCH_USER_LIBRARY = gql`
+
   query FetchUserLibrary($id: ID!) {
     user(_id: $id) {
+
       _id
       albums {
          _id
         title
         album_art_url
+        songs {
+          _id
+          title
+          length
+          audio_url
+        }
       }
       artists {
         _id
@@ -197,5 +206,40 @@ export const FETCH_PLAYLIST = gql`
 export const IS_LOGGED_IN = gql`
   query IsUserLoggedIn {
     isLoggedIn @client
+  }
+`;
+
+export const SEARCH_QUERY = gql`
+  query SearchQuery($filter: String!) {
+    search(filter: $filter) {
+      ... on SongType {
+        title
+        album {
+          title
+          artist {
+            name
+            artist_image_url
+          }
+        }
+        __typename
+      }
+      ... on AlbumType {
+        title
+        __typename
+        album_art_url
+        artist {
+          name
+        }
+      }
+      ... on ArtistType {
+        name
+        artist_image_url
+        __typename
+      }
+      ... on PlaylistType {
+        title
+        __typename
+      }
+    }
   }
 `;

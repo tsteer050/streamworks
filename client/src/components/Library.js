@@ -5,6 +5,7 @@ import LibraryAlbums from './LibraryAlbums';
 import LibraryPlaylist from './LibraryPlaylist';
 import LibrarySongs from './LibrarySongs';
 import LibraryArtists from './LibraryArtists';
+import NewPlaylistModal from "./NewPlaylistModal";
 import withRedux from '../util/redux_container';
 
 const LibraryAlbumsRedux = withRedux(LibraryAlbums);
@@ -15,6 +16,7 @@ const LibraryArtistsRedux = withRedux(LibraryArtists);
 class Library extends React.Component {
   constructor(props) {
     super(props);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount() {
@@ -47,14 +49,7 @@ class Library extends React.Component {
           NEW PLAYLIST
         </button>
         <div id="new-playlist-modal" className="modal">
-          <form className="new-playlist-form">
-            <button onClick={this.toggleModal}>X</button>
-            <input
-              type="text"
-              className="input-box"
-              placeholder="Start Typing . . ."
-            />
-          </form>
+          <NewPlaylistModal toggleModal={this.toggleModal}/>
         </div>
         <Switch>
           <Route exact path="/library/playlists" component={LibraryPlaylistRedux} />
