@@ -7,6 +7,7 @@ import AudioPlayer from "./AudioPlayer";
 import AlbumShow from "./AlbumShow";
 import ArtistShow from "./ArtistShow";
 import withRedux from '../util/redux_container';
+import Library from './Library';
 
 import SearchBar from "./searchbar/SearchBar";
 
@@ -24,6 +25,7 @@ class Main extends React.Component {
           <Route exact path="/" component={Splash} />
           <Route exact path="/album/:id" component={AlbumShowRedux} />
           <Route exact path="/artist/:id" component={ArtistShowRedux} />
+          <Route path="/library" component={Library} />
         </Switch>
         <AudioPlayerRedux />
       </Fragment>

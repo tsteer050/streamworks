@@ -3,9 +3,6 @@ import { Query } from "react-apollo";
 import { FETCH_ALBUM } from "../graphql/queries";
 import "./AlbumShow.css";
 import { Link } from 'react-router-dom';
-import { constants } from "fs";
-import { selectTrack, togglePlay } from "../util/redux_config";
-import { soundPlayer } from './AudioPlayer';
 
 const playIcon = require('../resources/play_icon.png');
 const pauseIcon = require('../resources/pause_icon.png');
