@@ -6,9 +6,12 @@ import LibraryPlaylist from './LibraryPlaylist';
 import LibrarySongs from './LibrarySongs';
 import LibraryArtists from './LibraryArtists';
 import NewPlaylistModal from "./NewPlaylistModal";
+import withRedux from '../util/redux_container';
 
-
-
+const LibraryAlbumsRedux = withRedux(LibraryAlbums);
+const LibraryPlaylistRedux = withRedux(LibraryPlaylist);
+const LibrarySongsRedux = withRedux(LibrarySongs);
+const LibraryArtistsRedux = withRedux(LibraryArtists);
 
 class Library extends React.Component {
   constructor(props) {
@@ -49,10 +52,10 @@ class Library extends React.Component {
           <NewPlaylistModal toggleModal={this.toggleModal}/>
         </div>
         <Switch>
-          <Route exact path="/library/playlists" component={LibraryPlaylist} />
-          <Route exact path="/library/songs" component={LibrarySongs} />
-          <Route exact path="/library/albums" component={LibraryAlbums} />
-          <Route exact path="/library/artists" component={LibraryArtists} />
+          <Route exact path="/library/playlists" component={LibraryPlaylistRedux} />
+          <Route exact path="/library/songs" component={LibrarySongsRedux} />
+          <Route exact path="/library/albums" component={LibraryAlbumsRedux} />
+          <Route exact path="/library/artists" component={LibraryArtistsRedux} />
         </Switch>
       </div>
     )};

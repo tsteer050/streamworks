@@ -42,7 +42,7 @@ class AWSSoundPlayer extends Component {
     if (this.props.state.playing) {
       this.props.soundCloudAudio.play();
     } else {
-      this.props.soundCloudAudio.stop();
+      this.props.soundCloudAudio.pause();
     }
   }
   

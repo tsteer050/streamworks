@@ -6,9 +6,10 @@ position: fixed;
 left: 230px;
 bottom: 90px;
 overflow-x: hidden;
-overflow-y: hidden;
+overflow-y: scroll;
 margin: 0 auto;
 background-image: linear-gradient(to bottom right, #106063, black);
+
 }
 
 .splash-container h1 {

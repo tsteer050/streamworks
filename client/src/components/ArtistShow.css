@@ -62,6 +62,30 @@
     text-decoration: none;
     list-style: none;
 }
+
+.album-image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+/* .album-image:hover{
+  opacity: .5!important;
+}
+.album-play-icon{
+  z-index: 1;
+} */
+
+.artist-album-name{
+  text-decoration: none !important;
+  color: white;
+
+}
+.artist-artist-name{
+      color: darkgray;
+    font-size: 15px;
+}
 /* .album-image{
   width: 100px;
   height: 100px;
