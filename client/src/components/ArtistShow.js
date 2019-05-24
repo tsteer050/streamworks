@@ -18,6 +18,9 @@ class ArtistShow extends React.Component {
       playIcon: null
     };
     this.albumSongLists = null;
+    this.onHover = this.onHover.bind(this);
+    this.offHover = this.offHover.bind(this);
+    this.toggleSong = this.toggleSong.bind(this);
   }
 
 
