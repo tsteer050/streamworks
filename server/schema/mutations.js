@@ -117,16 +117,8 @@ const mutation = new GraphQLObjectType({
       args: {
         title: { type: GraphQLString }
       },
-      async resolve(_, { name, description, weight }, ctx) {
-        const validUser = await AuthService.verifyUser({ token: ctx.token });
-
-        if (validUser.loggedIn) {
-          return new Playlist({ title }).save();
-        } else {
-          throw new Error(
-            "Sorry, you need to be logged in to perform this action."
-          );
-        }
+      resolve(_, {title}) {
+        return new Playlist({title}).save();
       }
     },
     deletePlaylist: {
@@ -134,7 +126,7 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLID }
       },
-      async resolve(_, { name, description, weight }, ctx) {
+      async resolve(_, { id }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
         if (validUser.loggedIn) {
@@ -152,7 +144,7 @@ const mutation = new GraphQLObjectType({
         playlistId: { type: GraphQLID },
         subscriberId: { type: GraphQLID }
       },
-      async resolve(_, { name, description, weight }, ctx) {
+      async resolve(_, { playlistId, subscriberId }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
         if (validUser.loggedIn) {
@@ -170,7 +162,7 @@ const mutation = new GraphQLObjectType({
         playlistId: { type: GraphQLID },
         subscriberId: { type: GraphQLID }
       },
-      async resolve(_, { name, description, weight }, ctx) {
+      async resolve(_, { playlistId, subscriberId }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
         if (validUser.loggedIn) {
@@ -188,7 +180,7 @@ const mutation = new GraphQLObjectType({
         playlistId: { type: GraphQLID },
         ownerId: { type: GraphQLID }
       },
-      async resolve(_, { name, description, weight }, ctx) {
+      async resolve(_, { playlistId, ownerId }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
         // if our service returns true then our product is good to save!
@@ -208,7 +200,7 @@ const mutation = new GraphQLObjectType({
         playlistId: { type: GraphQLID },
         songId: { type: GraphQLID }
       },
-      async resolve(_, { name, description, weight }, ctx) {
+      async resolve(_, { playlistId, songId }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
         // if our service returns true then our product is good to save!
@@ -228,7 +220,7 @@ const mutation = new GraphQLObjectType({
         playlistId: { type: GraphQLID },
         songId: { type: GraphQLID }
       },
-      async resolve(_, { name, description, weight }, ctx) {
+      async resolve(_, { playlistId, songId }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
         // if our service returns true then our product is good to save!
@@ -290,7 +282,7 @@ const mutation = new GraphQLObjectType({
         // all we need to log the user our is an id
         _id: { type: GraphQLID }
       },
-      async resolve(_, { name, description, weight }, ctx) {
+      async resolve(_, { _id }, ctx) {
         const validUser = await AuthService.verifyUser({ token: ctx.token });
 
         // if our service returns true then our product is good to save!
