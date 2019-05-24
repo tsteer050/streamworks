@@ -29,7 +29,7 @@ class SearchBar extends Component {
             placeholder="Start Typing . . ."
           />
         </div>
-        <section className="search-results">
+        <section className="search-results2">
           {this.state.filter ? (
             <Query
               query={SEARCH_QUERY}
