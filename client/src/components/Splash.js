@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Query } from "react-apollo";
-import { Link } from 'react-router-dom';
 import { FETCH_ALBUMS } from "../graphql/queries";
 import "./Splash.css";
 
@@ -14,15 +13,18 @@ class Splash extends React.Component {
             if (error) return `Error! ${error.message}`;
 
             return (
-              <ul id="splash">
-                {data.albums.map(album => (
-                  <li key={album._id}>
-                    <img className="list-album-art" src={album.album_art_url} alt={album.title} onClick={() => this.props.history.push(`/album/${album._id}`)}/>
-                    <h5 className="list-album-title">{album.title}</h5>
-                    <Link to={`/artist/${album.artist._id}`}><h5 className="list-album-artist-name">{album.artist.name}</h5></Link>
-                  </li>
-                ))}
-              </ul>
+              <div className="splash-container">
+                <h1>Top recommendations for you</h1>
+                <ul id="splash">
+                  {data.albums.map(album => (
+                    <li key={album._id}>
+                      <img className="list-album-art" src={album.album_art_url} alt={album.title} onClick={() => this.props.history.push(`/album/${album._id}`)} />
+                      <h5 className="list-album-title">{album.title}</h5>
+                      <h5 className="list-album-artist-name">{album.artist.name}</h5>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             );
           }}
         </Query>

@@ -3,9 +3,6 @@ import { Query } from "react-apollo";
 import { FETCH_ALBUM } from "../graphql/queries";
 import "./AlbumShow.css";
 import { Link } from 'react-router-dom';
-import { constants } from "fs";
-import { selectTrack, togglePlay } from "../util/redux_config";
-import { soundPlayer } from './AudioPlayer';
 
 const playIcon = require('../resources/play_icon.png');
 const pauseIcon = require('../resources/pause_icon.png');
@@ -59,7 +56,7 @@ class AlbumShow extends React.Component {
     if(track === this.state.currentTrack) {
 
       if(this.props.state.playing === false) {
-        element.src = pauseIcon;t
+        element.src = pauseIcon;
         playButton.innerHTML = "PLAY";
         //albumImage
         this.props.togglePlay();

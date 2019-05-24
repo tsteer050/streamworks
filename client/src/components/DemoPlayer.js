@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withCustomAudio } from "react-soundplayer/addons";
 import {
   PlayButton,
-  Timer,
   VolumeControl,
   Progress,
   Icons,
@@ -12,7 +11,7 @@ import {
 } from "react-soundplayer/components";
 import "./demoplayer.css";
 
-const { PlayIconSVG, PauseIconSVG, NextIconSVG, PrevIconSVG } = Icons;
+const { PlayIconSVG, NextIconSVG, PrevIconSVG } = Icons;
 
 class AWSSoundPlayer extends Component {
   convertTime(time) {
@@ -50,10 +49,9 @@ class AWSSoundPlayer extends Component {
 
   render() {
     const { trackTitle, artistName } = this.props;
-    console.log(this.props);
     return (
       <div className="p1 mb3 mt1 flex flex-center bg-darken-1 orange rounded">
-        <img className="player-album-art" src={this.props.albumArtUrl} />
+        <img className="player-album-art" src={this.props.albumArtUrl} alt={this.props.artistName} />
         
         <div className="player-track-labels">
           <h2 className="player-track-song-title-label">{trackTitle}</h2>
