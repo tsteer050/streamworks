@@ -7,6 +7,8 @@
   margin: 0;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: scroll;
   align-items: center;
   background-image: linear-gradient(to bottom right, #ab712a, black); 
   

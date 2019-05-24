@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Query } from "react-apollo";
 import { FETCH_ALBUMS } from "../graphql/queries";
+import { Link } from 'react-router-dom';
 import "./Splash.css";
 
 class Splash extends React.Component {
@@ -20,7 +21,7 @@ class Splash extends React.Component {
                     <li key={album._id}>
                       <img className="list-album-art" src={album.album_art_url} alt={album.title} onClick={() => this.props.history.push(`/album/${album._id}`)} />
                       <h5 className="list-album-title">{album.title}</h5>
-                      <h5 className="list-album-artist-name">{album.artist.name}</h5>
+                      <Link to={`/artist/${album.artist._id}`}><h5 className="list-album-artist-name">{album.artist.name}</h5></Link>
                     </li>
                   ))}
                 </ul>

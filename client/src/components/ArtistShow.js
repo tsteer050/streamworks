@@ -13,33 +13,54 @@ class ArtistShow extends React.Component {
     super(props);
     this.state = {
       songList: [],
-      currentTrack: null,
-      currentIconId: null
+      currentAlbum: null,
+      currentIconId: null,
+      playIcon: null
     };
-    this.defaultTrack = null;
-    this.songList = null;
+    this.albumSongLists = null;
   }
 
 
 
-  onHover(elementId, track) {
-    if (elementId === "albumImage") {
-      let albumImage = document.getElementById(elementId);
-
-    }
-    let element = document.getElementById(elementId);
-
-    if (this.props.state.playing === true && this.state.currentTrack === track) {
-      element.src = pauseIcon;
+  onHover(elementId) {
+    let playIcon = document.getElementById(elementId);
+  
+    if (elementId === this.state.currentAlbum) {
+        playIcon.src = this.state.playIcon;
     } else {
-      element.src = playIcon;
+      playIcon.src = require('../resources/album_play_icon.png');
     }
   }
-  offHover(elementId, track) {
+
+  offHover(elementId) {
 
     let element = document.getElementById(elementId);
-    if (this.state.currentTrack !== track) {
-      element.src = require('../resources/music_note_icon.png');
+    element.src = "";
+    
+  }
+  toggleIcon(iconId) {
+    
+    if (this.props.state.playing === false) {
+      this.state.playIcon = require('../resources/album_pause_icon.png');
+    } else {
+      this.state.playIcon = require('../resources/album_play_icon.png');
+    }
+    let icon = document.getElementById(iconId);
+    icon.src = this.state.playIcon;
+  }
+  playAlbum(e, albumId) {
+    
+
+    if(this.state.currentAlbum === albumId) {
+      this.props.togglePlay();
+      this.toggleIcon(albumId);
+    } else {
+      this.state.currentAlbum = albumId;
+      let playQueue = this.albumSongLists[albumId];
+      this.props.newPlayQueue(playQueue);
+      this.props.selectTrack(0);
+      this.props.togglePlay();
+      this.toggleIcon(albumId);
     }
   }
 
@@ -89,47 +110,50 @@ class ArtistShow extends React.Component {
         {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
-
-          // const songList = data.album.songs.map(song => {
-
-          //   return {
-          //     streamUrl: song.audio_url,
-          //     trackTitle: song.title,
-          //     artistName: data.album.artist.name,
-          //     albumArtUrl: data.album.album_art_url
-          //   };
-          // });
-          // this.songList = songList;
-          // this.props.newPlayQueue(songList)
+          let albumSongLists = {};
+          
 
           //create array of album's songs
           const albums = data.artist.albums.map((album, idx) => {
 
-            // if (idx === 0) this.defaultTrack = song._id;
+            albumSongLists[album._id] = album.songs.map(song => {
+
+            return {
+              streamUrl: song.audio_url,
+              trackTitle: song.title,
+              artistName: data.artist.name,
+              albumArtUrl: album.album_art_url
+            }})
+          
           
             let songLength = null;
             var sectionStyle = {
               width: "100%",
               height: "100%",
               backgroundImage: `url(${album.album_art_url})`,
-              backgroundSize: '145px'
-            };
-            
+              backgroundSize: '145px',
+              
+              
+     };
+   
 
-      return (
+   return (
               <li key={album._id} className="album-image-container">
-          <Link to={`/album/${album._id}`} style={{ textDecoration: 'none' }}>
-                  <div className="album-image" style={ sectionStyle }>
-                      {/* <img id={song._id} className="playicon" src={require('../resources/music_note_icon.png')}
-                        alt=""
-                      /> */}
-                  </div>
+              <div className="album-image" style={sectionStyle} onClick={e => this.playAlbum(e, album._id)}
+                onMouseOver={() => this.onHover(album._id, idx)} onMouseOut={() => { this.offHover(album._id, idx) }}
+                >
+                <img id={album._id} className="album-play-icon" src="" alt="" />
+              </div>
+                <Link to={`/album/${album._id}`} style={{ textDecoration: 'none' }}>
+                  
                   <p className="artist-album-name">{album.title}</p>
                 </Link>
                 <p className="artist-artist-name">{data.artist.name}</p>
               </li>
             )
           })
+          this.albumSongLists = albumSongLists;
+
           // artist's background image for header
           let headerStyle = {
             backgroundImage: `url(${data.artist.artist_image_url})`,

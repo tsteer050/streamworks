@@ -96,6 +96,13 @@ export const FETCH_ARTIST = gql`
         _id
         title
         album_art_url
+        songs {
+          _id
+        title
+        length
+        audio_url
+
+        }
       }
     }
   }

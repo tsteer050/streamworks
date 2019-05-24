@@ -26,9 +26,7 @@ class AlbumShow extends React.Component {
   }
 
   
-  componentDidMount() {
-   
-  }
+  
   onHover(elementId, track) {
     if(elementId === "albumImage") {
       let albumImage = document.getElementById(elementId);
@@ -92,11 +90,11 @@ class AlbumShow extends React.Component {
     return ( 
       
       <Query query={FETCH_ALBUM} variables={{ id }}>
-        {({ loading, error, data }) => {
+        {({ loading, error, data, client }) => {
           
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
-  
+
           const songList = data.album.songs.map(song => {
               
               return {
@@ -155,7 +153,8 @@ class AlbumShow extends React.Component {
                 <button id="playButton" className="play" onClick={e => this.toggleSong(e, this.state.currentTrack, this.state.currentIconId)}
                   >PLAY</button>
                 <div className="more-info">
-                  <p>(YEAR)    {`${data.album.songs.length} SONGS`}</p>
+                  {/* <p>(YEAR)</p>     */}
+                  <p>{`${data.album.songs.length} SONGS`}</p>
                 </div>
 
                 <div className="more-buttons">

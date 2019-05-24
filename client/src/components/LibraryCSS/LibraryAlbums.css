@@ -1,0 +1,4 @@
+.library-albums-show{
+  height: calc(100vh - 90px);
+  width: calc(100vw - 230px);
+}
