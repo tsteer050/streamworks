@@ -249,3 +249,18 @@ li.search-results-playlist {
     height: 26px;
   }
 }
+
+.search-here {
+  text-align: center;
+  position: relative;
+  top: 20%;
+}
+
+.search-here > h3 {
+  color: white;
+  font-weight: bold;
+}
+
+.search-here > p {
+  color: light-gray;
+}

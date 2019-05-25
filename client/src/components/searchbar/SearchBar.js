@@ -327,7 +327,12 @@ class SearchBar extends Component {
                 );
               }}
             </Query>
-          ) : null}
+          ) : (
+            <div className="search-here">
+              <h3>Search StreamWorks</h3>
+              <p>Find your favorite songs, artists, and playlists</p>
+            </div>
+          )}
         </section>
       </div>
     );
