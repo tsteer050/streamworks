@@ -95,8 +95,8 @@ class LibraryArtists extends React.Component {
               width: "145px",
               height: "145px",
               backgroundImage: `url(${artist.artist_image_url})`,
-              backgroundSize: "145px",
-              borderRadius: "50%"
+              borderRadius: "50%",
+              backgroundSize: "cover"
             };
 
             return (

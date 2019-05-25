@@ -101,3 +101,9 @@
   width: 100px;
   height: 100px;
 } */
+
+.artist-loading-screen {
+  background: black;
+  height: 900px;
+  width: 100vw;
+}
