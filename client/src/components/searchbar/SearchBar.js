@@ -125,47 +125,61 @@ class SearchBar extends Component {
                     </div>
                     <div className="artist-results">
                       <h1 className="results-header">Artists</h1>
-                      <ul className="artist-results-list">
-                        {artists.map(artist => {
-                          return (
-                            <li>
-                              <div className="artist-li-div">
-                                <Link to={`/artist/${artist._id}`}>
-                                  <img
-                                    className="artist-result-pic"
-                                    src={artist.artist_image_url}
-                                    alt="artist"
-                                  />
-                                  <p>{artist.name}</p>
-                                </Link>
-                              </div>
-                            </li>
-                          );
-                        })}
-                      </ul>
+                      {artists.length === 0 ? (
+                        <div className="no-results">
+                          <h4>No results</h4>
+                        </div>
+                      ) : (
+                        <ul className="artist-results-list">
+                          {artists.map(artist => {
+                            return (
+                              <li>
+                                <div className="artist-li-div">
+                                  <Link to={`/artist/${artist._id}`}>
+                                    <img
+                                      className="artist-result-pic"
+                                      src={artist.artist_image_url}
+                                      alt="artist"
+                                    />
+                                    <p>{artist.name}</p>
+                                  </Link>
+                                </div>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      )}
                     </div>
 
                     <div className="album-results">
                       <h1 className="albums-header2">Albums</h1>
-                      <ul className="albums-list2">
-                        {albums.map(album => {
-                          return (
-                            <li>
-                              <div className="albums--photo">
-                                <img
-                                  className="results-img"
-                                  src={album.album_art_url}
-                                  alt="artist"
-                                />
-                                <div className="results-p">
-                                  <p>{album.title}</p>
-                                  <p className="last-p">{album.artist.name}</p>
+                      {albums.length === 0 ? (
+                        <div className="no-results">
+                          <h4>No results</h4>
+                        </div>
+                      ) : (
+                        <ul className="albums-list2">
+                          {albums.map(album => {
+                            return (
+                              <li>
+                                <div className="albums--photo">
+                                  <img
+                                    className="results-img"
+                                    src={album.album_art_url}
+                                    alt="artist"
+                                  />
+                                  <div className="results-p">
+                                    <p>{album.title}</p>
+                                    <p className="last-p">
+                                      {album.artist.name}
+                                    </p>
+                                  </div>
                                 </div>
-                              </div>
-                            </li>
-                          );
-                        })}
-                      </ul>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      )}
                     </div>
                   </div>
                 );

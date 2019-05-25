@@ -152,6 +152,10 @@
   margin-bottom: 150px;
 }
 
+.no-results {
+  margin: 30px 40px;
+}
+
 /* loader */
 
 .loading-screen {
