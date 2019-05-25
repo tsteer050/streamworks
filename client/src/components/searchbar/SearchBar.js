@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { SEARCH_QUERY, FETCH_ALBUMS } from "../../graphql/queries";
+import { debounce } from "lodash";
+import { SEARCH_QUERY } from "../../graphql/queries";
 import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
 import withRedux from "../../util/redux_container";
@@ -28,21 +28,11 @@ class SearchBar extends Component {
     this.update = this.update.bind(this);
   }
 
-  update(e) {
-    e.preventDefault();
-    this.setState({ filter: e.target.value });
-  }
-
-  onEnter(e) {
-    if (e.key === "Enter") {
-      this.setState({ enter: true });
-    }
-  }
+  update = debounce(text => {
+    this.setState({ filter: text });
+  }, 1000);
 
   onHover(elementId, track) {
-    if (elementId === "albumImage") {
-      let albumImage = document.getElementById(elementId);
-    }
     let element = document.getElementById(elementId);
 
     if (
@@ -101,21 +91,19 @@ class SearchBar extends Component {
       <div className="search-div">
         <div className="input-header">
           <input
-            onKeyPress={this.onEnter.bind(this)}
-            onChange={this.update}
+            onChange={e => this.update(e.target.value)}
             type="text"
             className="input-box"
             placeholder="Start Typing . . ."
           />
         </div>
         <section className="search-results2">
-          {this.state.enter ? (
+          {this.state.filter ? (
             <Query
               query={SEARCH_QUERY}
               variables={{ filter: this.state.filter }}
             >
               {({ loading, error, data }) => {
-                console.log("data", data);
                 if (loading)
                   return (
                     <div className="loading-screen">
@@ -141,6 +129,7 @@ class SearchBar extends Component {
                     albumArtUrl: song.album.album_art_url
                   };
                 });
+
                 this.songList = songList;
 
                 let albums = data.search.filter(
@@ -150,8 +139,6 @@ class SearchBar extends Component {
                 let artists = data.search.filter(
                   result => result.__typename === "ArtistType"
                 );
-
-                // create songs list from search query
 
                 return (
                   <div className="outer-div">
