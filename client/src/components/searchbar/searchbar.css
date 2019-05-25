@@ -1,6 +1,6 @@
 .search-results2 {
   color: white;
-  height: 808px;
+  height: calc(100vh - 90px);
   overflow: scroll;
 }
 .search-div {
