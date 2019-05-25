@@ -37,7 +37,7 @@ class SearchBar extends Component {
           />
         </div>
         <section className="search-results2">
-          {this.state.filter ? (
+          {this.state.enter ? (
             <Query
               query={SEARCH_QUERY}
               variables={{ filter: this.state.filter }}
