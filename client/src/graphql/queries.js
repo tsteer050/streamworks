@@ -6,7 +6,6 @@ export const FETCH_USER = gql`
       _id
       name
       email
-      
     }
   }
 `;
@@ -99,10 +98,9 @@ export const FETCH_ARTIST = gql`
         album_art_url
         songs {
           _id
-        title
-        length
-        audio_url
-
+          title
+          length
+          audio_url
         }
       }
     }
@@ -213,10 +211,13 @@ export const SEARCH_QUERY = gql`
   query SearchQuery($filter: String!) {
     search(filter: $filter) {
       ... on SongType {
+        _id
         title
         album {
+          _id
           title
           artist {
+            _id
             name
             artist_image_url
           }
@@ -224,6 +225,7 @@ export const SEARCH_QUERY = gql`
         __typename
       }
       ... on AlbumType {
+        _id
         title
         __typename
         album_art_url
@@ -232,6 +234,7 @@ export const SEARCH_QUERY = gql`
         }
       }
       ... on ArtistType {
+        _id
         name
         artist_image_url
         __typename

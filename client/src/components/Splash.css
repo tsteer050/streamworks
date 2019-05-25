@@ -1,51 +1,49 @@
-
 .splash-container {
-height: calc(100vh - 90px);
-width: calc(100vw - 230px);
-position: fixed;
-left: 230px;
-bottom: 90px;
-overflow-x: hidden;
-overflow-y: scroll;
-margin: 0 auto;
-background-image: linear-gradient(to bottom right, #106063, black);
-
+  height: calc(100vh - 90px);
+  width: calc(100vw - 230px);
+  position: fixed;
+  left: 230px;
+  bottom: 90px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin: 0 auto;
+  background-image: linear-gradient(to bottom right, #106063, black);
 }
 
-.splash-container h1 {
-margin-left: 55px;
-margin-top: 30px;
-font-size: 36px;
-font-weight: bolder;
-color: #FFFFFF;
-font-family: sans-serif;
+.splash-container > h1 {
+  margin-left: 55px;
+  margin-top: 30px;
+  font-size: 36px;
+  font-weight: bolder;
+  color: #ffffff;
+  font-family: sans-serif;
+  margin-top: 100px;
 }
 
 #splash {
-padding: 40px;
-display: flex;
-flex-flow: row wrap;
-justify-content: flex-start;
+  padding: 20px 40px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
 }
 
 #splash li {
-flex-basis: 20%;
--ms-flex: auto;
-list-style: none;
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 15px;
+  flex-basis: 20%;
+  -ms-flex: auto;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
 }
 
 .list-album-art {
-/*
+  /*
 min-width: 150px;
 min-height: 150px; */
-flex-basis: 100%;
-max-width: 230px;
-max-height: 230px;
-
+  flex-basis: 100%;
+  max-width: 230px;
+  max-height: 230px;
 }
 
 .list-album-art:hover {
@@ -54,7 +52,7 @@ max-height: 230px;
 
 .list-album-title {
   font-size: 14px;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 4px;
 }
 

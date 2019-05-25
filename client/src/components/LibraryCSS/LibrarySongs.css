@@ -27,9 +27,6 @@
   margin: 0;
 }
 
-
-
-
 .album-name {
   font-size: 28px;
   line-height: 36px;
@@ -50,14 +47,17 @@
   text-decoration: underline;
 }
 
-
-
-.song-info-container{
+.song-info-container {
   display: flex;
   flex-direction: column;
 }
-.song-artist-album{
+.song-artist-album {
   font-size: 14px;
+  color: lightgray;
+}
+
+.song-artist-album > a {
+  color: lightgray;
 }
 
 .songs-list {
@@ -75,16 +75,16 @@
   align-items: center;
   justify-content: space-between;
   height: 4em;
-  margin-bottom: 25px;
 }
 .songs-list > li:hover {
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.2);
 }
 .songs-list > li:hover .menu {
   visibility: visible;
 }
-.playicon-songname{
+.playicon-songname {
   display: inline-flex;
+  padding-left: 10px;
 }
 .playicon-container {
   margin-right: 5px;
@@ -96,7 +96,7 @@
 
 .left-menu-icon {
 }
-  
+
 .menu {
   visibility: hidden;
 }

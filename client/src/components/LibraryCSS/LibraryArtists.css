@@ -1,9 +1,10 @@
-.library-artists-show{
+.library-artists-show {
   height: calc(100vh - 90px);
   width: calc(90vw - 230px);
+  margin-top: 100px;
 }
 
-.artist-image-container{
+.artist-image-container {
   margin-right: 20px;
   margin-bottom: 10px;
   display: flex;
@@ -11,13 +12,19 @@
   align-items: center;
 }
 
-.artists-list{
+.artists-list {
   display: flex;
   flex-direction: row;
-
 }
 
-.artist-artist-name{
- 
- font-style: 13px;
+.artist-image {
+  display: flex;
+}
+
+.artist-artist-name {
+  font-style: 13px;
+}
+
+.artist-play-icon {
+  margin: auto;
 }

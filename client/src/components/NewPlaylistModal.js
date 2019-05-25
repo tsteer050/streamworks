@@ -1,12 +1,10 @@
-import React from 'react';
+import React from "react";
 import { Mutation } from "react-apollo";
 import { CREATE_PLAYLIST } from "../graphql/mutations";
-import './library.css';
-import { withRouter } from 'react-router-dom';
-
+import "./library.css";
+import { withRouter } from "react-router-dom";
 
 class NewPlaylistModal extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -42,10 +40,19 @@ class NewPlaylistModal extends React.Component {
         }}
       >
         {newPlaylist => (
-          <form className="new-playlist-form"
+          <form
+            className="new-playlist-form"
             onSubmit={e => this.handleSubmit(e, newPlaylist)}
           >
-            <button className="x-button" onClick={() => { this.resetTitle(); this.props.toggleModal(); } }>X</button>
+            <button
+              className="x-button"
+              onClick={() => {
+                this.resetTitle();
+                this.props.toggleModal();
+              }}
+            >
+              X
+            </button>
             <h1>Create new playlist</h1>
             <div>
               <input
@@ -57,13 +64,31 @@ class NewPlaylistModal extends React.Component {
               />
             </div>
             <div className="new-playlist-form-buttons">
-              <button onClick={e => { e.preventDefault(); this.resetTitle(); this.props.toggleModal(); }} className="new-playlist-cancel-button">CANCEL</button>
-              <button type="submit" className="new-playlist-submit-button">SUBMIT</button>
+              <div>
+                <button
+                  onClick={e => {
+                    e.preventDefault();
+                    this.resetTitle();
+                    this.props.toggleModal();
+                  }}
+                  className="new-playlist-cancel-button"
+                >
+                  CANCEL
+                </button>
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  className="new-playlist-submit-button new-playlist-button"
+                >
+                  SUBMIT
+                </button>
+              </div>
             </div>
           </form>
         )}
       </Mutation>
-    )
+    );
   }
 }
 export default withRouter(NewPlaylistModal);

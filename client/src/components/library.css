@@ -10,8 +10,7 @@
   overflow-x: hidden;
   overflow-y: scroll;
   align-items: center;
-  background-image: linear-gradient(to bottom right, #ab712a, black); 
-  
+  background-image: linear-gradient(to bottom right, #ab712a, black);
 }
 
 .playlist-input-box {
@@ -27,15 +26,15 @@
 
 .modal {
   display: none;
-  position: fixed; 
-  z-index: 1; 
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.4); 
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .visible {
@@ -50,24 +49,25 @@
   flex-wrap: wrap;
 }
 
-.library-nav-bar Link {
+.library-nav-bar a {
   text-decoration: none;
   margin: 0 8px 0 8px;
   color: #b3b3b3;
   font-size: 14px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bolder;
+  text-transform: uppercase;
 }
 
-.library-nav-bar Link:hover {
+.library-nav-bar a:hover {
   cursor: pointer;
-  color: #FFFFFF;
+  color: #ffffff;
   /* text-decoration-color: #1DB954; */
 }
 
-.library-nav-bar Link:active {
+.library-nav-bar a:active {
   text-decoration: underline;
-  text-decoration-color: #1DB954;
+  text-decoration-color: #1db954;
 }
 
 .new-playlist-button {
@@ -84,9 +84,12 @@
   text-align: center;
   line-height: 30px;
   font-family: sans-serif;
-
 }
 
+.new-playlist-div {
+  width: 150px;
+  height: 50px;
+}
 
 .new-playlist-button:hover {
   background: #1ed760;
@@ -95,7 +98,29 @@
   height: 32px;
   line-height: 32px;
   text-decoration: none;
-  color: #FFFFFF;
+  color: #ffffff;
+}
+
+.new-playlist-cancel-button {
+  margin-top: 50px;
+  color: white;
+  border-radius: 500px;
+  width: 140px;
+  height: 30px;
+  background: black;
+  font-weight: 400;
+  border: 1px solid lightgray;
+  font-size: 11px;
+  outline: none !important;
+  text-align: center;
+  line-height: 30px;
+  font-family: sans-serif;
+  margin-right: 15px;
+}
+
+.new-playlist-cancel-button:hover {
+  width: 150px;
+  height: 32px;
 }
 
 .new-playlist-form {
@@ -108,7 +133,7 @@
 }
 
 .x-button {
-  color: #FFFFFF;
+  color: #ffffff;
   background: none;
   border: none;
   font-size: 45px;
@@ -121,9 +146,9 @@
   margin-bottom: 0;
 }
 
-.new-playlist-form h1 {
-  color: #FFFFFF;
-
+.new-playlist-form > h1 {
+  color: #ffffff;
+  font-weight: bold;
 }
 
 .new-playlist-form-buttons {
@@ -132,8 +157,24 @@
   justify-content: center;
 }
 
+.new-playlist-form-buttons > div {
+  width: 150px;
+  margin-right: 15px;
+}
+
 .new-playlist-form-buttons button {
   margin: 0 5px 0 5px;
 }
 
+.library-playlist-header {
+  margin-top: 50px;
+  color: white;
+}
 
+.library-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 30%;
+}

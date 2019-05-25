@@ -1,33 +1,42 @@
-.artist-show{
+.artist-show {
   flex-grow: 1;
   height: calc(100vh - 90px);
-  background: #111;
-   overflow-y: scroll;
+  overflow-y: scroll;
   overflow-x: hidden;
 }
-.title-header{
+.title-header {
   /* background-image: url(paper.gif); */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #07040F;
-  flex-grow:1;
-  height: 350px;
+  background: #07040f;
+  flex-grow: 1;
+  height: calc(100vh - 90px);
 }
 
-.artist-name{
+.albums-section {
+  margin-right: auto;
+}
+
+.artist-name {
   font-size: 72px;
   line-height: 82px;
-  letter-spacing: -.005em;
+  letter-spacing: -0.005em;
   font-weight: var(--glue-font-weight-black);
   color: white;
   text-transform: none;
 }
-.artist-favorite{
+
+.artist-name-div {
+  font-weight: bold;
+  position: relative;
+  top: -120px;
+}
+.artist-favorite {
   margin-right: 35px;
 }
-.artist-play{
+.artist-play {
   background-color: #1db954;
   font-size: 11px;
   color: white;
@@ -42,32 +51,34 @@
   margin-right: 35px;
 }
 
-.albums-header{
+.albums-header {
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 40px;
   color: white;
 }
-.albums-list{
+.albums-list {
   display: flex;
   flex-wrap: wrap;
 }
 
-
-
-.album-image-container{
+.album-image-container {
   width: 145px;
-    height: 145px;
-    margin-right: 18px;
-    text-decoration: none;
-    list-style: none;
+  height: 145px;
+  margin-right: 18px;
+  text-decoration: none;
+  list-style: none;
+  text-align: center;
 }
 
-.album-image{
+.album-image {
   display: flex;
   align-items: center;
   justify-content: center;
-  
+}
+
+.album-image-container > a {
+  text-align: center;
 }
 
 /* .album-image:hover{
@@ -77,14 +88,14 @@
   z-index: 1;
 } */
 
-.artist-album-name{
+.artist-album-name {
   text-decoration: none !important;
   color: white;
-
+  margin-bottom: 0;
 }
-.artist-artist-name{
-      color: darkgray;
-    font-size: 15px;
+.artist-artist-name {
+  color: darkgray;
+  font-size: 15px;
 }
 /* .album-image{
   width: 100px;

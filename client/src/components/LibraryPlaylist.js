@@ -1,6 +1,5 @@
 import React from "react";
 
-
 class LibraryPlaylist extends React.Component {
   constructor(props) {
     super(props);
@@ -8,13 +7,11 @@ class LibraryPlaylist extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Library Playlist</h1>
+      <div className="library-playlist-header">
+        <h4>LIBRARY PLAYLIST</h4>
       </div>
-    )
-  };
-
-};
+    );
+  }
+}
 
 export default LibraryPlaylist;
-

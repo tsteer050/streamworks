@@ -1,14 +1,14 @@
 import React from "react";
 import { Query } from "react-apollo";
-import { FETCH_ARTIST, FETCH_ARTISTS} from "../graphql/queries";
+import { FETCH_ARTIST, FETCH_ARTISTS } from "../graphql/queries";
 import "./LibraryCSS/LibraryAlbums.css";
 import "./LibraryCSS/LibraryArtists.css";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-const playIcon = require('../resources/play_icon.png');
-const pauseIcon = require('../resources/pause_icon.png');
-const musicNoteIcon = require('../resources/music_note_icon.png');
+const playIcon = require("../resources/play_icon.png");
+const pauseIcon = require("../resources/pause_icon.png");
+const musicNoteIcon = require("../resources/music_note_icon.png");
 
 class LibraryArtists extends React.Component {
   constructor(props) {
@@ -28,29 +28,24 @@ class LibraryArtists extends React.Component {
     if (elementId === this.state.currentAlbum) {
       playIcon.src = this.state.playIcon;
     } else {
-      playIcon.src = require('../resources/album_play_icon.png');
+      playIcon.src = require("../resources/album_play_icon.png");
     }
   }
 
   offHover(elementId) {
-
     let element = document.getElementById(elementId);
     element.src = "";
-
   }
   toggleIcon(iconId) {
-
     if (this.props.state.playing === false) {
-      this.state.playIcon = require('../resources/album_pause_icon.png');
+      this.state.playIcon = require("../resources/album_pause_icon.png");
     } else {
-      this.state.playIcon = require('../resources/album_play_icon.png');
+      this.state.playIcon = require("../resources/album_play_icon.png");
     }
     let icon = document.getElementById(iconId);
     icon.src = this.state.playIcon;
   }
   playAlbum(e, albumId) {
-
-
     if (this.state.currentAlbum === albumId) {
       this.props.togglePlay();
       this.toggleIcon(albumId);
@@ -68,52 +63,70 @@ class LibraryArtists extends React.Component {
     const id = "5ce5bcd33d5c871355e5a3d6";
 
     return (
-      <Query query={FETCH_ARTISTS} >
+      <Query query={FETCH_ARTISTS}>
         {({ loading, error, data }) => {
-          if (loading) return "Loading...";
+          if (loading)
+            return (
+              <div className="library-loading">
+                <div class="lds-facebook">
+                  <div />
+                  <div />
+                  <div />
+                </div>
+              </div>
+            );
           if (error) return `Error! ${error.message}`;
           let artistSongList = {};
 
-
           //create array of album's songs
           const artists = data.artists.map((artist, idx) => {
+            //   artistList[album._id] = album.songs.map(song => {
 
-          //   artistList[album._id] = album.songs.map(song => {
-
-          //     return {
-          //       streamUrl: song.audio_url,
-          //       trackTitle: song.title,
-          //       artistName: data.artist.name,
-          //       albumArtUrl: album.album_art_url
-          //     }
-          //   })
-
+            //     return {
+            //       streamUrl: song.audio_url,
+            //       trackTitle: song.title,
+            //       artistName: data.artist.name,
+            //       albumArtUrl: album.album_art_url
+            //     }
+            //   })
 
             let songLength = null;
             var sectionStyle = {
               width: "145px",
               height: "145px",
               backgroundImage: `url(${artist.artist_image_url})`,
-              backgroundSize: '145px',
-              borderRadius: '50%'
-
+              backgroundSize: "145px",
+              borderRadius: "50%"
             };
-
 
             return (
               <li key={artist._id} className="artist-image-container">
-                <div className="artist-image" style={sectionStyle} onClick={e => this.playartist(e, artist._id)}
-                  onMouseOver={() => this.onHover(artist._id, idx)} onMouseOut={() => { this.offHover(artist._id, idx) }}
+                <div
+                  className="artist-image"
+                  style={sectionStyle}
+                  onClick={e => this.playartist(e, artist._id)}
+                  onMouseOver={() => this.onHover(artist._id, idx)}
+                  onMouseOut={() => {
+                    this.offHover(artist._id, idx);
+                  }}
                 >
-                  <img id={artist._id} className="artist-play-icon" src="" alt="" />
+                  <img
+                    id={artist._id}
+                    className="artist-play-icon"
+                    src=""
+                    alt=""
+                  />
                 </div>
-                
-                <Link to={`/artist/${artist._id}`} style={{ textDecoration: 'none' }}>
+
+                <Link
+                  to={`/artist/${artist._id}`}
+                  style={{ textDecoration: "none" }}
+                >
                   <p className="artist-artist-name">{artist.name}</p>
                 </Link>
               </li>
-            )
-          })
+            );
+          });
           this.artistSongList = artistSongList;
 
           // artist's background image for header
@@ -124,20 +137,13 @@ class LibraryArtists extends React.Component {
 
           return (
             <div className="library-artists-show">
-              
-                <ul className="artists-list">
-                  {artists}
-                </ul>
-            
-
+              <ul className="artists-list">{artists}</ul>
             </div>
           );
-
         }}
       </Query>
     );
   }
-
-};
+}
 
 export default LibraryArtists;
