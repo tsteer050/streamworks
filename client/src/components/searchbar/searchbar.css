@@ -31,6 +31,23 @@
 .result-list {
   color: white;
   list-style-type: none;
+  width: calc(100vw - 200px);
+  margin-right: 50px;
+}
+
+.result-list > li {
+  padding: 5px;
+}
+
+.result-list > li:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+li.search-results-playlist {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
 .top-results {
@@ -46,19 +63,43 @@
 
 .results-div {
   display: flex;
+  margin-bottom: 100px;
 }
 
 .results-img {
   height: 250px;
-  margin-left: 50px;
 }
 
 .results-photo {
   text-align: center;
+  position: relative;
+  max-height: 250px;
+  margin-left: 50px;
+}
+
+.results-photo .btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+  font-size: 16px;
+  padding: 12px;
+  border: 2px solid white;
+  cursor: pointer;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.results-photo .btn:hover {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .results-p {
   margin-top: 15px;
+  margin-left: 50px;
 }
 
 .results-p > p {
@@ -87,10 +128,6 @@
   margin: 0 5px;
 }
 
-.artist-results {
-  margin-top: 50px;
-}
-
 .results-header {
   font-weight: bold;
   margin-left: 40px;
@@ -99,6 +136,7 @@
 .artist-results-list {
   display: flex;
   list-style-type: none;
+  margin-top: 50px;
 }
 
 .artist-result-pic {
@@ -126,6 +164,16 @@
 
 .albums-list2 {
   margin-top: 50px;
+}
+
+.albums-search-list > .results-p > p {
+  color: white;
+  text-decoration: none;
+  text-align: center;
+}
+
+.albums-search-list {
+  text-decoration: none !important;
 }
 
 .albums-list2 {

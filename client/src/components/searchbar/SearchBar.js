@@ -1,14 +1,29 @@
 import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
 import { SEARCH_QUERY, FETCH_ALBUMS } from "../../graphql/queries";
 import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
+import withRedux from "../../util/redux_container";
 
 import "./searchbar.css";
+
+const playIcon = require("../../resources/play_icon.png");
+const pauseIcon = require("../../resources/pause_icon.png");
+const musicNoteIcon = require("../../resources/music_note_icon.png");
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.state = { filter: "", enter: false };
+    this.state = {
+      filter: "",
+      enter: false,
+      songList: [],
+      currentTrack: null,
+      currentIconId: null
+    };
+    this.isLoggedIn = null;
+    this.defaultTrack = null;
+    this.songList = null;
 
     this.update = this.update.bind(this);
   }
@@ -21,6 +36,63 @@ class SearchBar extends Component {
   onEnter(e) {
     if (e.key === "Enter") {
       this.setState({ enter: true });
+    }
+  }
+
+  onHover(elementId, track) {
+    if (elementId === "albumImage") {
+      let albumImage = document.getElementById(elementId);
+    }
+    let element = document.getElementById(elementId);
+
+    if (
+      this.props.state.playing === true &&
+      this.state.currentTrack === track
+    ) {
+      element.src = pauseIcon;
+    } else {
+      element.src = playIcon;
+    }
+  }
+
+  offHover(elementId, track) {
+    let element = document.getElementById(elementId);
+    if (this.state.currentTrack !== track) {
+      element.src = musicNoteIcon;
+    }
+  }
+
+  toggleSong(e, track, iconElementId) {
+    track = track || 0;
+    iconElementId = iconElementId || this.defaultTrack;
+
+    let element = document.getElementById(iconElementId);
+    let play = document.getElementById("search-play-btn");
+
+    if (track === this.state.currentTrack) {
+      if (this.props.state.playing === false) {
+        element.src = pauseIcon;
+        play.src = pauseIcon;
+        //albumImage
+        this.props.togglePlay();
+      } else {
+        element.src = playIcon;
+        play.src = playIcon;
+        this.props.togglePlay();
+      }
+    } else {
+      this.props.newPlayQueue(this.songList);
+      element.src = pauseIcon;
+      play.src = pauseIcon;
+      this.setState({ currentTrack: track });
+
+      // set previous track's icon back to music note
+      if (this.state.currentIconId)
+        document.getElementById(this.state.currentIconId).src = musicNoteIcon;
+
+      this.setState({ currentIconId: iconElementId });
+      this.props.selectTrack(track);
+      this.props.togglePlay();
     }
   }
 
@@ -60,6 +132,17 @@ class SearchBar extends Component {
                   result => result.__typename === "SongType"
                 );
 
+                // create songlist for playqueu
+                const songList = songs.map((song, idx) => {
+                  return {
+                    streamUrl: song.audio_url,
+                    trackTitle: song.title,
+                    artistName: song.album.artist.name,
+                    albumArtUrl: song.album.album_art_url
+                  };
+                });
+                this.songList = songList;
+
                 let albums = data.search.filter(
                   result => result.__typename === "AlbumType"
                 );
@@ -67,6 +150,9 @@ class SearchBar extends Component {
                 let artists = data.search.filter(
                   result => result.__typename === "ArtistType"
                 );
+
+                // create songs list from search query
+
                 return (
                   <div className="outer-div">
                     <h6 className="top-results">TOP RESULTS</h6>
@@ -80,6 +166,18 @@ class SearchBar extends Component {
                                 src={songs[0].album.artist.artist_image_url}
                                 alt="artist"
                               />
+                              <button
+                                onClick={e =>
+                                  this.toggleSong(e, 0, songs[0]._id)
+                                }
+                                class="btn"
+                              >
+                                <img
+                                  id="search-play-btn"
+                                  src={playIcon}
+                                  alt="play"
+                                />
+                              </button>
                               <div className="results-p">
                                 <p>{songs[0].title}</p>
                                 <p className="last-p">
@@ -92,27 +190,79 @@ class SearchBar extends Component {
                               </div>
                             </div>
                             <ul className="result-list">
-                              {songs.map(song => {
+                              {songs.map((song, idx) => {
                                 if (song.title) {
+                                  if (idx === 0) this.defaultTrack = song._id;
+
+                                  let songLength = null;
+                                  if (song.length % 60 >= 10) {
+                                    songLength = `${Math.floor(
+                                      parseInt(song.length) / 60
+                                    )}:${song.length % 60}`;
+                                  } else {
+                                    songLength = `${Math.floor(
+                                      parseInt(song.length) / 60
+                                    )}:0${song.length % 60}`;
+                                  }
+
                                   return (
-                                    <li key={song._id}>
-                                      {song.title}
-                                      <div className="song-p">
-                                        <p>
-                                          <Link
-                                            to={`/artist/${
-                                              song.album.artist._id
-                                            }`}
-                                          >
-                                            {song.album.artist.name}
-                                          </Link>
-                                        </p>
-                                        <span className="star">*</span>
-                                        <p>
-                                          <Link to={`/album/${song.album._id}`}>
-                                            {song.album.title}
-                                          </Link>
-                                        </p>
+                                    <li
+                                      className="search-results-playlist"
+                                      key={song._id}
+                                      onMouseOver={() => {
+                                        this.onHover(song._id, idx);
+                                      }}
+                                      onMouseOut={() => {
+                                        this.offHover(song._id, idx);
+                                      }}
+                                    >
+                                      <div className="playicon-songname">
+                                        <span
+                                          className="playicon-container"
+                                          onClick={e =>
+                                            this.toggleSong(e, idx, song._id)
+                                          }
+                                        >
+                                          <img
+                                            id={song._id}
+                                            className="playicon"
+                                            src={musicNoteIcon}
+                                            alt=""
+                                          />
+                                        </span>
+                                        <span className="song-info-container">
+                                          <span id="1"> {song.title}</span>
+
+                                          <div className="song-artist-album">
+                                            <Link
+                                              to={`/artist/${
+                                                song.album.artist._id
+                                              }`}
+                                            >
+                                              <span className="song-artist">
+                                                {song.album.artist.name}
+                                              </span>
+                                            </Link>
+                                            <span className="star">*</span>
+                                            <Link
+                                              to={`/album/${song.album._id}`}
+                                            >
+                                              <span className="song-album">
+                                                {song.album.title}
+                                              </span>
+                                            </Link>
+                                          </div>
+                                        </span>
+                                      </div>
+                                      <div className="menu-songlength">
+                                        <span className="menu">
+                                          <img
+                                            className="menu-icon"
+                                            src={require("../../resources/menu_icon.png")}
+                                            alt=""
+                                          />
+                                        </span>
+                                        <span> {songLength}</span>
                                       </div>
                                     </li>
                                   );
@@ -163,17 +313,22 @@ class SearchBar extends Component {
                             return (
                               <li>
                                 <div className="albums--photo">
-                                  <img
-                                    className="results-img"
-                                    src={album.album_art_url}
-                                    alt="artist"
-                                  />
-                                  <div className="results-p">
-                                    <p>{album.title}</p>
-                                    <p className="last-p">
-                                      {album.artist.name}
-                                    </p>
-                                  </div>
+                                  <Link
+                                    className="albums-search-list"
+                                    to={`/album/${album._id}`}
+                                  >
+                                    <img
+                                      className="results-img"
+                                      src={album.album_art_url}
+                                      alt="artist"
+                                    />
+                                    <div className="results-p">
+                                      <p>{album.title}</p>
+                                      <p className="last-p">
+                                        {album.artist.name}
+                                      </p>
+                                    </div>
+                                  </Link>
                                 </div>
                               </li>
                             );
@@ -192,4 +347,4 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+export default withRedux(SearchBar);

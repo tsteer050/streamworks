@@ -103,7 +103,7 @@
 } */
 
 .artist-loading-screen {
-  background: black;
-  height: 900px;
-  width: 100vw;
+  height: calc(100vh - 90px);
+  width: calc(100vw - 230px);
+  background-color: black;
 }
