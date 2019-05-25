@@ -2,11 +2,11 @@ import React from "react";
 import { Query } from "react-apollo";
 import { FETCH_ARTIST } from "../graphql/queries";
 import "./LibraryCSS/LibraryAlbums.css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-const playIcon = require('../resources/play_icon.png');
-const pauseIcon = require('../resources/pause_icon.png');
-const musicNoteIcon = require('../resources/music_note_icon.png');
+const playIcon = require("../resources/play_icon.png");
+const pauseIcon = require("../resources/pause_icon.png");
+const musicNoteIcon = require("../resources/music_note_icon.png");
 
 class LibraryAlbums extends React.Component {
   constructor(props) {
@@ -26,29 +26,24 @@ class LibraryAlbums extends React.Component {
     if (elementId === this.state.currentAlbum) {
       playIcon.src = this.state.playIcon;
     } else {
-      playIcon.src = require('../resources/album_play_icon.png');
+      playIcon.src = require("../resources/album_play_icon.png");
     }
   }
 
   offHover(elementId) {
-
     let element = document.getElementById(elementId);
     element.src = "";
-
   }
   toggleIcon(iconId) {
-
     if (this.props.state.playing === false) {
-      this.state.playIcon = require('../resources/album_pause_icon.png');
+      this.state.playIcon = require("../resources/album_pause_icon.png");
     } else {
-      this.state.playIcon = require('../resources/album_play_icon.png');
+      this.state.playIcon = require("../resources/album_play_icon.png");
     }
     let icon = document.getElementById(iconId);
     icon.src = this.state.playIcon;
   }
   playAlbum(e, albumId) {
-
-
     if (this.state.currentAlbum === albumId) {
       this.props.togglePlay();
       this.toggleIcon(albumId);
@@ -68,78 +63,90 @@ class LibraryAlbums extends React.Component {
     return (
       <Query query={FETCH_ARTIST} variables={{ id }}>
         {({ loading, error, data }) => {
-          if (loading) return "Loading...";
+          if (loading)
+            return (
+              <div className="library-loading">
+                <div class="lds-facebook">
+                  <div />
+                  <div />
+                  <div />
+                </div>
+              </div>
+            );
           if (error) return `Error! ${error.message}`;
           let albumSongLists = {};
 
-
           //create array of album's songs
           const albums = data.artist.albums.map((album, idx) => {
-
             albumSongLists[album._id] = album.songs.map(song => {
-
               return {
                 streamUrl: song.audio_url,
                 trackTitle: song.title,
                 artistName: data.artist.name,
                 albumArtUrl: album.album_art_url
-              }
-            })
-
+              };
+            });
 
             let songLength = null;
             var sectionStyle = {
               width: "100%",
               height: "100%",
               backgroundImage: `url(${album.album_art_url})`,
-              backgroundSize: '145px',
-
-
+              backgroundSize: "145px"
             };
-
 
             return (
               <li key={album._id} className="album-image-container">
-                <div className="album-image" style={sectionStyle} onClick={e => this.playAlbum(e, album._id)}
-                  onMouseOver={() => this.onHover(album._id, idx)} onMouseOut={() => { this.offHover(album._id, idx) }}
+                <div
+                  className="album-image"
+                  style={sectionStyle}
+                  onClick={e => this.playAlbum(e, album._id)}
+                  onMouseOver={() => this.onHover(album._id, idx)}
+                  onMouseOut={() => {
+                    this.offHover(album._id, idx);
+                  }}
                 >
-                  <img id={album._id} className="album-play-icon" src="" alt="" />
+                  <img
+                    id={album._id}
+                    className="album-play-icon"
+                    src=""
+                    alt=""
+                  />
                 </div>
-                <Link to={`/album/${album._id}`} style={{ textDecoration: 'none' }}>
-
+                <Link
+                  to={`/album/${album._id}`}
+                  style={{ textDecoration: "none" }}
+                >
                   <p className="artist-album-name">{album.title}</p>
                 </Link>
-                <Link to={`/artist/${data.artist._id}`} style={{ textDecoration: 'none' }}>
-                <p className="artist-artist-name">{data.artist.name}</p>
+                <Link
+                  to={`/artist/${data.artist._id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <p className="artist-artist-name">{data.artist.name}</p>
                 </Link>
               </li>
-            )
-          })
+            );
+          });
           this.albumSongLists = albumSongLists;
 
           // artist's background image for header
           let headerStyle = {
             backgroundImage: `url(${data.artist.artist_image_url})`,
-            backgroundSize: '100%'
+            backgroundSize: "100%"
           };
 
           return (
             <div className="library-albums-show">
               <div className="albums-section">
-                <ul className="albums-list">
-                  {albums}
-                </ul>
+                <ul className="albums-list">{albums}</ul>
               </div>
-
             </div>
           );
-
         }}
       </Query>
     );
   }
-
-};
+}
 
 export default LibraryAlbums;
-

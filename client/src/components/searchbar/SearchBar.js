@@ -47,7 +47,7 @@ class SearchBar extends Component {
                 if (loading)
                   return (
                     <div className="loading-screen">
-                      <div class="lds-facebook">
+                      <div className="lds-facebook">
                         <div />
                         <div />
                         <div />
@@ -83,7 +83,11 @@ class SearchBar extends Component {
                               <div className="results-p">
                                 <p>{songs[0].title}</p>
                                 <p className="last-p">
-                                  {songs[0].album.artist.name}
+                                  <Link
+                                    to={`/artist/${songs[0].album.artist._id}`}
+                                  >
+                                    {songs[0].album.artist.name}
+                                  </Link>
                                 </p>
                               </div>
                             </div>
@@ -91,12 +95,24 @@ class SearchBar extends Component {
                               {songs.map(song => {
                                 if (song.title) {
                                   return (
-                                    <li>
+                                    <li key={song._id}>
                                       {song.title}
                                       <div className="song-p">
-                                        <p>{song.album.artist.name}</p>
+                                        <p>
+                                          <Link
+                                            to={`/artist/${
+                                              song.album.artist._id
+                                            }`}
+                                          >
+                                            {song.album.artist.name}
+                                          </Link>
+                                        </p>
                                         <span className="star">*</span>
-                                        <p>{song.album.title}</p>
+                                        <p>
+                                          <Link to={`/album/${song.album._id}`}>
+                                            {song.album.title}
+                                          </Link>
+                                        </p>
                                       </div>
                                     </li>
                                   );
@@ -114,12 +130,14 @@ class SearchBar extends Component {
                           return (
                             <li>
                               <div className="artist-li-div">
-                                <img
-                                  className="artist-result-pic"
-                                  src={artist.artist_image_url}
-                                  alt="artist"
-                                />
-                                <p>{artist.name}</p>
+                                <Link to={`/artist/${artist._id}`}>
+                                  <img
+                                    className="artist-result-pic"
+                                    src={artist.artist_image_url}
+                                    alt="artist"
+                                  />
+                                  <p>{artist.name}</p>
+                                </Link>
                               </div>
                             </li>
                           );

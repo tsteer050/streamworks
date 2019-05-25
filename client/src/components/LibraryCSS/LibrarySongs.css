@@ -53,6 +53,11 @@
 }
 .song-artist-album {
   font-size: 14px;
+  color: lightgray;
+}
+
+.song-artist-album > a {
+  color: lightgray;
 }
 
 .songs-list {
@@ -70,7 +75,6 @@
   align-items: center;
   justify-content: space-between;
   height: 4em;
-  margin-bottom: 25px;
 }
 .songs-list > li:hover {
   background: rgba(0, 0, 0, 0.2);
@@ -80,6 +84,7 @@
 }
 .playicon-songname {
   display: inline-flex;
+  padding-left: 10px;
 }
 .playicon-container {
   margin-right: 5px;
