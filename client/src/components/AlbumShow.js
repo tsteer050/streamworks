@@ -9,12 +9,13 @@ import { Link } from "react-router-dom";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import Modal from "./Modal";
+
 import SongIndex from './index/SongIndex';
 const jwt = require("jsonwebtoken");
 
 const playIcon = require('../resources/play_icon.png');
 const pauseIcon = require('../resources/pause_icon.png');
-const musicNoteIcon = require('../resources/music_note_icon.png');
+const musicNoteIcon = require('../resources/music_note_icon.png')
 
 class AlbumShow extends React.Component {
   constructor(props) {
@@ -23,9 +24,7 @@ class AlbumShow extends React.Component {
       songList: [],
       currentTrack: null,
       currentIconId: null,
-
       user: null
-
     };
     this.isLoggedIn = null;
     this.defaultTrack = null;
@@ -44,9 +43,11 @@ class AlbumShow extends React.Component {
     this.setState({ user });
   }
 
+
   setDefaultTrack(iconId) {
     this.defaultTrack = iconId;
   }
+
   onHover(elementId, track) {
     if (elementId === "albumImage") {
       let albumImage = document.getElementById(elementId);
@@ -112,8 +113,6 @@ class AlbumShow extends React.Component {
   render() {
     const id = this.props.match.params.id;
 
-
-
     const favoriteIcon = (addUserAlbum, removeUserAlbum, albumInLibrary) => {
       if (albumInLibrary) {
         return (
@@ -175,7 +174,17 @@ class AlbumShow extends React.Component {
     return ( 
       <Query query={FETCH_ALBUM} variables={{ id }}>
         {({ loading, error, data, client }) => {          
-          if (loading) return "Loading...";
+          if (loading)
+            return (
+              <div className="library-loading artist-loading-screen">
+                <div class="lds-facebook">
+                  <div />
+                  <div />
+                  <div />
+                </div>
+              </div>
+            );
+      
           if (error) return `Error! ${error.message}`;
 
           const songList = data.album.songs.map(song => {

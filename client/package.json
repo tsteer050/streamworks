@@ -13,6 +13,7 @@
     "cors": "^2.8.5",
     "graphql-tag": "^2.10.1",
     "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-apollo": "^2.5.5",
     "react-bootstrap": "^1.0.0-beta.8",

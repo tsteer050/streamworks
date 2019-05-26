@@ -102,7 +102,16 @@ class ArtistShow extends React.Component {
     return (
       <Query query={FETCH_ARTIST} variables={{ id }}>
         {({ loading, error, data }) => {
-          if (loading) return "Loading...";
+          if (loading)
+            return (
+              <div className="library-loading artist-loading-screen">
+                <div class="lds-facebook">
+                  <div />
+                  <div />
+                  <div />
+                </div>
+              </div>
+            );
           if (error) return `Error! ${error.message}`;
           let albumSongLists = {};
 
@@ -160,7 +169,8 @@ class ArtistShow extends React.Component {
             backgroundImage: ` linear-gradient(to bottom, rgba(0, 0, 0, 0), black 70%),url(${
               data.artist.artist_image_url
             })`,
-            backgroundSize: "100%"
+            backgroundSize: "100%",
+            backgroundRepeat: "no-repeat"
           };
 
           return (
