@@ -1,8 +1,9 @@
 import React from "react";
 import { Query } from "react-apollo";
-import { FETCH_ARTIST } from "../graphql/queries";
+import { FETCH_USER_LIBRARY } from "../graphql/queries";
 import "./LibraryCSS/LibraryAlbums.css";
 import { Link } from "react-router-dom";
+const jwt = require("jsonwebtoken");
 
 const playIcon = require("../resources/play_icon.png");
 const pauseIcon = require("../resources/pause_icon.png");
@@ -15,9 +16,16 @@ class LibraryAlbums extends React.Component {
       songList: [],
       currentAlbum: null,
       currentIconId: null,
-      playIcon: null
+      playIcon: null,
+      user: null
     };
     this.albumSongLists = null;
+  }
+
+  componentDidMount() {
+    let token = localStorage.getItem("auth-token");
+    const user = jwt.decode(token);
+    this.setState({ user });
   }
 
   onHover(elementId) {
@@ -43,6 +51,7 @@ class LibraryAlbums extends React.Component {
     let icon = document.getElementById(iconId);
     icon.src = this.state.playIcon;
   }
+
   playAlbum(e, albumId) {
     if (this.state.currentAlbum === albumId) {
       this.props.togglePlay();
@@ -58,11 +67,12 @@ class LibraryAlbums extends React.Component {
   }
 
   render() {
-    const id = "5ce5bcd33d5c871355e5a3d6";
+    if (!this.state.user) return (<div></div>);
 
     return (
-      <Query query={FETCH_ARTIST} variables={{ id }}>
+      <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }}>
         {({ loading, error, data }) => {
+          
           if (loading)
             return (
               <div className="library-loading">
@@ -76,13 +86,20 @@ class LibraryAlbums extends React.Component {
           if (error) return `Error! ${error.message}`;
           let albumSongLists = {};
 
+          //render simple message if nothing in library
+          if (!data.user.albums.length) {
+            return (
+              <div className="no-albums">Your albums will go here</div>
+            )
+          }
+
           //create array of album's songs
-          const albums = data.artist.albums.map((album, idx) => {
+          const albums = data.user.albums.map((album, idx) => {
             albumSongLists[album._id] = album.songs.map(song => {
               return {
                 streamUrl: song.audio_url,
                 trackTitle: song.title,
-                artistName: data.artist.name,
+                artistName: album.artist.name,
                 albumArtUrl: album.album_art_url
               };
             });
@@ -120,21 +137,17 @@ class LibraryAlbums extends React.Component {
                   <p className="artist-album-name">{album.title}</p>
                 </Link>
                 <Link
-                  to={`/artist/${data.artist._id}`}
+                  to={`/artist/${album.artist._id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <p className="artist-artist-name">{data.artist.name}</p>
+                  <p className="artist-artist-name">{album.artist.name}</p>
                 </Link>
               </li>
             );
           });
           this.albumSongLists = albumSongLists;
 
-          // artist's background image for header
-          let headerStyle = {
-            backgroundImage: `url(${data.artist.artist_image_url})`,
-            backgroundSize: "100%"
-          };
+        
 
           return (
             <div className="library-albums-show">

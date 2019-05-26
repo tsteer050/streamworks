@@ -133,7 +133,6 @@ export const FETCH_USER_LIBRARY = gql`
 
   query FetchUserLibrary($id: ID!) {
     user(_id: $id) {
-
       _id
       albums {
          _id
@@ -144,6 +143,10 @@ export const FETCH_USER_LIBRARY = gql`
           title
           length
           audio_url
+        }
+        artist {
+          _id
+          name
         }
       }
       artists {
@@ -158,6 +161,16 @@ export const FETCH_USER_LIBRARY = gql`
         title
         length
         audio_url
+        artist {
+          _id
+          name
+          artist_image_url
+        }
+        album {
+          _id
+          title
+          album_art_url
+        }
       }
       playlists {
         _id
@@ -181,7 +194,37 @@ export const FETCH_USER_LIBRARY = gql`
 //          _id
 //         title
 //         album_art_url
+//         songs {
+//           _id
+//           title
+//           length
+//           audio_url
+//         }
+//         artist {
+//           name
+//         }
 //       }
+//       artists {
+//         _id
+//         name
+//         genre
+//         bio
+//         artist_image_url
+//       }
+//       songs {
+//         _id
+//         title
+//         length
+//         audio_url
+//         album {
+//           _id
+//         }
+//         artist {
+//           _id
+//           name
+//         }
+//       }
+      
 //     }
 //   }
 // `;

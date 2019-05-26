@@ -30,6 +30,7 @@ class AlbumShow extends React.Component {
     this.defaultTrack = null;
     this.songList = null;
 
+    this.setDefaultTrack = this.setDefaultTrack.bind(this);
     this.onHover = this.onHover.bind(this);
     this.offHover = this.offHover.bind(this);
     this.toggleSong = this.toggleSong.bind(this);
@@ -40,6 +41,11 @@ class AlbumShow extends React.Component {
     let token = localStorage.getItem("auth-token");
     const user = jwt.decode(token);
     this.setState({ user });
+  }
+
+
+  setDefaultTrack(iconId) {
+    this.defaultTrack = iconId;
   }
 
   onHover(elementId, track) {
@@ -95,7 +101,12 @@ class AlbumShow extends React.Component {
 
       this.setState({ currentIconId: iconElementId });
       this.props.selectTrack(track);
+      if(this.props.state.playing === false) {
+        this.props.togglePlay();
+      } else {
       this.props.togglePlay();
+      this.props.togglePlay();
+      }
     }
   }
 
@@ -121,7 +132,6 @@ class AlbumShow extends React.Component {
         return (
           <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }}>
             {({ loading, error, data, client }) => {
-              debugger
               if (loading) return "Loading...";
               if (error) return `Error! ${error.message}`;
               let albumInLibrary;
@@ -188,7 +198,7 @@ class AlbumShow extends React.Component {
           });
           this.songList = songList;
           
-          const songIndex = <SongIndex songs={data.album.songs} onHover={this.onHover} offHover={this.offHover} toggleSong={this.toggleSong} />;
+          const songIndex = <SongIndex songs={data.album.songs} setDefaultTrack={this.setDefaultTrack} onHover={this.onHover} offHover={this.offHover} toggleSong={this.toggleSong} />;
 
           return (
             <div className="album-show">
