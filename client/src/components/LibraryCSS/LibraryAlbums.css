@@ -4,3 +4,8 @@
   position: relative;
   top: 100px;
 }
+.no-albums{
+  font-size: 50px;
+    color: white;
+    margin-top: 85px;
+}

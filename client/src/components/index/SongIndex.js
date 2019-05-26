@@ -12,7 +12,7 @@ class SongIndex extends React.Component {
     const { songs, onHover, offHover, toggleSong } = this.props;
 
     const mappedSongs = songs.map((song, idx) => {
-      if (idx === 0) this.defaultTrack = song._id;
+      if (idx === 0) this.props.setDefaultTrack(song._id);
 
       let songLength = null;
       if ((song.length % 60) >= 10) {

@@ -36,8 +36,8 @@ class AWSSoundPlayer extends Component {
 
   componentDidUpdate() {
     if (this.props.state.playQueue.length > 0) {
-      const track = this.props.state.playQueue[this.props.state.currentTrack];
-      this.props.soundCloudAudio._track.stream_url = track.streamUrl;
+      const track = this.props.state.currentTrack;
+      this.props.soundCloudAudio._playlistIndex = track;
     }
     if (this.props.state.playing) {
       this.props.soundCloudAudio.play();
@@ -48,6 +48,14 @@ class AWSSoundPlayer extends Component {
   
 
   render() {
+    let playList = null;
+    if (this.props.state.playQueue.length) {
+      playList = this.props.state.playQueue;
+      this.props.soundCloudAudio._playlist = {
+        tracks: playList
+      };
+    }
+      
     const { trackTitle, artistName } = this.props;
     return (
       <div className="p1 mb3 mt1 flex flex-center bg-darken-1 orange rounded">
