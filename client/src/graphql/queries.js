@@ -130,11 +130,13 @@ export const FETCH_SONG = gql`
 `;
 
 export const FETCH_USER_LIBRARY = gql`
-  query FetchUser($id: ID!) {
-    user(id: $id) {
+
+  query FetchUserLibrary($id: ID!) {
+    user(_id: $id) {
+
       _id
       albums {
-        _id
+         _id
         title
         album_art_url
         songs {
@@ -170,6 +172,19 @@ export const FETCH_USER_LIBRARY = gql`
     }
   }
 `;
+
+// export const FETCH_USER_LIBRARY = gql`
+//   query FetchUserLibrary($id: ID!) {
+//     user(_id: $id) {
+//       _id
+//       albums {
+//          _id
+//         title
+//         album_art_url
+//       }
+//     }
+//   }
+// `;
 
 export const FETCH_PLAYLIST = gql`
   query FetchPlaylist($id: ID!) {

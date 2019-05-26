@@ -1,15 +1,21 @@
 import React, { Fragment } from "react";
-import { Query } from "react-apollo";
-import { FETCH_ALBUM, FETCH_USER_LIBRARY } from "../graphql/queries";
+
+import { Query, Mutation } from "react-apollo";
+import { FETCH_ALBUM, IS_LOGGED_IN, FETCH_USER_LIBRARY } from "../graphql/queries";
+import { ADD_USER_ALBUM, REMOVE_USER_ALBUM } from '../graphql/mutations';
+
 import "./AlbumShow.css";
 import { Link } from "react-router-dom";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import Modal from "./Modal";
 
-const playIcon = require("../resources/play_icon.png");
-const pauseIcon = require("../resources/pause_icon.png");
-const musicNoteIcon = require("../resources/music_note_icon.png");
+import SongIndex from './index/SongIndex';
+const jwt = require("jsonwebtoken");
+
+const playIcon = require('../resources/play_icon.png');
+const pauseIcon = require('../resources/pause_icon.png');
+const musicNoteIcon = require('../resources/music_note_icon.png')
 
 class AlbumShow extends React.Component {
   constructor(props) {
@@ -17,11 +23,23 @@ class AlbumShow extends React.Component {
     this.state = {
       songList: [],
       currentTrack: null,
-      currentIconId: null
+      currentIconId: null,
+      user: null
     };
     this.isLoggedIn = null;
     this.defaultTrack = null;
     this.songList = null;
+
+    this.onHover = this.onHover.bind(this);
+    this.offHover = this.offHover.bind(this);
+    this.toggleSong = this.toggleSong.bind(this);
+
+  }
+
+  componentDidMount() {
+    let token = localStorage.getItem("auth-token");
+    const user = jwt.decode(token);
+    this.setState({ user });
   }
 
   onHover(elementId, track) {
@@ -84,11 +102,68 @@ class AlbumShow extends React.Component {
   render() {
     const id = this.props.match.params.id;
 
-    // const userId = this.state.user;
+    const favoriteIcon = (addUserAlbum, removeUserAlbum, albumInLibrary) => {
+      if (albumInLibrary) {
+        return (
+          <img onClick={e => removeUserAlbum({ variables: { userId: this.state.user.id, albumId: id } })} className="favorite" src={require('../resources/favorite_filled.png')} alt="Remove from library" />
+        )
+      }
+      return (
+        <img onClick={e => addUserAlbum({ variables: { userId: this.state.user.id, albumId: id } })} className="favorite" src={require('../resources/favorite_outline.png')} alt="Add to library" />
+      )
+    };
 
-    return (
+    
+
+    let favoriteButton;
+    if (this.state.user) {
+      favoriteButton = (album) => {
+        return (
+          <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }}>
+            {({ loading, error, data, client }) => {
+              debugger
+              if (loading) return "Loading...";
+              if (error) return `Error! ${error.message}`;
+              let albumInLibrary;
+              data.user.albums.some((userAlbum) => userAlbum._id === album._id) ? albumInLibrary = true : albumInLibrary = false;
+              return (
+                <Mutation 
+                  mutation={ADD_USER_ALBUM}
+                  >
+                  {addUserAlbum => {
+                    return (
+                      <Mutation
+                        mutation={REMOVE_USER_ALBUM}
+                      >
+                        {removeUserAlbum => {
+                          return (
+                            <Fragment>
+                              {favoriteIcon(addUserAlbum, removeUserAlbum, albumInLibrary)}
+                            </Fragment>
+                          )
+                        }}
+                      </Mutation>
+                    )
+                  }}
+                </Mutation>
+              )
+            }}
+          </Query>
+        )
+      }
+    } else {
+      favoriteButton = () => {
+        return ( 
+          <img className="favorite" src={require('../resources/favorite_outline.png')} alt="" />
+        )
+      }
+    }
+
+    
+
+    return ( 
       <Query query={FETCH_ALBUM} variables={{ id }}>
-        {({ loading, error, data, client }) => {
+        {({ loading, error, data, client }) => {          
           if (loading)
             return (
               <div className="library-loading artist-loading-screen">
@@ -99,6 +174,7 @@ class AlbumShow extends React.Component {
                 </div>
               </div>
             );
+      
           if (error) return `Error! ${error.message}`;
 
           const songList = data.album.songs.map(song => {
@@ -107,62 +183,12 @@ class AlbumShow extends React.Component {
               trackTitle: song.title,
               artistName: data.album.artist.name,
               albumArtUrl: data.album.album_art_url
-            };
+
+            }; 
           });
           this.songList = songList;
-          // this.props.newPlayQueue(songList)
-
-          //create array of album's songs
-          const songs = data.album.songs.map((song, idx) => {
-            if (idx === 0) this.defaultTrack = song._id;
-
-            let songLength = null;
-            if (song.length % 60 >= 10) {
-              songLength = `${Math.floor(
-                parseInt(song.length) / 60
-              )}:${song.length % 60}`;
-            } else {
-              songLength = `${Math.floor(
-                parseInt(song.length) / 60
-              )}:0${song.length % 60}`;
-            }
-            return (
-              <li
-                key={song._id}
-                onMouseOver={() => {
-                  this.onHover(song._id, idx);
-                }}
-                onMouseOut={() => {
-                  this.offHover(song._id, idx);
-                }}
-              >
-                <div className="playicon-songname">
-                  <span
-                    className="playicon-container"
-                    onClick={e => this.toggleSong(e, idx, song._id)}
-                  >
-                    <img
-                      id={song._id}
-                      className="playicon"
-                      src={require("../resources/music_note_icon.png")}
-                      alt=""
-                    />
-                  </span>
-                  <span id="1"> {song.title}</span>
-                </div>
-                <div className="menu-songlength">
-                  <span className="menu">
-                    <img
-                      className="menu-icon"
-                      src={require("../resources/menu_icon.png")}
-                      alt=""
-                    />
-                  </span>
-                  <span> {songLength}</span>
-                </div>
-              </li>
-            );
-          });
+          
+          const songIndex = <SongIndex songs={data.album.songs} onHover={this.onHover} offHover={this.offHover} toggleSong={this.toggleSong} />;
 
           return (
             <div className="album-show">
@@ -202,23 +228,14 @@ class AlbumShow extends React.Component {
                 <div className="more-info">
                   <p>{`${data.album.songs.length} SONGS`}</p>
                 </div>
-
                 <div className="more-buttons">
-                  <img
-                    className="favorite"
-                    src={require("../resources/favorites_icon.png")}
-                    alt=""
-                  />
-                  <img
-                    className="menu-icon"
-                    src={require("../resources/menu_icon.png")}
-                    alt=""
-                  />
+                   {favoriteButton(data.album)}
+                  <img className="menu-icon" src={require('../resources/menu_icon.png')} alt=""/>
                 </div>
               </div>
+              <div className="right-column">      
+                {songIndex}
 
-              <div className="right-column">
-                <ul className="songs-list">{songs}</ul>
               </div>
             </div>
           );

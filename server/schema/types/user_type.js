@@ -7,6 +7,7 @@ const {
   GraphQLList,
   GraphQLBoolean
 } = graphql;
+const User = mongoose.model('users');
 
 const UserType = new GraphQLObjectType({
   name: "UserType",
