@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Query } from "react-apollo";
-import { FETCH_ALBUM, FETCH_LIBRARY } from "../graphql/queries";
+import { FETCH_ALBUM, FETCH_USER_LIBRARY } from "../graphql/queries";
 import "./LibraryCSS/LibrarySongs.css";
+const jwt = require("jsonwebtoken");
 
 const playIcon = require("../resources/play_icon.png");
 const pauseIcon = require("../resources/pause_icon.png");
@@ -14,11 +15,18 @@ class LibrarySongs extends React.Component {
     this.state = {
       songList: [],
       currentTrack: null,
-      currentIconId: null
+      currentIconId: null,
+      user: null
     };
     this.isLoggedIn = null;
     this.defaultTrack = null;
     this.songList = null;
+  }
+
+  componentDidMount() {
+    let token = localStorage.getItem("auth-token");
+    const user = jwt.decode(token);
+    this.setState({ user });
   }
 
   onHover(elementId, track) {
@@ -75,10 +83,10 @@ class LibrarySongs extends React.Component {
   }
 
   render() {
-    const id = "5ce5bcd33d5c871355e5a3d9";
+    if(!this.state.user) return (<div></div>);
 
     return (
-      <Query query={FETCH_ALBUM} variables={{ id }}>
+      <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }}>
         {({ loading, error, data }) => {
           if (loading)
             return (
@@ -91,20 +99,23 @@ class LibrarySongs extends React.Component {
               </div>
             );
           if (error) return `Error! ${error.message}`;
-
-          const songList = data.album.songs.map(song => {
+            
+          if(!data.user.songs.length) {
+            return (<div className="no-songs">Your songs will appear here</div>)
+          }
+          const songList = data.user.songs.map(song => {
             return {
               streamUrl: song.audio_url,
               trackTitle: song.title,
-              artistName: data.album.artist.name,
-              albumArtUrl: data.album.album_art_url
+              artistName: song.artist.name,
+              albumArtUrl: song.album.album_art_url
             };
           });
           this.songList = songList;
           // this.props.newPlayQueue(songList)
 
           //create array of album's songs
-          const songs = data.album.songs.map((song, idx) => {
+          const songs = data.user.songs.map((song, idx) => {
             if (idx === 0) this.defaultTrack = song._id;
 
             let songLength = null;
@@ -143,14 +154,14 @@ class LibrarySongs extends React.Component {
                     <span id="1"> {song.title}</span>
 
                     <div className="song-artist-album">
-                      <Link to={`/artist/${data.album.artist._id}`}>
+                      <Link to={`/artist/${song.album.artist._id}`}>
                         <span className="song-artist">
-                          {data.album.artist.name}
+                          {song.artist.name}
                         </span>
                       </Link>
                       <span> . </span>
-                      <Link to={`/album/${data.album._id}`}>
-                        <span className="song-album">{data.album.title}</span>
+                      <Link to={`/album/${song.album._id}`}>
+                        <span className="song-album">{song.album.title}</span>
                       </Link>
                     </div>
                   </span>

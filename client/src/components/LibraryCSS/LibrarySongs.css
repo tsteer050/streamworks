@@ -3,7 +3,11 @@
   margin-right: 30px;
   width: calc(90vw - 230px);
 }
-
+.no-songs{
+  font-size: 50px;
+    color: white;
+    margin-top: 85px;
+}
 /* @media all and (max-width: 899px) {
  .album-show {
   display: flex;

@@ -24,7 +24,7 @@ class LoggedIn extends React.Component {
     let token = localStorage.getItem("auth-token");
 
     const user = jwt.decode(token);
-    // debugger;
+    
     this.setState({ user });
   }
 
@@ -152,7 +152,6 @@ class Sidebar extends React.Component {
                 {({ data }) => {
                   // if we have some one logged in we show them a logout button
                   if (data.isLoggedIn) {
-                    // debugger;
                     return (
                       <LoggedIn client={client} history={this.props.history} />
                     );

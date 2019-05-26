@@ -1,10 +1,11 @@
 import React from "react";
 import { Query } from "react-apollo";
-import { FETCH_ARTIST, FETCH_ARTISTS } from "../graphql/queries";
+import { FETCH_USER_LIBRARY } from "../graphql/queries";
 import "./LibraryCSS/LibraryAlbums.css";
 import "./LibraryCSS/LibraryArtists.css";
-
 import { Link } from "react-router-dom";
+
+const jwt = require("jsonwebtoken");
 
 const playIcon = require("../resources/play_icon.png");
 const pauseIcon = require("../resources/pause_icon.png");
@@ -17,9 +18,16 @@ class LibraryArtists extends React.Component {
       songList: [],
       currentAlbum: null,
       currentIconId: null,
-      playIcon: null
+      playIcon: null,
+      user: null
     };
     this.artistSongList = null;
+  }
+
+  componentDidMount() {
+    let token = localStorage.getItem("auth-token");
+    const user = jwt.decode(token);
+    this.setState({ user });
   }
 
   onHover(elementId) {
@@ -60,10 +68,10 @@ class LibraryArtists extends React.Component {
   }
 
   render() {
-    const id = "5ce5bcd33d5c871355e5a3d6";
+    if (!this.state.user) return (<div></div>);
 
     return (
-      <Query query={FETCH_ARTISTS}>
+      <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }}>
         {({ loading, error, data }) => {
           if (loading)
             return (
@@ -77,9 +85,16 @@ class LibraryArtists extends React.Component {
             );
           if (error) return `Error! ${error.message}`;
           let artistSongList = {};
+              debugger
+          //render simple message if nothing in library
+          if (!data.user.artists.length) {
+            debugger
+            return (
+              <div className="no-artists">Your artists will go here</div>
+            )
+          }
 
-          //create array of album's songs
-          const artists = data.artists.map((artist, idx) => {
+          const artists = data.user.artists.map((artist, idx) => {
             //   artistList[album._id] = album.songs.map(song => {
 
             //     return {
