@@ -213,9 +213,12 @@ export const SEARCH_QUERY = gql`
       ... on SongType {
         _id
         title
+        audio_url
+        length
         album {
           _id
           title
+          album_art_url
           artist {
             _id
             name
@@ -230,6 +233,7 @@ export const SEARCH_QUERY = gql`
         __typename
         album_art_url
         artist {
+          _id
           name
         }
       }
@@ -237,10 +241,6 @@ export const SEARCH_QUERY = gql`
         _id
         name
         artist_image_url
-        __typename
-      }
-      ... on PlaylistType {
-        title
         __typename
       }
     }

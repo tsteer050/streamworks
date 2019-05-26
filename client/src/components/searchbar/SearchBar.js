@@ -1,27 +1,104 @@
 import React, { Component, Fragment } from "react";
-import { SEARCH_QUERY, FETCH_ALBUMS } from "../../graphql/queries";
+import { debounce } from "lodash";
+import { SEARCH_QUERY } from "../../graphql/queries";
 import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
+import withRedux from "../../util/redux_container";
 
 import "./searchbar.css";
+
+const playIcon = require("../../resources/play_icon.png");
+const pauseIcon = require("../../resources/pause_icon.png");
+const musicNoteIcon = require("../../resources/music_note_icon.png");
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.state = { filter: "", enter: false };
+    this.state = {
+      filter: "",
+      currentSong: null,
+      songList: [],
+      currentTrack: null,
+      currentIconId: null
+    };
+    this.isLoggedIn = null;
+    this.defaultTrack = null;
+    this.songList = null;
 
     this.update = this.update.bind(this);
+    this.setCurrentSong = this.setCurrentSong.bind(this);
   }
 
-  update(e) {
-    e.preventDefault();
-    this.setState({ filter: e.target.value });
-  }
+  update = debounce(text => {
+    this.setState({ filter: text });
+  }, 1000);
 
-  onEnter(e) {
-    if (e.key === "Enter") {
-      this.setState({ enter: true });
+  onHover(elementId, track) {
+    let element = document.getElementById(elementId);
+
+    if (
+      this.props.state.playing === true &&
+      this.state.currentTrack === track
+    ) {
+      element.src = pauseIcon;
+    } else {
+      element.src = playIcon;
     }
+  }
+
+  offHover(elementId, track) {
+    let element = document.getElementById(elementId);
+    if (this.state.currentTrack !== track) {
+      element.src = musicNoteIcon;
+    }
+  }
+
+  toggleSong(e, track, song) {
+    track = track || 0;
+    let iconElementId = song._id || this.defaultTrack;
+
+    let element = document.getElementById(iconElementId);
+    let play = document.getElementById("search-play-btn");
+
+    if (track === this.state.currentTrack) {
+      if (this.props.state.playing === false) {
+        element.src = pauseIcon;
+        play.src = pauseIcon;
+        //albumImage
+        this.props.togglePlay();
+      } else {
+        element.src = playIcon;
+        play.src = playIcon;
+        this.props.togglePlay();
+      }
+    } else {
+      this.props.newPlayQueue(this.songList);
+      element.src = pauseIcon;
+      play.src = pauseIcon;
+      this.setState({ currentTrack: track });
+
+      // set previous track's icon back to music note
+      if (this.state.currentIconId) {
+        document.getElementById(this.state.currentIconId).src = musicNoteIcon;
+      }
+      this.setState({ currentIconId: iconElementId });
+      this.props.selectTrack(track);
+      this.props.togglePlay();
+    }
+    // this.setState({ currentSong: song });
+    this.setCurrentSong(song);
+  }
+
+  setCurrentSong(song) {
+    this.setState({ currentSong: song }, () => {
+      let img = document.getElementById("results-img");
+      let title = document.getElementById("results-title");
+      let artist = document.getElementById("results-artist-name");
+
+      img.src = song.album.album_art_url;
+      title.innerText = song.title;
+      artist.innerText = song.album.artist.name;
+    });
   }
 
   render() {
@@ -29,21 +106,19 @@ class SearchBar extends Component {
       <div className="search-div">
         <div className="input-header">
           <input
-            onKeyPress={this.onEnter.bind(this)}
-            onChange={this.update}
+            onChange={e => this.update(e.target.value)}
             type="text"
             className="input-box"
             placeholder="Start Typing . . ."
           />
         </div>
         <section className="search-results2">
-          {this.state.enter ? (
+          {this.state.filter ? (
             <Query
               query={SEARCH_QUERY}
               variables={{ filter: this.state.filter }}
             >
               {({ loading, error, data }) => {
-                console.log("data", data);
                 if (loading)
                   return (
                     <div className="loading-screen">
@@ -60,6 +135,18 @@ class SearchBar extends Component {
                   result => result.__typename === "SongType"
                 );
 
+                // create songlist for playqueu
+                const songList = songs.map((song, idx) => {
+                  return {
+                    streamUrl: song.audio_url,
+                    trackTitle: song.title,
+                    artistName: song.album.artist.name,
+                    albumArtUrl: song.album.album_art_url
+                  };
+                });
+
+                this.songList = songList;
+
                 let albums = data.search.filter(
                   result => result.__typename === "AlbumType"
                 );
@@ -67,6 +154,7 @@ class SearchBar extends Component {
                 let artists = data.search.filter(
                   result => result.__typename === "ArtistType"
                 );
+
                 return (
                   <div className="outer-div">
                     <h6 className="top-results">TOP RESULTS</h6>
@@ -76,43 +164,122 @@ class SearchBar extends Component {
                           <Fragment>
                             <div className="results-photo">
                               <img
+                                id="results-img"
                                 className="results-img"
                                 src={songs[0].album.artist.artist_image_url}
                                 alt="artist"
                               />
+                              <button
+                                onClick={e =>
+                                  this.toggleSong(e, 0, songs[0]._id)
+                                }
+                                className="btn"
+                              >
+                                <img
+                                  id="search-play-btn"
+                                  src={playIcon}
+                                  alt="play"
+                                />
+                              </button>
                               <div className="results-p">
-                                <p>{songs[0].title}</p>
+                                <p id="results-title">{songs[0].title}</p>
                                 <p className="last-p">
-                                  <Link
-                                    to={`/artist/${songs[0].album.artist._id}`}
-                                  >
-                                    {songs[0].album.artist.name}
-                                  </Link>
+                                  {this.state.currentSong ? (
+                                    <Link
+                                      id="results-artist-name"
+                                      to={`/artist/${
+                                        this.state.currentSong.album.artist._id
+                                      }`}
+                                    >
+                                      {this.state.currentSong.album.artist.name}
+                                    </Link>
+                                  ) : (
+                                    <Link
+                                      id="results-artist-name"
+                                      to={`/artist/${
+                                        songs[0].album.artist._id
+                                      }`}
+                                    >
+                                      {songs[0].album.artist.name}
+                                    </Link>
+                                  )}
                                 </p>
                               </div>
                             </div>
                             <ul className="result-list">
-                              {songs.map(song => {
+                              {songs.map((song, idx) => {
                                 if (song.title) {
+                                  if (idx === 0) this.defaultTrack = song._id;
+
+                                  let songLength = null;
+                                  if (song.length % 60 >= 10) {
+                                    songLength = `${Math.floor(
+                                      parseInt(song.length) / 60
+                                    )}:${song.length % 60}`;
+                                  } else {
+                                    songLength = `${Math.floor(
+                                      parseInt(song.length) / 60
+                                    )}:0${song.length % 60}`;
+                                  }
+
                                   return (
-                                    <li key={song._id}>
-                                      {song.title}
-                                      <div className="song-p">
-                                        <p>
-                                          <Link
-                                            to={`/artist/${
-                                              song.album.artist._id
-                                            }`}
-                                          >
-                                            {song.album.artist.name}
-                                          </Link>
-                                        </p>
-                                        <span className="star">*</span>
-                                        <p>
-                                          <Link to={`/album/${song.album._id}`}>
-                                            {song.album.title}
-                                          </Link>
-                                        </p>
+                                    <li
+                                      className="search-results-playlist"
+                                      key={song._id}
+                                      onMouseOver={() => {
+                                        this.onHover(song._id, idx);
+                                      }}
+                                      onMouseOut={() => {
+                                        this.offHover(song._id, idx);
+                                      }}
+                                    >
+                                      <div className="playicon-songname">
+                                        <span
+                                          className="playicon-container"
+                                          onClick={e =>
+                                            this.toggleSong(e, idx, song)
+                                          }
+                                        >
+                                          <img
+                                            id={song._id}
+                                            className="playicon"
+                                            src={musicNoteIcon}
+                                            alt=""
+                                          />
+                                        </span>
+                                        <span className="song-info-container">
+                                          <span id="1"> {song.title}</span>
+
+                                          <div className="song-artist-album">
+                                            <Link
+                                              to={`/artist/${
+                                                song.album.artist._id
+                                              }`}
+                                            >
+                                              <span className="song-artist">
+                                                {song.album.artist.name}
+                                              </span>
+                                            </Link>
+                                            <span className="star">*</span>
+                                            <Link
+                                              to={`/album/${song.album._id}`}
+                                            >
+                                              <span className="song-album">
+                                                {song.album.title}
+                                              </span>
+                                            </Link>
+                                          </div>
+                                        </span>
+                                      </div>
+                                      <div className="menu-songlength">
+                                        <span className="menu">
+                                          <img
+                                            className="menu-icon"
+                                            src={require("../../resources/menu_icon.png")}
+                                            alt=""
+                                          />
+                                        </span>
+                                        <span> {songLength}</span>
                                       </div>
                                     </li>
                                   );
@@ -125,57 +292,81 @@ class SearchBar extends Component {
                     </div>
                     <div className="artist-results">
                       <h1 className="results-header">Artists</h1>
-                      <ul className="artist-results-list">
-                        {artists.map(artist => {
-                          return (
-                            <li>
-                              <div className="artist-li-div">
-                                <Link to={`/artist/${artist._id}`}>
-                                  <img
-                                    className="artist-result-pic"
-                                    src={artist.artist_image_url}
-                                    alt="artist"
-                                  />
-                                  <p>{artist.name}</p>
-                                </Link>
-                              </div>
-                            </li>
-                          );
-                        })}
-                      </ul>
+                      {artists.length === 0 ? (
+                        <div className="no-results">
+                          <h4>No results</h4>
+                        </div>
+                      ) : (
+                        <ul className="artist-results-list">
+                          {artists.map(artist => {
+                            return (
+                              <li>
+                                <div className="artist-li-div">
+                                  <Link to={`/artist/${artist._id}`}>
+                                    <img
+                                      className="artist-result-pic"
+                                      src={artist.artist_image_url}
+                                      alt="artist"
+                                    />
+                                    <p>{artist.name}</p>
+                                  </Link>
+                                </div>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      )}
                     </div>
 
                     <div className="album-results">
                       <h1 className="albums-header2">Albums</h1>
-                      <ul className="albums-list2">
-                        {albums.map(album => {
-                          return (
-                            <li>
-                              <div className="albums--photo">
-                                <img
-                                  className="results-img"
-                                  src={album.album_art_url}
-                                  alt="artist"
-                                />
-                                <div className="results-p">
-                                  <p>{album.title}</p>
-                                  <p className="last-p">{album.artist.name}</p>
+                      {albums.length === 0 ? (
+                        <div className="no-results">
+                          <h4>No results</h4>
+                        </div>
+                      ) : (
+                        <ul className="albums-list2">
+                          {albums.map(album => {
+                            return (
+                              <li>
+                                <div className="albums--photo">
+                                  <Link
+                                    className="albums-search-list"
+                                    to={`/album/${album._id}`}
+                                  >
+                                    <img
+                                      className="results-img"
+                                      src={album.album_art_url}
+                                      alt="artist"
+                                    />
+                                    <div className="results-p">
+                                      <p>{album.title}</p>
+                                      <p className="last-p">
+                                        {album.artist.name}
+                                      </p>
+                                    </div>
+                                  </Link>
                                 </div>
-                              </div>
-                            </li>
-                          );
-                        })}
-                      </ul>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      )}
                     </div>
                   </div>
                 );
               }}
             </Query>
-          ) : null}
+          ) : (
+            <div className="search-here">
+              <h3>Search StreamWorks</h3>
+              <p>Find your favorite songs, artists, and playlists</p>
+            </div>
+          )}
         </section>
       </div>
     );
   }
 }
 
-export default SearchBar;
+export default withRedux(SearchBar);
