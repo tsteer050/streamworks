@@ -154,7 +154,7 @@ class SearchBar extends Component {
                 let artists = data.search.filter(
                   result => result.__typename === "ArtistType"
                 );
-
+                 debugger 
                 return (
                   <div className="outer-div">
                     <h6 className="top-results">TOP RESULTS</h6>
