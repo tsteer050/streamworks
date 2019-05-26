@@ -78,9 +78,9 @@ class SearchBar extends Component {
       this.setState({ currentTrack: track });
 
       // set previous track's icon back to music note
-      if (this.state.currentIconId)
+      if (this.state.currentIconId) {
         document.getElementById(this.state.currentIconId).src = musicNoteIcon;
-
+      }
       this.setState({ currentIconId: iconElementId });
       this.props.selectTrack(track);
       this.props.togglePlay();
@@ -184,12 +184,25 @@ class SearchBar extends Component {
                               <div className="results-p">
                                 <p id="results-title">{songs[0].title}</p>
                                 <p className="last-p">
-                                  <Link
-                                    id="results-artist-name"
-                                    to={`/artist/${songs[0].album.artist._id}`}
-                                  >
-                                    {songs[0].album.artist.name}
-                                  </Link>
+                                  {this.state.currentSong ? (
+                                    <Link
+                                      id="results-artist-name"
+                                      to={`/artist/${
+                                        this.state.currentSong.album.artist._id
+                                      }`}
+                                    >
+                                      {this.state.currentSong.album.artist.name}
+                                    </Link>
+                                  ) : (
+                                    <Link
+                                      id="results-artist-name"
+                                      to={`/artist/${
+                                        songs[0].album.artist._id
+                                      }`}
+                                    >
+                                      {songs[0].album.artist.name}
+                                    </Link>
+                                  )}
                                 </p>
                               </div>
                             </div>
