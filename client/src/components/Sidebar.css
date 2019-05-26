@@ -159,3 +159,7 @@ a > h3 {
   display: flex;
   align-items: center;
 }
+
+.str-header {
+  margin-bottom: 0;
+}

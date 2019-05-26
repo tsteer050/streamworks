@@ -67,7 +67,9 @@ li.search-results-playlist {
 }
 
 .results-img {
-  height: 250px;
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
 }
 
 .results-photo {

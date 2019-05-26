@@ -16,7 +16,7 @@ class SearchBar extends Component {
     super(props);
     this.state = {
       filter: "",
-      enter: false,
+      currentSong: null,
       songList: [],
       currentTrack: null,
       currentIconId: null
@@ -26,6 +26,7 @@ class SearchBar extends Component {
     this.songList = null;
 
     this.update = this.update.bind(this);
+    this.setCurrentSong = this.setCurrentSong.bind(this);
   }
 
   update = debounce(text => {
@@ -52,9 +53,9 @@ class SearchBar extends Component {
     }
   }
 
-  toggleSong(e, track, iconElementId) {
+  toggleSong(e, track, song) {
     track = track || 0;
-    iconElementId = iconElementId || this.defaultTrack;
+    let iconElementId = song._id || this.defaultTrack;
 
     let element = document.getElementById(iconElementId);
     let play = document.getElementById("search-play-btn");
@@ -84,6 +85,20 @@ class SearchBar extends Component {
       this.props.selectTrack(track);
       this.props.togglePlay();
     }
+    // this.setState({ currentSong: song });
+    this.setCurrentSong(song);
+  }
+
+  setCurrentSong(song) {
+    this.setState({ currentSong: song }, () => {
+      let img = document.getElementById("results-img");
+      let title = document.getElementById("results-title");
+      let artist = document.getElementById("results-artist-name");
+
+      img.src = song.album.album_art_url;
+      title.innerText = song.title;
+      artist.innerText = song.album.artist.name;
+    });
   }
 
   render() {
@@ -149,6 +164,7 @@ class SearchBar extends Component {
                           <Fragment>
                             <div className="results-photo">
                               <img
+                                id="results-img"
                                 className="results-img"
                                 src={songs[0].album.artist.artist_image_url}
                                 alt="artist"
@@ -157,7 +173,7 @@ class SearchBar extends Component {
                                 onClick={e =>
                                   this.toggleSong(e, 0, songs[0]._id)
                                 }
-                                class="btn"
+                                className="btn"
                               >
                                 <img
                                   id="search-play-btn"
@@ -166,9 +182,10 @@ class SearchBar extends Component {
                                 />
                               </button>
                               <div className="results-p">
-                                <p>{songs[0].title}</p>
+                                <p id="results-title">{songs[0].title}</p>
                                 <p className="last-p">
                                   <Link
+                                    id="results-artist-name"
                                     to={`/artist/${songs[0].album.artist._id}`}
                                   >
                                     {songs[0].album.artist.name}
@@ -207,7 +224,7 @@ class SearchBar extends Component {
                                         <span
                                           className="playicon-container"
                                           onClick={e =>
-                                            this.toggleSong(e, idx, song._id)
+                                            this.toggleSong(e, idx, song)
                                           }
                                         >
                                           <img
