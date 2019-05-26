@@ -21,7 +21,7 @@ class SearchBar extends Component {
       currentTrack: null,
       currentIconId: null
     };
-    this.isLoggedIn = null;
+
     this.defaultTrack = null;
     this.songList = null;
 
@@ -64,7 +64,7 @@ class SearchBar extends Component {
       if (this.props.state.playing === false) {
         element.src = pauseIcon;
         play.src = pauseIcon;
-        //albumImage
+
         this.props.togglePlay();
       } else {
         element.src = playIcon;
@@ -85,7 +85,7 @@ class SearchBar extends Component {
       this.props.selectTrack(track);
       this.props.togglePlay();
     }
-    // this.setState({ currentSong: song });
+
     this.setCurrentSong(song);
   }
 
@@ -102,6 +102,7 @@ class SearchBar extends Component {
   }
 
   render() {
+    let song = this.state.currentSong;
     return (
       <div className="search-div">
         <div className="input-header">
@@ -154,11 +155,13 @@ class SearchBar extends Component {
                 let artists = data.search.filter(
                   result => result.__typename === "ArtistType"
                 );
-                 debugger 
+
                 return (
                   <div className="outer-div">
                     <h6 className="top-results">TOP RESULTS</h6>
                     <div className="search-results">
+                      {/* top results */}
+
                       <div className="results-div">
                         {songs.length === 0 ? null : (
                           <Fragment>
@@ -169,31 +172,44 @@ class SearchBar extends Component {
                                 src={songs[0].album.artist.artist_image_url}
                                 alt="artist"
                               />
-                              <button
-                                onClick={e =>
-                                  this.toggleSong(e, 0, songs[0]._id)
-                                }
-                                className="btn"
-                              >
-                                <img
-                                  id="search-play-btn"
-                                  src={playIcon}
-                                  alt="play"
-                                />
-                              </button>
+                              {/* Play button toggles current song or default song */}
+
+                              {this.state.currentSong ? (
+                                <button
+                                  onClick={e =>
+                                    this.toggleSong(
+                                      e,
+                                      this.state.currentTrack,
+                                      song
+                                    )
+                                  }
+                                  className="btn"
+                                >
+                                  <img
+                                    id="search-play-btn"
+                                    src={playIcon}
+                                    alt="play"
+                                  />
+                                </button>
+                              ) : (
+                                <button
+                                  onClick={e => this.toggleSong(e, 0, songs[0])}
+                                  className="btn"
+                                >
+                                  <img
+                                    id="search-play-btn"
+                                    src={playIcon}
+                                    alt="play"
+                                  />
+                                </button>
+                              )}
+
                               <div className="results-p">
                                 <p id="results-title">{songs[0].title}</p>
                                 <p className="last-p">
-                                  {this.state.currentSong ? (
-                                    <Link
-                                      id="results-artist-name"
-                                      to={`/artist/${
-                                        this.state.currentSong.album.artist._id
-                                      }`}
-                                    >
-                                      {this.state.currentSong.album.artist.name}
-                                    </Link>
-                                  ) : (
+                                  {/* Links change for current playing song or first song on playlist */}
+
+                                  {this.state.currentSong === null ? (
                                     <Link
                                       id="results-artist-name"
                                       to={`/artist/${
@@ -202,10 +218,18 @@ class SearchBar extends Component {
                                     >
                                       {songs[0].album.artist.name}
                                     </Link>
+                                  ) : (
+                                    <Link
+                                      id="results-artist-name"
+                                      to={`/artist/${song.album.artist._id}`}
+                                    >
+                                      {song.album.artist.name}
+                                    </Link>
                                   )}
                                 </p>
                               </div>
                             </div>
+                            {/* list of search results  */}
                             <ul className="result-list">
                               {songs.map((song, idx) => {
                                 if (song.title) {
@@ -290,6 +314,9 @@ class SearchBar extends Component {
                         )}
                       </div>
                     </div>
+
+                    {/* artist search results  */}
+
                     <div className="artist-results">
                       <h1 className="results-header">Artists</h1>
                       {artists.length === 0 ? (
@@ -317,6 +344,8 @@ class SearchBar extends Component {
                         </ul>
                       )}
                     </div>
+
+                    {/* album search results */}
 
                     <div className="album-results">
                       <h1 className="albums-header2">Albums</h1>
