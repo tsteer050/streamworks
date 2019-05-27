@@ -51,10 +51,19 @@ export const VERIFY_USER = gql`
 // `;
 
 export const CREATE_PLAYLIST = gql`
-  mutation CreatePlaylist($title: String!) {
-    newPlaylist(title: $title) {
-      _id,
-      title
+  mutation NewPlaylist($title: String!, $ownerId: ID!) {
+    newPlaylist(title: $title, ownerId: $ownerId) {
+        _id
+        title
+        songs {
+          _id
+          title
+          length
+          audio_url
+        }
+        subscribers {
+          _id
+        }
     }
   }
 `;
