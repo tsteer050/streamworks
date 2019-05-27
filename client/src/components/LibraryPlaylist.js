@@ -66,7 +66,7 @@ class LibraryPlaylist extends React.Component {
     if (!this.state.user) return (<div></div>);
 
     return (
-      <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }}>
+      <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }} >
         {({ loading, error, data }) => {
 
           if (loading)
@@ -81,14 +81,14 @@ class LibraryPlaylist extends React.Component {
             );
           if (error) return `Error! ${error.message}`;
           let albumSongLists = {};
-          debugger
+
           //render simple message if nothing in library
           if (!data.user.playlists.length) {
             return (
               <div className="no-playlists">Your Playlists will go here</div>
             )
           }
-          let playListSongLists = null;
+          let playListSongLists = [];
           //create array of album's songs
           const playLists = data.user.playlists.map((playList, idx) => {
 
