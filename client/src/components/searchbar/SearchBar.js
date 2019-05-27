@@ -139,7 +139,7 @@ class SearchBar extends Component {
                 // create songlist for playqueu
                 const songList = songs.map((song, idx) => {
                   return {
-                    streamUrl: song.audio_url,
+                    stream_url: song.audio_url,
                     trackTitle: song.title,
                     artistName: song.album.artist.name,
                     albumArtUrl: song.album.album_art_url
