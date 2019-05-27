@@ -70,11 +70,21 @@
   list-style: none;
   text-align: center;
 }
-
-.album-image {
+.overlay{
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(0,0,0,0);
+  transition: background .2s ease;
+}
+.overlay:hover{
+   background: rgba(0,0,0,.8);
+}
+
+.album-image {
+  
 }
 
 .album-image-container > a {

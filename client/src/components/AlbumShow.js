@@ -189,7 +189,7 @@ class AlbumShow extends React.Component {
 
           const songList = data.album.songs.map(song => {
             return {
-              streamUrl: song.audio_url,
+              stream_url: song.audio_url,
               trackTitle: song.title,
               artistName: data.album.artist.name,
               albumArtUrl: data.album.album_art_url
@@ -199,24 +199,33 @@ class AlbumShow extends React.Component {
           this.songList = songList;
           
           const songIndex = <SongIndex songs={data.album.songs} setDefaultTrack={this.setDefaultTrack} onHover={this.onHover} offHover={this.offHover} toggleSong={this.toggleSong} />;
-
-          return (
+          const albumArtStyle = {
+            // width: '225px',
+            // height: '225px',
+            backgroundImage: `url(${data.album.album_art_url})`,
+            backgroundSize: "225px"
+          }
+    return (
             <div className="album-show">
               <div className="left-column">
-                <div className="album-photo-container">
-                  <img
-                    id="albumImage"
-                    className="album-photo"
-                    src={`${data.album.album_art_url}`}
-                    alt=""
-                    onClick={e =>
-                      this.toggleSong(
-                        e,
-                        this.state.currentTrack,
-                        this.state.currentIconId
-                      )
-                    }
-                  />
+                <div className="album-photo-container" style={albumArtStyle}
+                  onClick={e =>
+                    this.toggleSong(
+                      e,
+                      this.state.currentTrack,
+                      this.state.currentIconId
+                    )
+                  }
+                  >
+                  <div className="album-show-overlay">
+                    <img
+                      id="album-play-icon"
+                      className="album-show-play-icon"
+                      src={`${require('../resources/album_play_icon.png')}`}
+                      alt=""
+
+                    />
+                  </div>
                 </div>
                 <p className="album-name">{data.album.title}</p>
                 <Link to={`/artist/${data.album.artist._id}`}>

@@ -119,7 +119,7 @@ class ArtistShow extends React.Component {
           const albums = data.artist.albums.map((album, idx) => {
             albumSongLists[album._id] = album.songs.map(song => {
               return {
-                streamUrl: song.audio_url,
+                stream_url: song.audio_url,
                 trackTitle: song.title,
                 artistName: data.artist.name,
                 albumArtUrl: album.album_art_url
@@ -145,12 +145,14 @@ class ArtistShow extends React.Component {
                     this.offHover(album._id, idx);
                   }}
                 >
-                  <img
-                    id={album._id}
-                    className="album-play-icon"
-                    src=""
-                    alt=""
-                  />
+                  <div className="overlay">
+                      <img
+                        id={album._id}
+                        className="album-play-icon"
+                        src=""
+                        alt=""
+                      />
+                  </div>
                 </div>
                 <Link
                   to={`/album/${album._id}`}

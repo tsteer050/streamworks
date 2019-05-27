@@ -91,7 +91,7 @@ class LibrarySongs extends React.Component {
           if (loading)
             return (
               <div className="library-loading">
-                <div class="lds-facebook">
+                <div className="lds-facebook">
                   <div />
                   <div />
                   <div />
@@ -105,7 +105,7 @@ class LibrarySongs extends React.Component {
           }
           const songList = data.user.songs.map(song => {
             return {
-              streamUrl: song.audio_url,
+              stream_url: song.audio_url,
               trackTitle: song.title,
               artistName: song.artist.name,
               albumArtUrl: song.album.album_art_url

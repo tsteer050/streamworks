@@ -138,7 +138,7 @@ class SearchBar extends Component {
                 // create songlist for playqueu
                 const songList = songs.map((song, idx) => {
                   return {
-                    streamUrl: song.audio_url,
+                    stream_url: song.audio_url,
                     trackTitle: song.title,
                     artistName: song.album.artist.name,
                     albumArtUrl: song.album.album_art_url
@@ -154,7 +154,7 @@ class SearchBar extends Component {
                 let artists = data.search.filter(
                   result => result.__typename === "ArtistType"
                 );
-                 debugger 
+                  
                 return (
                   <div className="outer-div">
                     <h6 className="top-results">TOP RESULTS</h6>

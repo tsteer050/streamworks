@@ -39,7 +39,7 @@ class AudioPlayer extends Component {
     }
 
     track = track || {
-      streamUrl:
+      stream_url:
         "https://s3.us-east-2.amazonaws.com/streamworks-songs/Respect+My+Art/Long+Live+the+King+1.m4a",
       trackTitle: "Long Live the King",
       artistName: "Organ Freeman",
@@ -54,7 +54,7 @@ class AudioPlayer extends Component {
               <div id="audio-player-bar">
                 <AWSSoundPlayer
                   id="audio-player"
-                  streamUrl={track.streamUrl}
+                  streamUrl={track.stream_url}
                   trackTitle={track.trackTitle}
                   artistName={track.artistName}
                   albumArtUrl={track.albumArtUrl}
