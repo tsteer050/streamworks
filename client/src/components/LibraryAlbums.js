@@ -97,7 +97,7 @@ class LibraryAlbums extends React.Component {
           const albums = data.user.albums.map((album, idx) => {
             albumSongLists[album._id] = album.songs.map(song => {
               return {
-                streamUrl: song.audio_url,
+                stream_url: song.audio_url,
                 trackTitle: song.title,
                 artistName: album.artist.name,
                 albumArtUrl: album.album_art_url

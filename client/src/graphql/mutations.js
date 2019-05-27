@@ -82,3 +82,27 @@ export const REMOVE_USER_ALBUM = gql`
   }
 `;
 
+export const ADD_USER_ARTIST = gql`
+  mutation AddUserArtist($userId: ID!, $artistId: ID!) {
+    addUserArtist(userId: $userId, artistId: $artistId) {
+      _id
+      artists {
+        _id
+      }
+    }
+  }
+
+`;
+
+export const REMOVE_USER_ARTIST = gql`
+  mutation RemoveUserArtist($userId: ID!, $artistId: ID!) {
+    removeUserArtist(userId: $userId, artistId: $artistId) {
+      _id
+      artists {
+        _id
+      }
+    }
+  }
+
+`;
+

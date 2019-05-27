@@ -9,11 +9,18 @@ import {
   NextButton,
   PrevButton
 } from "react-soundplayer/components";
-import "./demoplayer.css";
+import "./awssoundplayer.css";
 
 const { PlayIconSVG, NextIconSVG, PrevIconSVG } = Icons;
 
 class AWSSoundPlayer extends Component {
+
+  constructor(props) {
+    super(props);
+    this.onNextClick = this.onNextClick.bind(this);
+    this.onPrevClick = this.onPrevClick.bind(this);
+  }
+
   convertTime(time) {
     let roundedTime = Math.round(time);
     let minutes = 0;
@@ -32,6 +39,25 @@ class AWSSoundPlayer extends Component {
     }
     timeString += seconds.toString();
     return timeString;
+  }
+
+  onPrevClick() {
+    // If duration > 3 seconds, then tell soundcloud to restart current song
+    //Else: 
+    if (this.props.currentTime > 3 || this.props.state.currentTrack == 0) {
+      this.props.soundCloudAudio.setTime(0);
+    } else {
+      this.props.prevTrack();
+
+    }
+  }
+
+  onNextClick() {
+    if (this.props.state.currentTrack === this.props.state.playQueue.length - 1) {
+      this.props.setCurrentTrack(0);
+    } else {
+      this.props.nextTrack();
+    }
   }
 
   componentDidUpdate() {
@@ -70,6 +96,7 @@ class AWSSoundPlayer extends Component {
           className="flex-none h4 button button-transparent button-grow rounded mr2"
           icon={PrevIconSVG}
           {...this.props}
+          onPrevClick={this.onPrevClick}
         />
         <PlayButton
           className="flex-none h4 button button-transparent button-grow rounded mr2"
@@ -80,6 +107,7 @@ class AWSSoundPlayer extends Component {
           className="flex-none h4 button button-transparent button-grow rounded mr2"
           icon={NextIconSVG}
           {...this.props}
+          onNextClick={this.onNextClick}
         />
 
         <div className="progress-bar-container">

@@ -189,7 +189,7 @@ class AlbumShow extends React.Component {
 
           const songList = data.album.songs.map(song => {
             return {
-              streamUrl: song.audio_url,
+              stream_url: song.audio_url,
               trackTitle: song.title,
               artistName: data.album.artist.name,
               albumArtUrl: data.album.album_art_url

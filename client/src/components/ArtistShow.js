@@ -1,8 +1,10 @@
-import React from "react";
-import { Query } from "react-apollo";
-import { FETCH_ARTIST } from "../graphql/queries";
+import React, { Fragment } from "react";
+import { Query, Mutation } from "react-apollo";
+import { FETCH_ARTIST, FETCH_USER_LIBRARY } from "../graphql/queries";
+import { ADD_USER_ARTIST, REMOVE_USER_ARTIST } from "../graphql/mutations";
 import "./ArtistShow.css";
 import { Link } from "react-router-dom";
+const jwt = require("jsonwebtoken");
 
 const playIcon = require("../resources/play_icon.png");
 const pauseIcon = require("../resources/pause_icon.png");
@@ -15,12 +17,19 @@ class ArtistShow extends React.Component {
       songList: [],
       currentAlbum: null,
       currentIconId: null,
-      playIcon: null
+      playIcon: null,
+      user: null
     };
     this.albumSongLists = null;
     this.onHover = this.onHover.bind(this);
     this.offHover = this.offHover.bind(this);
     this.toggleSong = this.toggleSong.bind(this);
+  }
+
+  componentDidMount() {
+    let token = localStorage.getItem("auth-token");
+    const user = jwt.decode(token);
+    this.setState({ user });
   }
 
   onHover(elementId) {
@@ -99,6 +108,76 @@ class ArtistShow extends React.Component {
   render() {
     const id = this.props.match.params.id;
 
+
+    const favoriteIcon = (addUserArtist, removeUserArtist, artistInLibrary) => {
+      if (artistInLibrary) {
+        return (
+          <img onClick={e => removeUserArtist({ variables: { userId: this.state.user.id, artistId: id } })} className="favorite" src={require('../resources/favorite_filled.png')} alt="Remove from library" />
+        )
+      }
+      return (
+        <img onClick={e => addUserArtist({ variables: { userId: this.state.user.id, artistId: id } })} className="favorite" src={require('../resources/favorite_outline.png')} alt="Add to library" />
+      )
+    };
+
+
+
+    let favoriteButton;
+    if (this.state.user) {
+      favoriteButton = (artist) => {
+        return (
+          <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }}>
+            {({ loading, error, data, client }) => {
+              if (loading) return "Loading...";
+              if (error) return `Error! ${error.message}`;
+              let artistInLibrary;
+              data.user.artists.some((userArtist) => userArtist._id === artist._id) ? artistInLibrary = true : artistInLibrary = false;
+              return (
+                <Mutation
+                  mutation={ADD_USER_ARTIST}
+                >
+                  {addUserArtist => {
+                    return (
+                      <Mutation
+                        mutation={REMOVE_USER_ARTIST}
+                      >
+                        {removeUserArtist => {
+                          return (
+                            <Fragment>
+                              {favoriteIcon(addUserArtist, removeUserArtist, artistInLibrary)}
+                            </Fragment>
+                          )
+                        }}
+                      </Mutation>
+                    )
+                  }}
+                </Mutation>
+              )
+            }}
+          </Query>
+        )
+      }
+    } else {
+      favoriteButton = () => {
+        return (
+          <img className="favorite" src={require('../resources/favorite_outline.png')} alt="" />
+        )
+      }
+    }
+
+
+
+//     BELOW HERE IS THE PAGE
+
+
+
+
+
+
+
+
+
+    
     return (
       <Query query={FETCH_ARTIST} variables={{ id }}>
         {({ loading, error, data }) => {
@@ -119,7 +198,7 @@ class ArtistShow extends React.Component {
           const albums = data.artist.albums.map((album, idx) => {
             albumSongLists[album._id] = album.songs.map(song => {
               return {
-                streamUrl: song.audio_url,
+                stream_url: song.audio_url,
                 trackTitle: song.title,
                 artistName: data.artist.name,
                 albumArtUrl: album.album_art_url
@@ -183,11 +262,7 @@ class ArtistShow extends React.Component {
                       {" "}
                       PLAY
                     </button>
-                    <img
-                      className="artist-favorite"
-                      src={require("../resources/favorites_icon.png")}
-                      alt=""
-                    />
+                    {favoriteButton(data.artist)}
                     <img
                       className="menu-icon"
                       src={require("../resources/menu_icon.png")}
