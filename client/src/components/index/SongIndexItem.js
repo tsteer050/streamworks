@@ -4,6 +4,25 @@ class SongIndexItem extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      showMenu: false
+    };
+    this.showMenu = this.showMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+  }
+  showMenu(event) {
+    event.preventDefault();
+    
+    this.setState({ showMenu: true }, () => {
+      document.addEventListener('click', this.closeMenu);
+    });
+  }
+
+  closeMenu() {
+    this.setState({ showMenu: false }, () => {
+      document.removeEventListener('click', this.closeMenu);
+    });
   }
 
   render() {
@@ -23,7 +42,17 @@ class SongIndexItem extends React.Component {
         </div>
         <div className="menu-songlength">
           <span className="menu">
-            <img className="menu-icon" src={require('../../resources/menu_icon.png')} alt="" />
+            <button className="menu-button" onClick={e => this.showMenu(e)}>
+              <img className="menu-icon" src={require('../../resources/menu_icon.png')} alt="" />
+              {this.state.showMenu ? (
+                <ul className="nav-menu-list">
+                  <li id="nav-menu-username">Save to your Favorite Songs</li>
+                  <div id="nav-menu-divider"></div>
+                  <li onClick={this.props.logOut}><div>Add to Playlist</div></li>
+                </ul>)
+                :
+                (null)}
+            </button>
           </span>
           <span> {songLength}</span>
         </div>
