@@ -361,6 +361,26 @@ const mutation = new GraphQLObjectType({
         return User.removeArtist(userId, artistId);
       }
     },
+    addUserSong: {
+      type: UserType,
+      args: {
+        userId: { type: GraphQLID },
+        songId: { type: GraphQLID }
+      },
+      resolve(_, { userId, songId }) {
+        return User.addSong(userId, songId);
+      }
+    },
+    removeUserSong: {
+      type: UserType,
+      args: {
+        userId: { type: GraphQLID },
+        songId: { type: GraphQLID }
+      },
+      resolve(_, { userId, songId }) {
+        return User.removeSong(userId, songId);
+      }
+    },
   }
 });
 
