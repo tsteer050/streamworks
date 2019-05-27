@@ -61,8 +61,11 @@ class AWSSoundPlayer extends Component {
   }
 
   componentDidUpdate() {
+    
     if (this.props.state.playQueue.length > 0) {
+      
       const track = this.props.state.currentTrack;
+
       this.props.soundCloudAudio._playlistIndex = track;
     }
     if (this.props.state.playing) {

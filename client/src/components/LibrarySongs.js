@@ -91,7 +91,7 @@ class LibrarySongs extends React.Component {
           if (loading)
             return (
               <div className="library-loading">
-                <div class="lds-facebook">
+                <div className="lds-facebook">
                   <div />
                   <div />
                   <div />

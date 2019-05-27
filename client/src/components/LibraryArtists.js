@@ -85,10 +85,10 @@ class LibraryArtists extends React.Component {
             );
           if (error) return `Error! ${error.message}`;
           let artistSongList = {};
-              debugger
+              
           //render simple message if nothing in library
           if (!data.user.artists.length) {
-            debugger
+            
             return (
               <div className="no-artists">Your artists will go here</div>
             )
@@ -98,7 +98,7 @@ class LibraryArtists extends React.Component {
             //   artistList[album._id] = album.songs.map(song => {
 
             //     return {
-            //       streamUrl: song.audio_url,
+            //       stream_url: song.audio_url,
             //       trackTitle: song.title,
             //       artistName: data.artist.name,
             //       albumArtUrl: album.album_art_url
