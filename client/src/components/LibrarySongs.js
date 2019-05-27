@@ -107,7 +107,7 @@ class LibrarySongs extends React.Component {
             return {
               stream_url: song.audio_url,
               trackTitle: song.title,
-              artistName: song.artist.name,
+              artistName: song.album.artist.name,
               albumArtUrl: song.album.album_art_url
             };
           });
@@ -156,7 +156,7 @@ class LibrarySongs extends React.Component {
                     <div className="song-artist-album">
                       <Link to={`/artist/${song.album.artist._id}`}>
                         <span className="song-artist">
-                          {song.artist.name}
+                          {song.album.artist.name}
                         </span>
                       </Link>
                       <span> . </span>

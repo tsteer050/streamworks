@@ -135,6 +135,7 @@ class AlbumShow extends React.Component {
               if (loading) return "Loading...";
               if (error) return `Error! ${error.message}`;
               let albumInLibrary;
+              debugger
               data.user.albums.some((userAlbum) => userAlbum._id === album._id) ? albumInLibrary = true : albumInLibrary = false;
               return (
                 <Mutation 
