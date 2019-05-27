@@ -1,6 +1,7 @@
-import React from 'react';
-import { FETCH_USER_LIBRARY } from "../graphql/queries";
-import { ADD_USER_SONG, REMOVE_USER_SONG } from '../graphql/mutations';
+import React, { Fragment } from 'react';
+import { FETCH_USER_LIBRARY } from "../../graphql/queries";
+import { ADD_USER_SONG, REMOVE_USER_SONG } from '../../graphql/mutations';
+import { Query, Mutation } from "react-apollo";
 const jwt = require("jsonwebtoken");
 
 class SongIndexItem extends React.Component {
@@ -34,6 +35,7 @@ class SongIndexItem extends React.Component {
     this.setState({ showMenu: false }, () => {
       document.removeEventListener('click', this.closeMenu);
     });
+  }
 
   render() {
     const { song, idx, onHover, offHover, toggleSong, songLength } = this.props;
