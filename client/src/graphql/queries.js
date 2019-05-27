@@ -161,15 +161,14 @@ export const FETCH_USER_LIBRARY = gql`
         title
         length
         audio_url
-        artist {
-          _id
-          name
-          artist_image_url
-        }
         album {
           _id
           title
           album_art_url
+          artist {
+            _id
+            name
+          }
         }
       }
       playlists {
