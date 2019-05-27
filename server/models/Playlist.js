@@ -14,6 +14,7 @@ const PlaylistSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
     ref: "users",
+    required: true
   },
   subscribers: [{
     type: Schema.Types.ObjectId,
@@ -41,6 +42,33 @@ PlaylistSchema.statics.updateOwner = (playlistId, ownerId) => {
     });
   });
 };
+
+
+PlaylistSchema.statics.newPlaylist = (title, ownerId) => {
+  const Playlist = mongoose.model("playlists");
+  const User = mongoose.model("users");
+
+
+  return User.findById(ownerId).then(owner => {
+    new Playlist({ title, owner: ownerId }).save().then(playlist => {
+      owner.playlists.push(playlist);
+      owner.save().then(owner => {
+        return playlist;
+      });
+    });
+  });
+};
+
+
+// return new Playlist({ title, ownerId }).save();
+
+
+
+
+
+
+
+
 
 PlaylistSchema.statics.addSubscriber = (playlistId, subscriberId) => {
   const Playlist = mongoose.model('playlists');

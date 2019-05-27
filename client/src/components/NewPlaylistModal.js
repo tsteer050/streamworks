@@ -3,13 +3,22 @@ import { Mutation } from "react-apollo";
 import { CREATE_PLAYLIST } from "../graphql/mutations";
 import "./library.css";
 import { withRouter } from "react-router-dom";
+const jwt = require("jsonwebtoken");
+
 
 class NewPlaylistModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: ""
+      title: "",
+      user: null
     };
+  }
+
+  componentDidMount() {
+    let token = localStorage.getItem("auth-token");
+    const user = jwt.decode(token);
+    this.setState({ user });
   }
 
   update(field) {
@@ -22,11 +31,14 @@ class NewPlaylistModal extends React.Component {
 
   handleSubmit(e, newPlaylist) {
     e.preventDefault();
-    newPlaylist({
-      variables: {
-        title: this.state.title
-      }
-    });
+    if (this.state.user) {
+      newPlaylist({
+        variables: {
+          title: this.state.title,
+          ownerId: this.state.user.id
+        }
+      });
+    }
   }
 
   render() {
@@ -34,9 +46,10 @@ class NewPlaylistModal extends React.Component {
       <Mutation
         mutation={CREATE_PLAYLIST}
         onCompleted={data => {
+          debugger
           const id = data.newPlaylist._id;
           this.setState({ title: "" });
-          this.props.history.push(`/playlists/${id}`);
+          // this.props.history.push(`/playlists/${id}`);
         }}
       >
         {newPlaylist => (

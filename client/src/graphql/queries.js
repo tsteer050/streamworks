@@ -180,53 +180,15 @@ export const FETCH_USER_LIBRARY = gql`
           length
           audio_url
         }
+        subscribers {
+          _id
+        }
       }
     }
   }
 `;
 
-// export const FETCH_USER_LIBRARY = gql`
-//   query FetchUserLibrary($id: ID!) {
-//     user(_id: $id) {
-//       _id
-//       albums {
-//          _id
-//         title
-//         album_art_url
-//         songs {
-//           _id
-//           title
-//           length
-//           audio_url
-//         }
-//         artist {
-//           name
-//         }
-//       }
-//       artists {
-//         _id
-//         name
-//         genre
-//         bio
-//         artist_image_url
-//       }
-//       songs {
-//         _id
-//         title
-//         length
-//         audio_url
-//         album {
-//           _id
-//         }
-//         artist {
-//           _id
-//           name
-//         }
-//       }
-      
-//     }
-//   }
-// `;
+
 
 export const FETCH_PLAYLIST = gql`
   query FetchPlaylist($id: ID!) {
