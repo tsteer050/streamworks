@@ -82,3 +82,51 @@ export const REMOVE_USER_ALBUM = gql`
   }
 `;
 
+export const ADD_USER_ARTIST = gql`
+  mutation AddUserArtist($userId: ID!, $artistId: ID!) {
+    addUserArtist(userId: $userId, artistId: $artistId) {
+      _id
+      artists {
+        _id
+      }
+    }
+  }
+
+`;
+
+export const REMOVE_USER_ARTIST = gql`
+  mutation RemoveUserArtist($userId: ID!, $artistId: ID!) {
+    removeUserArtist(userId: $userId, artistId: $artistId) {
+      _id
+      artists {
+        _id
+      }
+    }
+  }
+
+`;
+
+export const ADD_USER_SONG = gql`
+  mutation AddUserSong($userId: ID!, $songId: ID!) {
+    addUserSong(userId: $userId, songId: $songId) {
+      _id
+      songs {
+        _id
+      }
+    }
+  }
+
+`;
+
+export const REMOVE_USER_SONG = gql`
+  mutation RemoveUserSong($userId: ID!, $songId: ID!) {
+    removeUserSong(userId: $userId, songId: $songId) {
+      _id
+      songs {
+        _id
+      }
+    }
+  }
+
+`;
+

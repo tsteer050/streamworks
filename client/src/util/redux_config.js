@@ -4,6 +4,7 @@ import { combineReducers, createStore } from 'redux';
 const SELECT_TRACK = 'SELECT_TRACK';
 const NEW_PLAY_QUEUE = 'NEW_PLAY_QUEUE';
 const TOGGLE_PLAY = 'TOGGLE_PLAY';
+const SET_CURRENT_TRACK = 'SET_CURRENT_TRACK';
 
 export const selectTrack = (index) => ({
   type: SELECT_TRACK,
@@ -17,6 +18,11 @@ export const newPlayQueue = (queue) => ({
 
 export const togglePlay = () => ({
   type: TOGGLE_PLAY
+});
+
+export const setCurrentTrack = (index) => ({
+  type: SET_CURRENT_TRACK,
+  index
 });
 
 
@@ -33,6 +39,8 @@ const currentTrackReducer = (state = 0, action) => {
   switch (action.type) {
     case SELECT_TRACK:
       return action.selected;
+    case SET_CURRENT_TRACK:
+      return action.index;
     default:
       return state;
   }

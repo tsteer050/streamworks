@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./AudioPlayer.css";
 import { Query } from "react-apollo";
-import AWSSoundPlayer from "./DemoPlayer";
+import AWSSoundPlayer from "./AWSSoundPlayer";
 import { IS_LOGGED_IN } from "../graphql/queries";
 
 import PlaceHolderPlayer from "./PlaceHolderPlayer";
@@ -19,6 +19,7 @@ class AudioPlayer extends Component {
   }
 
   nextTrack() {
+
     let currentTrack = this.props.state.currentTrack;
     currentTrack += 1;
     this.props.selectTrack(currentTrack);
@@ -26,7 +27,7 @@ class AudioPlayer extends Component {
 
   prevTrack() {
     let currentTrack = this.props.state.currentTrack;
-    currentTrack += 1;
+    currentTrack -= 1;
     if (currentTrack < 0) currentTrack = 0;
     this.props.selectTrack(currentTrack);
   }
@@ -62,6 +63,7 @@ class AudioPlayer extends Component {
                   nextTrack={this.nextTrack}
                   togglePlay={this.togglePlay}
                   state={this.props.state}
+                  setCurrentTrack={this.props.setCurrentTrack}
                 />
               </div>
             );
