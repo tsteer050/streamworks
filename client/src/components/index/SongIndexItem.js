@@ -1,6 +1,7 @@
-import React from 'react';
-import { FETCH_USER_LIBRARY } from "../graphql/queries";
-import { ADD_USER_SONG, REMOVE_USER_SONG } from '../graphql/mutations';
+import React, { Fragment } from 'react';
+import { FETCH_USER_LIBRARY } from "../../graphql/queries";
+import { ADD_USER_SONG, REMOVE_USER_SONG } from '../../graphql/mutations';
+import { Query, Mutation } from 'react-apollo';
 const jwt = require("jsonwebtoken");
 
 class SongIndexItem extends React.Component {
@@ -34,6 +35,7 @@ class SongIndexItem extends React.Component {
     this.setState({ showMenu: false }, () => {
       document.removeEventListener('click', this.closeMenu);
     });
+  }
 
   render() {
     const { song, idx, onHover, offHover, toggleSong, songLength } = this.props;
@@ -42,11 +44,15 @@ class SongIndexItem extends React.Component {
     const favoriteMenuItem = (addUserSong, removeUserSong, songInLibrary) => {
       if (songInLibrary) {
         return (
-          <h5 onClick={e => removeUserSong({ variables: { userId: this.state.user.id, songId: song._id } })} >Remove from library</h5>
+          <li className="song-menu-item">
+           <h5 onClick={e => removeUserSong({ variables: { userId: this.state.user.id, songId: song._id } })} >Remove from library</h5>
+          </li>
         )
       }
       return (
-        <h5 onClick={e => addUserSong({ variables: { userId: this.state.user.id, songId: song._id } })} >Add to library</h5>      
+        <li className="song-menu-item">
+         <h5 onClick={e => addUserSong({ variables: { userId: this.state.user.id, songId: song._id } })} >Add to library</h5>   
+        </li>   
         )
     };
 
@@ -90,7 +96,10 @@ class SongIndexItem extends React.Component {
     } else {
       favoriteButton = () => {
         return (
-          <h5>Add to library</h5>
+          <li className="song-menu-item">
+            <h5>Add to library</h5>
+          </li>
+          
         )
       }
     }
@@ -120,10 +129,9 @@ class SongIndexItem extends React.Component {
             <button className="menu-button" onClick={e => this.showMenu(e)}>
               <img className="menu-icon" src={require('../../resources/menu_icon.png')} alt="" />
               {this.state.showMenu ? (
-                <ul className="nav-menu-list">
-                  <li id="nav-menu-username">Save to your Favorite Songs</li>
-                  <div id="nav-menu-divider"></div>
-                  <li onClick={this.props.logOut}><div>Add to Playlist</div></li>
+                <ul className="song-menu">
+                  {favoriteButton(song)}
+                  <li className="song-menu-item">Add to Playlist</li>
                 </ul>)
                 :
                 (null)}

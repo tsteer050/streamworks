@@ -168,37 +168,3 @@
 .left-menu-icon {
 }
 
-.menu {
-  visibility: hidden;
-}
-.menu-button{
-  border: none;
-  background: none;
-}
-.menu-icon {
-  transform: rotate(90deg);
-}
-.menu-button {
-  position: relative;
-   border: none;
-   height: 30px;
-   width: 30px;
-   background-size: contain;
-   /* background: image-url("menu-icon.png"); */
-   background-repeat: no-repeat;
-   margin-left: 20px;
-   cursor: pointer;
- }
-.nav-menu-list {
-  position: absolute;
-  text-align: left;
-  border: 1px solid lightgray;
-  top: 30px;
-  width: 300px;
-  right: 0;
-  background: white;
-  font-size: 14px;
-}
-.nav-menu-list > li:hover {
-  background: #F3F3F3;;
-}
