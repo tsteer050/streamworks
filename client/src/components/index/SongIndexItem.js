@@ -1,13 +1,90 @@
 import React from 'react';
+import { FETCH_USER_LIBRARY } from "../graphql/queries";
+import { ADD_USER_SONG, REMOVE_USER_SONG } from '../graphql/mutations';
+const jwt = require("jsonwebtoken");
 
 class SongIndexItem extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      user: null
+    };
+  }
+
+  componentDidMount() {
+    let token = localStorage.getItem("auth-token");
+    const user = jwt.decode(token);
+    this.setState({ user });
   }
 
   render() {
     const { song, idx, onHover, offHover, toggleSong, songLength } = this.props;
+
+    //
+    const favoriteMenuItem = (addUserSong, removeUserSong, songInLibrary) => {
+      if (songInLibrary) {
+        return (
+          <h5 onClick={e => removeUserSong({ variables: { userId: this.state.user.id, songId: song._id } })} >Remove from library</h5>
+        )
+      }
+      return (
+        <h5 onClick={e => addUserSong({ variables: { userId: this.state.user.id, songId: song._id } })} >Add to library</h5>      
+        )
+    };
+
+
+
+    let favoriteButton;
+    if (this.state.user) {
+      favoriteButton = (song) => {
+        return (
+          <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }}>
+            {({ loading, error, data, client }) => {
+              if (loading) return "Loading...";
+              if (error) return `Error! ${error.message}`;
+              let songInLibrary;
+              data.user.songs.some((userSong) => userSong._id === song._id) ? songInLibrary = true : songInLibrary = false;
+              return (
+                <Mutation
+                  mutation={ADD_USER_SONG}
+                >
+                  {addUserSong => {
+                    return (
+                      <Mutation
+                        mutation={REMOVE_USER_SONG}
+                      >
+                        {removeUserSong => {
+                          return (
+                            <Fragment>
+                              {favoriteMenuItem(addUserSong, removeUserSong, songInLibrary)}
+                            </Fragment>
+                          )
+                        }}
+                      </Mutation>
+                    )
+                  }}
+                </Mutation>
+              )
+            }}
+          </Query>
+        )
+      }
+    } else {
+      favoriteButton = () => {
+        return (
+          <h5>Add to library</h5>
+        )
+      }
+    }
+
+
+
+
+
+
+
+    //
     
     return (
       <li key={song._id} onMouseOver={() => { onHover(song._id, idx) }}
