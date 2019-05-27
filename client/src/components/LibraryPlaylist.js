@@ -81,7 +81,6 @@ class LibraryPlaylist extends React.Component {
             );
           if (error) return `Error! ${error.message}`;
           let albumSongLists = {};
-          debugger
           //render simple message if nothing in library
           if (!data.user.playlists.length) {
             return (

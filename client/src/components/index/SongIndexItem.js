@@ -1,11 +1,7 @@
 import React, { Fragment } from 'react';
 import { FETCH_USER_LIBRARY } from "../../graphql/queries";
 import { ADD_USER_SONG, REMOVE_USER_SONG } from '../../graphql/mutations';
-<<<<<<< HEAD
 import { Query, Mutation } from "react-apollo";
-=======
-import { Query, Mutation } from 'react-apollo';
->>>>>>> 849a2d976059d01e15b718ac089003f0d43038db
 const jwt = require("jsonwebtoken");
 
 class SongIndexItem extends React.Component {

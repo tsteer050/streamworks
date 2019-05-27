@@ -130,12 +130,11 @@ class AlbumShow extends React.Component {
     if (this.state.user) {
       favoriteButton = (album) => {
         return (
-          <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }}>
+          <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }} partialRefetch={true}>
             {({ loading, error, data, client }) => {
               if (loading) return "Loading...";
               if (error) return `Error! ${error.message}`;
               let albumInLibrary;
-              debugger
               data.user.albums.some((userAlbum) => userAlbum._id === album._id) ? albumInLibrary = true : albumInLibrary = false;
               return (
                 <Mutation 
