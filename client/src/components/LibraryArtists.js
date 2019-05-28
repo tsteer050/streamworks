@@ -125,12 +125,14 @@ class LibraryArtists extends React.Component {
                     this.offHover(artist._id, idx);
                   }}
                 >
+                <div className="overlay-artists">
                   <img
                     id={artist._id}
                     className="artist-play-icon"
                     src=""
                     alt=""
                   />
+                  </div>
                 </div>
 
                 <Link

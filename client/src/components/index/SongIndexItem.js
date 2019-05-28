@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { FETCH_USER_LIBRARY } from "../../graphql/queries";
 import { ADD_USER_SONG, REMOVE_USER_SONG } from '../../graphql/mutations';
 import { Query, Mutation } from "react-apollo";
+import "./songIndexItem.css";
 const jwt = require("jsonwebtoken");
 
 class SongIndexItem extends React.Component {
@@ -45,13 +46,13 @@ class SongIndexItem extends React.Component {
       if (songInLibrary) {
         return (
           <li className="song-menu-item">
-           <h5 onClick={e => removeUserSong({ variables: { userId: this.state.user.id, songId: song._id } })} >Remove from library</h5>
+           <p onClick={e => removeUserSong({ variables: { userId: this.state.user.id, songId: song._id } })} >Remove from library</p>
           </li>
         )
       }
       return (
         <li className="song-menu-item">
-         <h5 onClick={e => addUserSong({ variables: { userId: this.state.user.id, songId: song._id } })} >Add to library</h5>   
+         <p onClick={e => addUserSong({ variables: { userId: this.state.user.id, songId: song._id } })} >Add to library</p>   
         </li>   
         )
     };

@@ -123,12 +123,14 @@ class LibraryAlbums extends React.Component {
                     this.offHover(album._id, idx);
                   }}
                 >
+                <div className="overlay">
                   <img
                     id={album._id}
                     className="album-play-icon"
                     src=""
                     alt=""
                   />
+                  </div>
                 </div>
                 <Link
                   to={`/album/${album._id}`}
