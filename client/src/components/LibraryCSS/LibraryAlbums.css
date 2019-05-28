@@ -9,3 +9,8 @@
     color: white;
     margin-top: 85px;
 }
+.album-image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

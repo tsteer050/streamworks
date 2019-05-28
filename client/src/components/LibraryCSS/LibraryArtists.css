@@ -32,6 +32,19 @@
   background-repeat: no-repeat;
   object-fit: cover;
 }
+.overlay-artists{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0);
+  transition: background .2s ease;
+}
+.overlay-artists:hover{
+   background: rgba(0,0,0,.8);
+}
 
 .artist-artist-name {
   font-style: 13px;

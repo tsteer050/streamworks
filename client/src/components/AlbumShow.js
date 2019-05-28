@@ -15,6 +15,8 @@ const jwt = require("jsonwebtoken");
 
 const playIcon = require('../resources/play_icon.png');
 const pauseIcon = require('../resources/pause_icon.png');
+const imagePlayIcon = require('../resources/album_play_icon.png');
+const imagePauseIcon = require('../resources/album_pause_icon.png');
 const musicNoteIcon = require('../resources/music_note_icon.png')
 
 class AlbumShow extends React.Component {
@@ -24,6 +26,7 @@ class AlbumShow extends React.Component {
       songList: [],
       currentTrack: null,
       currentIconId: null,
+      currentImageIconId: null,
       user: null
     };
     this.isLoggedIn = null;
@@ -48,9 +51,27 @@ class AlbumShow extends React.Component {
     this.defaultTrack = iconId;
   }
 
+  toggleImageIcon() {
+    let icon = document.getElementById("albumImage");
+
+    if (this.props.state.playing === false) {
+      icon.src = imagePauseIcon;
+    } else {
+      icon.src = imagePlayIcon;
+    }
+  }
+
   onHover(elementId, track) {
+    
     if (elementId === "albumImage") {
       let albumImage = document.getElementById(elementId);
+      if (this.props.state.playing === true) {
+        
+        albumImage.src = imagePauseIcon;
+      } else {
+        albumImage.src = imagePlayIcon;
+      }
+      return;
     }
     let element = document.getElementById(elementId);
 
@@ -65,6 +86,11 @@ class AlbumShow extends React.Component {
   }
   offHover(elementId, track) {
     let element = document.getElementById(elementId);
+    if (elementId === "albumImage") {
+      
+      element.src = "";
+      return;
+    }
     if (this.state.currentTrack !== track) {
       element.src = require("../resources/music_note_icon.png");
     }
@@ -77,7 +103,7 @@ class AlbumShow extends React.Component {
     let element = document.getElementById(iconElementId);
     let playButton = document.getElementById("playButton");
     let albumImage = document.getElementById("albumImage");
-
+    this.toggleImageIcon();
     if (track === this.state.currentTrack) {
       if (this.props.state.playing === false) {
         element.src = pauseIcon;
@@ -95,6 +121,8 @@ class AlbumShow extends React.Component {
       playButton.innerHTML = "PLAY";
       this.setState({ currentTrack: track });
 
+      // toggle the album image play icon
+      
       // set previous track's icon back to music note
       if (this.state.currentIconId)
         document.getElementById(this.state.currentIconId).src = musicNoteIcon;
@@ -135,7 +163,6 @@ class AlbumShow extends React.Component {
               if (loading) return "Loading...";
               if (error) return `Error! ${error.message}`;
               let albumInLibrary;
-              debugger
               data.user.albums.some((userAlbum) => userAlbum._id === album._id) ? albumInLibrary = true : albumInLibrary = false;
               return (
                 <Mutation 
@@ -217,14 +244,15 @@ class AlbumShow extends React.Component {
                       this.state.currentIconId
                     )
                   }
+                  onMouseOver={() => this.onHover("albumImage")}
+                  onMouseOut={() => this.offHover("albumImage")}
                   >
                   <div className="album-show-overlay">
                     <img
-                      id="album-play-icon"
+                      id="albumImage"
                       className="album-show-play-icon"
-                      src={`${require('../resources/album_play_icon.png')}`}
                       alt=""
-
+                      src=""
                     />
                   </div>
                 </div>
