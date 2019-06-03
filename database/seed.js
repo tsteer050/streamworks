@@ -189,70 +189,70 @@ mongoose
                       {
                         _id: songIds[9],
                         title: "Don't Panic",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Parachutes/01+Don\'t+Panic.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Parachutes/01+Don\'t+Panic.mp3',
                         length: 137,
                         album: albumIds[1]
                       },
                       {
                         _id: songIds[10],
                         title: "Shiver",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Parachutes/02+Shiver.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Parachutes/02+Shiver.mp3',
                         length: 300,
                         album: albumIds[1]
                       },
                       {
                         _id: songIds[11],
                         title: "Spies",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Parachutes/03+Spies.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Parachutes/03+Spies.mp3',
                         length: 319,
                         album: albumIds[1]
                       },
                       {
                         _id: songIds[12],
                         title: "Sparks",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Parachutes/04+Sparks.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Parachutes/04+Sparks.mp3',
                         length: 227,
                         album: albumIds[1]
                       },
                       {
                         _id: songIds[13],
                         title: "Yellow",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Parachutes/05+Yellow.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Parachutes/05+Yellow.mp3',
                         length: 269,
                         album: albumIds[1]
                       },
                       {
                         _id: songIds[14],
                         title: "Trouble",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Parachutes/06+Trouble.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Parachutes/06+Trouble.mp3',
                         length: 271,
                         album: albumIds[1]
                       },
                       {
                         _id: songIds[15],
                         title: "Parachutes",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Parachutes/07+Parachutes.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Parachutes/07+Parachutes.mp3',
                         length: 46,
                         album: albumIds[1]
                       },
                       {
                         _id: songIds[16],
                         title: "High Speed",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Parachutes/08+High+Speed.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Parachutes/08+High+Speed.mp3',
                         length: 254,
                         album: albumIds[1]
                       },
                       {
                         _id: songIds[17],
                         title: "We Never Change",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Parachutes/09+We+Never+Change.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Parachutes/09+We+Never+Change.mp3',
                         length: 249,
                         album: albumIds[1]
                       },
                       {
                         _id: songIds[18],
                         title: "Everything's Not Lost",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Parachutes/10+Everything\'s+Not+Lost.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Parachutes/10+Everything\'s+Not+Lost.mp3',
                         length: 436,
                         album: albumIds[1]
                       },
@@ -260,77 +260,77 @@ mongoose
                       {
                         _id: songIds[19],
                         title: "Politik",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/A+Rush+of+Blood+to+the+Head/01+Politik.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/A+Rush+of+Blood+to+the+Head/01+Politik.mp3',
                         length: 319,
                         album: albumIds[2]
                       },
                       {
                         _id: songIds[20],
                         title: "In My Place",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/A+Rush+of+Blood+to+the+Head/02+In+My+Place.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/A+Rush+of+Blood+to+the+Head/02+In+My+Place.mp3',
                         length: 229,
                         album: albumIds[2]
                       },
                       {
                         _id: songIds[21],
                         title: "God Put a Smile Upon Your Face",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/A+Rush+of+Blood+to+the+Head/03+God+Put+a+Smile+Upon+Your+Face.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/A+Rush+of+Blood+to+the+Head/03+God+Put+a+Smile+Upon+Your+Face.mp3',
                         length: 297,
                         album: albumIds[2]
                       },
                       {
                         _id: songIds[22],
                         title: "The Scientist",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/A+Rush+of+Blood+to+the+Head/04+The+Scientist.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/A+Rush+of+Blood+to+the+Head/04+The+Scientist.mp3',
                         length: 309,
                         album: albumIds[2]
                       },
                       {
                         _id: songIds[23],
                         title: "Clocks",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/A+Rush+of+Blood+to+the+Head/05+Clocks.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/A+Rush+of+Blood+to+the+Head/05+Clocks.mp3',
                         length: 307,
                         album: albumIds[2]
                       },
                       {
                         _id: songIds[24],
                         title: "Daylight",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/A+Rush+of+Blood+to+the+Head/06+Daylight.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/A+Rush+of+Blood+to+the+Head/06+Daylight.mp3',
                         length: 328,
                         album: albumIds[2]
                       },
                       {
                         _id: songIds[25],
                         title: "Green Eyes",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/A+Rush+of+Blood+to+the+Head/07+Green+Eyes.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/A+Rush+of+Blood+to+the+Head/07+Green+Eyes.mp3',
                         length: 223,
                         album: albumIds[2]
                       },
                       {
                         _id: songIds[26],
                         title: "Warning Sign",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/A+Rush+of+Blood+to+the+Head/08+Warning+Sign.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/A+Rush+of+Blood+to+the+Head/08+Warning+Sign.mp3',
                         length: 331,
                         album: albumIds[2]
                       },
                       {
                         _id: songIds[27],
                         title: "A Whisper",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/A+Rush+of+Blood+to+the+Head/09+A+Whisper.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/A+Rush+of+Blood+to+the+Head/09+A+Whisper.mp3',
                         length: 238,
                         album: albumIds[2]
                       },
                       {
                         _id: songIds[28],
                         title: "A Rush of Blood to the Head",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/A+Rush+of+Blood+to+the+Head/10+A+Rush+of+Blood+to+the+Head.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/A+Rush+of+Blood+to+the+Head/10+A+Rush+of+Blood+to+the+Head.mp3',
                         length: 351,
                         album: albumIds[2]
                       },
                       {
                         _id: songIds[29],
                         title: "Amsterdam",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/A+Rush+of+Blood+to+the+Head/11+Amsterdam.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/A+Rush+of+Blood+to+the+Head/11+Amsterdam.mp3',
                         length: 319,
                         album: albumIds[2]
                       },
@@ -338,154 +338,154 @@ mongoose
                       {
                         _id: songIds[31],
                         title: "Life in Technicolor",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Viva+la+Vida/01+Life+in+Technicolor.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Viva+la+Vida/01+Life+in+Technicolor.mp3',
                         length: 149,
                         album: albumIds[3]
                       },
                       {
                         _id: songIds[32],
                         title: "Cemeteries of London",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Viva+la+Vida/02+Cemeteries+of+London.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Viva+la+Vida/02+Cemeteries+of+London.mp3',
                         length: 201,
                         album: albumIds[3]
                       },
                       {
                         _id: songIds[33],
                         title: "Lost!",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Viva+la+Vida/03+Lost!.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Viva+la+Vida/03+Lost!.mp3',
                         length: 236,
                         album: albumIds[3]
                       },
                       {
                         _id: songIds[34],
                         title: "42",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Viva+la+Vida/04+42.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Viva+la+Vida/04+42.mp3',
                         length: 238,
                         album: albumIds[3]
                       },
                       {
                         _id: songIds[35],
                         title: "Lovers in Japan-Reign of Love",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Viva+la+Vida/05+Lovers+in+Japan-Reign+of+Love.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Viva+la+Vida/05+Lovers+in+Japan-Reign+of+Love.mp3',
                         length: 411,
                         album: albumIds[3]
                       },
                       {
                         _id: songIds[36],
                         title: "Yes",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Viva+la+Vida/06+Yes.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Viva+la+Vida/06+Yes.mp3',
                         length: 427,
                         album: albumIds[3]
                       },
                       {
                         _id: songIds[37],
                         title: "Viva la Vida",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Viva+la+Vida/07+Viva+La+Vida.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Viva+la+Vida/07+Viva+La+Vida.mp3',
                         length: 243,
                         album: albumIds[3]
                       },
                       {
                         _id: songIds[38],
                         title: "Violet Hill",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Viva+la+Vida/08+Violet+Hill.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Viva+la+Vida/08+Violet+Hill.mp3',
                         length: 229,
                         album: albumIds[3]
                       },
                       {
                         _id: songIds[39],
                         title: "Strawberry Swing",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Viva+la+Vida/09+Strawberry+Swing.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Viva+la+Vida/09+Strawberry+Swing.mp3',
                         length: 250,
                         album: albumIds[3]
                       },
                       {
                         _id: songIds[40],
                         title: "Death and All His Friends",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Viva+la+Vida/10+Death+and+All+His+Friends.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Viva+la+Vida/10+Death+and+All+His+Friends.mp3',
                         length: 379,
                         album: albumIds[3]
                       },
                       {
                         _id: songIds[41],
                         title: "We Die Young",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Facelift/01+We+Die+Young.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Facelift/01+We+Die+Young.mp3',
                         length: 152,
                         album: albumIds[4]
                       },
                       {
                         _id: songIds[42],
                         title: "Man in the Box",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Facelift/02+Man+in+the+Box.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Facelift/02+Man+in+the+Box.mp3',
                         length: 286,
                         album: albumIds[4]
                       },
                       {
                         _id: songIds[43],
                         title: "Sea of Sorrow",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Facelift/03+Sea+of+Sorrow.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Facelift/03+Sea+of+Sorrow.mp3',
                         length: 349,
                         album: albumIds[4]
                       },
                       {
                         _id: songIds[44],
                         title: "Bleed the Freak",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Facelift/04+Bleed+the+Freak.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Facelift/04+Bleed+the+Freak.mp3',
                         length: 241,
                         album: albumIds[4]
                       },
                       {
                         _id: songIds[45],
                         title: "I Can't Remember",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Facelift/05+I+Can\'t+Remember.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Facelift/05+I+Can\'t+Remember.mp3',
                         length: 222,
                         album: albumIds[4]
                       },
                       {
                         _id: songIds[46],
                         title: "Love, Hate, Love",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Facelift/06+Love%2C+Hate%2C+Love.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Facelift/06+Love%2C+Hate%2C+Love.mp3',
                         length: 386,
                         album: albumIds[4]
                       },
                       {
                         _id: songIds[47],
                         title: "It Ain't Like That",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Facelift/07+It+Ain\'t+Like+That.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Facelift/07+It+Ain\'t+Like+That.mp3',
                         length: 277,
                         album: albumIds[4]
                       },
                       {
                         _id: songIds[48],
                         title: "Sunshine",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Facelift/08+Sunshine.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Facelift/08+Sunshine.mp3',
                         length: 284,
                         album: albumIds[4]
                       },
                       {
                         _id: songIds[49],
                         title: "Put You Down",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Facelift/09+Put+You+Down.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Facelift/09+Put+You+Down.mp3',
                         length: 196,
                         album: albumIds[4]
                       },
                       {
                         _id: songIds[50],
                         title: "Confusion",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Facelift/10+Confusion.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Facelift/10+Confusion.mp3',
                         length: 344,
                         album: albumIds[4]
                       },
                       {
                         _id: songIds[51],
                         title: "I Know Something (Bout You)",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Facelift/11+I+Know+Somethin+(Bout+You).wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Facelift/11+I+Know+Somethin+(Bout+You).mp3',
                         length: 262,
                         album: albumIds[4]
                       },
                       {
                         _id: songIds[52],
                         title: "Real Thing",
-                        audio_url: 'https://s3.us-east-2.amazonaws.com/streamworks-songs/Facelift/12+Real+Thing.wma',
+                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Facelift/12+Real+Thing.mp3',
                         length: 243,
                         album: albumIds[4]
                       },
