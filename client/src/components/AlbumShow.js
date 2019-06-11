@@ -1,18 +1,13 @@
 import React, { Fragment } from "react";
-
 import { Query, Mutation } from "react-apollo";
-import { FETCH_ALBUM, IS_LOGGED_IN, FETCH_USER_LIBRARY } from "../graphql/queries";
+import { FETCH_ALBUM, FETCH_USER_LIBRARY } from "../graphql/queries";
 import { ADD_USER_ALBUM, REMOVE_USER_ALBUM } from '../graphql/mutations';
-
 import "./AlbumShow.css";
 import { Link } from "react-router-dom";
-import Rodal from "rodal";
 import "rodal/lib/rodal.css";
-import Modal from "./Modal";
-
 import SongIndex from './index/SongIndex';
-const jwt = require("jsonwebtoken");
 
+const jwt = require("jsonwebtoken");
 const playIcon = require('../resources/play_icon.png');
 const pauseIcon = require('../resources/pause_icon.png');
 const imagePlayIcon = require('../resources/album_play_icon.png');
@@ -102,7 +97,7 @@ class AlbumShow extends React.Component {
 
     let element = document.getElementById(iconElementId);
     let playButton = document.getElementById("playButton");
-    let albumImage = document.getElementById("albumImage");
+   
     this.toggleImageIcon();
     if (track === this.state.currentTrack) {
       if (this.props.state.playing === false) {

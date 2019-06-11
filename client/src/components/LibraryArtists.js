@@ -7,10 +7,6 @@ import { Link } from "react-router-dom";
 
 const jwt = require("jsonwebtoken");
 
-const playIcon = require("../resources/play_icon.png");
-const pauseIcon = require("../resources/pause_icon.png");
-const musicNoteIcon = require("../resources/music_note_icon.png");
-
 class LibraryArtists extends React.Component {
   constructor(props) {
     super(props);
@@ -46,9 +42,9 @@ class LibraryArtists extends React.Component {
   }
   toggleIcon(iconId) {
     if (this.props.state.playing === false) {
-      this.state.playIcon = require("../resources/album_pause_icon.png");
+      this.setState({ playIcon: require("../resources/album_pause_icon.png")});
     } else {
-      this.state.playIcon = require("../resources/album_play_icon.png");
+      this.setState({ playIcon: require("../resources/album_play_icon.png")});
     }
     let icon = document.getElementById(iconId);
     icon.src = this.state.playIcon;
@@ -58,7 +54,9 @@ class LibraryArtists extends React.Component {
       this.props.togglePlay();
       this.toggleIcon(albumId);
     } else {
-      this.state.currentAlbum = albumId;
+      this.setState({
+        currentAlbum: albumId
+      });
       let playQueue = this.albumSongLists[albumId];
       this.props.newPlayQueue(playQueue);
       this.props.selectTrack(0);
@@ -95,17 +93,7 @@ class LibraryArtists extends React.Component {
           }
 
           const artists = data.user.artists.map((artist, idx) => {
-            //   artistList[album._id] = album.songs.map(song => {
 
-            //     return {
-            //       stream_url: song.audio_url,
-            //       trackTitle: song.title,
-            //       artistName: data.artist.name,
-            //       albumArtUrl: album.album_art_url
-            //     }
-            //   })
-
-            let songLength = null;
             var sectionStyle = {
               width: "145px",
               height: "145px",

@@ -40,9 +40,13 @@ class LibraryPlaylist extends React.Component {
   }
   toggleIcon(iconId) {
     if (this.props.state.playing === false) {
-      this.state.playIcon = require("../resources/album_pause_icon.png");
+      this.setState({
+        playIcon:require("../resources/album_pause_icon.png")
+      });
     } else {
-      this.state.playIcon = require("../resources/album_play_icon.png");
+      this.setState({
+        playIcon:require("../resources/album_play_icon.png")
+      });
     }
     let icon = document.getElementById(iconId);
     icon.src = this.state.playIcon;
@@ -53,7 +57,7 @@ class LibraryPlaylist extends React.Component {
       this.props.togglePlay();
       this.toggleIcon(albumId);
     } else {
-      this.state.currentAlbum = albumId;
+      this.setState({currentAlbum: albumId});
       let playQueue = this.albumSongLists[albumId];
       this.props.newPlayQueue(playQueue);
       this.props.selectTrack(0);
@@ -72,7 +76,7 @@ class LibraryPlaylist extends React.Component {
           if (loading)
             return (
               <div className="library-loading">
-                <div class="lds-facebook">
+                <div className="lds-facebook">
                   <div />
                   <div />
                   <div />
@@ -80,7 +84,7 @@ class LibraryPlaylist extends React.Component {
               </div>
             );
           if (error) return `Error! ${error.message}`;
-          let albumSongLists = {};
+          
 
           //render simple message if nothing in library
           if (!data.user.playlists.length) {
@@ -101,7 +105,7 @@ class LibraryPlaylist extends React.Component {
               };
             });
 
-            let songLength = null;
+            
             var sectionStyle = {
               width: "100%",
               height: "100%",

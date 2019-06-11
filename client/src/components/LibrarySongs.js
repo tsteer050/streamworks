@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Query } from "react-apollo";
-import { FETCH_ALBUM, FETCH_USER_LIBRARY } from "../graphql/queries";
+import { FETCH_USER_LIBRARY } from "../graphql/queries";
 import "./LibraryCSS/LibrarySongs.css";
 const jwt = require("jsonwebtoken");
 
@@ -30,9 +30,6 @@ class LibrarySongs extends React.Component {
   }
 
   onHover(elementId, track) {
-    if (elementId === "albumImage") {
-      let albumImage = document.getElementById(elementId);
-    }
     let element = document.getElementById(elementId);
 
     if (
@@ -56,12 +53,10 @@ class LibrarySongs extends React.Component {
     iconElementId = iconElementId || this.defaultTrack;
 
     let element = document.getElementById(iconElementId);
-    let albumImage = document.getElementById("albumImage");
 
     if (track === this.state.currentTrack) {
       if (this.props.state.playing === false) {
         element.src = pauseIcon;
-        //albumImage
         this.props.togglePlay();
       } else {
         element.src = playIcon;
@@ -72,7 +67,6 @@ class LibrarySongs extends React.Component {
       element.src = pauseIcon;
       this.setState({ currentTrack: track });
 
-      // set previous track's icon back to music note
       if (this.state.currentIconId)
         document.getElementById(this.state.currentIconId).src = musicNoteIcon;
 
@@ -112,9 +106,7 @@ class LibrarySongs extends React.Component {
             };
           });
           this.songList = songList;
-          // this.props.newPlayQueue(songList)
 
-          //create array of album's songs
           const songs = data.user.songs.map((song, idx) => {
             if (idx === 0) this.defaultTrack = song._id;
 
