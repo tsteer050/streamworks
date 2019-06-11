@@ -13,7 +13,7 @@ class Splash extends React.Component {
             if (loading)
               return (
                 <div className="loading-screen">
-                  <div class="lds-facebook">
+                  <div className="lds-facebook">
                     <div />
                     <div />
                     <div />

@@ -44,7 +44,7 @@ class AWSSoundPlayer extends Component {
   onPrevClick() {
     // If duration > 3 seconds, then tell soundcloud to restart current song
     //Else: 
-    if (this.props.currentTime > 3 || this.props.state.currentTrack == 0) {
+    if (this.props.currentTime > 3 || this.props.state.currentTrack === 0) {
       this.props.soundCloudAudio.setTime(0);
     } else {
       this.props.prevTrack();

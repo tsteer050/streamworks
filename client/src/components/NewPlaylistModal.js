@@ -46,10 +46,10 @@ class NewPlaylistModal extends React.Component {
       <Mutation
         mutation={CREATE_PLAYLIST}
         onCompleted={data => {
-          debugger
+          console.log(data);
           const id = data.newPlaylist._id;
-          this.setState({ title: "" });
-          // this.props.history.push(`/playlists/${id}`);
+          this.resetTitle();
+          this.props.history.push(`/playlists/${id}`);
         }}
       >
         {newPlaylist => (
@@ -57,7 +57,7 @@ class NewPlaylistModal extends React.Component {
             className="new-playlist-form"
             onSubmit={e => this.handleSubmit(e, newPlaylist)}
           >
-            <button
+            <span
               className="x-button"
               onClick={() => {
                 this.resetTitle();
@@ -65,7 +65,7 @@ class NewPlaylistModal extends React.Component {
               }}
             >
               X
-            </button>
+            </span>
             <h1>Create new playlist</h1>
             <div>
               <input

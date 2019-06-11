@@ -1,21 +1,21 @@
 import React from "react";
+import { Mutation } from "react-apollo";
+import { ADD_PLAYLIST_SONG } from "../graphql/mutations";
 import { Query } from "react-apollo";
-import { FETCH_USER_LIBRARY } from "../graphql/queries";
-import "./LibraryCSS/LibraryPlaylists.css";
+import { FETCH_USER_LIBRARY } from '../graphql/queries';
+import "./library.css";
+import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
+import "./addsongtoplaylist.css";
 const jwt = require("jsonwebtoken");
 
-class LibraryPlaylist extends React.Component {
+
+class AddSongToPlaylistModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      songList: [],
-      currentAlbum: null,
-      currentIconId: null,
-      playIcon: null,
       user: null
     };
-    this.albumSongLists = null;
   }
 
   componentDidMount() {
@@ -24,51 +24,20 @@ class LibraryPlaylist extends React.Component {
     this.setState({ user });
   }
 
-  onHover(elementId) {
-    let playIcon = document.getElementById(elementId);
-
-    if (elementId === this.state.currentAlbum) {
-      playIcon.src = this.state.playIcon;
-    } else {
-      playIcon.src = require("../resources/album_play_icon.png");
-    }
-  }
-
-  offHover(elementId) {
-    let element = document.getElementById(elementId);
-    element.src = "";
-  }
-  toggleIcon(iconId) {
-    if (this.props.state.playing === false) {
-      this.setState({
-        playIcon:require("../resources/album_pause_icon.png")
-      });
-    } else {
-      this.setState({
-        playIcon:require("../resources/album_play_icon.png")
-      });
-    }
-    let icon = document.getElementById(iconId);
-    icon.src = this.state.playIcon;
-  }
-
-  playAlbum(e, albumId) {
-    if (this.state.currentAlbum === albumId) {
-      this.props.togglePlay();
-      this.toggleIcon(albumId);
-    } else {
-      this.setState({currentAlbum: albumId});
-      let playQueue = this.albumSongLists[albumId];
-      this.props.newPlayQueue(playQueue);
-      this.props.selectTrack(0);
-      this.props.togglePlay();
-      this.toggleIcon(albumId);
-    }
-  }
+  // handleSubmit(e, newPlaylist) {
+  //   e.preventDefault();
+  //   if (this.state.user) {
+  //     newPlaylist({
+  //       variables: {
+  //         title: this.state.title,
+  //         ownerId: this.state.user.id
+  //       }
+  //     });
+  //   }
+  // }
 
   render() {
-    if (!this.state.user) return (<div></div>);
-
+    // THIS NEEDS TO BE REPLACED ENTIRELY
     return (
       <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }} >
         {({ loading, error, data }) => {
@@ -76,7 +45,7 @@ class LibraryPlaylist extends React.Component {
           if (loading)
             return (
               <div className="library-loading">
-                <div className="lds-facebook">
+                <div class="lds-facebook">
                   <div />
                   <div />
                   <div />
@@ -84,7 +53,7 @@ class LibraryPlaylist extends React.Component {
               </div>
             );
           if (error) return `Error! ${error.message}`;
-          
+          let albumSongLists = {};
 
           //render simple message if nothing in library
           if (!data.user.playlists.length) {
@@ -93,7 +62,6 @@ class LibraryPlaylist extends React.Component {
             )
           }
           let playListSongLists = [];
-          //create array of album's songs
           const playLists = data.user.playlists.map((playList, idx) => {
 
             playListSongLists[playList._id] = playList.songs.map(song => {
@@ -105,7 +73,7 @@ class LibraryPlaylist extends React.Component {
               };
             });
 
-            
+            let songLength = null;
             var sectionStyle = {
               width: "100%",
               height: "100%",
@@ -153,8 +121,69 @@ class LibraryPlaylist extends React.Component {
           );
         }}
       </Query>
+
+
+
+
+
+
+
+
+
+
+
+      // <Mutation mutation={ADD_PLAYLIST_SONG} >
+      //   {addPlaylistSong => (
+
+          // <form
+          //   className="new-playlist-form"
+          //   onSubmit={e => this.handleSubmit(e, newPlaylist)}
+          // >
+          //   <button
+          //     className="x-button"
+          //     onClick={() => {
+          //       this.resetTitle();
+          //       this.props.toggleModal();
+          //     }}
+          //   >
+          //     X
+          //   </button>
+          //   <h1>Create new playlist</h1>
+          //   <div>
+          //     <input
+          //       type="text"
+          //       className="playlist-input-box"
+          //       placeholder="Start Typing . . ."
+          //       value={this.state.title}
+          //       onChange={this.update("title")}
+          //     />
+          //   </div>
+          //   <div className="new-playlist-form-buttons">
+          //     <div>
+          //       <button
+          //         onClick={e => {
+          //           e.preventDefault();
+          //           this.resetTitle();
+          //           this.props.toggleModal();
+          //         }}
+          //         className="new-playlist-cancel-button"
+          //       >
+          //         CANCEL
+          //       </button>
+          //     </div>
+          //     <div>
+          //       <button
+          //         type="submit"
+          //         className="new-playlist-submit-button new-playlist-button"
+          //       >
+          //         SUBMIT
+          //       </button>
+          //     </div>
+          //   </div>
+          // </form>
+        // )}
+      // </Mutation>
     );
   }
 }
-
-export default LibraryPlaylist;
+export default withRouter(AddSongToPlaylistModal);

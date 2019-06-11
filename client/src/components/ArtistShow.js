@@ -48,9 +48,9 @@ class ArtistShow extends React.Component {
   }
   toggleIcon(iconId) {
     if (this.props.state.playing === false) {
-      this.state.playIcon = require("../resources/album_pause_icon.png");
+      this.setState({playIcon: require("../resources/album_pause_icon.png")});
     } else {
-      this.state.playIcon = require("../resources/album_play_icon.png");
+      this.setState({playIcon: require("../resources/album_play_icon.png")});
     }
     let icon = document.getElementById(iconId);
     icon.src = this.state.playIcon;
@@ -60,7 +60,9 @@ class ArtistShow extends React.Component {
       this.props.togglePlay();
       this.toggleIcon(albumId);
     } else {
-      this.state.currentAlbum = albumId;
+      this.setState({
+        currentAlbum: albumId
+      });
       let playQueue = this.albumSongLists[albumId];
       this.props.newPlayQueue(playQueue);
       this.props.selectTrack(0);
@@ -204,8 +206,6 @@ class ArtistShow extends React.Component {
                 albumArtUrl: album.album_art_url
               };
             });
-
-            let songLength = null;
             var sectionStyle = {
               width: "100%",
               height: "100%",
@@ -288,8 +288,3 @@ class ArtistShow extends React.Component {
 
 export default ArtistShow;
 
-{
-  /* <div className="more-info">
-  <p>(YEAR)    {`${data.album.songs.length} SONGS`}</p>
-</div> */
-}

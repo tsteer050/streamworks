@@ -7,7 +7,7 @@ import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { createHttpLink } from "apollo-link-http";
 import { ApolloProvider } from "react-apollo";
-import { onError } from "apollo-link-error";
+// import { onError } from "apollo-link-error";
 import {HashRouter} from 'react-router-dom';
 import { VERIFY_USER } from './graphql/mutations';
 import { Provider } from 'react-redux';
@@ -59,9 +59,9 @@ if (token) {
 
 
 
-const errorLink = onError(({ graphQLErrors }) => {
-  if (graphQLErrors) graphQLErrors.map(({ message }) => console.log(message));
-});
+// const errorLink = onError(({ graphQLErrors }) => {
+//   if (graphQLErrors) graphQLErrors.map(({ message }) => console.log(message));
+// });
 
 
 
