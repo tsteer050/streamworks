@@ -20,7 +20,7 @@ const PlaylistType = new GraphQLObjectType({
     owner: {
       type: UserType,
       resolve(parentValue) {
-        return User.findById(parentValue.user)
+        return User.findById(parentValue.owner)
         .then(user => user)
         .catch(err => null);
       }

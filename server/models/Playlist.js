@@ -48,12 +48,12 @@ PlaylistSchema.statics.newPlaylist = async(title, ownerId) => {
   const Playlist = mongoose.model("playlists");
   const User = mongoose.model("users");
 
-  const owner = await User.findById(ownerId);
+  let owner = await User.findById(ownerId);
   let playlist = new Playlist({ title, owner });
+
   playlist = await playlist.save();
   owner.playlists.push(playlist);
-  await owner.save();
-
+  owner = await owner.save();
   return playlist;
   
 };

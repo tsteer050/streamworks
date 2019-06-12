@@ -1,6 +1,7 @@
 import React from "react";
 import { Mutation } from "react-apollo";
 import { CREATE_PLAYLIST } from "../graphql/mutations";
+import { FETCH_USER_LIBRARY } from "../graphql/queries";
 import "./library.css";
 import { withRouter } from "react-router-dom";
 const jwt = require("jsonwebtoken");
@@ -45,8 +46,18 @@ class NewPlaylistModal extends React.Component {
     return (
       <Mutation
         mutation={CREATE_PLAYLIST}
+        update={(cache, { data: { newPlaylist }} ) => {
+          const { user } = cache.readQuery({ query: FETCH_USER_LIBRARY, variables: { id: this.state.user.id } });
+          const { playlists } = user;
+          playlists.push(newPlaylist);
+          user.playlists = playlists;
+          cache.writeQuery({
+            query: FETCH_USER_LIBRARY,
+            data: { user },
+          });
+        }}
         onCompleted={data => {
-          console.log(data);
+
           const id = data.newPlaylist._id;
           this.resetTitle();
           this.props.history.push(`/playlists/${id}`);
