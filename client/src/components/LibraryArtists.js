@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 
 const jwt = require("jsonwebtoken");
 
-const playIcon = require("../resources/play_icon.png");
-const pauseIcon = require("../resources/pause_icon.png");
-const musicNoteIcon = require("../resources/music_note_icon.png");
+// const playIcon = require("../resources/play_icon.png");
+// const pauseIcon = require("../resources/pause_icon.png");
+// const musicNoteIcon = require("../resources/music_note_icon.png");
 
 class LibraryArtists extends React.Component {
   constructor(props) {

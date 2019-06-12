@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Query } from "react-apollo";
-import { FETCH_ALBUM, FETCH_USER_LIBRARY } from "../graphql/queries";
+import { FETCH_USER_LIBRARY } from "../graphql/queries";
 import "./LibraryCSS/LibrarySongs.css";
+import SongIndex from './index/SongIndex';
 const jwt = require("jsonwebtoken");
 
 const playIcon = require("../resources/play_icon.png");
@@ -21,6 +21,11 @@ class LibrarySongs extends React.Component {
     this.isLoggedIn = null;
     this.defaultTrack = null;
     this.songList = null;
+
+    this.setDefaultTrack = this.setDefaultTrack.bind(this);
+    this.onHover = this.onHover.bind(this);
+    this.offHover = this.offHover.bind(this);
+    this.toggleSong = this.toggleSong.bind(this);
   }
 
   componentDidMount() {
@@ -29,9 +34,13 @@ class LibrarySongs extends React.Component {
     this.setState({ user });
   }
 
+  setDefaultTrack(iconId) {
+    this.defaultTrack = iconId;
+  }
+
   onHover(elementId, track) {
     if (elementId === "albumImage") {
-      let albumImage = document.getElementById(elementId);
+      //let albumImage = document.getElementById(elementId);
     }
     let element = document.getElementById(elementId);
 
@@ -56,7 +65,7 @@ class LibrarySongs extends React.Component {
     iconElementId = iconElementId || this.defaultTrack;
 
     let element = document.getElementById(iconElementId);
-    let albumImage = document.getElementById("albumImage");
+    //let albumImage = document.getElementById("albumImage");
 
     if (track === this.state.currentTrack) {
       if (this.props.state.playing === false) {
@@ -115,70 +124,7 @@ class LibrarySongs extends React.Component {
           // this.props.newPlayQueue(songList)
 
           //create array of album's songs
-          const songs = data.user.songs.map((song, idx) => {
-            if (idx === 0) this.defaultTrack = song._id;
-
-            let songLength = null;
-            if (song.length % 60 >= 10) {
-              songLength = `${Math.floor(
-                parseInt(song.length) / 60
-              )}:${song.length % 60}`;
-            } else {
-              songLength = `${Math.floor(
-                parseInt(song.length) / 60
-              )}:0${song.length % 60}`;
-            }
-            return (
-              <li
-                key={song._id}
-                onMouseOver={() => {
-                  this.onHover(song._id, idx);
-                }}
-                onMouseOut={() => {
-                  this.offHover(song._id, idx);
-                }}
-              >
-                <div className="playicon-songname">
-                  <span
-                    className="playicon-container"
-                    onClick={e => this.toggleSong(e, idx, song._id)}
-                  >
-                    <img
-                      id={song._id}
-                      className="playicon"
-                      src={require("../resources/music_note_icon.png")}
-                      alt=""
-                    />
-                  </span>
-                  <span className="song-info-container">
-                    <span id="1"> {song.title}</span>
-
-                    <div className="song-artist-album">
-                      <Link to={`/artist/${song.album.artist._id}`}>
-                        <span className="song-artist">
-                          {song.album.artist.name}
-                        </span>
-                      </Link>
-                      <span> . </span>
-                      <Link to={`/album/${song.album._id}`}>
-                        <span className="song-album">{song.album.title}</span>
-                      </Link>
-                    </div>
-                  </span>
-                </div>
-                <div className="menu-songlength">
-                  <span className="menu">
-                    <img
-                      className="menu-icon"
-                      src={require("../resources/menu_icon.png")}
-                      alt=""
-                    />
-                  </span>
-                  <span> {songLength}</span>
-                </div>
-              </li>
-            );
-          });
+          const songs = <SongIndex songs={data.user.songs} setDefaultTrack={this.setDefaultTrack} onHover={this.onHover} offHover={this.offHover} toggleSong={this.toggleSong} />
 
           return (
             // <div className="librarysongs-show">
