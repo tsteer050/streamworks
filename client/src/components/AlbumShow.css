@@ -78,6 +78,7 @@
 }
 
 .album-show-play-icon{
+  visibility: hidden;
 }
 
 

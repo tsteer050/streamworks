@@ -23,12 +23,12 @@ class AlbumShow extends React.Component {
       songList: [],
       currentTrack: null,
       currentIconId: null,
-      currentImageIconId: null,
       user: null
     };
     this.isLoggedIn = null;
     this.defaultTrack = null;
     this.songList = null;
+    this.currentImageIconId = null;
 
     this.setDefaultTrack = this.setDefaultTrack.bind(this);
     this.onHover = this.onHover.bind(this);
@@ -41,8 +41,34 @@ class AlbumShow extends React.Component {
     let token = localStorage.getItem("auth-token");
     const user = jwt.decode(token);
     this.setState({ user });
+    //this.props.newPlayQueue(this.songList);
   }
 
+  componentDidUpdate() {
+    if (!document.getElementById("playButton")) return;
+    if (!document.getElementById(this.props.state.currentTrack)) return;
+
+    if(this.state.currentTrack !== this.props.state.currentTrack) {
+      if (this.state.currentTrack !== null) {
+        document.getElementById(this.state.currentTrack).src = musicNoteIcon;
+      } 
+      this.setState({currentTrack: this.props.state.currentTrack});
+    }
+
+    let icon = document.getElementById(this.props.state.currentTrack);
+    let playButton = document.getElementById("playButton");
+    let albumImageIcon = document.getElementById("albumImage");
+
+    if (this.props.state.playing === false) {
+      playButton.innerHTML = "PAUSE";
+      icon.src = playIcon;
+      albumImageIcon.src = imagePlayIcon;
+    } else {
+      playButton.innerHTML = "PLAY";
+      icon.src = pauseIcon;
+      albumImageIcon.src = imagePauseIcon;
+    }
+  }
 
   setDefaultTrack(iconId) {
     this.defaultTrack = iconId;
@@ -50,6 +76,7 @@ class AlbumShow extends React.Component {
 
   toggleImageIcon() {
     let icon = document.getElementById("albumImage");
+    
 
     if (this.props.state.playing === false) {
       icon.src = imagePauseIcon;
@@ -62,15 +89,10 @@ class AlbumShow extends React.Component {
     
     if (elementId === "albumImage") {
       let albumImage = document.getElementById(elementId);
-      if (this.props.state.playing === true) {
-        
-        albumImage.src = imagePauseIcon;
-      } else {
-        albumImage.src = imagePlayIcon;
-      }
+      albumImage.style.visibility = "visible";
       return;
     }
-    let element = document.getElementById(elementId);
+    let element = document.getElementById(track);
 
     if (
       this.props.state.playing === true &&
@@ -82,13 +104,14 @@ class AlbumShow extends React.Component {
     }
   }
   offHover(elementId, track) {
-    let element = document.getElementById(elementId);
+    
     if (elementId === "albumImage") {
-      
-      element.src = "";
+      let albumImage = document.getElementById(elementId);
+      albumImage.style.visibility = "hidden";
       return;
     }
     if (this.state.currentTrack !== track) {
+      let element = document.getElementById(track);
       element.src = require("../resources/music_note_icon.png");
     }
   }
@@ -97,35 +120,12 @@ class AlbumShow extends React.Component {
     track = track || 0;
     iconElementId = iconElementId || this.defaultTrack;
 
-    let element = document.getElementById(iconElementId);
-    let playButton = document.getElementById("playButton");
-
-    this.toggleImageIcon();
     if (track === this.state.currentTrack) {
-      if (this.props.state.playing === false) {
-        element.src = pauseIcon;
-        playButton.innerHTML = "PLAY";
-       
         this.props.togglePlay();
-      } else {
-        element.src = playIcon;
-        playButton.innerHTML = "PAUSE";
-        this.props.togglePlay();
-      }
     } else {
       this.props.newPlayQueue(this.songList);
-      element.src = pauseIcon;
-      playButton.innerHTML = "PLAY";
-      this.setState({ currentTrack: track });
-
-      // toggle the album image play icon
-      
-      // set previous track's icon back to music note
-      if (this.state.currentIconId)
-        document.getElementById(this.state.currentIconId).src = musicNoteIcon;
-
-      this.setState({ currentIconId: iconElementId });
       this.props.selectTrack(track);
+
       if(this.props.state.playing === false) {
         this.props.togglePlay();
       } else {
@@ -222,7 +222,7 @@ class AlbumShow extends React.Component {
             }; 
           });
           this.songList = songList;
-          
+         
           const songIndex = <SongIndex songs={data.album.songs} setDefaultTrack={this.setDefaultTrack} onHover={this.onHover} offHover={this.offHover} toggleSong={this.toggleSong} />;
           const albumArtStyle = {
             // width: '225px',
@@ -249,7 +249,7 @@ class AlbumShow extends React.Component {
                       id="albumImage"
                       className="album-show-play-icon"
                       alt=""
-                      src=""
+                      src={imagePlayIcon}
                     />
                   </div>
                 </div>
