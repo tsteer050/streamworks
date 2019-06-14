@@ -5,6 +5,8 @@ import { ADD_USER_ALBUM, REMOVE_USER_ALBUM } from '../graphql/mutations';
 import "./AlbumShow.css";
 import { Link } from "react-router-dom";
 import "rodal/lib/rodal.css";
+
+
 import SongIndex from './index/SongIndex';
 
 const jwt = require("jsonwebtoken");
@@ -97,7 +99,7 @@ class AlbumShow extends React.Component {
 
     let element = document.getElementById(iconElementId);
     let playButton = document.getElementById("playButton");
-   
+
     this.toggleImageIcon();
     if (track === this.state.currentTrack) {
       if (this.props.state.playing === false) {

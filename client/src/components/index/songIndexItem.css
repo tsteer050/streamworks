@@ -17,6 +17,10 @@
    margin-left: 20px;
    cursor: pointer;
  }
+ .menu-button:hover {
+   outline: none;
+ }
+
 .song-menu {
   position: absolute;
     display: flex;
@@ -29,17 +33,27 @@
     justify-content: flex-start;
     top: 30px;
     width: 195px;
+    list-style: none;
     right: 0;
     background: #333;
-    font-size: 14px;
 }
-.song-menu > li:hover {
-  background: #F3F3F3;;
+.song-menu {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.song-menu-item:hover {
+  background: #555;
 }
 .song-menu-item{
-  font-size: 13px;
+  font-size: 15px;
     text-align: start;
-    
+    line-height: 40px;
+    height: 40px;
     width: 100%;
     padding-left: 20px;
+    padding-bottom:0px;
+    padding-top: 0px;
+}
+p {
+  padding: 0;
 }

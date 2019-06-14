@@ -98,7 +98,7 @@ class SongIndexItem extends React.Component {
       favoriteButton = () => {
         return (
           <li className="song-menu-item">
-            <h5>Add to library</h5>
+            Add to library
           </li>
           
         )
