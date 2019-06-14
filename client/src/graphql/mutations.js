@@ -54,12 +54,15 @@ export const CREATE_PLAYLIST = gql`
   mutation NewPlaylist($title: String!, $ownerId: ID!) {
     newPlaylist(title: $title, ownerId: $ownerId) {
         _id
-        title
         songs {
           _id
           title
           length
           audio_url
+        }
+        title
+        owner {
+          _id
         }
         subscribers {
           _id

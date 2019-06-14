@@ -44,31 +44,19 @@ PlaylistSchema.statics.updateOwner = (playlistId, ownerId) => {
 };
 
 
-PlaylistSchema.statics.newPlaylist = (title, ownerId) => {
+PlaylistSchema.statics.newPlaylist = async(title, ownerId) => {
   const Playlist = mongoose.model("playlists");
   const User = mongoose.model("users");
 
+  let owner = await User.findById(ownerId);
+  let playlist = new Playlist({ title, owner });
 
-  return User.findById(ownerId).then(owner => {
-    new Playlist({ title, owner: ownerId }).save().then(playlist => {
-      owner.playlists.push(playlist);
-      owner.save().then(owner => {
-        return playlist;
-      });
-    });
-  });
+  playlist = await playlist.save();
+  owner.playlists.push(playlist);
+  owner = await owner.save();
+  return playlist;
+  
 };
-
-
-// return new Playlist({ title, ownerId }).save();
-
-
-
-
-
-
-
-
 
 PlaylistSchema.statics.addSubscriber = (playlistId, subscriberId) => {
   const Playlist = mongoose.model('playlists');

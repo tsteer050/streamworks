@@ -1,6 +1,7 @@
 import React from "react";
 import { Mutation } from "react-apollo";
 import { CREATE_PLAYLIST } from "../graphql/mutations";
+import { FETCH_USER_LIBRARY } from "../graphql/queries";
 import "./library.css";
 import { withRouter } from "react-router-dom";
 const jwt = require("jsonwebtoken");
@@ -45,11 +46,21 @@ class NewPlaylistModal extends React.Component {
     return (
       <Mutation
         mutation={CREATE_PLAYLIST}
+        update={(cache, { data: { newPlaylist }} ) => {
+          const { user } = cache.readQuery({ query: FETCH_USER_LIBRARY, variables: { id: this.state.user.id } });
+          const { playlists } = user;
+          playlists.push(newPlaylist);
+          user.playlists = playlists;
+          cache.writeQuery({
+            query: FETCH_USER_LIBRARY,
+            data: { user },
+          });
+        }}
         onCompleted={data => {
-          debugger
+
           const id = data.newPlaylist._id;
-          this.setState({ title: "" });
-          // this.props.history.push(`/playlists/${id}`);
+          this.resetTitle();
+          this.props.history.push(`/playlists/${id}`);
         }}
       >
         {newPlaylist => (
@@ -57,7 +68,7 @@ class NewPlaylistModal extends React.Component {
             className="new-playlist-form"
             onSubmit={e => this.handleSubmit(e, newPlaylist)}
           >
-            <button
+            <span
               className="x-button"
               onClick={() => {
                 this.resetTitle();
@@ -65,7 +76,7 @@ class NewPlaylistModal extends React.Component {
               }}
             >
               X
-            </button>
+            </span>
             <h1>Create new playlist</h1>
             <div>
               <input

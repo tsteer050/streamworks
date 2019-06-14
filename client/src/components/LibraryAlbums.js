@@ -5,10 +5,6 @@ import "./LibraryCSS/LibraryAlbums.css";
 import { Link } from "react-router-dom";
 const jwt = require("jsonwebtoken");
 
-const playIcon = require("../resources/play_icon.png");
-const pauseIcon = require("../resources/pause_icon.png");
-const musicNoteIcon = require("../resources/music_note_icon.png");
-
 class LibraryAlbums extends React.Component {
   constructor(props) {
     super(props);
@@ -44,9 +40,13 @@ class LibraryAlbums extends React.Component {
   }
   toggleIcon(iconId) {
     if (this.props.state.playing === false) {
-      this.state.playIcon = require("../resources/album_pause_icon.png");
+      this.setState({
+        playIcon: require("../resources/album_pause_icon.png")
+      });
     } else {
-      this.state.playIcon = require("../resources/album_play_icon.png");
+      this.setState({
+        playIcon: require("../resources/album_play_icon.png")
+      });
     }
     let icon = document.getElementById(iconId);
     icon.src = this.state.playIcon;
@@ -57,7 +57,9 @@ class LibraryAlbums extends React.Component {
       this.props.togglePlay();
       this.toggleIcon(albumId);
     } else {
-      this.state.currentAlbum = albumId;
+      this.setState({
+        currentAlbum: albumId
+      });
       let playQueue = this.albumSongLists[albumId];
       this.props.newPlayQueue(playQueue);
       this.props.selectTrack(0);
@@ -104,7 +106,7 @@ class LibraryAlbums extends React.Component {
               };
             });
 
-            let songLength = null;
+         
             var sectionStyle = {
               width: "100%",
               height: "100%",

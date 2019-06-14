@@ -3,11 +3,6 @@ import SongIndexItem from './SongIndexItem';
 
 class SongIndex extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
-
   render() {
     const { songs, onHover, offHover, toggleSong } = this.props;
 
