@@ -5,6 +5,9 @@ import "./LibraryCSS/LibraryAlbums.css";
 import { Link } from "react-router-dom";
 const jwt = require("jsonwebtoken");
 
+const imagePlayIcon = require('../resources/album_play_icon.png');
+const imagePauseIcon = require('../resources/album_pause_icon.png');
+
 class LibraryAlbums extends React.Component {
   constructor(props) {
     super(props);
@@ -24,38 +27,51 @@ class LibraryAlbums extends React.Component {
     this.setState({ user });
   }
 
-  onHover(elementId) {
-    let playIcon = document.getElementById(elementId);
+  componentDidUpdate() {
+    if (!document.getElementById(this.state.currentAlbum)) return;
 
-    if (elementId === this.state.currentAlbum) {
-      playIcon.src = this.state.playIcon;
-    } else {
-      playIcon.src = require("../resources/album_play_icon.png");
+    if (this.state.currentTrack !== this.props.state.currentTrack) {
+      this.setState({ currentTrack: this.props.state.currentTrack });
     }
+
+    let albumImageIcon = document.getElementById(this.state.currentAlbum);
+
+    if (this.props.state.playing === false) {
+      albumImageIcon.src = imagePlayIcon;
+    } else {
+      albumImageIcon.src = imagePauseIcon;
+    }
+  }
+
+  onHover(elementId) {
+    let albumImage = document.getElementById(elementId);
+    albumImage.style.visibility = "visible";
   }
 
   offHover(elementId) {
-    let element = document.getElementById(elementId);
-    element.src = "";
+    let albumImage = document.getElementById(elementId);
+    albumImage.style.visibility = "hidden";
+    return;
   }
-  toggleIcon(iconId) {
-    if (this.props.state.playing === false) {
-      this.setState({
-        playIcon: require("../resources/album_pause_icon.png")
-      });
-    } else {
-      this.setState({
-        playIcon: require("../resources/album_play_icon.png")
-      });
-    }
-    let icon = document.getElementById(iconId);
-    icon.src = this.state.playIcon;
-  }
+
+
+  // toggleIcon(iconId) {
+  //   if (this.props.state.playing === false) {
+  //     this.setState({
+  //       playIcon: require("../resources/album_pause_icon.png")
+  //     });
+  //   } else {
+  //     this.setState({
+  //       playIcon: require("../resources/album_play_icon.png")
+  //     });
+  //   }
+  //   let icon = document.getElementById(iconId);
+  //   icon.src = this.state.playIcon;
+  // }
 
   playAlbum(e, albumId) {
     if (this.state.currentAlbum === albumId) {
       this.props.togglePlay();
-      this.toggleIcon(albumId);
     } else {
       this.setState({
         currentAlbum: albumId
@@ -64,7 +80,6 @@ class LibraryAlbums extends React.Component {
       this.props.newPlayQueue(playQueue);
       this.props.selectTrack(0);
       this.props.togglePlay();
-      this.toggleIcon(albumId);
     }
   }
 
@@ -129,7 +144,7 @@ class LibraryAlbums extends React.Component {
                   <img
                     id={album._id}
                     className="album-play-icon"
-                    src=""
+                    src={imagePlayIcon}
                     alt=""
                   />
                   </div>

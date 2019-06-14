@@ -13,6 +13,7 @@ class LibraryArtists extends React.Component {
     this.state = {
       songList: [],
       currentAlbum: null,
+      currentArtist: null,
       currentIconId: null,
       playIcon: null,
       user: null
@@ -49,15 +50,21 @@ class LibraryArtists extends React.Component {
     let icon = document.getElementById(iconId);
     icon.src = this.state.playIcon;
   }
-  playAlbum(e, albumId) {
-    if (this.state.currentAlbum === albumId) {
+
+  // disabled for now - need to create songlist for all user's artists
+  playArtist(e, artistId, albumId) {
+    // disabled
+    return;
+    ////////////
+    
+    if (this.state.currentArtist === artistId) {
       this.props.togglePlay();
-      this.toggleIcon(albumId);
     } else {
       this.setState({
+        currentArtist: artistId,
         currentAlbum: albumId
       });
-      let playQueue = this.albumSongLists[albumId];
+      let playQueue = this.artistSongList[albumId];
       this.props.newPlayQueue(playQueue);
       this.props.selectTrack(0);
       this.props.togglePlay();
@@ -92,6 +99,22 @@ class LibraryArtists extends React.Component {
             )
           }
 
+          //create array of artist's albums and songs for playback
+          // let artistSongList = {};
+
+          // const albums = data.artist.albums.map((album, idx) => {
+          //   artistSongList[album._id] = album.songs.map(song => {
+          //     return {
+          //       stream_url: song.audio_url,
+          //       trackTitle: song.title,
+          //       artistName: data.artist.name,
+          //       albumArtUrl: album.album_art_url
+          //     };
+          //   });
+          // });
+          // this.artistSongList = artistSongList;
+
+          // create array of user's artists for display
           const artists = data.user.artists.map((artist, idx) => {
 
             var sectionStyle = {
@@ -107,7 +130,7 @@ class LibraryArtists extends React.Component {
                 <div
                   className="artist-image"
                   style={sectionStyle}
-                  onClick={e => this.playartist(e, artist._id)}
+                  onClick={e => this.playArtist(e, artist._id, this.currentAlbum || data.artists)}
                   onMouseOver={() => this.onHover(artist._id, idx)}
                   onMouseOut={() => {
                     this.offHover(artist._id, idx);

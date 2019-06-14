@@ -14,7 +14,7 @@ const playIcon = require('../resources/play_icon.png');
 const pauseIcon = require('../resources/pause_icon.png');
 const imagePlayIcon = require('../resources/album_play_icon.png');
 const imagePauseIcon = require('../resources/album_pause_icon.png');
-const musicNoteIcon = require('../resources/music_note_icon.png')
+const musicNoteIcon = require('../resources/music_note_icon.png');
 
 class AlbumShow extends React.Component {
   constructor(props) {
