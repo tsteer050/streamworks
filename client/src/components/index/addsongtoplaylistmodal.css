@@ -1,0 +1,13 @@
+.add-song-to-playlist-modal {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: black;
+}
+
+.visible {
+  display: block;
+}
