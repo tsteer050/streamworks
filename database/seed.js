@@ -116,14 +116,6 @@ mongoose
             albums: [albumIds[10]]
           },
           {
-            _id: artistIds[9],
-            name: "Loreena McKennitt",
-            genre: "Celtic",
-            bio: "Loreena Isabel Irene McKennitt is a Canadian musician, composer, harpist, accordionist, and pianist.",
-            artist_image_url: 'https://www.udiscovermusic.com/wp-content/uploads/2018/03/U2-optimised-copy.jpg',
-            albums: [albumIds[11]]
-          },
-          {
             _id: artistIds[10],
             name: "Muse",
             genre: "Rock",

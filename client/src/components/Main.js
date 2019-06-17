@@ -16,6 +16,7 @@ const AudioPlayerRedux = withRedux(AudioPlayer);
 const AlbumShowRedux = withRedux(AlbumShow);
 const ArtistShowRedux = withRedux(ArtistShow);
 const PlaylistShowRedux = withRedux(PlaylistShow);
+const SplashRedux = withRedux(Splash);
 
 class Main extends React.Component {
   render() {
@@ -24,7 +25,7 @@ class Main extends React.Component {
         <SideBar />
         <Switch>
           <Route exact path="/search" component={SearchBar} />
-          <Route exact path="/" component={Splash} />
+          <Route exact path="/" component={SplashRedux} />
           <Route exact path="/album/:id" component={AlbumShowRedux} />
           <Route exact path="/artist/:id" component={ArtistShowRedux} />
           <Route path="/library" component={Library} />

@@ -159,8 +159,8 @@ class PlaylistShow extends React.Component {
             return {
               stream_url: song.audio_url,
               trackTitle: song.title,
-              artistName: "",
-              albumArtUrl: ""
+              artistName: song.artist.name,
+              albumArtUrl: song.album.albumArtUrl
 
             };
           });
@@ -204,9 +204,9 @@ class PlaylistShow extends React.Component {
                   </div>
                 </div>
                 <p className="playlist-name">{data.playlist.title}</p>
-                <Link to={`/library/playlists`}>
+                {/* <Link to={`/library/playlists`}>
                   <p className="playlist-artist-name">{this.state.user.name}</p>
-                </Link>
+                </Link> */}
                 <button
                   id="playButton"
                   className="play"
