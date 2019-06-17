@@ -4,7 +4,13 @@ import { FETCH_ALBUMS } from "../graphql/queries";
 import { Link } from "react-router-dom";
 import "./Splash.css";
 
+const imagePlayIcon = require('../resources/album_play_icon.png');
+const imagePauseIcon = require('../resources/album_pause_icon.png');
+
 class Splash extends React.Component {
+
+  
+
   render() {
     return (
       <Fragment>
@@ -36,6 +42,21 @@ class Splash extends React.Component {
                           this.props.history.push(`/album/${album._id}`)
                         }
                       />
+                      <div className="splash-overlay" onClick={e => {
+                        if(e.target.className === "splash-play-icon") {
+                          e.stopPropagation();
+                          return;
+                        }
+                        this.props.history.push(`/album/${album._id}`)
+                      }}>
+                        <img
+                          id="albumImage"
+                          className="splash-play-icon"
+                          alt=""
+                          src={imagePlayIcon}
+                        />
+                      </div>
+                     
                       <h5 className="list-album-title">{album.title}</h5>
                       <Link to={`/artist/${album.artist._id}`}>
                         <h5 className="list-album-artist-name">

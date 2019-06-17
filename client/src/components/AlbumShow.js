@@ -225,8 +225,8 @@ class AlbumShow extends React.Component {
          
           const songIndex = <SongIndex songs={data.album.songs} setDefaultTrack={this.setDefaultTrack} onHover={this.onHover} offHover={this.offHover} toggleSong={this.toggleSong} />;
           const albumArtStyle = {
-            // width: '225px',
-            // height: '225px',
+            width: '225px',
+            height: '225px',
             backgroundImage: `url(${data.album.album_art_url})`,
             backgroundSize: "225px"
           }
@@ -275,7 +275,7 @@ class AlbumShow extends React.Component {
                 </div>
                 <div className="more-buttons">
                    {favoriteButton(data.album)}
-                  <img className="menu-icon" src={require('../resources/menu_icon.png')} alt=""/>
+                  {/* <img className="menu-icon" src={require('../resources/menu_icon.png')} alt=""/> */}
                 </div>
               </div>
               <div className="right-column">      

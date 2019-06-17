@@ -239,7 +239,7 @@ class ArtistShow extends React.Component {
 
           // artist's background image for header
           let headerStyle = {
-            backgroundImage: ` linear-gradient(to bottom, rgba(0, 0, 0, 0), black 70%),url(${
+            backgroundImage: ` linear-gradient(to bottom, rgba(0, 0, 0, 0), black 80%),url(${
               data.artist.artist_image_url
             })`,
             backgroundSize: "100%",
@@ -258,11 +258,11 @@ class ArtistShow extends React.Component {
                       PLAY
                     </button>
                     {favoriteButton(data.artist)}
-                    <img
+                    {/* <img
                       className="menu-icon"
                       src={require("../resources/menu_icon.png")}
                       alt=""
-                    />
+                    /> */}
                   </div>
                 </div>
 
