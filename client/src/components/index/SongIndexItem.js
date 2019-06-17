@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { FETCH_USER_LIBRARY } from "../../graphql/queries";
 import { ADD_USER_SONG, REMOVE_USER_SONG } from '../../graphql/mutations';
 import { Query, Mutation } from "react-apollo";
+import AddToPlaylistModal from './AddToPlaylistModal';
 import "./songIndexItem.css";
 const jwt = require("jsonwebtoken");
 
@@ -16,6 +17,7 @@ class SongIndexItem extends React.Component {
     };
     this.showMenu = this.showMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
   
     componentDidMount() {
@@ -36,6 +38,13 @@ class SongIndexItem extends React.Component {
     this.setState({ showMenu: false }, () => {
       document.removeEventListener('click', this.closeMenu);
     });
+  }
+
+  toggleModal(song) {
+    let id = song._id + "modal";
+    let modal = document.getElementById(id);
+    modal.classList.add('visible');
+    console.log('toggled modal');
   }
 
   render() {
@@ -105,14 +114,6 @@ class SongIndexItem extends React.Component {
       }
     }
 
-
-
-
-
-
-
-    //
-    
     return (
       <li key={song._id} onMouseOver={() => { onHover(song._id, idx) }}
         onMouseOut={() => { offHover(song._id, idx) }}
@@ -132,7 +133,8 @@ class SongIndexItem extends React.Component {
               {this.state.showMenu ? (
                 <ul className="song-menu">
                   {favoriteButton(song)}
-                  <li className="song-menu-item">Add to Playlist</li>
+                  <li className="song-menu-item" onClick={() => this.toggleModal(song)}>Add to Playlist</li>
+                  <AddToPlaylistModal song={song} user={this.state.user} />
                 </ul>)
                 :
                 (null)}
