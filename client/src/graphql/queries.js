@@ -179,6 +179,21 @@ export const FETCH_USER_LIBRARY = gql`
           title
           length
           audio_url
+          album {
+            _id
+            title
+            album_art_url
+            songs {
+              _id
+              title
+              length
+              audio_url
+            }
+            artist {
+              _id
+              name
+            }
+          }
         }
         subscribers {
           _id
@@ -200,6 +215,21 @@ export const FETCH_PLAYLIST = gql`
         title
         length
         audio_url
+        album {
+          _id
+          title
+          album_art_url
+          songs {
+            _id
+            title
+            length
+            audio_url
+          }
+          artist {
+            _id
+            name
+          }
+        }
       }
     }
   }

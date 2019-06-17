@@ -59,6 +59,45 @@ export const CREATE_PLAYLIST = gql`
           title
           length
           audio_url
+          album {
+            _id
+            title
+            album_art_url
+            artist {
+              _id
+              name
+            }
+          }
+        }
+        title
+        owner {
+          _id
+        }
+        subscribers {
+          _id
+        }
+    }
+  }
+`;
+
+export const ADD_PLAYLIST_SONG = gql`
+  mutation AddPlaylistSong($playlistId: ID!, $songId: ID!) {
+    addPlaylistSong(playlistId: $playlistId, songId: $songId) {
+        _id
+        songs {
+          _id
+          title
+          length
+          audio_url
+          album {
+            _id
+            title
+            album_art_url
+            artist {
+              _id
+              name
+            }
+          }
         }
         title
         owner {

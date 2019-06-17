@@ -60,11 +60,11 @@ class AlbumShow extends React.Component {
     let albumImageIcon = document.getElementById("albumImage");
 
     if (this.props.state.playing === false) {
-      playButton.innerHTML = "PAUSE";
+      playButton.innerHTML = "PLAY";
       icon.src = playIcon;
       albumImageIcon.src = imagePlayIcon;
     } else {
-      playButton.innerHTML = "PLAY";
+      playButton.innerHTML = "PAUSE";
       icon.src = pauseIcon;
       albumImageIcon.src = imagePauseIcon;
     }

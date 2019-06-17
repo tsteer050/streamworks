@@ -100,14 +100,14 @@ class LibraryPlaylist extends React.Component {
               return {
                 stream_url: song.audio_url,
                 trackTitle: song.title,
-                artistName: song.artist.name,
+                artistName: song.album.artist.name,
                 albumArtUrl: song.album.album_art_url
               };
             });
 
             let image;
             if (playList.songs.length > 0) {
-              image = playList.songs[0].album.albumArtUrl;
+              image = playList.songs[0].album.album_art_url;
             } else {
               image = require('../images/empty-playlist.png');
             }
