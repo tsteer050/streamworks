@@ -34,13 +34,32 @@ class LibrarySongs extends React.Component {
     this.setState({ user });
   }
 
+  componentDidUpdate() {
+    if (!document.getElementById(this.props.state.currentTrack)) return;
+
+    if (this.state.currentTrack !== this.props.state.currentTrack) {
+      if (this.state.currentTrack !== null) {
+        document.getElementById(this.state.currentTrack).src = musicNoteIcon;
+      }
+      this.setState({ currentTrack: this.props.state.currentTrack });
+    }
+
+    let icon = document.getElementById(this.props.state.currentTrack);
+
+    if (this.props.state.playing === false) {
+      icon.src = playIcon;
+    } else {
+      icon.src = pauseIcon;
+    }
+  }
+
   setDefaultTrack(iconId) {
     this.defaultTrack = iconId;
   }
 
   onHover(elementId, track) {
 
-    let element = document.getElementById(elementId);
+    let element = document.getElementById(track);
 
     if (
       this.props.state.playing === true &&
@@ -52,8 +71,9 @@ class LibrarySongs extends React.Component {
     }
   }
   offHover(elementId, track) {
-    let element = document.getElementById(elementId);
+
     if (this.state.currentTrack !== track) {
+      let element = document.getElementById(track);
       element.src = require("../resources/music_note_icon.png");
     }
   }
@@ -62,27 +82,18 @@ class LibrarySongs extends React.Component {
     track = track || 0;
     iconElementId = iconElementId || this.defaultTrack;
 
-    let element = document.getElementById(iconElementId);
-
     if (track === this.state.currentTrack) {
-      if (this.props.state.playing === false) {
-        element.src = pauseIcon;
-        this.props.togglePlay();
-      } else {
-        element.src = playIcon;
-        this.props.togglePlay();
-      }
+      this.props.togglePlay();
     } else {
       this.props.newPlayQueue(this.songList);
-      element.src = pauseIcon;
-      this.setState({ currentTrack: track });
-
-      if (this.state.currentIconId)
-        document.getElementById(this.state.currentIconId).src = musicNoteIcon;
-
-      this.setState({ currentIconId: iconElementId });
       this.props.selectTrack(track);
-      this.props.togglePlay();
+
+      if (this.props.state.playing === false) {
+        this.props.togglePlay();
+      } else {
+        this.props.togglePlay();
+        this.props.togglePlay();
+      }
     }
   }
 

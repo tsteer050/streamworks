@@ -15,19 +15,19 @@ mongoose
     Artist.remove({}).then(() => {
       let artistIds = [];
 
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 10; i++) {
         artistIds.push(ObjectId());
       }
 
       let albumIds = [];
 
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 12; i++) {
         albumIds.push(ObjectId());
       }
 
       let songIds = [];
 
-      for (let i = 0; i < 79; i++) {
+      for (let i = 0; i < 120; i++) {
         songIds.push(ObjectId());
       }
 
@@ -88,6 +88,38 @@ mongoose
             artist_image_url: 'https://www.decodedmagazine.com/wp-content/uploads/2016/11/Brian-Transeau-1-decoded.jpg',
             albums: [albumIds[7]]
           },
+          {
+            _id: artistIds[6],
+            name: "U2",
+            genre: "Rock",
+            bio: "U2 are an Irish rock band from Dublin, formed in 1976.",
+            artist_image_url: 'https://www.udiscovermusic.com/wp-content/uploads/2018/03/U2-optimised-copy.jpg',
+            albums: [albumIds[8]]
+          },
+          {
+            _id: artistIds[7],
+            name: "Ahmad Jamal",
+            genre: "Jazz",
+            bio: "Ahmad Jamal is an American jazz pianist, composer, bandleader, and educator.",
+            artist_image_url: 'https://images-na.ssl-images-amazon.com/images/I/618jpCRULbL.jpg',
+            albums: [albumIds[9]]
+          },
+          {
+            _id: artistIds[8],
+            name: "Joni Mitchell",
+            genre: "Folk Jazz",
+            bio: "Roberta Joan 'Joni' Mitchell is a Canadian singer-songwriter",
+            artist_image_url: 'https://i.scdn.co/image/68cfb061951dbd44c95422a54cb70baec0722ca3',
+            albums: [albumIds[10]]
+          },
+          {
+            _id: artistIds[9],
+            name: "Loreena McKennitt",
+            genre: "Celtic",
+            bio: "Loreena Isabel Irene McKennitt is a Canadian musician, composer, harpist, accordionist, and pianist.",
+            artist_image_url: 'https://www.udiscovermusic.com/wp-content/uploads/2018/03/U2-optimised-copy.jpg',
+            albums: [albumIds[11]]
+          },
        ], (errors, artists) => {
           Album.remove({}).then(() => {
             Album.create(
@@ -147,6 +179,34 @@ mongoose
                   album_art_url: 'https://i1.sndcdn.com/artworks-000283768052-vuzlke-t500x500.jpg',
                   artist: artistIds[5],
                   songs: [songIds[72], songIds[73], songIds[74], songIds[75], songIds[76], songIds[77], songIds[78]]
+                },
+                {
+                  _id: albumIds[8],
+                  title: "All That You Can't Leave Behind",
+                  album_art_url: 'https://upload.wikimedia.org/wikipedia/en/5/5b/U2-all-that-you-cant-leave-behind.jpg',
+                  artist: artistIds[6],
+                  songs: [songIds[79], songIds[80], songIds[81], songIds[82], songIds[83], songIds[84], songIds[85], songIds[86], songIds[87], songIds[88], songIds[89]]
+                },
+                {
+                  _id: albumIds[9],
+                  title: "Blue Moon- The New York Session-The Paris Concert",
+                  album_art_url: 'https://images-na.ssl-images-amazon.com/images/I/51XFoHUbJ9L.jpg',
+                  artist: artistIds[7],
+                  songs: [songIds[90], songIds[91], songIds[92], songIds[93], songIds[94], songIds[95], songIds[96], songIds[97], songIds[98]]
+                },
+                {
+                  _id: albumIds[10],
+                  title: "Both Sides Now",
+                  album_art_url: 'http://www.thelefortreport.com/blog/wp-content/uploads/1091.jpg',
+                  artist: artistIds[8],
+                  songs: [songIds[99], songIds[100], songIds[101], songIds[102], songIds[103], songIds[104], songIds[105], songIds[106], songIds[107], songIds[108], songIds[109], songIds[110]]
+                },
+                {
+                  _id: albumIds[11],
+                  title: "The Book of Secrets",
+                  album_art_url: 'https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/Album_Cover-The_Book_of_Secrets.jpg/220px-Album_Cover-The_Book_of_Secrets.jpg',
+                  artist: artistIds[9],
+                  songs: [songIds[111], songIds[112], songIds[113], songIds[114], songIds[115], songIds[116], songIds[117], songIds[118]]
                 },
               ], (errors, albums) => {
                 Song.remove({}).then(() => {
@@ -701,6 +761,286 @@ mongoose
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/This+Binary+Universe/07+Good+Morning+Kaia+1.m4a',
                         length: 492,
                         album: albumIds[7]
+                      },
+                      {
+                        _id: songIds[79],
+                        title: "Beautiful Day",
+                        audio_url: '',
+                        length: 248,
+                        album: albumIds[8]
+                      },
+                      {
+                        _id: songIds[80],
+                        title: "Stuck in a Moment You Can't Get Out Of",
+                        audio_url: '',
+                        length: 272,
+                        album: albumIds[8]
+                      },
+                      {
+                        _id: songIds[81],
+                        title: "Elevation",
+                        audio_url: '',
+                        length: 228,
+                        album: albumIds[8]
+                      },
+                      {
+                        _id: songIds[82],
+                        title: "Walk On",
+                        audio_url: '',
+                        length: 296,
+                        album: albumIds[8]
+                      },
+                      {
+                        _id: songIds[83],
+                        title: "Kite",
+                        audio_url: '',
+                        length: 267,
+                        album: albumIds[8]
+                      },
+                      {
+                        _id: songIds[84],
+                        title: "In a Little While",
+                        audio_url: '',
+                        length: 219,
+                        album: albumIds[8]
+                      },
+                      {
+                        _id: songIds[85],
+                        title: "Wild Honey",
+                        audio_url: '',
+                        length: 227,
+                        album: albumIds[8]
+                      },
+                      {
+                        _id: songIds[86],
+                        title: "Peace on Earth",
+                        audio_url: '',
+                        length: 288,
+                        album: albumIds[8]
+                      },
+                      {
+                        _id: songIds[87],
+                        title: "When I Looked at the World",
+                        audio_url: '',
+                        length: 258,
+                        album: albumIds[8]
+                      },
+                      {
+                        _id: songIds[88],
+                        title: "New York",
+                        audio_url: '',
+                        length: 330,
+                        album: albumIds[8]
+                      },
+                      {
+                        _id: songIds[89],
+                        title: "Grace",
+                        audio_url: '',
+                        length: 331,
+                        album: albumIds[8]
+                      },
+                      {
+                        _id: songIds[90],
+                        title: "Autumn Rain",
+                        audio_url: '',
+                        length: 457,
+                        album: albumIds[9]
+                      },
+                      {
+                        _id: songIds[91],
+                        title: "Blue Moon",
+                        audio_url: '',
+                        length: 595,
+                        album: albumIds[9]
+                      },
+                      {
+                        _id: songIds[92],
+                        title: "Gypsy",
+                        audio_url: '',
+                        length: 313,
+                        album: albumIds[9]
+                      },
+                      {
+                        _id: songIds[93],
+                        title: "Invitation",
+                        audio_url: '',
+                        length: 793,
+                        album: albumIds[9]
+                      },
+                      {
+                        _id: songIds[94],
+                        title: "I Remember Italy",
+                        audio_url: '',
+                        length: 787,
+                        album: albumIds[9]
+                      },
+                      {
+                        _id: songIds[95],
+                        title: "Laura",
+                        audio_url: '',
+                        length: 329,
+                        album: albumIds[9]
+                      },
+                      {
+                        _id: songIds[96],
+                        title: "Morning Mist",
+                        audio_url: '',
+                        length: 499,
+                        album: albumIds[9]
+                      },
+                      {
+                        _id: songIds[97],
+                        title: "This Is the Life",
+                        audio_url: '',
+                        length: 428,
+                        album: albumIds[9]
+                      },
+                      {
+                        _id: songIds[98],
+                        title: "Woody'n You",
+                        audio_url: '',
+                        length: 296,
+                        album: albumIds[9]
+                      },
+                      {
+                        _id: songIds[99],
+                        title: "You're My Thrill",
+                        audio_url: '',
+                        length: 233,
+                        album: albumIds[10]
+                      },
+                      {
+                        _id: songIds[100],
+                        title: "At Last",
+                        audio_url: '',
+                        length: 268,
+                        album: albumIds[10]
+                      },
+                      {
+                        _id: songIds[101],
+                        title: "Comes Love",
+                        audio_url: '',
+                        length: 269,
+                        album: albumIds[10]
+                      },
+                      {
+                        _id: songIds[102],
+                        title: "You've Changed",
+                        audio_url: '',
+                        length: 301,
+                        album: albumIds[10]
+                      },
+                      {
+                        _id: songIds[103],
+                        title: "Answer Me, My Love",
+                        audio_url: '',
+                        length: 204,
+                        album: albumIds[10]
+                      },
+                      {
+                        _id: songIds[104],
+                        title: "A Case of you",
+                        audio_url: '',
+                        length: 354,
+                        album: albumIds[10]
+                      },
+                      {
+                        _id: songIds[105],
+                        title: "Don't Go to Strangers",
+                        audio_url: '',
+                        length: 251,
+                        album: albumIds[10]
+                      },
+                      {
+                        _id: songIds[106],
+                        title: "Sometimes I'm Happy",
+                        audio_url: '',
+                        length: 238,
+                        album: albumIds[10]
+                      },
+                      {
+                        _id: songIds[107],
+                        title: "Don't Worry 'Bout Me",
+                        audio_url: '',
+                        length: 230,
+                        album: albumIds[10]
+                      },
+                      {
+                        _id: songIds[108],
+                        title: "Stormy Weather",
+                        audio_url: '',
+                        length: 187,
+                        album: albumIds[10]
+                      },
+                      {
+                        _id: songIds[109],
+                        title: "I Wish I Were in Love Again",
+                        audio_url: '',
+                        length: 216,
+                        album: albumIds[10]
+                      },
+                      {
+                        _id: songIds[110],
+                        title: "Both Sides Now",
+                        audio_url: '',
+                        length: 346,
+                        album: albumIds[10]
+                      },
+                      {
+                        _id: songIds[111],
+                        title: "Prologue",
+                        audio_url: '',
+                        length: 265,
+                        album: albumIds[11]
+                      },
+                      {
+                        _id: songIds[112],
+                        title: "The Mummer's Dance",
+                        audio_url: '',
+                        length: 369,
+                        album: albumIds[11]
+                      },
+                      {
+                        _id: songIds[113],
+                        title: "Skellig",
+                        audio_url: '',
+                        length: 368,
+                        album: albumIds[11]
+                      },
+                      {
+                        _id: songIds[114],
+                        title: "Marco Pollo",
+                        audio_url: '',
+                        length: 319,
+                        album: albumIds[11]
+                      },
+                      {
+                        _id: songIds[115],
+                        title: "The Highwayman",
+                        audio_url: '',
+                        length: 621,
+                        album: albumIds[11]
+                      },
+                      {
+                        _id: songIds[116],
+                        title: "La Serenissima",
+                        audio_url: '',
+                        length: 310,
+                        album: albumIds[11]
+                      },
+                      {
+                        _id: songIds[117],
+                        title: "Night Ride Across the Caucasus",
+                        audio_url: '',
+                        length: 513,
+                        album: albumIds[11]
+                      },
+                      {
+                        _id: songIds[118],
+                        title: "Dante's Prayer",
+                        audio_url: '',
+                        length: 431,
+                        album: albumIds[11]
                       },
                       
                     ], (errors, songs) => {
