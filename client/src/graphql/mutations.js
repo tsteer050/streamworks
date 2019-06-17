@@ -59,6 +59,15 @@ export const CREATE_PLAYLIST = gql`
           title
           length
           audio_url
+          album {
+            _id
+            title
+            album_art_url
+            artist {
+              _id
+              name
+            }
+          }
         }
         title
         owner {
@@ -80,6 +89,15 @@ export const ADD_PLAYLIST_SONG = gql`
           title
           length
           audio_url
+          album {
+            _id
+            title
+            album_art_url
+            artist {
+              _id
+              name
+            }
+          }
         }
         title
         owner {

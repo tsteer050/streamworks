@@ -26,7 +26,12 @@ class AddToPlaylistModal extends React.Component {
 
   handleClick(addPlaylistSong, playlist) {
     let id = this.props.song._id + "modal";
-    addPlaylistSong(playlist._id, this.props.song._id);
+    addPlaylistSong({
+      variables: {
+        playlistId: playlist._id,
+        songId: this.props.song._id
+      }
+    });
     let modal = document.getElementById(id);
     modal.classList.remove('visible');
   }
@@ -44,18 +49,15 @@ class AddToPlaylistModal extends React.Component {
               let playlists = data.user.playlists;
 
               return (
-                <Mutation
-                  mutation={ADD_PLAYLIST_SONG}
-                >
+                <Mutation mutation={ADD_PLAYLIST_SONG}>
                   {addPlaylistSong => {
                     return (
                       <ul>
                         {playlists.map(playlist => {
                           return (
                             <li className="playlist-song-modal-item" onClick={() => this.handleClick(addPlaylistSong, playlist)}>
-
-                            <h1>{playlist.title}</h1>
-                          </li>
+                              <h1>{playlist.title}</h1>
+                            </li>
                           )
                         })}
                       </ul>

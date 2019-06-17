@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
-import { Query, Mutation } from "react-apollo";
+import React from "react";
+import { Query } from "react-apollo";
 import { FETCH_PLAYLIST } from "../graphql/queries";
 import "./PlaylistShow.css";
-import { Link } from "react-router-dom";
+
 import "rodal/lib/rodal.css";
 
 
@@ -56,14 +56,14 @@ class PlaylistShow extends React.Component {
 
     let icon = document.getElementById(this.props.state.currentTrack);
     let playButton = document.getElementById("playButton");
-    let albumImageIcon = document.getElementById("albumImage");
+    let albumImageIcon = document.getElementById("playlistImage");
 
     if (this.props.state.playing === false) {
-      playButton.innerHTML = "PAUSE";
+      playButton.innerHTML = "PLAY";
       icon.src = playIcon;
       albumImageIcon.src = imagePlayIcon;
     } else {
-      playButton.innerHTML = "PLAY";
+      playButton.innerHTML = "PAUSE";
       icon.src = pauseIcon;
       albumImageIcon.src = imagePauseIcon;
     }
@@ -165,8 +165,10 @@ class PlaylistShow extends React.Component {
             };
           });
           let image;
+          // debugger
           if (data.playlist.songs.length > 0) {
-            image = data.playlist.songs[0].album.albumArtUrl;
+            
+            image = data.playlist.songs[0].album.album_art_url;
           } else {
             image = require('../images/empty-playlist.png');
           }
@@ -179,7 +181,6 @@ class PlaylistShow extends React.Component {
             backgroundImage: `url(${image})`,
             backgroundSize: "225px"
           }
-          debugger
           return (
             <div className="playlist-show">
               <div className="left-column">
@@ -204,9 +205,9 @@ class PlaylistShow extends React.Component {
                   </div>
                 </div>
                 <p className="playlist-name">{data.playlist.title}</p>
-                <Link to={`/library/playlists`}>
+                {/* <Link to={`/library/playlists`}>
                   <p className="playlist-artist-name">{this.state.user.name}</p>
-                </Link>
+                </Link> */}
                 <button
                   id="playButton"
                   className="play"
