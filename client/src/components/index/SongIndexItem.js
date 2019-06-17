@@ -119,11 +119,11 @@ class SongIndexItem extends React.Component {
       >
         <div className="playicon-songname">
           <span className="playicon-container" onClick={e => toggleSong(e, idx, song._id)}>
-            <img id={song._id} className="playicon" src={require('../../resources/music_note_icon.png')}
+            <img id={idx} className="playicon" src={require('../../resources/music_note_icon.png')}
               alt=""
             />
           </span>
-          <span id="1"> {song.title}</span>
+          <span > {song.title}</span>
         </div>
         <div className="menu-songlength">
           <span className="menu">

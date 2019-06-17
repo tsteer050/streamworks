@@ -16,18 +16,21 @@ mongoose
       let artistIds = [];
 
       for (let i = 0; i < 17; i++) {
+
         artistIds.push(ObjectId());
       }
 
       let albumIds = [];
 
       for (let i = 0; i < 19; i++) {
+
         albumIds.push(ObjectId());
       }
 
       let songIds = [];
 
       for (let i = 0; i < 207; i++) {
+
         songIds.push(ObjectId());
       }
 
@@ -176,6 +179,7 @@ mongoose
             artist_image_url: 'https://media.gq.com/photos/5919b3ad5607d02ba9e29a6b/16:9/w_1280,c_limit/Phoenix0174-Phoenix-Alex-Reside-GQ-2.jpg',
             albums: [albumIds[18]]
           },
+
        ], (errors, artists) => {
           Album.remove({}).then(() => {
             Album.create(
@@ -313,6 +317,7 @@ mongoose
                   artist: artistIds[16],
                   songs: [songIds[196], songIds[197], songIds[198], songIds[199], songIds[200], songIds[201], songIds[202], songIds[203], songIds[204], songIds[205]]
                 },
+
               ], (errors, albums) => {
                 Song.remove({}).then(() => {
                   Song.create(
@@ -870,6 +875,7 @@ mongoose
                       {
                         _id: songIds[79],
                         title: "Beautiful Day",
+
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/All+That+You+Can\'t+Leave+Behind/01+Beautiful+Day.mp3',
                         length: 248,
                         album: albumIds[8]
@@ -878,6 +884,7 @@ mongoose
                         _id: songIds[80],
                         title: "Stuck in a Moment You Can't Get Out Of",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/All+That+You+Can\'t+Leave+Behind/02+Stuck+in+a+Moment+You+Can\'t+Get+Out+Of.mp3',
+
                         length: 272,
                         album: albumIds[8]
                       },
@@ -885,6 +892,7 @@ mongoose
                         _id: songIds[81],
                         title: "Elevation",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/All+That+You+Can\'t+Leave+Behind/03+Elevation.mp3',
+
                         length: 228,
                         album: albumIds[8]
                       },
@@ -892,6 +900,7 @@ mongoose
                         _id: songIds[82],
                         title: "Walk On",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/All+That+You+Can\'t+Leave+Behind/04+Walk+On.mp3',
+
                         length: 296,
                         album: albumIds[8]
                       },
@@ -899,6 +908,7 @@ mongoose
                         _id: songIds[83],
                         title: "Kite",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/All+That+You+Can\'t+Leave+Behind/05+Kite.mp3',
+
                         length: 267,
                         album: albumIds[8]
                       },
@@ -906,6 +916,7 @@ mongoose
                         _id: songIds[84],
                         title: "In a Little While",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/All+That+You+Can\'t+Leave+Behind/06+In+a+Little+While.mp3',
+
                         length: 219,
                         album: albumIds[8]
                       },
@@ -913,6 +924,7 @@ mongoose
                         _id: songIds[85],
                         title: "Wild Honey",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/All+That+You+Can\'t+Leave+Behind/07+Wild+Honey.mp3',
+
                         length: 227,
                         album: albumIds[8]
                       },
@@ -920,6 +932,7 @@ mongoose
                         _id: songIds[86],
                         title: "Peace on Earth",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/All+That+You+Can\'t+Leave+Behind/08+Peace+on+Earth.mp3',
+
                         length: 288,
                         album: albumIds[8]
                       },
@@ -927,6 +940,7 @@ mongoose
                         _id: songIds[87],
                         title: "When I Looked at the World",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/All+That+You+Can\'t+Leave+Behind/09+When+I+Look+at+the+World.mp3',
+
                         length: 258,
                         album: albumIds[8]
                       },
@@ -934,6 +948,7 @@ mongoose
                         _id: songIds[88],
                         title: "New York",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/All+That+You+Can\'t+Leave+Behind/10+New+York.mp3',
+
                         length: 330,
                         album: albumIds[8]
                       },
@@ -941,6 +956,7 @@ mongoose
                         _id: songIds[89],
                         title: "Grace",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/All+That+You+Can\'t+Leave+Behind/11+Grace.mp3',
+
                         length: 331,
                         album: albumIds[8]
                       },
@@ -948,6 +964,7 @@ mongoose
                         _id: songIds[90],
                         title: "Autumn Rain",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Blue+Moon-+The+New+York+Session-The+Paris+Concert/01+Autumn+Rain.mp3',
+
                         length: 457,
                         album: albumIds[9]
                       },
@@ -955,6 +972,7 @@ mongoose
                         _id: songIds[91],
                         title: "Blue Moon",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Blue+Moon-+The+New+York+Session-The+Paris+Concert/02+Blue+Moon.mp3',
+
                         length: 595,
                         album: albumIds[9]
                       },
@@ -962,6 +980,7 @@ mongoose
                         _id: songIds[92],
                         title: "Gypsy",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Blue+Moon-+The+New+York+Session-The+Paris+Concert/03+Gypsy.mp3',
+
                         length: 313,
                         album: albumIds[9]
                       },
@@ -969,6 +988,7 @@ mongoose
                         _id: songIds[93],
                         title: "Invitation",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Blue+Moon-+The+New+York+Session-The+Paris+Concert/04+Invitation.mp3',
+
                         length: 793,
                         album: albumIds[9]
                       },
@@ -976,6 +996,7 @@ mongoose
                         _id: songIds[94],
                         title: "I Remember Italy",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Blue+Moon-+The+New+York+Session-The+Paris+Concert/05+I+Remember+Italy.mp3',
+
                         length: 787,
                         album: albumIds[9]
                       },
@@ -983,6 +1004,7 @@ mongoose
                         _id: songIds[95],
                         title: "Laura",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Blue+Moon-+The+New+York+Session-The+Paris+Concert/06+Laura.mp3',
+
                         length: 329,
                         album: albumIds[9]
                       },
@@ -990,6 +1012,7 @@ mongoose
                         _id: songIds[96],
                         title: "Morning Mist",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Blue+Moon-+The+New+York+Session-The+Paris+Concert/07+Morning+Mist.mp3',
+
                         length: 499,
                         album: albumIds[9]
                       },
@@ -997,6 +1020,7 @@ mongoose
                         _id: songIds[97],
                         title: "This Is the Life",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Blue+Moon-+The+New+York+Session-The+Paris+Concert/08+This+Is+the+Life.mp3',
+
                         length: 428,
                         album: albumIds[9]
                       },
@@ -1004,6 +1028,7 @@ mongoose
                         _id: songIds[98],
                         title: "Woody'n You",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Blue+Moon-+The+New+York+Session-The+Paris+Concert/09+Woody\'n+You.mp3',
+
                         length: 296,
                         album: albumIds[9]
                       },
@@ -1011,6 +1036,7 @@ mongoose
                         _id: songIds[99],
                         title: "You're My Thrill",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Both+Sides+Now/01+You\'re+My+Thrill.mp3',
+
                         length: 233,
                         album: albumIds[10]
                       },
@@ -1018,6 +1044,7 @@ mongoose
                         _id: songIds[100],
                         title: "At Last",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Both+Sides+Now/02+At+Last.mp3',
+
                         length: 268,
                         album: albumIds[10]
                       },
@@ -1025,6 +1052,7 @@ mongoose
                         _id: songIds[101],
                         title: "Comes Love",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Both+Sides+Now/03+Comes+Love.mp3',
+
                         length: 269,
                         album: albumIds[10]
                       },
@@ -1032,6 +1060,7 @@ mongoose
                         _id: songIds[102],
                         title: "You've Changed",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Both+Sides+Now/04+You\'ve+Changed.mp3',
+
                         length: 301,
                         album: albumIds[10]
                       },
@@ -1039,6 +1068,7 @@ mongoose
                         _id: songIds[103],
                         title: "Answer Me, My Love",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Both+Sides+Now/05+Answer+Me%2C+My+Love.mp3',
+
                         length: 204,
                         album: albumIds[10]
                       },
@@ -1046,6 +1076,7 @@ mongoose
                         _id: songIds[104],
                         title: "A Case of you",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Both+Sides+Now/06+A+Case+of+You.mp3',
+
                         length: 354,
                         album: albumIds[10]
                       },
@@ -1053,6 +1084,7 @@ mongoose
                         _id: songIds[105],
                         title: "Don't Go to Strangers",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Both+Sides+Now/07+Don\'t+Go+to+Strangers.mp3',
+
                         length: 251,
                         album: albumIds[10]
                       },
@@ -1060,6 +1092,7 @@ mongoose
                         _id: songIds[106],
                         title: "Sometimes I'm Happy",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Both+Sides+Now/08+Sometimes+I\'m+Happy.mp3',
+
                         length: 238,
                         album: albumIds[10]
                       },
@@ -1067,6 +1100,7 @@ mongoose
                         _id: songIds[107],
                         title: "Don't Worry 'Bout Me",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Both+Sides+Now/09+Don\'t+Worry+\'Bout+Me.mp3',
+
                         length: 230,
                         album: albumIds[10]
                       },
@@ -1074,6 +1108,7 @@ mongoose
                         _id: songIds[108],
                         title: "Stormy Weather",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Both+Sides+Now/10+Stormy+Weather.mp3',
+
                         length: 187,
                         album: albumIds[10]
                       },
@@ -1081,6 +1116,7 @@ mongoose
                         _id: songIds[109],
                         title: "I Wish I Were in Love Again",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Both+Sides+Now/11+I+Wish+I+Were+in+Love+Again.mp3',
+
                         length: 216,
                         album: albumIds[10]
                       },
@@ -1088,6 +1124,7 @@ mongoose
                         _id: songIds[110],
                         title: "Both Sides Now",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Both+Sides+Now/12+Both+Sides%2C+Now+%5BVersion%5D.mp3',
+
                         length: 346,
                         album: albumIds[10]
                       },
@@ -1095,6 +1132,7 @@ mongoose
                         _id: songIds[111],
                         title: "Prologue",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/The+Book+of+Secrets/01+Prologue.mp3',
+
                         length: 265,
                         album: albumIds[11]
                       },
@@ -1102,6 +1140,7 @@ mongoose
                         _id: songIds[112],
                         title: "The Mummer's Dance",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/The+Book+of+Secrets/02+The+Mummers\'+Dance.mp3',
+
                         length: 369,
                         album: albumIds[11]
                       },
@@ -1109,6 +1148,7 @@ mongoose
                         _id: songIds[113],
                         title: "Skellig",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/The+Book+of+Secrets/03+Skellig.mp3',
+
                         length: 368,
                         album: albumIds[11]
                       },
@@ -1116,6 +1156,7 @@ mongoose
                         _id: songIds[114],
                         title: "Marco Pollo",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/The+Book+of+Secrets/04+Marco+Polo.mp3',
+
                         length: 319,
                         album: albumIds[11]
                       },
@@ -1123,6 +1164,7 @@ mongoose
                         _id: songIds[115],
                         title: "The Highwayman",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/The+Book+of+Secrets/05+The+Highwayman.mp3',
+
                         length: 621,
                         album: albumIds[11]
                       },
@@ -1130,6 +1172,7 @@ mongoose
                         _id: songIds[116],
                         title: "La Serenissima",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/The+Book+of+Secrets/06+La+Serenissima.mp3',
+
                         length: 310,
                         album: albumIds[11]
                       },
@@ -1137,6 +1180,7 @@ mongoose
                         _id: songIds[117],
                         title: "Night Ride Across the Caucasus",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/The+Book+of+Secrets/07+Night+Ride+Across+the+Caucasus.mp3',
+
                         length: 513,
                         album: albumIds[11]
                       },
@@ -1756,6 +1800,7 @@ mongoose
                         length: 456,
                         album: albumIds[18]
                       },
+
                       
                     ], (errors, songs) => {
                       Playlist.remove({}).then(() => {

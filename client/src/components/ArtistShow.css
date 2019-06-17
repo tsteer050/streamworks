@@ -91,12 +91,10 @@
   text-align: center;
 }
 
-/* .album-image:hover{
-  opacity: .5!important;
-}
+
 .album-play-icon{
-  z-index: 1;
-} */
+  visibility: hidden;
+} 
 
 .artist-album-name {
   text-decoration: none !important;

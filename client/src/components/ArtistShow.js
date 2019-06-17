@@ -6,9 +6,9 @@ import "./ArtistShow.css";
 import { Link } from "react-router-dom";
 const jwt = require("jsonwebtoken");
 
-const playIcon = require("../resources/play_icon.png");
-const pauseIcon = require("../resources/pause_icon.png");
 const musicNoteIcon = require("../resources/music_note_icon.png");
+const imagePlayIcon = require('../resources/album_play_icon.png');
+const imagePauseIcon = require('../resources/album_pause_icon.png');
 
 class ArtistShow extends React.Component {
   constructor(props) {
@@ -32,33 +32,43 @@ class ArtistShow extends React.Component {
     this.setState({ user });
   }
 
-  onHover(elementId) {
-    let playIcon = document.getElementById(elementId);
+  componentDidUpdate() {
+    if (!document.getElementById("playButton")) return;
+    if (!document.getElementById(this.state.currentAlbum)) return;
 
-    if (elementId === this.state.currentAlbum) {
-      playIcon.src = this.state.playIcon;
-    } else {
-      playIcon.src = require("../resources/album_play_icon.png");
+    if (this.state.currentTrack !== this.props.state.currentTrack) {
+      if (this.state.currentTrack !== null) {
+        document.getElementById(this.state.currentAlbum).src = musicNoteIcon;
+      }
+      this.setState({ currentTrack: this.props.state.currentTrack });
     }
-  }
 
-  offHover(elementId) {
-    let element = document.getElementById(elementId);
-    element.src = "";
-  }
-  toggleIcon(iconId) {
+    let playButton = document.getElementById("playButton");
+    let albumImageIcon = document.getElementById(this.state.currentAlbum);
+    
     if (this.props.state.playing === false) {
-      this.setState({playIcon: require("../resources/album_pause_icon.png")});
+      playButton.innerHTML = "PAUSE";
+      albumImageIcon.src = imagePlayIcon;
     } else {
-      this.setState({playIcon: require("../resources/album_play_icon.png")});
+      playButton.innerHTML = "PLAY";
+      albumImageIcon.src = imagePauseIcon;
     }
-    let icon = document.getElementById(iconId);
-    icon.src = this.state.playIcon;
   }
+
+  onHover(elementId, track) {
+      let albumImage = document.getElementById(elementId);
+      albumImage.style.visibility = "visible";
+  }
+
+  offHover(elementId, track) {
+      let albumImage = document.getElementById(elementId);
+      albumImage.style.visibility = "hidden";
+      return;
+  }
+
   playAlbum(e, albumId) {
     if (this.state.currentAlbum === albumId) {
       this.props.togglePlay();
-      this.toggleIcon(albumId);
     } else {
       this.setState({
         currentAlbum: albumId
@@ -67,44 +77,26 @@ class ArtistShow extends React.Component {
       this.props.newPlayQueue(playQueue);
       this.props.selectTrack(0);
       this.props.togglePlay();
-      this.toggleIcon(albumId);
     }
   }
 
   toggleSong(e, track, iconElementId) {
-    this.props.newPlayQueue(this.songList);
     track = track || 0;
     iconElementId = iconElementId || this.defaultTrack;
 
-    let element = document.getElementById(iconElementId);
-    let playButton = document.getElementById("playButton");
-    // let albumImage = document.getElementById("albumImage");
-
     if (track === this.state.currentTrack) {
+      this.props.togglePlay();
+    } else {
+      this.props.newPlayQueue(this.songList);
+      this.props.selectTrack(track);
+
       if (this.props.state.playing === false) {
-        element.src = pauseIcon;
-        playButton.innerHTML = "PLAY";
-        //albumImage
         this.props.togglePlay();
       } else {
-        element.src = playIcon;
-        playButton.innerHTML = "PAUSE";
+        this.props.togglePlay();
         this.props.togglePlay();
       }
-    } else {
-      element.src = pauseIcon;
-      playButton.innerHTML = "PLAY";
-      this.setState({ currentTrack: track });
-
-      // set previous track's icon back to music note
-      if (this.state.currentIconId)
-        document.getElementById(this.state.currentIconId).src = musicNoteIcon;
-
-      this.setState({ currentIconId: iconElementId });
-      this.props.selectTrack(track);
-      this.props.togglePlay();
     }
-    //this.props.togglePlay();
   }
 
   render() {
@@ -228,7 +220,7 @@ class ArtistShow extends React.Component {
                       <img
                         id={album._id}
                         className="album-play-icon"
-                        src=""
+                        src={imagePlayIcon}
                         alt=""
                       />
                   </div>
@@ -260,7 +252,8 @@ class ArtistShow extends React.Component {
                 <div className="artist-name-div">
                   <p className="artist-name">{data.artist.name}</p>
                   <div className="header-buttons">
-                    <button id="playButton" className="artist-play">
+                    <button id="playButton" className="artist-play"
+                      onClick={e => this.playAlbum(e, this.state.currentAlbum || data.artist.albums[0]._id)}>
                       {" "}
                       PLAY
                     </button>

@@ -38,9 +38,6 @@
 }
 
 .list-album-art {
-  /*
-min-width: 150px;
-min-height: 150px; */
   flex-basis: 100%;
   max-width: 230px;
   max-height: 230px;
