@@ -10,12 +10,12 @@ class LibraryPlaylist extends React.Component {
     super(props);
     this.state = {
       songList: [],
-      currentAlbum: null,
+      currentPlaylist: null,
       currentIconId: null,
       playIcon: null,
       user: null
     };
-    this.albumSongLists = null;
+    this.playlistSongLists = null;
   }
 
   componentDidMount() {
@@ -27,7 +27,7 @@ class LibraryPlaylist extends React.Component {
   onHover(elementId) {
     let playIcon = document.getElementById(elementId);
 
-    if (elementId === this.state.currentAlbum) {
+    if (elementId === this.state.currentPlaylist) {
       playIcon.src = this.state.playIcon;
     } else {
       playIcon.src = require("../resources/album_play_icon.png");
@@ -52,17 +52,17 @@ class LibraryPlaylist extends React.Component {
     icon.src = this.state.playIcon;
   }
 
-  playAlbum(e, albumId) {
-    if (this.state.currentAlbum === albumId) {
+  playPlaylist(e, playlistId) {
+    if (this.state.currentPlaylist === playlistId) {
       this.props.togglePlay();
-      this.toggleIcon(albumId);
+      this.toggleIcon(playlistId);
     } else {
-      this.setState({currentAlbum: albumId});
-      let playQueue = this.albumSongLists[albumId];
+      this.setState({currentPlaylist: playlistId});
+      let playQueue = this.playlistSongLists[playlistId];
       this.props.newPlayQueue(playQueue);
       this.props.selectTrack(0);
       this.props.togglePlay();
-      this.toggleIcon(albumId);
+      this.toggleIcon(playlistId);
     }
   }
 
@@ -105,11 +105,17 @@ class LibraryPlaylist extends React.Component {
               };
             });
 
-            
+            let image;
+            if (playList.songs.length > 0) {
+              image = playList.songs[0].album.albumArtUrl;
+            } else {
+              image = require('../images/empty-playlist.png');
+            }
+
             var sectionStyle = {
               width: "100%",
               height: "100%",
-              backgroundImage: `url(${playList.playlist_art_url})`,
+              backgroundImage: `url(${image})`,
               backgroundSize: "145px"
             };
 
@@ -124,12 +130,14 @@ class LibraryPlaylist extends React.Component {
                     this.offHover(playList._id, idx);
                   }}
                 >
-                  <img
-                    id={playList._id}
-                    className="playlist-play-icon"
-                    src=""
-                    alt=""
-                  />
+                  <div className="overlay-playlists">
+                    <img
+                      id={playList._id}
+                      className="playlist-play-icon"
+                      src=""
+                      alt=""
+                    />
+                  </div>
                 </div>
                 <Link
                   to={`/playlists/${playList._id}`}
