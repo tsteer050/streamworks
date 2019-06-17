@@ -134,11 +134,11 @@ class SongIndexItem extends React.Component {
                 <ul className="song-menu">
                   {favoriteButton(song)}
                   <li className="song-menu-item" onClick={() => this.toggleModal(song)}>Add to Playlist</li>
-                  <AddToPlaylistModal song={song} user={this.state.user} />
                 </ul>)
                 :
                 (null)}
             </button>
+            <AddToPlaylistModal song={song} user={this.state.user} />
           </span>
           <span> {songLength}</span>
         </div>

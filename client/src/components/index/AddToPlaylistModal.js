@@ -25,8 +25,9 @@ class AddToPlaylistModal extends React.Component {
   }
 
   handleClick(addPlaylistSong, playlist) {
-    addPlaylistSong(playlist.id, this.props.song.id);
-    let modal = document.getElementById(this.props.song.id.toString() + "modal");
+    let id = this.props.song._id + "modal";
+    addPlaylistSong(playlist._id, this.props.song._id);
+    let modal = document.getElementById(id);
     modal.classList.remove('visible');
   }
 
@@ -53,7 +54,7 @@ class AddToPlaylistModal extends React.Component {
                           return (
                             <li className="playlist-song-modal-item" onClick={() => this.handleClick(addPlaylistSong, playlist)}>
 
-                            <h1>A PLAYLIST</h1>
+                            <h1>{playlist.title}</h1>
                           </li>
                           )
                         })}
