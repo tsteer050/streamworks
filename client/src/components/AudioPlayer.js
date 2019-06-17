@@ -34,8 +34,8 @@ class AudioPlayer extends Component {
 
   render() {
     let track;
-
     if (this.props.state.playQueue.length > 0) {
+    
       track = this.props.state.playQueue[this.props.state.currentTrack];
     }
 
@@ -63,6 +63,7 @@ class AudioPlayer extends Component {
                   nextTrack={this.nextTrack}
                   togglePlay={this.togglePlay}
                   state={this.props.state}
+                  selectTrack={this.props.selectTrack}
                   setCurrentTrack={this.props.setCurrentTrack}
                 />
               </div>

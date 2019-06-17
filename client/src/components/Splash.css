@@ -35,6 +35,31 @@
   flex-direction: column;
   align-items: center;
   padding: 15px;
+  position: relative;
+}
+.splash-overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  flex-basis: 100%;
+  max-width: 230px;
+  max-height: 230px;
+  display: none;
+  background: rgba(0,0,0,0);
+  transition: background .8s ease;
+}
+
+.splash-play-icon {
+  /* position: absolute; */
+  max-height: 50px;
+  max-width: 50px;
+}
+
+#splash li:hover .splash-overlay{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,.8);
 }
 
 .list-album-art {

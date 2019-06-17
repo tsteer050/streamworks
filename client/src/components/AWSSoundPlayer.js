@@ -19,6 +19,7 @@ class AWSSoundPlayer extends Component {
     super(props);
     this.onNextClick = this.onNextClick.bind(this);
     this.onPrevClick = this.onPrevClick.bind(this);
+    this.seeking = null;
   }
 
   convertTime(time) {
@@ -61,7 +62,6 @@ class AWSSoundPlayer extends Component {
   }
 
   componentDidUpdate() {
-    
     if (this.props.state.playQueue.length > 0) {
       
       const track = this.props.state.currentTrack;
@@ -73,15 +73,30 @@ class AWSSoundPlayer extends Component {
     } else {
       this.props.soundCloudAudio.pause();
     }
+
+    // play next track in list when track reaches duration time
+    if(!this.props.seeking) this.seeking = false;
+
+    if (this.props.seeking && this.props.currentTime === this.props.duration && !this.seeking) {
+      //this.props.soundCloudAudio.setTime(0);
+      if (this.props.state.currentTrack === this.props.state.playQueue.length - 1) this.props.soundCloudAudio.stop();
+      let currentTrack = this.props.state.currentTrack;
+      currentTrack += 1;
+      this.props.setCurrentTrack(currentTrack);
+      console.log(this.props.state.currentTrack);
+      this.seeking = true;
+    }
   }
   
 
   render() {
+   
+    
     let playList = null;
     if (this.props.state.playQueue.length) {
       playList = this.props.state.playQueue;
       this.props.soundCloudAudio._playlist = {
-        tracks: playList
+        tracks: playList,
       };
     }
       
