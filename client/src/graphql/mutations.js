@@ -569,7 +569,7 @@ export const REMOVE_USER_SONG = gql`
         subscribers {
           _id
         }
-\      }
+      }
     }
   }
 
