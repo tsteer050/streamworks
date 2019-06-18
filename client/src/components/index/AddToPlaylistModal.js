@@ -2,8 +2,11 @@ import React from 'react';
 import { FETCH_USER_LIBRARY } from "../../graphql/queries";
 import { ADD_PLAYLIST_SONG } from '../../graphql/mutations';
 import { Query, Mutation } from "react-apollo";
+import NewPlaylistNestedModal from '../NewPlaylistNestedModal';
 import "./addsongtoplaylistmodal.css";
+import * as emptyPlaylistImage from "../../images/empty-playlist.png";
 const jwt = require("jsonwebtoken");
+
 
 class AddToPlaylistModal extends React.Component {
 
@@ -14,6 +17,8 @@ class AddToPlaylistModal extends React.Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.addToNewList = this.addToNewList.bind(this);
   }
 
 
@@ -22,6 +27,23 @@ class AddToPlaylistModal extends React.Component {
     let token = localStorage.getItem("auth-token");
     const user = jwt.decode(token);
     this.setState({ user });
+  }
+
+  toggleModal() {
+    let modal = document.getElementById("new-playlist-nested-modal");
+    modal.classList.toggle("visible");
+  }
+
+  addToNewList(addPlaylistSong, playlistId) {
+    let id = this.props.song._id + "modal";
+    addPlaylistSong({
+      variables: {
+        playlistId: playlistId,
+        songId: this.props.song._id
+      }
+    });
+    let modal = document.getElementById(id);
+    modal.classList.remove('visible');
   }
 
   handleClick(addPlaylistSong, playlist) {
@@ -42,31 +64,70 @@ class AddToPlaylistModal extends React.Component {
     if (this.state.user) {
       return (
         <div id={id} className='add-song-to-playlist-modal'>
-          <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }}>
-            {({ loading, error, data, client }) => {
-              if (loading) return "Loading...";
-              if (error) return `Error! ${error.message}`;
-              let playlists = data.user.playlists;
+          <div className="playlist-song-modal-div">
+            <span
+              className="x-button playlist-x"
+              onClick={() => {
+                let id = this.props.song._id + "modal";
+                let modal = document.getElementById(id);
+                modal.classList.remove('visible');
+              }}
+            >
+              X
+            </span>
+            <h1>Add to Playlist</h1>
+            <button onClick={(e) => { e.preventDefault();  this.toggleModal();} } className="modal-new-playlist-button">NEW PLAYLIST</button>
+            <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }}>
+              {({ loading, error, data, client }) => {
+                if (loading) return "Loading...";
+                if (error) return `Error! ${error.message}`;
+                let playlists = data.user.playlists;
 
-              return (
-                <Mutation mutation={ADD_PLAYLIST_SONG}>
-                  {addPlaylistSong => {
-                    return (
-                      <ul>
-                        {playlists.map(playlist => {
-                          return (
-                            <li className="playlist-song-modal-item" onClick={() => this.handleClick(addPlaylistSong, playlist)}>
-                              <h1>{playlist.title}</h1>
-                            </li>
-                          )
-                        })}
-                      </ul>
-                    )
-                  }}
-                </Mutation>
-              )
-            }}
-          </Query>
+                return (
+                  <Mutation mutation={ADD_PLAYLIST_SONG}>
+                    {addPlaylistSong => {
+                      return (
+
+                        <div>
+                          <ul className="playlists-list">
+                            {playlists.map(playlist => {
+                              let image;
+                              let length = 0;
+                              if (playlist.songs.length) length = playlist.songs.length;
+                              if (playlist.songs.length) {
+                                image = playlist.songs[0].album.album_art_url;
+                              } else {
+                                image = emptyPlaylistImage;
+                              }
+                              var sectionStyle = {
+                                width: "100%",
+                                height: "100%",
+                                backgroundImage: `url(${image})`,
+                                backgroundSize: "145px"
+                              };
+                              return (
+                                <li className="playlist-modal-item" onClick={() => this.handleClick(addPlaylistSong, playlist)}>
+                                  <div
+                                    className="playlist-image"
+                                    style={sectionStyle}
+                                  />
+                                  <p className="playlist-name">{playlist.title}</p>
+                                  <p className="playlist-length">{length} songs</p>
+                                </li>
+                              )
+                            })}
+                          </ul>
+                          <div id="new-playlist-nested-modal" className="nested-modal">
+                            <NewPlaylistNestedModal addPlaylistSong={addPlaylistSong} addToNewList={this.addToNewList} toggleModal={this.toggleModal}/>
+                          </div>
+                        </div>
+                      )
+                    }}
+                  </Mutation>
+                )
+              }}
+            </Query>
+          </div>
         </div>
       )
     } else {

@@ -15,11 +15,15 @@ class PlaceHolderPlayer extends React.Component {
   }
 
   show() {
-    this.setState({ visible: true });
+    if (!this.props.loggedIn) {
+      this.setState({ visible: true });
+    }
   }
 
   hide() {
-    this.setState({ visible: false });
+    if (!this.props.loggedIn) {
+      this.setState({ visible: false });
+    }
   }
 
   render() {

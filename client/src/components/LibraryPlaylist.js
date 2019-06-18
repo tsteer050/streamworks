@@ -53,17 +53,19 @@ class LibraryPlaylist extends React.Component {
   }
 
   playPlaylist(e, playlistId) {
-    if (this.state.currentPlaylist === playlistId) {
-      this.props.togglePlay();
-      this.toggleIcon(playlistId);
-    } else {
-      this.setState({currentPlaylist: playlistId});
-      let playQueue = this.playlistSongLists[playlistId];
-      this.props.newPlayQueue(playQueue);
-      this.props.selectTrack(0);
-      this.props.togglePlay();
-      this.toggleIcon(playlistId);
-    }
+
+   
+    // if (this.state.currentPlaylist === playlistId) {
+    //   this.props.togglePlay();
+    //   this.toggleIcon(playlistId);
+    // } else {
+    //   this.setState({currentPlaylist: playlistId});
+    //   let playQueue = this.playlistSongLists[playlistId];
+    //   this.props.newPlayQueue(playQueue);
+    //   this.props.selectTrack(0);
+    //   this.props.togglePlay();
+    //   this.toggleIcon(playlistId);
+    // }
   }
 
   render() {
