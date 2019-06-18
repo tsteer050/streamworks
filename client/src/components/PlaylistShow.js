@@ -102,6 +102,7 @@ class PlaylistShow extends React.Component {
   }
 
   toggleSong(e, track, iconElementId) {
+    if(!this.songList) return;
     track = track || 0;
     iconElementId = iconElementId || this.defaultTrack;
 
