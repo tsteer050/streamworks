@@ -131,6 +131,11 @@
   align-items: center;
 }
 
+.x-button-container {
+  height: 60px;
+  margin-top: 20px;
+}
+
 .x-button {
   color: #ffffff;
   background: none;
@@ -154,6 +159,7 @@
   margin-top: 30px;
   display: flex;
   justify-content: center;
+  height: 40px;
 }
 
 .new-playlist-form-buttons > div {
@@ -179,7 +185,7 @@
 }
 
 .nested-modal {
-    display: none;
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -196,7 +202,7 @@
   margin-bottom: 0;
 }
 
-.library-playlist-length { 
+.library-playlist-length {
   color: darkgray;
   font-size: 15px;
 }

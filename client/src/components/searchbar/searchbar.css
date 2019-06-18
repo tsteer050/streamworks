@@ -77,7 +77,14 @@ li.search-results-playlist {
   position: relative;
   max-height: 250px;
   margin-left: 50px;
+  margin-right: 15px;
+  margin-top: 25px;
 }
+
+/* .search-songs-results > .songs-list {
+  padding-top: 0px;
+  width: 100%;
+} */
 
 .results-photo .btn {
   position: absolute;
@@ -188,6 +195,7 @@ li.search-results-playlist {
   list-style-type: none;
   width: 300px;
   text-align: center;
+  margin-left: 25px;
 }
 
 .albums-header2 {

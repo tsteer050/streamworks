@@ -17,7 +17,6 @@
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-
 }
 
 .playlist-modal-item {
@@ -60,9 +59,8 @@
   line-height: 1.6;
   padding: 11px 44px;
   outline: none !important;
-  margin-right: 35px;
 }
-    
+
 .modal-new-playlist-button:hover {
   cursor: pointer;
 }
