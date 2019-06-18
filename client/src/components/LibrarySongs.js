@@ -2,7 +2,7 @@ import React from "react";
 import { Query } from "react-apollo";
 import { FETCH_USER_LIBRARY } from "../graphql/queries";
 import "./LibraryCSS/LibrarySongs.css";
-import SongIndex from './index/SongIndex';
+import SongIndex from "./index/SongIndex";
 const jwt = require("jsonwebtoken");
 
 const playIcon = require("../resources/play_icon.png");
@@ -58,7 +58,6 @@ class LibrarySongs extends React.Component {
   }
 
   onHover(elementId, track) {
-
     let element = document.getElementById(track);
 
     if (
@@ -71,7 +70,6 @@ class LibrarySongs extends React.Component {
     }
   }
   offHover(elementId, track) {
-
     if (this.state.currentTrack !== track) {
       let element = document.getElementById(track);
       element.src = require("../resources/music_note_icon.png");
@@ -80,7 +78,7 @@ class LibrarySongs extends React.Component {
 
   toggleSong(e, track, iconElementId) {
     track = track || 0;
-    iconElementId = iconElementId || this.defaultTrack;
+    iconElementId = iconElementId._id || this.defaultTrack;
 
     if (track === this.state.currentTrack) {
       this.props.togglePlay();
@@ -98,7 +96,7 @@ class LibrarySongs extends React.Component {
   }
 
   render() {
-    if(!this.state.user) return (<div></div>);
+    if (!this.state.user) return <div />;
 
     return (
       <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }}>
@@ -114,9 +112,9 @@ class LibrarySongs extends React.Component {
               </div>
             );
           if (error) return `Error! ${error.message}`;
-            
-          if(!data.user.songs.length) {
-            return (<div className="no-songs">Your songs will appear here</div>)
+
+          if (!data.user.songs.length) {
+            return <div className="no-songs">Your songs will appear here</div>;
           }
           const songList = data.user.songs.map(song => {
             return {
@@ -129,7 +127,15 @@ class LibrarySongs extends React.Component {
           this.songList = songList;
 
           //create array of album's songs
-          const songs = <SongIndex songs={data.user.songs} setDefaultTrack={this.setDefaultTrack} onHover={this.onHover} offHover={this.offHover} toggleSong={this.toggleSong} />
+          const songs = (
+            <SongIndex
+              songs={data.user.songs}
+              setDefaultTrack={this.setDefaultTrack}
+              onHover={this.onHover}
+              offHover={this.offHover}
+              toggleSong={this.toggleSong}
+            />
+          );
 
           return (
             // <div className="librarysongs-show">

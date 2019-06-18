@@ -30,6 +30,7 @@
   border-radius: 50%;
   background-repeat: no-repeat;
   cursor: pointer;
+  object-fit: cover;
 }
 
 .overlay-artists {

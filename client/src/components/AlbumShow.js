@@ -1,20 +1,19 @@
 import React, { Fragment } from "react";
 import { Query, Mutation } from "react-apollo";
 import { FETCH_ALBUM, FETCH_USER_LIBRARY } from "../graphql/queries";
-import { ADD_USER_ALBUM, REMOVE_USER_ALBUM } from '../graphql/mutations';
+import { ADD_USER_ALBUM, REMOVE_USER_ALBUM } from "../graphql/mutations";
 import "./AlbumShow.css";
 import { Link } from "react-router-dom";
 import "rodal/lib/rodal.css";
 
-
-import SongIndex from './index/SongIndex';
+import SongIndex from "./index/SongIndex";
 
 const jwt = require("jsonwebtoken");
-const playIcon = require('../resources/play_icon.png');
-const pauseIcon = require('../resources/pause_icon.png');
-const imagePlayIcon = require('../resources/album_play_icon.png');
-const imagePauseIcon = require('../resources/album_pause_icon.png');
-const musicNoteIcon = require('../resources/music_note_icon.png');
+const playIcon = require("../resources/play_icon.png");
+const pauseIcon = require("../resources/pause_icon.png");
+const imagePlayIcon = require("../resources/album_play_icon.png");
+const imagePauseIcon = require("../resources/album_pause_icon.png");
+const musicNoteIcon = require("../resources/music_note_icon.png");
 
 class AlbumShow extends React.Component {
   constructor(props) {
@@ -34,7 +33,6 @@ class AlbumShow extends React.Component {
     this.onHover = this.onHover.bind(this);
     this.offHover = this.offHover.bind(this);
     this.toggleSong = this.toggleSong.bind(this);
-
   }
 
   componentDidMount() {
@@ -48,11 +46,11 @@ class AlbumShow extends React.Component {
     if (!document.getElementById("playButton")) return;
     if (!document.getElementById(this.props.state.currentTrack)) return;
 
-    if(this.state.currentTrack !== this.props.state.currentTrack) {
+    if (this.state.currentTrack !== this.props.state.currentTrack) {
       if (this.state.currentTrack !== null) {
         document.getElementById(this.state.currentTrack).src = musicNoteIcon;
-      } 
-      this.setState({currentTrack: this.props.state.currentTrack});
+      }
+      this.setState({ currentTrack: this.props.state.currentTrack });
     }
 
     let icon = document.getElementById(this.props.state.currentTrack);
@@ -75,7 +73,6 @@ class AlbumShow extends React.Component {
   }
 
   onHover(elementId, track) {
-    
     if (elementId === "albumImage") {
       let albumImage = document.getElementById(elementId);
       albumImage.style.visibility = "visible";
@@ -93,7 +90,6 @@ class AlbumShow extends React.Component {
     }
   }
   offHover(elementId, track) {
-    
     if (elementId === "albumImage") {
       let albumImage = document.getElementById(elementId);
       albumImage.style.visibility = "hidden";
@@ -107,19 +103,23 @@ class AlbumShow extends React.Component {
 
   toggleSong(e, track, iconElementId) {
     track = track || 0;
-    iconElementId = iconElementId || this.defaultTrack;
+
+    if (typeof iconElementId === "Object") {
+      iconElementId = iconElementId._id || this.defaultTrack;
+    } else {
+      iconElementId = iconElementId || this.defaultTrack;
+    }
 
     if (track === this.state.currentTrack) {
-        this.props.togglePlay();
+      this.props.togglePlay();
     } else {
       this.props.newPlayQueue(this.songList);
       this.props.selectTrack(track);
 
-      if(this.props.state.playing === false) {
+      if (this.props.state.playing === false) {
         this.props.togglePlay();
       } else {
-      this.props.togglePlay();
-      this.props.togglePlay();
+        this.props.togglePlay();
       }
     }
   }
@@ -130,64 +130,88 @@ class AlbumShow extends React.Component {
     const favoriteIcon = (addUserAlbum, removeUserAlbum, albumInLibrary) => {
       if (albumInLibrary) {
         return (
-          <img onClick={e => removeUserAlbum({ variables: { userId: this.state.user.id, albumId: id } })} className="favorite" src={require('../resources/favorite_filled.png')} alt="Remove from library" />
-        )
+          <img
+            onClick={e =>
+              removeUserAlbum({
+                variables: { userId: this.state.user.id, albumId: id }
+              })
+            }
+            className="favorite"
+            src={require("../resources/favorite_filled.png")}
+            alt="Remove from library"
+          />
+        );
       }
       return (
-        <img onClick={e => addUserAlbum({ variables: { userId: this.state.user.id, albumId: id } })} className="favorite" src={require('../resources/favorite_outline.png')} alt="Add to library" />
-      )
+        <img
+          onClick={e =>
+            addUserAlbum({
+              variables: { userId: this.state.user.id, albumId: id }
+            })
+          }
+          className="favorite"
+          src={require("../resources/favorite_outline.png")}
+          alt="Add to library"
+        />
+      );
     };
-
-    
 
     let favoriteButton;
     if (this.state.user) {
-      favoriteButton = (album) => {
+      favoriteButton = album => {
         return (
-          <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }} partialRefetch={true}>
+          <Query
+            query={FETCH_USER_LIBRARY}
+            variables={{ id: this.state.user.id }}
+            partialRefetch={true}
+          >
             {({ loading, error, data, client }) => {
               if (loading) return "Loading...";
               if (error) return `Error! ${error.message}`;
               let albumInLibrary;
-              data.user.albums.some((userAlbum) => userAlbum._id === album._id) ? albumInLibrary = true : albumInLibrary = false;
+              data.user.albums.some(userAlbum => userAlbum._id === album._id)
+                ? (albumInLibrary = true)
+                : (albumInLibrary = false);
               return (
-                <Mutation 
-                  mutation={ADD_USER_ALBUM}
-                  >
+                <Mutation mutation={ADD_USER_ALBUM}>
                   {addUserAlbum => {
                     return (
-                      <Mutation
-                        mutation={REMOVE_USER_ALBUM}
-                      >
+                      <Mutation mutation={REMOVE_USER_ALBUM}>
                         {removeUserAlbum => {
                           return (
                             <Fragment>
-                              {favoriteIcon(addUserAlbum, removeUserAlbum, albumInLibrary)}
+                              {favoriteIcon(
+                                addUserAlbum,
+                                removeUserAlbum,
+                                albumInLibrary
+                              )}
                             </Fragment>
-                          )
+                          );
                         }}
                       </Mutation>
-                    )
+                    );
                   }}
                 </Mutation>
-              )
+              );
             }}
           </Query>
-        )
-      }
+        );
+      };
     } else {
       favoriteButton = () => {
-        return ( 
-          <img className="favorite" src={require('../resources/favorite_outline.png')} alt="" />
-        )
-      }
+        return (
+          <img
+            className="favorite"
+            src={require("../resources/favorite_outline.png")}
+            alt=""
+          />
+        );
+      };
     }
 
-    
-
-    return ( 
+    return (
       <Query query={FETCH_ALBUM} variables={{ id }}>
-        {({ loading, error, data, client }) => {          
+        {({ loading, error, data, client }) => {
           if (loading)
             return (
               <div className="library-loading artist-loading-screen">
@@ -198,7 +222,7 @@ class AlbumShow extends React.Component {
                 </div>
               </div>
             );
-      
+
           if (error) return `Error! ${error.message}`;
 
           const songList = data.album.songs.map(song => {
@@ -207,26 +231,35 @@ class AlbumShow extends React.Component {
               trackTitle: song.title,
               artistName: data.album.artist.name,
               albumArtUrl: data.album.album_art_url
-
-            }; 
+            };
           });
           this.songList = songList;
-         
-          const songIndex = <SongIndex songs={data.album.songs} setDefaultTrack={this.setDefaultTrack} onHover={this.onHover} offHover={this.offHover} toggleSong={this.toggleSong} />;
+
+          const songIndex = (
+            <SongIndex
+              songs={data.album.songs}
+              setDefaultTrack={this.setDefaultTrack}
+              onHover={this.onHover}
+              offHover={this.offHover}
+              toggleSong={this.toggleSong}
+            />
+          );
           const albumArtStyle = {
-            width: '225px',
-            height: '225px',
+            width: "225px",
+            height: "225px",
             backgroundImage: `url(${data.album.album_art_url})`,
             backgroundSize: "225px"
-          }
-    return (
+          };
+          return (
             <div className="album-show">
               <div className="left-column">
+\
                 <div className="album-photo-container" style={albumArtStyle}
                   
+
                   onMouseOver={() => this.onHover("albumImage")}
                   onMouseOut={() => this.offHover("albumImage")}
-                  >
+                >
                   <div className="album-show-overlay">
                     <img
                       id="albumImage"
@@ -264,14 +297,11 @@ class AlbumShow extends React.Component {
                   <p>{`${data.album.songs.length} SONGS`}</p>
                 </div>
                 <div className="more-buttons">
-                   {favoriteButton(data.album)}
+                  {favoriteButton(data.album)}
                   {/* <img className="menu-icon" src={require('../resources/menu_icon.png')} alt=""/> */}
                 </div>
               </div>
-              <div className="right-column">      
-                {songIndex}
-
-              </div>
+              <div className="right-column">{songIndex}</div>
             </div>
           );
         }}
