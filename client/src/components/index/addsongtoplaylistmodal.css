@@ -5,7 +5,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: black;
+  background: rgba(0, 0, 0, 0.85);
 }
 
 .visible {
@@ -65,4 +65,15 @@
     
 .modal-new-playlist-button:hover {
   cursor: pointer;
+}
+
+.playlist-name {
+  text-decoration: none !important;
+  color: white;
+  margin-bottom: 0;
+}
+
+.playlist-length {
+  color: darkgray;
+  font-size: 15px;
 }

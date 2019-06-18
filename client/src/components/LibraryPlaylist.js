@@ -142,10 +142,12 @@ class LibraryPlaylist extends React.Component {
                   </div>
                 </div>
                 <Link
+                  className="library-playlist-link"
                   to={`/playlists/${playList._id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <p className="playlist-name">{playList.title}</p>
+                  <p className="library-playlist-name">{playList.title}</p>
+                  <p className="library-playlist-length">{playList.songs.length ? playList.songs.length + " songs" : "0 songs"}</p>
                 </Link>
               </li>
             );

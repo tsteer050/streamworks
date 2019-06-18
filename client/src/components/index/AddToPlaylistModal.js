@@ -30,7 +30,8 @@ class AddToPlaylistModal extends React.Component {
   }
 
   toggleModal() {
-    let modal = document.getElementById("new-playlist-nested-modal");
+    let id = "new-playlist-nested-modal" + this.props.song._id;
+    let modal = document.getElementById(id);
     modal.classList.toggle("visible");
   }
 
@@ -117,7 +118,7 @@ class AddToPlaylistModal extends React.Component {
                               )
                             })}
                           </ul>
-                          <div id="new-playlist-nested-modal" className="nested-modal">
+                          <div id={"new-playlist-nested-modal" + this.props.song._id} className="nested-modal">
                             <NewPlaylistNestedModal addPlaylistSong={addPlaylistSong} addToNewList={this.addToNewList} toggleModal={this.toggleModal}/>
                           </div>
                         </div>

@@ -46,7 +46,6 @@ class AudioPlayer extends Component {
       artistName: "Organ Freeman",
       albumArtUrl: "https://m.media-amazon.com/images/I/81mBzkImdvL._SS500_.jpg"
     };
-    console.log(this.props.state.currentTrack);
     return (
       <Query query={IS_LOGGED_IN}>
         {({ data }) => {
