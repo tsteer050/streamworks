@@ -5,15 +5,14 @@ import "./PlaylistShow.css";
 
 import "rodal/lib/rodal.css";
 
-
-import SongIndex from './index/SongIndex';
+import SongIndex from "./index/SongIndex";
 
 const jwt = require("jsonwebtoken");
-const playIcon = require('../resources/play_icon.png');
-const pauseIcon = require('../resources/pause_icon.png');
-const imagePlayIcon = require('../resources/album_play_icon.png');
-const imagePauseIcon = require('../resources/album_pause_icon.png');
-const musicNoteIcon = require('../resources/music_note_icon.png');
+const playIcon = require("../resources/play_icon.png");
+const pauseIcon = require("../resources/pause_icon.png");
+const imagePlayIcon = require("../resources/album_play_icon.png");
+const imagePauseIcon = require("../resources/album_pause_icon.png");
+const musicNoteIcon = require("../resources/music_note_icon.png");
 
 class PlaylistShow extends React.Component {
   constructor(props) {
@@ -33,7 +32,6 @@ class PlaylistShow extends React.Component {
     this.onHover = this.onHover.bind(this);
     this.offHover = this.offHover.bind(this);
     this.toggleSong = this.toggleSong.bind(this);
-
   }
 
   componentDidMount() {
@@ -76,7 +74,6 @@ class PlaylistShow extends React.Component {
   // toggleImageIcon() {
   //   let icon = document.getElementById("albumImage");
 
-
   //   if (this.props.state.playing === false) {
   //     icon.src = imagePauseIcon;
   //   } else {
@@ -85,7 +82,6 @@ class PlaylistShow extends React.Component {
   // }
 
   onHover(elementId, track) {
-
     if (elementId === "playlistImage") {
       let playlistImage = document.getElementById(elementId);
       playlistImage.style.visibility = "visible";
@@ -103,7 +99,6 @@ class PlaylistShow extends React.Component {
     }
   }
   offHover(elementId, track) {
-
     if (elementId === "playlistImage") {
       let playlistImage = document.getElementById(elementId);
       playlistImage.style.visibility = "hidden";
@@ -138,14 +133,14 @@ class PlaylistShow extends React.Component {
     const id = this.props.match.params.id;
 
     let favoriteButton;
-    
+
     return (
       <Query query={FETCH_PLAYLIST} variables={{ id }}>
         {({ loading, error, data, client }) => {
           if (loading) {
             return (
               <div className="library-loading artist-loading-screen">
-                <div class="lds-facebook">
+                <div className="lds-facebook">
                   <div />
                   <div />
                   <div />
@@ -159,32 +154,42 @@ class PlaylistShow extends React.Component {
             return {
               stream_url: song.audio_url,
               trackTitle: song.title,
-              artistName: song.artist.name,
-              albumArtUrl: song.album.albumArtUrl
+              artistName: song.album.artist.name,
+              albumArtUrl: song.album.album_art_url
+
 
             };
           });
           let image;
           // debugger
           if (data.playlist.songs.length > 0) {
-            
             image = data.playlist.songs[0].album.album_art_url;
           } else {
-            image = require('../images/empty-playlist.png');
+            image = require("../images/empty-playlist.png");
           }
 
           this.songList = songList;
-          const songIndex = <SongIndex songs={data.playlist.songs} setDefaultTrack={this.setDefaultTrack} onHover={this.onHover} offHover={this.offHover} toggleSong={this.toggleSong} />;
+          const songIndex = (
+            <SongIndex
+              songs={data.playlist.songs}
+              setDefaultTrack={this.setDefaultTrack}
+              onHover={this.onHover}
+              offHover={this.offHover}
+              toggleSong={this.toggleSong}
+            />
+          );
           const playlistArtStyle = {
-            width: '225px',
-            height: '225px',
+            width: "225px",
+            height: "225px",
             backgroundImage: `url(${image})`,
             backgroundSize: "225px"
-          }
+          };
           return (
             <div className="playlist-show">
               <div className="left-column">
-                <div className="playlist-photo-container" style={playlistArtStyle}
+                <div
+                  className="playlist-photo-container"
+                  style={playlistArtStyle}
                   onClick={e =>
                     this.toggleSong(
                       e,
@@ -224,18 +229,14 @@ class PlaylistShow extends React.Component {
                 <div className="more-info">
                   <p>{`${data.playlist.songs.length} SONGS`}</p>
                 </div>
-    
               </div>
-              <div className="right-column">
-                {songIndex}
-
-              </div>
+              <div className="right-column">{songIndex}</div>
             </div>
           );
         }}
-    </Query>)
-    }
-  
+      </Query>
+    );
   }
+}
 
-export default PlaylistShow
+export default PlaylistShow;

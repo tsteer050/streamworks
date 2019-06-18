@@ -54,7 +54,6 @@ class Profile extends React.Component {
                 </Query>
 
                 <div className="menu-links">
-                  <Link to="overview">VIEW ACCOUNT</Link>
                   <Link to="/contact">CONTACT US</Link>
                   <button
                     className="logout-btn"

@@ -15,7 +15,7 @@ class LibraryPlaylist extends React.Component {
       playIcon: null,
       user: null
     };
-    this.playlistSongLists = null;
+    this.playListSongLists = {};
   }
 
   componentDidMount() {
@@ -41,11 +41,11 @@ class LibraryPlaylist extends React.Component {
   toggleIcon(iconId) {
     if (this.props.state.playing === false) {
       this.setState({
-        playIcon:require("../resources/album_pause_icon.png")
+        playIcon: require("../resources/album_pause_icon.png")
       });
     } else {
       this.setState({
-        playIcon:require("../resources/album_play_icon.png")
+        playIcon: require("../resources/album_play_icon.png")
       });
     }
     let icon = document.getElementById(iconId);
@@ -53,28 +53,26 @@ class LibraryPlaylist extends React.Component {
   }
 
   playPlaylist(e, playlistId) {
+    if (this.state.currentPlaylist === playlistId) {
+      this.props.togglePlay();
+      this.toggleIcon(playlistId);
+    } else {
+      this.setState({ currentPlaylist: playlistId });
 
-   
-    // if (this.state.currentPlaylist === playlistId) {
-    //   this.props.togglePlay();
-    //   this.toggleIcon(playlistId);
-    // } else {
-    //   this.setState({currentPlaylist: playlistId});
-    //   let playQueue = this.playlistSongLists[playlistId];
-    //   this.props.newPlayQueue(playQueue);
-    //   this.props.selectTrack(0);
-    //   this.props.togglePlay();
-    //   this.toggleIcon(playlistId);
-    // }
+      let playQueue = this.playListSongLists[playlistId];
+      this.props.newPlayQueue(playQueue);
+      this.props.selectTrack(0);
+      this.props.togglePlay();
+      this.toggleIcon(playlistId);
+    }
   }
 
   render() {
-    if (!this.state.user) return (<div></div>);
+    if (!this.state.user) return <div />;
 
     return (
-      <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }} >
+      <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }}>
         {({ loading, error, data }) => {
-
           if (loading)
             return (
               <div className="library-loading">
@@ -86,19 +84,17 @@ class LibraryPlaylist extends React.Component {
               </div>
             );
           if (error) return `Error! ${error.message}`;
-          
 
           //render simple message if nothing in library
           if (!data.user.playlists.length) {
             return (
               <div className="no-playlists">Your Playlists will go here</div>
-            )
+            );
           }
-          let playListSongLists = [];
+
           //create array of album's songs
           const playLists = data.user.playlists.map((playList, idx) => {
-
-            playListSongLists[playList._id] = playList.songs.map(song => {
+            this.playListSongLists[playList._id] = playList.songs.map(song => {
               return {
                 stream_url: song.audio_url,
                 trackTitle: song.title,
@@ -111,7 +107,7 @@ class LibraryPlaylist extends React.Component {
             if (playList.songs.length > 0) {
               image = playList.songs[0].album.album_art_url;
             } else {
-              image = require('../images/empty-playlist.png');
+              image = require("../images/empty-playlist.png");
             }
 
             var sectionStyle = {
@@ -152,9 +148,6 @@ class LibraryPlaylist extends React.Component {
               </li>
             );
           });
-          this.playListSongLists = playListSongLists;
-
-
 
           return (
             <div className="library-albums-show">
