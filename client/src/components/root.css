@@ -4,3 +4,12 @@
   /* flex-wrap: wrap; */
   width: 100%;
 }
+
+
+::-webkit-scrollbar {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(63, 62, 62, 0.85);
+}
