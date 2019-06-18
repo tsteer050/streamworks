@@ -38,7 +38,9 @@ export const FETCH_ALBUMS = gql`
         artist_image_url
       }
       songs {
+         _id
         title
+        audio_url
       }
     }
   }

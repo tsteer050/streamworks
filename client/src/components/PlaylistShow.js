@@ -159,8 +159,8 @@ class PlaylistShow extends React.Component {
             return {
               stream_url: song.audio_url,
               trackTitle: song.title,
-              artistName: "",
-              albumArtUrl: ""
+              artistName: song.artist.name,
+              albumArtUrl: song.album.albumArtUrl
 
             };
           });

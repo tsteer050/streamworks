@@ -74,17 +74,6 @@ class AlbumShow extends React.Component {
     this.defaultTrack = iconId;
   }
 
-  toggleImageIcon() {
-    let icon = document.getElementById("albumImage");
-    
-
-    if (this.props.state.playing === false) {
-      icon.src = imagePauseIcon;
-    } else {
-      icon.src = imagePlayIcon;
-    }
-  }
-
   onHover(elementId, track) {
     
     if (elementId === "albumImage") {
