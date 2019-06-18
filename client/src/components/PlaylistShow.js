@@ -19,6 +19,7 @@ class PlaylistShow extends React.Component {
     super(props);
     this.state = {
       songList: [],
+      pageEventTriggered: false,
       currentTrack: null,
       currentIconId: null,
       user: null
@@ -71,16 +72,6 @@ class PlaylistShow extends React.Component {
     this.defaultTrack = iconId;
   }
 
-  // toggleImageIcon() {
-  //   let icon = document.getElementById("albumImage");
-
-  //   if (this.props.state.playing === false) {
-  //     icon.src = imagePauseIcon;
-  //   } else {
-  //     icon.src = imagePlayIcon;
-  //   }
-  // }
-
   onHover(elementId, track) {
     if (elementId === "playlistImage") {
       let playlistImage = document.getElementById(elementId);
@@ -114,9 +105,10 @@ class PlaylistShow extends React.Component {
     track = track || 0;
     iconElementId = iconElementId || this.defaultTrack;
 
-    if (track === this.state.currentTrack) {
+    if (track === this.state.currentTrack && this.state.pageEventTriggered) {
       this.props.togglePlay();
     } else {
+      this.setState({pageEventTriggered: true});
       this.props.newPlayQueue(this.songList);
       this.props.selectTrack(track);
 

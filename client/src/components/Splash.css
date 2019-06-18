@@ -37,6 +37,16 @@
   padding: 15px;
   position: relative;
 }
+
+.background-transition{
+  background: rgba(0,0,0,0);
+   transition: background .2s ease;
+}
+
+.background-transition:hover {
+  background: rgba(0,0,0,.8);
+ 
+}
 .splash-overlay {
   height: 100%;
   width: 100%;
@@ -45,21 +55,24 @@
   max-width: 230px;
   max-height: 230px;
   display: none;
-  background: rgba(0,0,0,0);
-  transition: background .8s ease;
-}
+  
+} 
 
 .splash-play-icon {
   /* position: absolute; */
   max-height: 50px;
   max-width: 50px;
+  opacity: .8;
+}
+.splash-play-icon:hover {
+  transform: scale(1.25);
+  opacity: 1;
 }
 
 #splash li:hover .splash-overlay{
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0,0,0,.8);
 }
 
 .list-album-art {

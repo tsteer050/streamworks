@@ -79,6 +79,11 @@
 
 .playlist-show-play-icon{
   visibility: hidden;
+  opacity: .7;
+}
+.playlist-show-play-icon:hover{
+  opacity: 1;
+  transform: scale(1.25);
 }
 
 

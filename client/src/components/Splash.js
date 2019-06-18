@@ -5,15 +5,31 @@ import { Link } from "react-router-dom";
 import "./Splash.css";
 
 const imagePlayIcon = require('../resources/album_play_icon.png');
+const imagePauseIcon = require('../resources/album_pause_icon.png');
 
 class Splash extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentAlbum: null
+      currentAlbum: null,
+      previousAlbum: null
     };
   }
   
+  componentDidUpdate() {
+    if(!this.state.currentAlbum) return;
+
+    if (this.state.previousAlbum) document.getElementById(this.state.previousAlbum).src = imagePlayIcon;
+
+    let albumImageIcon = document.getElementById(this.state.currentAlbum);
+
+    if (this.props.state.playing === false) {
+      albumImageIcon.src = imagePlayIcon;
+    } else {
+      albumImageIcon.src = imagePauseIcon;
+    }
+  }
+
   playAlbum(e, album) {
     let track = null;
 
@@ -30,10 +46,10 @@ class Splash extends React.Component {
       track = 0;
       this.props.newPlayQueue(songList);
       this.props.selectTrack(track);
-      this.setState({ currentAlbum: album });
+      this.setState({ currentAlbum: album._id });
 
       this.props.togglePlay();
-    } else if (this.state.currentAlbum !== album) {
+    } else if (this.state.currentAlbum !== album._id) {
       const songList = album.songs.map(song => {
         return {
           stream_url: song.audio_url,
@@ -46,7 +62,8 @@ class Splash extends React.Component {
       track = 0;
       this.props.newPlayQueue(songList);
       this.props.selectTrack(track);
-      this.setState({ currentAlbum: album });
+      this.setState({ previousAlbum: this.state.currentAlbum });
+      this.setState({ currentAlbum: album._id });
 
       if(!this.props.state.playing) this.props.togglePlay();
 
@@ -88,7 +105,7 @@ class Splash extends React.Component {
                           this.props.history.push(`/album/${album._id}`)
                         }
                       />
-                      <div className="splash-overlay" onClick={e => {
+                      <div className="splash-overlay background-transition" onClick={e => {
                         if(e.target.className === "splash-play-icon") {
                           e.stopPropagation();
                           return;
@@ -96,7 +113,7 @@ class Splash extends React.Component {
                         this.props.history.push(`/album/${album._id}`)
                       }}>
                         <img
-                          id="albumImage"
+                          id={album._id}
                           className="splash-play-icon"
                           alt=""
                           src={imagePlayIcon}

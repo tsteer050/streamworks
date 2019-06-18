@@ -30,6 +30,7 @@
   border-radius: 50%;
   background-repeat: no-repeat;
   cursor: pointer;
+  object-fit: cover;
 }
 
 .overlay-artists {
@@ -46,4 +47,12 @@
 .artist-artist-name {
   font-style: 13px;
   cursor: pointer;
+}
+
+.album-play-icon{
+   opacity: .8;
+}
+.album-play-icon:hover {
+  transform: scale(1.25);
+  opacity: 1;
 }

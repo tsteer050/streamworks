@@ -54,21 +54,6 @@ class LibraryAlbums extends React.Component {
     return;
   }
 
-
-  // toggleIcon(iconId) {
-  //   if (this.props.state.playing === false) {
-  //     this.setState({
-  //       playIcon: require("../resources/album_pause_icon.png")
-  //     });
-  //   } else {
-  //     this.setState({
-  //       playIcon: require("../resources/album_play_icon.png")
-  //     });
-  //   }
-  //   let icon = document.getElementById(iconId);
-  //   icon.src = this.state.playIcon;
-  // }
-
   playAlbum(e, albumId) {
     if (this.state.currentAlbum === albumId) {
       this.props.togglePlay();
@@ -134,7 +119,10 @@ class LibraryAlbums extends React.Component {
                 <div
                   className="album-image"
                   style={sectionStyle}
-                  onClick={e => this.playAlbum(e, album._id)}
+                  onClick={e => {
+                    if(e.target.className === "album-play-icon") return;
+                    this.props.history.push(`/album/${album._id}`)
+                  }}
                   onMouseOver={() => this.onHover(album._id, idx)}
                   onMouseOut={() => {
                     this.offHover(album._id, idx);
@@ -144,6 +132,7 @@ class LibraryAlbums extends React.Component {
                   <img
                     id={album._id}
                     className="album-play-icon"
+                    onClick={e => this.playAlbum(e, album._id)}
                     src={imagePlayIcon}
                     alt=""
                   />

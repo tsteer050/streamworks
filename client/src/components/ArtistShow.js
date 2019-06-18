@@ -99,6 +99,11 @@ class ArtistShow extends React.Component {
     }
   }
 
+  showAlbumPage(e, album_id) {
+    if (e.target.className === "album-play-icon") return;
+    this.props.history.push(`/album/${ album_id }`);
+  }
+
   render() {
     const id = this.props.match.params.id;
 
@@ -210,7 +215,7 @@ class ArtistShow extends React.Component {
                 <div
                   className="album-image"
                   style={sectionStyle}
-                  onClick={e => this.playAlbum(e, album._id)}
+                  onClick={e => this.showAlbumPage(e, album._id)}
                   onMouseOver={() => this.onHover(album._id, idx)}
                   onMouseOut={() => {
                     this.offHover(album._id, idx);
@@ -221,10 +226,12 @@ class ArtistShow extends React.Component {
                         id={album._id}
                         className="album-play-icon"
                         src={imagePlayIcon}
+                        onClick={e => this.playAlbum(e, album._id)}
                         alt=""
                       />
                   </div>
                 </div>
+
                 <Link
                   to={`/album/${album._id}`}
                   style={{ textDecoration: "none" }}

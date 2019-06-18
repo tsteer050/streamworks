@@ -4,6 +4,8 @@ import { FETCH_USER_LIBRARY } from "../graphql/queries";
 import "./LibraryCSS/LibraryPlaylists.css";
 import { Link } from "react-router-dom";
 const jwt = require("jsonwebtoken");
+const imagePlayIcon = require('../resources/album_play_icon.png');
+const imagePauseIcon = require('../resources/album_pause_icon.png');
 
 class LibraryPlaylist extends React.Component {
   constructor(props) {
@@ -11,6 +13,7 @@ class LibraryPlaylist extends React.Component {
     this.state = {
       songList: [],
       currentPlaylist: null,
+      previousPlaylist: null,
       currentIconId: null,
       playIcon: null,
       user: null
@@ -24,46 +27,42 @@ class LibraryPlaylist extends React.Component {
     this.setState({ user });
   }
 
-  onHover(elementId) {
-    let playIcon = document.getElementById(elementId);
+  componentDidUpdate() {
+    if (!document.getElementById(this.state.currentPlaylist)) return;
 
-    if (elementId === this.state.currentPlaylist) {
-      playIcon.src = this.state.playIcon;
+    if(this.state.previousPlaylist) document.getElementById(this.state.previousPlaylist).src = imagePlayIcon;
+
+    let playlistImageIcon = document.getElementById(this.state.currentPlaylist);
+    if (this.props.state.playing === false) {
+      playlistImageIcon.src = imagePlayIcon;
     } else {
-      playIcon.src = require("../resources/album_play_icon.png");
+      playlistImageIcon.src = imagePauseIcon;
     }
+  }
+
+  onHover(elementId) {
+    let playlistIcon = document.getElementById(elementId);
+    playlistIcon.style.visibility = "visible";
   }
 
   offHover(elementId) {
-    let element = document.getElementById(elementId);
-    element.src = "";
-  }
-  toggleIcon(iconId) {
-    if (this.props.state.playing === false) {
-      this.setState({
-        playIcon: require("../resources/album_pause_icon.png")
-      });
-    } else {
-      this.setState({
-        playIcon: require("../resources/album_play_icon.png")
-      });
-    }
-    let icon = document.getElementById(iconId);
-    icon.src = this.state.playIcon;
+    let playlistIcon = document.getElementById(elementId);
+    playlistIcon.style.visibility = "hidden";
   }
 
+  
   playPlaylist(e, playlistId) {
     if (this.state.currentPlaylist === playlistId) {
       this.props.togglePlay();
-      this.toggleIcon(playlistId);
     } else {
+      this.setState({ previousPlaylist: this.state.currentPlaylist });
       this.setState({ currentPlaylist: playlistId });
 
       let playQueue = this.playListSongLists[playlistId];
       this.props.newPlayQueue(playQueue);
       this.props.selectTrack(0);
-      this.props.togglePlay();
-      this.toggleIcon(playlistId);
+      if(!this.props.state.playing) this.props.togglePlay();
+      
     }
   }
 
@@ -122,7 +121,10 @@ class LibraryPlaylist extends React.Component {
                 <div
                   className="playlist-image"
                   style={sectionStyle}
-                  onClick={e => this.playPlaylist(e, playList._id)}
+                  onClick={e => {
+                    if(e.target.className === "playlist-play-icon") return;
+                    this.props.history.push(`/playlists/${playList._id}`);
+                  }}
                   onMouseOver={() => this.onHover(playList._id, idx)}
                   onMouseOut={() => {
                     this.offHover(playList._id, idx);
@@ -132,7 +134,8 @@ class LibraryPlaylist extends React.Component {
                     <img
                       id={playList._id}
                       className="playlist-play-icon"
-                      src=""
+                      onClick={e => this.playPlaylist(e, playList._id)}
+                      src={imagePlayIcon}
                       alt=""
                     />
                   </div>

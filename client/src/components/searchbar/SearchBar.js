@@ -4,6 +4,7 @@ import { SEARCH_QUERY } from "../../graphql/queries";
 import { Query } from "react-apollo";
 import { Link } from "react-router-dom";
 import withRedux from "../../util/redux_container";
+import SongIndex from "./../index/SongIndex";
 
 import "./searchbar.css";
 
@@ -19,7 +20,8 @@ class SearchBar extends Component {
       currentSong: null,
       songList: [],
       currentTrack: null,
-      currentIconId: null
+      currentIconId: null,
+      prevTrack: null
     };
 
     this.defaultTrack = null;
@@ -27,14 +29,18 @@ class SearchBar extends Component {
 
     this.update = this.update.bind(this);
     this.setCurrentSong = this.setCurrentSong.bind(this);
+    this.setDefaultTrack = this.setDefaultTrack.bind(this);
+    this.onHover = this.onHover.bind(this);
+    this.offHover = this.offHover.bind(this);
+    this.toggleSong = this.toggleSong.bind(this);
   }
 
   update = debounce(text => {
     this.setState({ filter: text });
-  }, 1000);
+  }, 500);
 
   onHover(elementId, track) {
-    let element = document.getElementById(elementId);
+    let element = document.getElementById(track);
 
     if (
       this.props.state.playing === true &&
@@ -47,17 +53,21 @@ class SearchBar extends Component {
   }
 
   offHover(elementId, track) {
-    let element = document.getElementById(elementId);
+    let element = document.getElementById(track);
     if (this.state.currentTrack !== track) {
       element.src = musicNoteIcon;
     }
+  }
+
+  setDefaultTrack(iconId) {
+    this.defaultTrack = iconId;
   }
 
   toggleSong(e, track, song) {
     track = track || 0;
     let iconElementId = song._id || this.defaultTrack;
 
-    let element = document.getElementById(iconElementId);
+    let element = document.getElementById(track);
     let play = document.getElementById("search-play-btn");
 
     if (track === this.state.currentTrack) {
@@ -79,7 +89,7 @@ class SearchBar extends Component {
 
       // set previous track's icon back to music note
       if (this.state.currentIconId) {
-        document.getElementById(this.state.currentIconId).src = musicNoteIcon;
+        document.getElementById(this.state.currentTrack).src = musicNoteIcon;
       }
       this.setState({ currentIconId: iconElementId });
       this.props.selectTrack(track);
@@ -103,6 +113,7 @@ class SearchBar extends Component {
 
   render() {
     let song = this.state.currentSong;
+
     return (
       <div className="search-div">
         <div className="input-header">
@@ -147,6 +158,16 @@ class SearchBar extends Component {
                 });
 
                 this.songList = songList;
+
+                const songIndex = (
+                  <SongIndex
+                    songs={songs}
+                    setDefaultTrack={this.setDefaultTrack}
+                    onHover={this.onHover}
+                    offHover={this.offHover}
+                    toggleSong={this.toggleSong}
+                  />
+                );
 
                 let albums = data.search.filter(
                   result => result.__typename === "AlbumType"
@@ -220,95 +241,19 @@ class SearchBar extends Component {
                                   ) : (
                                     <Link
                                       id="results-artist-name"
-                                      to={`/artist/${song.album.artist._id}`}
+                                      to={`/artist/${
+                                        this.state.currentSong.album.artist._id
+                                      }`}
                                     >
-                                      {song.album.artist.name}
+                                      {this.state.currentSong.album.artist.name}
                                     </Link>
                                   )}
                                 </p>
                               </div>
                             </div>
                             {/* list of search results  */}
-                            <ul className="result-list">
-                              {songs.map((song, idx) => {
-                                if (song.title) {
-                                  if (idx === 0) this.defaultTrack = song._id;
 
-                                  let songLength = null;
-                                  if (song.length % 60 >= 10) {
-                                    songLength = `${Math.floor(
-                                      parseInt(song.length) / 60
-                                    )}:${song.length % 60}`;
-                                  } else {
-                                    songLength = `${Math.floor(
-                                      parseInt(song.length) / 60
-                                    )}:0${song.length % 60}`;
-                                  }
-
-                                  return (
-                                    <li
-                                      className="search-results-playlist"
-                                      key={song._id}
-                                      onMouseOver={() => {
-                                        this.onHover(song._id, idx);
-                                      }}
-                                      onMouseOut={() => {
-                                        this.offHover(song._id, idx);
-                                      }}
-                                    >
-                                      <div className="playicon-songname">
-                                        <span
-                                          className="playicon-container"
-                                          onClick={e =>
-                                            this.toggleSong(e, idx, song)
-                                          }
-                                        >
-                                          <img
-                                            id={song._id}
-                                            className="playicon"
-                                            src={musicNoteIcon}
-                                            alt=""
-                                          />
-                                        </span>
-                                        <span className="song-info-container">
-                                          <span id="1"> {song.title}</span>
-
-                                          <div className="song-artist-album">
-                                            <Link
-                                              to={`/artist/${
-                                                song.album.artist._id
-                                              }`}
-                                            >
-                                              <span className="song-artist">
-                                                {song.album.artist.name}
-                                              </span>
-                                            </Link>
-                                            <span className="star">*</span>
-                                            <Link
-                                              to={`/album/${song.album._id}`}
-                                            >
-                                              <span className="song-album">
-                                                {song.album.title}
-                                              </span>
-                                            </Link>
-                                          </div>
-                                        </span>
-                                      </div>
-                                      <div className="menu-songlength">
-                                        <span className="menu">
-                                          <img
-                                            className="menu-icon"
-                                            src={require("../../resources/menu_icon.png")}
-                                            alt=""
-                                          />
-                                        </span>
-                                        <span> {songLength}</span>
-                                      </div>
-                                    </li>
-                                  );
-                                }
-                              })}
-                            </ul>
+                            {songIndex}
                           </Fragment>
                         )}
                       </div>
