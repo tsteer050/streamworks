@@ -13,6 +13,7 @@ class LibrarySongs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      pageEventTriggered: false,
       songList: [],
       currentTrack: null,
       currentIconId: null,
@@ -80,9 +81,10 @@ class LibrarySongs extends React.Component {
     track = track || 0;
     iconElementId = iconElementId._id || this.defaultTrack;
 
-    if (track === this.state.currentTrack) {
+    if (track === this.state.currentTrack && this.state.pageEventTriggered) {
       this.props.togglePlay();
     } else {
+      this.setState({pageEventTriggered: true});
       this.props.newPlayQueue(this.songList);
       this.props.selectTrack(track);
 

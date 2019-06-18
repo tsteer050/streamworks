@@ -47,10 +47,10 @@ class ArtistShow extends React.Component {
     let albumImageIcon = document.getElementById(this.state.currentAlbum);
     
     if (this.props.state.playing === false) {
-      playButton.innerHTML = "PAUSE";
+      playButton.innerHTML = "PLAY";
       albumImageIcon.src = imagePlayIcon;
     } else {
-      playButton.innerHTML = "PLAY";
+      playButton.innerHTML = "PAUSE";
       albumImageIcon.src = imagePauseIcon;
     }
   }
