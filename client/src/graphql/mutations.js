@@ -146,7 +146,69 @@ export const ADD_USER_ALBUM = gql`
     addUserAlbum(userId: $userId, albumId: $albumId) {
       _id
       albums {
+         _id
+        title
+        album_art_url
+        songs {
+          _id
+          title
+          length
+          audio_url
+        }
+        artist {
+          _id
+          name
+        }
+      }
+      artists {
         _id
+        name
+        genre
+        bio
+        artist_image_url
+      }
+      songs {
+        _id
+        title
+        length
+        audio_url
+        album {
+          _id
+          title
+          album_art_url
+          artist {
+            _id
+            name
+          }
+        }
+      }
+      playlists {
+        _id
+        title
+        songs {
+          _id
+          title
+          length
+          audio_url
+          album {
+            _id
+            title
+            album_art_url
+            songs {
+              _id
+              title
+              length
+              audio_url
+            }
+            artist {
+              _id
+              name
+            }
+          }
+        }
+        subscribers {
+          _id
+        }
       }
     }
   }
@@ -157,7 +219,69 @@ export const REMOVE_USER_ALBUM = gql`
     removeUserAlbum(userId: $userId, albumId: $albumId) {
       _id
       albums {
+         _id
+        title
+        album_art_url
+        songs {
+          _id
+          title
+          length
+          audio_url
+        }
+        artist {
+          _id
+          name
+        }
+      }
+      artists {
         _id
+        name
+        genre
+        bio
+        artist_image_url
+      }
+      songs {
+        _id
+        title
+        length
+        audio_url
+        album {
+          _id
+          title
+          album_art_url
+          artist {
+            _id
+            name
+          }
+        }
+      }
+      playlists {
+        _id
+        title
+        songs {
+          _id
+          title
+          length
+          audio_url
+          album {
+            _id
+            title
+            album_art_url
+            songs {
+              _id
+              title
+              length
+              audio_url
+            }
+            artist {
+              _id
+              name
+            }
+          }
+        }
+        subscribers {
+          _id
+        }
       }
     }
   }
@@ -167,8 +291,70 @@ export const ADD_USER_ARTIST = gql`
   mutation AddUserArtist($userId: ID!, $artistId: ID!) {
     addUserArtist(userId: $userId, artistId: $artistId) {
       _id
+      albums {
+         _id
+        title
+        album_art_url
+        songs {
+          _id
+          title
+          length
+          audio_url
+        }
+        artist {
+          _id
+          name
+        }
+      }
       artists {
         _id
+        name
+        genre
+        bio
+        artist_image_url
+      }
+      songs {
+        _id
+        title
+        length
+        audio_url
+        album {
+          _id
+          title
+          album_art_url
+          artist {
+            _id
+            name
+          }
+        }
+      }
+      playlists {
+        _id
+        title
+        songs {
+          _id
+          title
+          length
+          audio_url
+          album {
+            _id
+            title
+            album_art_url
+            songs {
+              _id
+              title
+              length
+              audio_url
+            }
+            artist {
+              _id
+              name
+            }
+          }
+        }
+        subscribers {
+          _id
+        }
       }
     }
   }
@@ -179,8 +365,70 @@ export const REMOVE_USER_ARTIST = gql`
   mutation RemoveUserArtist($userId: ID!, $artistId: ID!) {
     removeUserArtist(userId: $userId, artistId: $artistId) {
       _id
+      albums {
+         _id
+        title
+        album_art_url
+        songs {
+          _id
+          title
+          length
+          audio_url
+        }
+        artist {
+          _id
+          name
+        }
+      }
       artists {
         _id
+        name
+        genre
+        bio
+        artist_image_url
+      }
+      songs {
+        _id
+        title
+        length
+        audio_url
+        album {
+          _id
+          title
+          album_art_url
+          artist {
+            _id
+            name
+          }
+        }
+      }
+      playlists {
+        _id
+        title
+        songs {
+          _id
+          title
+          length
+          audio_url
+          album {
+            _id
+            title
+            album_art_url
+            songs {
+              _id
+              title
+              length
+              audio_url
+            }
+            artist {
+              _id
+              name
+            }
+          }
+        }
+        subscribers {
+          _id
+        }
       }
     }
   }
@@ -191,8 +439,70 @@ export const ADD_USER_SONG = gql`
   mutation AddUserSong($userId: ID!, $songId: ID!) {
     addUserSong(userId: $userId, songId: $songId) {
       _id
+      albums {
+         _id
+        title
+        album_art_url
+        songs {
+          _id
+          title
+          length
+          audio_url
+        }
+        artist {
+          _id
+          name
+        }
+      }
+      artists {
+        _id
+        name
+        genre
+        bio
+        artist_image_url
+      }
       songs {
         _id
+        title
+        length
+        audio_url
+        album {
+          _id
+          title
+          album_art_url
+          artist {
+            _id
+            name
+          }
+        }
+      }
+      playlists {
+        _id
+        title
+        songs {
+          _id
+          title
+          length
+          audio_url
+          album {
+            _id
+            title
+            album_art_url
+            songs {
+              _id
+              title
+              length
+              audio_url
+            }
+            artist {
+              _id
+              name
+            }
+          }
+        }
+        subscribers {
+          _id
+        }
       }
     }
   }
@@ -203,8 +513,70 @@ export const REMOVE_USER_SONG = gql`
   mutation RemoveUserSong($userId: ID!, $songId: ID!) {
     removeUserSong(userId: $userId, songId: $songId) {
       _id
+      albums {
+         _id
+        title
+        album_art_url
+        songs {
+          _id
+          title
+          length
+          audio_url
+        }
+        artist {
+          _id
+          name
+        }
+      }
+      artists {
+        _id
+        name
+        genre
+        bio
+        artist_image_url
+      }
       songs {
         _id
+        title
+        length
+        audio_url
+        album {
+          _id
+          title
+          album_art_url
+          artist {
+            _id
+            name
+          }
+        }
+      }
+      playlists {
+        _id
+        title
+        songs {
+          _id
+          title
+          length
+          audio_url
+          album {
+            _id
+            title
+            album_art_url
+            songs {
+              _id
+              title
+              length
+              audio_url
+            }
+            artist {
+              _id
+              name
+            }
+          }
+        }
+        subscribers {
+          _id
+        }
       }
     }
   }
