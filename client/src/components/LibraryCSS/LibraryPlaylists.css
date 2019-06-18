@@ -52,6 +52,12 @@
 
 .playlist-play-icon {
   margin: auto;
+  visibility: hidden;
+  opacity: .7;
+}
+.playlist-play-icon:hover {
+  opacity: 1;
+  transform: scale(1.25);
 }
 
 .playlists-section {

@@ -79,6 +79,12 @@
 
 .album-show-play-icon{
   visibility: hidden;
+  opacity: .8;
+  transform: scale(1.25);
+}
+.album-show-play-icon:hover{
+  opacity: 1;
+  transform: scale(1.50);
 }
 
 
@@ -167,6 +173,7 @@
   max-width: 19px;
   max-height: 19px;
 }
+
 .left-menu-icon {
 }
 

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "./Splash.css";
 
 const imagePlayIcon = require('../resources/album_play_icon.png');
+const imagePauseIcon = require('../resources/album_pause_icon.png');
 
 class Splash extends React.Component {
   constructor(props) {
