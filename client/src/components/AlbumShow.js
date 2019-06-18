@@ -253,16 +253,10 @@ class AlbumShow extends React.Component {
           return (
             <div className="album-show">
               <div className="left-column">
-                <div
-                  className="album-photo-container"
-                  style={albumArtStyle}
-                  onClick={e =>
-                    this.toggleSong(
-                      e,
-                      this.state.currentTrack,
-                      this.state.currentIconId
-                    )
-                  }
+\
+                <div className="album-photo-container" style={albumArtStyle}
+                  
+
                   onMouseOver={() => this.onHover("albumImage")}
                   onMouseOut={() => this.offHover("albumImage")}
                 >
@@ -272,6 +266,13 @@ class AlbumShow extends React.Component {
                       className="album-show-play-icon"
                       alt=""
                       src={imagePlayIcon}
+                      onClick={e =>
+                        this.toggleSong(
+                          e,
+                          this.state.currentTrack,
+                          this.state.currentIconId
+                        )
+                      }
                     />
                   </div>
                 </div>

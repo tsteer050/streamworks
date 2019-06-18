@@ -25,7 +25,6 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
-  transition: background 2s ease;
 }
 
 #splash li {

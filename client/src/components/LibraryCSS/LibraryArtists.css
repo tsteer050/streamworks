@@ -48,3 +48,11 @@
   font-style: 13px;
   cursor: pointer;
 }
+
+.album-play-icon{
+   opacity: .8;
+}
+.album-play-icon:hover {
+  transform: scale(1.25);
+  opacity: 1;
+}
