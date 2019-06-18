@@ -18,10 +18,9 @@
     margin-top: 75px;
   }
   .album-photo-container {
- height: 235px;
-  width: 235px;
-  
-}
+    height: 235px;
+    width: 235px;
+  }
 
   .right-column {
     flex-grow: 1;
@@ -42,10 +41,9 @@
   }
 
   .album-photo-container {
- height: 205px;
-  width: 205px;
-  
-}
+    height: 205px;
+    width: 205px;
+  }
 }
 
 .loading-screen {
@@ -63,24 +61,22 @@
   max-width: 225px;
   
 } */
-.album-show-overlay{
+.album-show-overlay {
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0);
-  transition: background .2s ease;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.2s ease;
 }
-.album-show-overlay:hover{
-  
-  background: rgba(0,0,0,.8);
+.album-show-overlay:hover {
+  background: rgba(0, 0, 0, 0.8);
 }
 
-.album-show-play-icon{
+.album-show-play-icon {
   visibility: hidden;
 }
-
 
 .album-photo {
   width: 100%;
@@ -132,6 +128,8 @@
 
 .favorite {
   margin-right: 20px;
+  object-fit: contain;
+  width: 30px;
 }
 
 .menu {
@@ -145,6 +143,7 @@
   color: white;
   font-size: 16px;
   cursor: default;
+  margin-right: 20px;
 }
 .songs-list > li {
   width: 100%;
@@ -154,7 +153,7 @@
   height: 4em;
 }
 .songs-list > li:hover {
-  transition: background .3s ease;
+  transition: background 0.3s ease;
   background: rgba(0, 0, 0, 0.9);
 }
 .songs-list > li:hover .menu {
@@ -169,4 +168,3 @@
 }
 .left-menu-icon {
 }
-

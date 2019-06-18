@@ -252,87 +252,8 @@ class SearchBar extends Component {
                               </div>
                             </div>
                             {/* list of search results  */}
+
                             {songIndex}
-                            {/* <ul className="result-list">
-                              {songs.map((song, idx) => {
-                                if (song.title) {
-                                  if (idx === 0) this.defaultTrack = song._id;
-
-                                  let songLength = null;
-                                  if (song.length % 60 >= 10) {
-                                    songLength = `${Math.floor(
-                                      parseInt(song.length) / 60
-                                    )}:${song.length % 60}`;
-                                  } else {
-                                    songLength = `${Math.floor(
-                                      parseInt(song.length) / 60
-                                    )}:0${song.length % 60}`;
-                                  }
-
-                                  return (
-                                    <li
-                                      className="search-results-playlist"
-                                      key={song._id}
-                                      onMouseOver={() => {
-                                        this.onHover(song._id, idx);
-                                      }}
-                                      onMouseOut={() => {
-                                        this.offHover(song._id, idx);
-                                      }}
-                                    >
-                                      <div className="playicon-songname">
-                                        <span
-                                          className="playicon-container"
-                                          onClick={e =>
-                                            this.toggleSong(e, idx, song)
-                                          }
-                                        >
-                                          <img
-                                            id={song._id}
-                                            className="playicon"
-                                            src={musicNoteIcon}
-                                            alt=""
-                                          />
-                                        </span>
-                                        <span className="song-info-container">
-                                          <span id="1"> {song.title}</span>
-
-                                          <div className="song-artist-album">
-                                            <Link
-                                              to={`/artist/${
-                                                song.album.artist._id
-                                              }`}
-                                            >
-                                              <span className="song-artist">
-                                                {song.album.artist.name}
-                                              </span>
-                                            </Link>
-                                            <span className="star">*</span>
-                                            <Link
-                                              to={`/album/${song.album._id}`}
-                                            >
-                                              <span className="song-album">
-                                                {song.album.title}
-                                              </span>
-                                            </Link>
-                                          </div>
-                                        </span>
-                                      </div>
-                                      <div className="menu-songlength">
-                                        <span className="menu">
-                                          <img
-                                            className="menu-icon"
-                                            src={require("../../resources/menu_icon.png")}
-                                            alt=""
-                                          />
-                                        </span>
-                                        <span> {songLength}</span>
-                                      </div>
-                                    </li>
-                                  );
-                                }
-                              })}
-                            </ul> */}
                           </Fragment>
                         )}
                       </div>
