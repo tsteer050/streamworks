@@ -16,6 +16,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .playlists-list {
@@ -55,4 +56,11 @@
 
 .playlists-section {
   margin-right: auto;
+}
+
+.library-playlist-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

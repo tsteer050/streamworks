@@ -46,11 +46,10 @@ class AudioPlayer extends Component {
       artistName: "Organ Freeman",
       albumArtUrl: "https://m.media-amazon.com/images/I/81mBzkImdvL._SS500_.jpg"
     };
-
     return (
       <Query query={IS_LOGGED_IN}>
         {({ data }) => {
-          if (data.isLoggedIn) {
+          if (data.isLoggedIn && this.props.state.currentTrack != null) {
             return (
               <div id="audio-player-bar">
                 <AWSSoundPlayer
@@ -71,7 +70,7 @@ class AudioPlayer extends Component {
           } else {
             return (
               <div id="audio-player-bar">
-                <PlaceHolderPlayer />
+                <PlaceHolderPlayer loggedIn={data.isLoggedIn} />
               </div>
             );
           }

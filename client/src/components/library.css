@@ -1,9 +1,8 @@
 .library-page-area {
-  position: fixed;
   width: calc(100vw - 230px);
   height: calc(100vh - 90px);
-  left: 230px;
-  bottom: 90px;
+  /* left: 230px;
+  bottom: 90px; */
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -177,4 +176,31 @@
   align-items: center;
   position: relative;
   top: 30%;
+}
+
+.nested-modal {
+    display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.library-playlist-name {
+  text-decoration: none !important;
+  color: white;
+  margin-bottom: 0;
+}
+
+.library-playlist-length { 
+  color: darkgray;
+  font-size: 15px;
+}
+
+.playlist-image:hover {
+  cursor: pointer;
 }

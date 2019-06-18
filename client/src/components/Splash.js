@@ -7,8 +7,55 @@ import "./Splash.css";
 const imagePlayIcon = require('../resources/album_play_icon.png');
 
 class Splash extends React.Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentAlbum: null
+    };
+  }
   
+  playAlbum(e, album) {
+    let track = null;
+
+    if (this.props.state.currentTrack === null) {
+      const songList = album.songs.map(song => {
+        return {
+          stream_url: song.audio_url,
+          trackTitle: song.title,
+          artistName: album.artist.name,
+          albumArtUrl: album.album_art_url
+
+        };
+      });
+      track = 0;
+      this.props.newPlayQueue(songList);
+      this.props.selectTrack(track);
+      this.setState({ currentAlbum: album });
+
+      this.props.togglePlay();
+    } else if (this.state.currentAlbum !== album) {
+      const songList = album.songs.map(song => {
+        return {
+          stream_url: song.audio_url,
+          trackTitle: song.title,
+          artistName: album.artist.name,
+          albumArtUrl: album.album_art_url
+
+        };
+      });
+      track = 0;
+      this.props.newPlayQueue(songList);
+      this.props.selectTrack(track);
+      this.setState({ currentAlbum: album });
+
+      if(!this.props.state.playing) this.props.togglePlay();
+
+    } else {
+      this.props.togglePlay();
+    }
+
+  }
+
 
   render() {
     return (
@@ -53,11 +100,14 @@ class Splash extends React.Component {
                           className="splash-play-icon"
                           alt=""
                           src={imagePlayIcon}
+                          onClick={e => this.playAlbum(e, album)}
                         />
                       </div>
-                     
+                      <Link to={`/album/${album._id}`} style={{ textDecoration: 'none' }}>
                       <h5 className="list-album-title">{album.title}</h5>
-                      <Link to={`/artist/${album.artist._id}`}>
+                     </Link>
+
+                      <Link to={`/artist/${album.artist._id}`} style={{ textDecoration: 'none' }} >
                         <h5 className="list-album-artist-name">
                           {album.artist.name}
                         </h5>
