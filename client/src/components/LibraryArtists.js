@@ -11,14 +11,8 @@ class LibraryArtists extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      songList: [],
-      currentAlbum: null,
-      currentArtist: null,
-      currentIconId: null,
-      playIcon: null,
       user: null
     };
-    this.artistSongList = null;
   }
 
   componentDidMount() {
@@ -27,53 +21,8 @@ class LibraryArtists extends React.Component {
     this.setState({ user });
   }
 
-  onHover(elementId) {
-    let playIcon = document.getElementById(elementId);
-
-    if (elementId === this.state.currentAlbum) {
-      playIcon.src = this.state.playIcon;
-    } else {
-      playIcon.src = require("../resources/album_play_icon.png");
-    }
-  }
-
-  offHover(elementId) {
-    let element = document.getElementById(elementId);
-    element.src = "";
-  }
-  toggleIcon(iconId) {
-    if (this.props.state.playing === false) {
-      this.setState({ playIcon: require("../resources/album_pause_icon.png")});
-    } else {
-      this.setState({ playIcon: require("../resources/album_play_icon.png")});
-    }
-    let icon = document.getElementById(iconId);
-    icon.src = this.state.playIcon;
-  }
-
-  // disabled for now - need to create songlist for all user's artists
-  playArtist(e, artistId, albumId) {
-    // disabled
-    return;
-    ////////////
-    
-    if (this.state.currentArtist === artistId) {
-      this.props.togglePlay();
-    } else {
-      this.setState({
-        currentArtist: artistId,
-        currentAlbum: albumId
-      });
-      let playQueue = this.artistSongList[albumId];
-      this.props.newPlayQueue(playQueue);
-      this.props.selectTrack(0);
-      this.props.togglePlay();
-      this.toggleIcon(albumId);
-    }
-  }
-
   render() {
-    if (!this.state.user) return (<div></div>);
+    if (!this.state.user) return <div />;
 
     return (
       <Query query={FETCH_USER_LIBRARY} variables={{ id: this.state.user.id }}>
@@ -89,60 +38,25 @@ class LibraryArtists extends React.Component {
               </div>
             );
           if (error) return `Error! ${error.message}`;
-          let artistSongList = {};
-              
+
           //render simple message if nothing in library
           if (!data.user.artists.length) {
-            
-            return (
-              <div className="no-artists">Your artists will go here</div>
-            )
+            return <div className="no-artists">Your artists will go here</div>;
           }
-
-          //create array of artist's albums and songs for playback
-          // let artistSongList = {};
-
-          // const albums = data.artist.albums.map((album, idx) => {
-          //   artistSongList[album._id] = album.songs.map(song => {
-          //     return {
-          //       stream_url: song.audio_url,
-          //       trackTitle: song.title,
-          //       artistName: data.artist.name,
-          //       albumArtUrl: album.album_art_url
-          //     };
-          //   });
-          // });
-          // this.artistSongList = artistSongList;
 
           // create array of user's artists for display
           const artists = data.user.artists.map((artist, idx) => {
-
-            var sectionStyle = {
-              width: "145px",
-              height: "145px",
-              backgroundImage: `url(${artist.artist_image_url})`,
-              borderRadius: "50%",
-              backgroundSize: "cover"
-            };
-
             return (
               <li key={artist._id} className="artist-image-container">
-                <div
-                  className="artist-image"
-                  style={sectionStyle}
-                  onClick={e => this.playArtist(e, artist._id, this.currentAlbum || data.artists)}
-                  onMouseOver={() => this.onHover(artist._id, idx)}
-                  onMouseOut={() => {
-                    this.offHover(artist._id, idx);
-                  }}
-                >
-                <div className="overlay-artists">
-                  <img
-                    id={artist._id}
-                    className="artist-play-icon"
-                    src=""
-                    alt=""
-                  />
+                <div>
+                  <div className="overlay-artists">
+                    <Link to={`/artist/${artist._id}`}>
+                      <img
+                        className="artist-image"
+                        src={artist.artist_image_url}
+                        alt="artist"
+                      />
+                    </Link>
                   </div>
                 </div>
 
@@ -155,13 +69,6 @@ class LibraryArtists extends React.Component {
               </li>
             );
           });
-          this.artistSongList = artistSongList;
-
-          // artist's background image for header
-          // let headerStyle = {
-          //   backgroundImage: `url(${artist.artist_image_url})`,
-          //   backgroundSize: '100%'
-          // };
 
           return (
             <div className="library-artists-show">
