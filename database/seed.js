@@ -116,14 +116,6 @@ mongoose
             albums: [albumIds[10]]
           },
           {
-            _id: artistIds[9],
-            name: "Loreena McKennitt",
-            genre: "Celtic",
-            bio: "Loreena Isabel Irene McKennitt is a Canadian musician, composer, harpist, accordionist, and pianist.",
-            artist_image_url: 'https://www.udiscovermusic.com/wp-content/uploads/2018/03/U2-optimised-copy.jpg',
-            albums: [albumIds[11]]
-          },
-          {
             _id: artistIds[10],
             name: "Muse",
             genre: "Rock",
@@ -260,13 +252,6 @@ mongoose
                   album_art_url: 'http://www.thelefortreport.com/blog/wp-content/uploads/1091.jpg',
                   artist: artistIds[8],
                   songs: [songIds[99], songIds[100], songIds[101], songIds[102], songIds[103], songIds[104], songIds[105], songIds[106], songIds[107], songIds[108], songIds[109], songIds[110]]
-                },
-                {
-                  _id: albumIds[11],
-                  title: "The Book of Secrets",
-                  album_art_url: 'https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/Album_Cover-The_Book_of_Secrets.jpg/220px-Album_Cover-The_Book_of_Secrets.jpg',
-                  artist: artistIds[9],
-                  songs: [songIds[111], songIds[112], songIds[113], songIds[114], songIds[115], songIds[116], songIds[117], songIds[118]]
                 },
                 {
                   _id: albumIds[12],

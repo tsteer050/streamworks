@@ -53,17 +53,19 @@ class LibraryPlaylist extends React.Component {
   }
 
   playPlaylist(e, playlistId) {
-    if (this.state.currentPlaylist === playlistId) {
-      this.props.togglePlay();
-      this.toggleIcon(playlistId);
-    } else {
-      this.setState({currentPlaylist: playlistId});
-      let playQueue = this.playlistSongLists[playlistId];
-      this.props.newPlayQueue(playQueue);
-      this.props.selectTrack(0);
-      this.props.togglePlay();
-      this.toggleIcon(playlistId);
-    }
+
+   
+    // if (this.state.currentPlaylist === playlistId) {
+    //   this.props.togglePlay();
+    //   this.toggleIcon(playlistId);
+    // } else {
+    //   this.setState({currentPlaylist: playlistId});
+    //   let playQueue = this.playlistSongLists[playlistId];
+    //   this.props.newPlayQueue(playQueue);
+    //   this.props.selectTrack(0);
+    //   this.props.togglePlay();
+    //   this.toggleIcon(playlistId);
+    // }
   }
 
   render() {
@@ -140,10 +142,12 @@ class LibraryPlaylist extends React.Component {
                   </div>
                 </div>
                 <Link
+                  className="library-playlist-link"
                   to={`/playlists/${playList._id}`}
                   style={{ textDecoration: "none" }}
                 >
-                  <p className="playlist-name">{playList.title}</p>
+                  <p className="library-playlist-name">{playList.title}</p>
+                  <p className="library-playlist-length">{playList.songs.length ? playList.songs.length + " songs" : "0 songs"}</p>
                 </Link>
               </li>
             );
