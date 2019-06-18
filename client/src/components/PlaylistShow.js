@@ -168,6 +168,7 @@ class PlaylistShow extends React.Component {
               onHover={this.onHover}
               offHover={this.offHover}
               toggleSong={this.toggleSong}
+              playlist={data.playlist}
             />
           );
           const playlistArtStyle = {

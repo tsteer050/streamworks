@@ -24,14 +24,9 @@ class SongIndex extends React.Component {
       }
       return (
         <Fragment>
-          <SongIndexItem
-            song={song}
-            idx={idx}
-            onHover={onHover}
-            offHover={offHover}
-            toggleSong={toggleSong}
-            songLength={songLength}
-          />
+
+         <SongIndexItem song={song} idx={idx} onHover={onHover} offHover={offHover} toggleSong={toggleSong} songLength={songLength} playlist={this.props.playlist ? this.props.playlist : null}/>
+
         </Fragment>
       );
     });

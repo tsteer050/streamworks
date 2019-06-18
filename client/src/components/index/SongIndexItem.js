@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
 import { FETCH_USER_LIBRARY } from "../../graphql/queries";
-import { ADD_USER_SONG, REMOVE_USER_SONG } from "../../graphql/mutations";
+
+import { ADD_USER_SONG, REMOVE_USER_SONG, REMOVE_PLAYLIST_SONG } from '../../graphql/mutations';
+
 import { Query, Mutation } from "react-apollo";
 import AddToPlaylistModal from "./AddToPlaylistModal";
 import "./songIndexItem.css";
@@ -17,6 +19,7 @@ class SongIndexItem extends React.Component {
     this.showMenu = this.showMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.removeSong = this.removeSong.bind(this);
   }
 
   componentDidMount() {
@@ -46,8 +49,17 @@ class SongIndexItem extends React.Component {
     console.log("toggled modal");
   }
 
+  removeSong(removePlaylistSong, playlist, song) {
+    removePlaylistSong({
+      variables: {
+        playlistId: playlist._id,
+        songId: song._id
+      }
+    });
+  }
+
   render() {
-    const { song, idx, onHover, offHover, toggleSong, songLength } = this.props;
+    const { song, idx, onHover, offHover, toggleSong, songLength, playlist } = this.props;
 
     //
     const favoriteMenuItem = (addUserSong, removeUserSong, songInLibrary) => {
@@ -80,6 +92,7 @@ class SongIndexItem extends React.Component {
         </li>
       );
     };
+
 
     let favoriteButton;
     if (this.state.user) {
@@ -126,7 +139,9 @@ class SongIndexItem extends React.Component {
         return <li className="song-menu-item">Add to library</li>;
       };
     }
-
+    let libOption = (removePlaylistSong) => {
+      return playlist ? <li className="song-menu-item" onClick={() => this.removeSong(removePlaylistSong, playlist, song)}>Remove from Playlist</li> : <li className="song-menu-item" onClick={() => this.toggleModal(song)}>Add to Playlist</li>;
+    }
     return (
       <li
         key={song._id}
@@ -162,14 +177,22 @@ class SongIndexItem extends React.Component {
               {this.state.showMenu ? (
                 <ul className="song-menu">
                   {favoriteButton(song)}
-                  <li
-                    className="song-menu-item"
-                    onClick={() => this.toggleModal(song)}
+
+                  <Mutation
+                    mutation={REMOVE_PLAYLIST_SONG}
                   >
-                    Add to Playlist
-                  </li>
-                </ul>
-              ) : null}
+                    {removePlaylistSong => {
+                      return (
+                        <Fragment>
+                          {libOption(removePlaylistSong)}
+                        </Fragment>
+                      )
+                    }}
+                  </Mutation>
+                </ul>)
+                :
+                (null)}
+
             </button>
             <AddToPlaylistModal song={song} user={this.state.user} />
           </span>
