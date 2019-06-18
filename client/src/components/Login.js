@@ -19,7 +19,6 @@ class Login extends React.Component {
   }
 
   updateCache(client, { data }) {
-    console.log(data);
     // here we can write directly to our cache with our returned mutation data
     client.writeData({
       data: { isLoggedIn: data.login.loggedIn }

@@ -4,7 +4,7 @@ import { Query } from "react-apollo";
 import { IS_LOGGED_IN } from "../graphql/queries";
 
 
-// our route switches on routeType
+
 const AuthRoute = ({
   component: Component,
   path,
@@ -14,10 +14,6 @@ const AuthRoute = ({
 }) => (
     <Query query={IS_LOGGED_IN}>
       {({ data }) => {
-        // if the route type is "auth" then this route will only render if the
-        // user is not logged in - useful for authentication routes
-        // like login or register
-        
         if (routeType === "auth") {
           return (
             <Route
@@ -29,8 +25,6 @@ const AuthRoute = ({
             />
           );
         } else {
-          // otherwise this will be a protected route which will only
-          // render the component if the user is logged in
           return (
             <Route
               {...rest}

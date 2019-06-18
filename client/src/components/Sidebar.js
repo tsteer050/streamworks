@@ -78,15 +78,7 @@ class Sidebar extends React.Component {
     this.setState({ visible: false });
   }
 
-  // componentDidMount() {
-  //   let token = localStorage.getItem("auth-token");
-
-  //   const user = jwt.decode(token);
-  //   this.setState({ user });
-  // }
-
   render() {
-    // if (!this.state.user) return null;
 
     return (
       <Fragment>

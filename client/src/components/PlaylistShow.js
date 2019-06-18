@@ -39,7 +39,6 @@ class PlaylistShow extends React.Component {
     let token = localStorage.getItem("auth-token");
     const user = jwt.decode(token);
     this.setState({ user });
-    //this.props.newPlayQueue(this.songList);
   }
 
   componentDidUpdate() {
@@ -125,7 +124,7 @@ class PlaylistShow extends React.Component {
   render() {
     const id = this.props.match.params.id;
 
-    let favoriteButton;
+    
 
     return (
       <Query query={FETCH_PLAYLIST} variables={{ id }}>
@@ -142,19 +141,18 @@ class PlaylistShow extends React.Component {
             );
           }
           if (error) return `Error! ${error.message}`;
-
-          const songList = data.playlist.songs.map(song => {
-            return {
-              stream_url: song.audio_url,
-              trackTitle: song.title,
-              artistName: song.album.artist.name,
-              albumArtUrl: song.album.album_art_url
-
-
-            };
-          });
+          let songList = null;
+          if (data.playlist.songs) {
+            songList = data.playlist.songs.map(song => {
+              return {
+                stream_url: song.audio_url,
+                trackTitle: song.title,
+                artistName: song.album.artist.name,
+                albumArtUrl: song.album.album_art_url
+              };
+            });
+          }
           let image;
-          // debugger
           if (data.playlist.songs.length > 0) {
             image = data.playlist.songs[0].album.album_art_url;
           } else {

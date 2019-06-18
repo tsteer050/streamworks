@@ -46,7 +46,6 @@ class SongIndexItem extends React.Component {
     let id = song._id + "modal";
     let modal = document.getElementById(id);
     modal.classList.add("visible");
-    console.log("toggled modal");
   }
 
   removeSong(removePlaylistSong, playlist, song) {
@@ -60,8 +59,6 @@ class SongIndexItem extends React.Component {
 
   render() {
     const { song, idx, onHover, offHover, toggleSong, songLength, playlist } = this.props;
-
-    //
     const favoriteMenuItem = (addUserSong, removeUserSong, songInLibrary) => {
       if (songInLibrary) {
         return (
@@ -140,7 +137,7 @@ class SongIndexItem extends React.Component {
       };
     }
     let libOption = (removePlaylistSong) => {
-      return playlist ? <li className="song-menu-item" onClick={() => this.removeSong(removePlaylistSong, playlist, song)}>Remove from Playlist</li> : <li className="song-menu-item" onClick={() => this.toggleModal(song)}>Add to Playlist</li>;
+      return playlist ? <li className="song-menu-item" key={song._id} onClick={() => this.removeSong(removePlaylistSong, playlist, song)}>Remove from Playlist</li> : <li className="song-menu-item" onClick={() => this.toggleModal(song)}>Add to Playlist</li>;
     }
     return (
       <li

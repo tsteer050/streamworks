@@ -1,12 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const expressGraphQL = require("express-graphql");
 const db = require("../config/keys").MONGO_URI;
-const models = require("../server/models/index");
 const schema = require("./schema/schema");
 const keys = require("../config/keys");
 const { accessKeyId, secretAccessKey } = keys;
+const path = require('path');
 
 const cors = require("cors");
 
@@ -17,7 +16,13 @@ if (!db) {
   throw new Error("You must provide a string to connect to mLab");
 }
 
-// app.use(bodyParser.json());
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('frontend/build'));
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  });
+}
 
 app.use(
   "/graphql",

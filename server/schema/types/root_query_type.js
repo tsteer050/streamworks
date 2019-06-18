@@ -90,13 +90,9 @@ const RootQueryType = new GraphQLObjectType({
       }
     },
     search: {
-      // type: SearchType,
       type: new GraphQLList(SearchType),
-      // type: SearchType,
       args: { filter: { type: GraphQLString } },
       resolve: async (_, args) => {
-        // Song.createIndex({ title: "text" });
-        // let song = await Album.find({ $text: { $search: args } });
         let album = await Album.find({
           title: { $regex: args.filter, $options: "i" }
         });
@@ -111,13 +107,8 @@ const RootQueryType = new GraphQLObjectType({
           name: { $regex: args.filter, $options: "i" }
         });
 
-        console.log(song);
-        // return { song, album, playlist, artist };
         return [...song, ...album, ...playlist, ...artist];
-        // return song
-        //   .concat(album)
-        //   .concat(playlist)
-        //   .concat(artist);
+
       }
     }
   })

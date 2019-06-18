@@ -27,9 +27,14 @@
 
 .menu-links {
   text-align: center;
+  height: 120px;
 }
 
-.menu-links > a {
+.menu-links > div {
+  height: 50px;
+}
+
+.menu-links > div > a {
   display: block;
   border-radius: 50px;
   color: white;
@@ -42,7 +47,7 @@
   font-size: 12px;
 }
 
-.menu-links > a:hover {
+.menu-links > div >  a:hover {
   width: 210px;
   border: 2px solid white;
 }

@@ -42,14 +42,6 @@ export const VERIFY_USER = gql`
   }
 `;
 
-// export const GET_CURRENTUSER_ID = gql`
-//   mutation VerifyUser($token: String!) {
-//     verifyUser(token: $token) {
-//       loggedIn
-//     }
-//   }
-// `;
-
 export const CREATE_PLAYLIST = gql`
   mutation NewPlaylist($title: String!, $ownerId: ID!) {
     newPlaylist(title: $title, ownerId: $ownerId) {
@@ -577,7 +569,7 @@ export const REMOVE_USER_SONG = gql`
         subscribers {
           _id
         }
-      }
+\      }
     }
   }
 

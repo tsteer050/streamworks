@@ -140,13 +140,9 @@ class LibrarySongs extends React.Component {
           );
 
           return (
-            // <div className="librarysongs-show">
-
             <div className="main-column">
               <ul className="songs-list">{songs}</ul>
             </div>
-
-            // </div>
           );
         }}
       </Query>
