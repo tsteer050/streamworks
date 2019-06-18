@@ -80,6 +80,7 @@ class NewPlaylistModal extends React.Component {
             <h1>Create new playlist</h1>
             <div>
               <input
+                onKeyPress={(e) => { if (e.key === 'Enter') this.handleSubmit(e, newPlaylist)}}
                 type="text"
                 className="playlist-input-box"
                 placeholder="Start Typing . . ."

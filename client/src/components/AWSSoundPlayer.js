@@ -78,12 +78,10 @@ class AWSSoundPlayer extends Component {
     if(!this.props.seeking) this.seeking = false;
 
     if (this.props.seeking && this.props.currentTime === this.props.duration && !this.seeking) {
-      //this.props.soundCloudAudio.setTime(0);
       if (this.props.state.currentTrack === this.props.state.playQueue.length - 1) this.props.soundCloudAudio.stop();
       let currentTrack = this.props.state.currentTrack;
       currentTrack += 1;
       this.props.setCurrentTrack(currentTrack);
-      console.log(this.props.state.currentTrack);
       this.seeking = true;
     }
   }

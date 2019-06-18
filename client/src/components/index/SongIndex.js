@@ -22,10 +22,11 @@ class SongIndex extends React.Component {
         songLength = `${Math.floor(parseInt(song.length) / 60)}:0${song.length %
           60}`;
       }
+      let key = "a" + song._id;
       return (
-        <Fragment>
+        <Fragment key={key}>
 
-         <SongIndexItem song={song} idx={idx} onHover={onHover} offHover={offHover} toggleSong={toggleSong} songLength={songLength} playlist={this.props.playlist ? this.props.playlist : null}/>
+         <SongIndexItem  song={song} idx={idx} onHover={onHover} offHover={offHover} toggleSong={toggleSong} songLength={songLength} playlist={this.props.playlist ? this.props.playlist : null}/>
 
         </Fragment>
       );

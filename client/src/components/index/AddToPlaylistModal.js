@@ -115,8 +115,10 @@ class AddToPlaylistModal extends React.Component {
                                 backgroundImage: `url(${image})`,
                                 backgroundSize: "145px"
                               };
+                              let key = "c" + playlist._id;
                               return (
                                 <li
+                                  key={key}
                                   className="playlist-modal-item"
                                   onClick={() =>
                                     this.handleClick(addPlaylistSong, playlist)

@@ -63,6 +63,7 @@
   max-height: 50px;
   max-width: 50px;
   opacity: .8;
+  cursor: pointer;
 }
 .splash-play-icon:hover {
   transform: scale(1.25);

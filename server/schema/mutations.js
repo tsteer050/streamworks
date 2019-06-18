@@ -13,8 +13,6 @@ const UserType = require("./types/user_type");
 const User = mongoose.model("users");
 const AuthService = require("../services/auth");
 
-//Remove this comment!
-
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {

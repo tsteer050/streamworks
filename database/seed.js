@@ -1114,69 +1114,6 @@ mongoose
                         album: albumIds[10]
                       },
                       {
-                        _id: songIds[111],
-                        title: "Prologue",
-                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/The+Book+of+Secrets/01+Prologue.mp3',
-
-                        length: 265,
-                        album: albumIds[11]
-                      },
-                      {
-                        _id: songIds[112],
-                        title: "The Mummer's Dance",
-                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/The+Book+of+Secrets/02+The+Mummers\'+Dance.mp3',
-
-                        length: 369,
-                        album: albumIds[11]
-                      },
-                      {
-                        _id: songIds[113],
-                        title: "Skellig",
-                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/The+Book+of+Secrets/03+Skellig.mp3',
-
-                        length: 368,
-                        album: albumIds[11]
-                      },
-                      {
-                        _id: songIds[114],
-                        title: "Marco Pollo",
-                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/The+Book+of+Secrets/04+Marco+Polo.mp3',
-
-                        length: 319,
-                        album: albumIds[11]
-                      },
-                      {
-                        _id: songIds[115],
-                        title: "The Highwayman",
-                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/The+Book+of+Secrets/05+The+Highwayman.mp3',
-
-                        length: 621,
-                        album: albumIds[11]
-                      },
-                      {
-                        _id: songIds[116],
-                        title: "La Serenissima",
-                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/The+Book+of+Secrets/06+La+Serenissima.mp3',
-
-                        length: 310,
-                        album: albumIds[11]
-                      },
-                      {
-                        _id: songIds[117],
-                        title: "Night Ride Across the Caucasus",
-                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/The+Book+of+Secrets/07+Night+Ride+Across+the+Caucasus.mp3',
-
-                        length: 513,
-                        album: albumIds[11]
-                      },
-                      {
-                        _id: songIds[118],
-                        title: "Dante's Prayer",
-                        audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/The+Book+of+Secrets/08+Dante\'s+Prayer.mp3',
-                        length: 431,
-                        album: albumIds[11]
-                      },
-                      {
                         _id: songIds[119],
                         title: "Intro",
                         audio_url: 'https://streamworks-songs.s3.us-east-2.amazonaws.com/Absolution/01+Intro.mp3',

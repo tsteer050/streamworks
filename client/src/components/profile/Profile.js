@@ -54,7 +54,10 @@ class Profile extends React.Component {
                 </Query>
 
                 <div className="menu-links">
+                  <div>
                   <Link to="/contact">CONTACT US</Link>
+                  </div>
+                  <div>
                   <button
                     className="logout-btn"
                     onClick={e => {
@@ -66,6 +69,7 @@ class Profile extends React.Component {
                   >
                     LOGOUT
                   </button>
+                  </div>
                 </div>
               </div>
             </div>

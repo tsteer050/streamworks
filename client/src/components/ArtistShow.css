@@ -99,6 +99,7 @@
 .album-play-icon{
   visibility: hidden;
   opacity: .8;
+  cursor: pointer;
 }
 .album-play-icon:hover {
   transform: scale(1.25);

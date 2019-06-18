@@ -39,7 +39,6 @@ class AlbumShow extends React.Component {
     let token = localStorage.getItem("auth-token");
     const user = jwt.decode(token);
     this.setState({ user });
-    //this.props.newPlayQueue(this.songList);
   }
 
   componentDidUpdate() {
@@ -104,7 +103,7 @@ class AlbumShow extends React.Component {
   toggleSong(e, track, iconElementId) {
     track = track || 0;
 
-    if (typeof iconElementId === "Object") {
+    if (typeof iconElementId === "object") {
       iconElementId = iconElementId._id || this.defaultTrack;
     } else {
       iconElementId = iconElementId || this.defaultTrack;
@@ -215,7 +214,7 @@ class AlbumShow extends React.Component {
           if (loading)
             return (
               <div className="library-loading artist-loading-screen">
-                <div class="lds-facebook">
+                <div className="lds-facebook">
                   <div />
                   <div />
                   <div />

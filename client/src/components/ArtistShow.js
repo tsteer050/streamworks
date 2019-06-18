@@ -163,27 +163,15 @@ class ArtistShow extends React.Component {
         )
       }
     }
-
-
-
 //     BELOW HERE IS THE PAGE
 
-
-
-
-
-
-
-
-
-    
     return (
       <Query query={FETCH_ARTIST} variables={{ id }}>
         {({ loading, error, data }) => {
           if (loading)
             return (
               <div className="library-loading artist-loading-screen">
-                <div class="lds-facebook">
+                <div className="lds-facebook">
                   <div />
                   <div />
                   <div />

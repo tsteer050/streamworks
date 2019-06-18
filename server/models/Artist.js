@@ -1,11 +1,3 @@
-// -Artist
-//   - Name
-//   - Albums
-//   - Songs
-//   - Genre
-//   - Bio
-//   - picture
-
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
