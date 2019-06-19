@@ -191,7 +191,7 @@ class SongIndexItem extends React.Component {
                 (null)}
 
             </button>
-            <AddToPlaylistModal song={song} user={this.state.user} />
+            {this.state.user ? <AddToPlaylistModal song={song} user={this.state.user} /> : null }
           </span>
           <span> {songLength}</span>
         </div>
