@@ -2,9 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const expressGraphQL = require("express-graphql");
 const db = require("../config/keys").MONGO_URI;
+const models = require("../server/models/index");
 const schema = require("./schema/schema");
 const keys = require("../config/keys");
-const models = require("../server/models/index");
 const { accessKeyId, secretAccessKey } = keys;
 const path = require('path');
 
