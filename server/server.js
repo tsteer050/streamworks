@@ -16,7 +16,7 @@ app.use(cors());
 if (!db) {
   throw new Error("You must provide a string to connect to mLab");
 }
-
+console.log(db);
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log("Connected to MongoDB successfully"))

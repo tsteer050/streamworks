@@ -103,12 +103,6 @@ class AlbumShow extends React.Component {
   toggleSong(e, track, iconElementId) {
     track = track || 0;
 
-    if (typeof iconElementId === "object") {
-      iconElementId = iconElementId._id || this.defaultTrack;
-    } else {
-      iconElementId = iconElementId || this.defaultTrack;
-    }
-
     if (track === this.state.currentTrack) {
       this.props.togglePlay();
     } else {
@@ -117,9 +111,9 @@ class AlbumShow extends React.Component {
 
       if (this.props.state.playing === false) {
         this.props.togglePlay();
-      } else {
+      } else if (track === this.state.currentTrack){
         this.props.togglePlay();
-      }
+      } 
     }
   }
 
