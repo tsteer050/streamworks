@@ -26,7 +26,7 @@ Users are able to sign in, sign up, or use the demo user account to browse the s
 
 Users can add music to their library.
 
-![alt text](./client/src/images/library.png "StreamWorks Library")
+![alt text](./client/src/images/musiclibrary.png "StreamWorks Library")
 
 ## Playlist
 
