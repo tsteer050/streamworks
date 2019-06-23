@@ -13,14 +13,20 @@ import { VERIFY_USER } from './graphql/mutations';
 import { Provider } from 'react-redux';
 import { store } from './util/redux_config';
 
-
+// change the connection uri based on whether it's a production or development launch
+let connectionUri = null;
+if (process.env.NODE_ENV === "production") {
+  connectionUri = `/graphql`;
+} else {
+  connectionUri = "http://localhost:5000/graphql";
+} 
 
 const cache = new InMemoryCache({
   dataIdFromObject: object => object._id || null
 });
 
 const httpLink = createHttpLink({
-  uri: "/graphql",
+  uri: connectionUri,
   headers: {
     authorization: localStorage.getItem("auth-token")
   }
