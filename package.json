@@ -27,6 +27,6 @@
     "mongoose": "^5.5.9",
     "nodemon": "^1.19.0",
     "prisma": "^1.33.0",
-    "validator": "^10.11.0"
+    "validator": "^13.7.0"
   }
 }
